@@ -1,0 +1,73 @@
+<div class="min-h-screen flex items-center">
+    <form >
+        <div class="p-[80px] pt-[98px] pb-[40px] mr-[49px] bg-white font-roboto font-normal">
+            <div>
+                <h1 class="font-roboto font-bold text-[36px]">Verify your Email</h1>
+            </div>
+            <div class="mt-[72px] ml-[32px] mr-[32px] flex flex-col gap-[25px]">
+                <div>
+                    <div class="mb-[18px]">
+                        <p class="text-[18px] text-[#333333]">{{'Enter OTP sent to jith********06@gmail.com'}}</p>
+                    </div>
+                    <div>
+                        <div class="flex gap-[27px]">
+                            <div class="w-[48px] h-[48px]">
+                                <input #otpInput type="number" maxlength="1" (keyup)="show($event, 0)" class="border-[#BEBEBE] border-[1px] rounded-[5.07px] pt-[10px] pb-[10px] pl-[17px] pr-[17px] w-full h-full font-bold text-[24px]" >
+                            </div>
+                            <div class="w-[48px] h-[48px]">
+                                <input #otpInput type="number" maxlength="1" (keyup)="show($event, 1)" class="border-[#BEBEBE] border-[1px] rounded-[5.07px] pt-[10px] pb-[10px] pl-[17px] pr-[17px] w-full h-full font-bold text-[24px]" >
+                            </div>
+                            <div class="w-[48px] h-[48px]">
+                                <input #otpInput type="number" maxlength="1" (keyup)="show($event, 2)" class="border-[#BEBEBE] border-[1px] rounded-[5.07px] pt-[10px] pb-[10px] pl-[17px] pr-[17px] w-full h-full font-bold text-[24px]" >
+                            </div>
+                            <div class="w-[48px] h-[48px]">
+                                <input #otpInput type="number" maxlength="1" (keyup)="show($event, 3)" class="border-[#BEBEBE] border-[1px] rounded-[5.07px] pt-[10px] pb-[10px] pl-[17px] pr-[17px] w-full h-full font-bold text-[24px]" >
+                            </div>
+                            <div class="w-[48px] h-[48px]">
+                                <input #otpInput type="number" maxlength="1" (keyup)="show($event, 4)" class="border-[#BEBEBE] border-[1px] rounded-[5.07px] pt-[10px] pb-[10px] pl-[17px] pr-[17px] w-full h-full font-bold text-[24px]" >
+                            </div>
+                            <div class="w-[48px] h-[48px]">
+                                <input #otpInput type="number" maxlength="1" (keyup)="show($event, 5)" class="border-[#BEBEBE] border-[1px] rounded-[5.07px] pt-[10px] pb-[10px] pl-[17px] pr-[17px] w-full h-full font-bold text-[24px]" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-[12px] text-black text-opacity-[70%]">
+                        @if(minutes === '00' && seconds === '00') {
+                            <span>OTP Expired</span>
+                        }@else{
+                            <span>OTP expires in
+                                @if(minutes !== '00') {
+                                    <span>{{ minutes }}:</span>
+                                }
+                                {{ seconds }} seconds
+                            </span>
+                        }
+                    </p>
+                </div>
+                <div>
+                    <button class="bg-[#1A2C50] font-medium font-roboto hover:bg-[#282764] p-[11px] rounded-[5.07px] text-[20px] text-center text-white w-full" type="submit">
+                        @if(isFormSubmited){
+                            <div class="flex justify-center items-center">
+                                <div class="animate-spin inline-block size-[30px] border-[3px] border-current border-t-transparent text-white rounded-full dark:text-white" role="status" aria-label="loading">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                        }@else{
+                            Verify OTP
+                        }
+                    </button>
+                </div>
+                @if(showResendOTPOption){
+                    <div class="text-[12px] text-black text-center">
+                        <p class="text-opacity-[70%]">Didn't receive OTP? <span (click)="resendOTP();" class="text-[#DC3558] cursor-pointer">Resend OTP</span></p>
+                    </div>
+                }
+            </div>
+            <div class="mt-[51px]">
+                <p class="font-roboto font-normal text-[12px]">2024 CineHub.</p>
+            </div>
+        </div>
+    </form>
+</div>
