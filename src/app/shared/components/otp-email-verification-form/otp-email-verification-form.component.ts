@@ -37,7 +37,7 @@ export class OtpEmailVerificationFormComponent implements AfterViewInit, OnDestr
     
     if(alreadyRunedInSeconds < 30) {
       const enableTime: number = (30 - alreadyRunedInSeconds) * 1000;
-      this.initiateResendOptionShowTime(enableTime); // resend option will enable in 30 seconds
+      this.initiateResendOptionShowTime(enableTime); // resend option will enable in 30 seconds.
     }else{
       this.showResendOTPOption = true;
     }
@@ -45,28 +45,28 @@ export class OtpEmailVerificationFormComponent implements AfterViewInit, OnDestr
     this.otpTimer = setInterval(() => {
       const minutes: number = Number(this.minutes);
       const seconds: number = Number(this.seconds);
+
       if(seconds === 0 && minutes !== 0) {
         this.seconds = '60';
-        if((minutes - 1) < 10){
-          this.minutes = `0${minutes - 1}`;
-        }else{
-          this.minutes = `${minutes - 1}`;
-        }
+        this.minutes = this.getTimeInStarndardFormat((minutes - 1)); // get time if less than 10 get 1 if greater than 9 get normal 10.
       }else if(seconds === 0 && minutes === 0) {
-        localStorage.removeItem('minutes');
-        localStorage.removeItem('seconds');
-        clearInterval(this.otpTimer);
+        this.resetTimer(); // clear the minutes and seconds store in the localstorage + clear the interval.
         return;
       }else {
-        if((seconds - 1) < 10){
-          this.seconds = `0${seconds - 1}`;
-        }else{
-          this.seconds = `${seconds - 1}`;
-        }
+        this.seconds = this.getTimeInStarndardFormat((seconds - 1));  // get time if less than 10 get 1 if greater than 9 get normal 10.
       }
-      localStorage.setItem('minutes', this.minutes);
+
+      localStorage.setItem('minutes', this.minutes); // store minutes and time in localstorage so we get the track of time even page gets reloaded mannuly.
       localStorage.setItem('seconds', this.seconds);
     }, 1000);
+  }
+
+  private getTimeInStarndardFormat(time: number): string {
+    if(time < 10){
+      return `0${time}`;
+    }else{
+      return `${time}`;
+    }
   }
 
   private resetTimer(): void {
