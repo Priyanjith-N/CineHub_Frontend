@@ -1,22 +1,33 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, QueryList, Renderer2, ViewChildren, input } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-otp-email-verification-form',
   standalone: true,
-  imports: [],
+  imports: [
+    ReactiveFormsModule
+  ],
   templateUrl: './otp-email-verification-form.component.html',
   styleUrl: './otp-email-verification-form.component.css'
 })
 export class OtpEmailVerificationFormComponent implements AfterViewInit, OnDestroy  {
   @ViewChildren('otpInput') otpInputs!: QueryList<ElementRef>;
-  private otp: string = '';
+  otpVerificationForm: FormGroup;
   isFormSubmited: boolean = false;
   showResendOTPOption: boolean = false;
   private otpTimer!: ReturnType<typeof setInterval>;
   minutes: string = '0';
   seconds: string = '0';
 
-  constructor() {
+  constructor(private renderer: Renderer2) {
+    this.otpVerificationForm = new FormGroup({
+      firstDigit: new FormControl('', [Validators.required]),
+      secondDigit: new FormControl('', [Validators.required]),
+      thirdDigit: new FormControl('', [Validators.required]),
+      fourthDigit: new FormControl('', [Validators.required]),
+      fivethDigit: new FormControl('', [Validators.required]),
+      sixthDigit: new FormControl('', [Validators.required]),
+    });
     this.startTimer(); // start otp timer
   }
 
@@ -81,23 +92,24 @@ export class OtpEmailVerificationFormComponent implements AfterViewInit, OnDestr
     }, enableTime);
   }
 
-  show(event: KeyboardEvent, index: number): void {
+  show(event: KeyboardEvent, index: number, fromCOntrolName: string): void {
     const keyChar: string = event.key;
-    const inputElement: HTMLInputElement = event.target as HTMLInputElement;
 
     if (!/[0-9]|\Backspace/.test(keyChar)) {
-      inputElement.value = '';
-      return;
+      this.otpVerificationForm.get(fromCOntrolName)?.setValue(''); // set current value empty.
     }else if(keyChar === 'Backspace') {
-      this.otp = this.otp.slice(0, index);
-      if(index > 0) {
+      this.otpVerificationForm.get(fromCOntrolName)?.setValue(''); // set current value empty.
+
+      if(index > 0) { // for changing the focucs to previous input box.
         this.otpInputs.toArray()[(index - 1)].nativeElement.focus();
       }
     }else{
-      this.otp += inputElement.value;
+      this.otpVerificationForm.get(fromCOntrolName)?.setValue(keyChar); // set the value to input char automatically the value would assign to formControl but for safety.
+      
       if(index < 5) {
         this.otpInputs.toArray()[(index + 1)].nativeElement.focus();
       }else{
+        this.onSubmit();
         this.otpInputs.toArray()[5].nativeElement.blur();
       }
     }
@@ -108,5 +120,15 @@ export class OtpEmailVerificationFormComponent implements AfterViewInit, OnDestr
     // resend otp logic
     this.resetTimer();
     this.startTimer();
+  }
+
+  async onSubmit(): Promise<void> {
+    if(this.otpVerificationForm.invalid) {
+      this.otpVerificationForm.setErrors({message: 'Enter Valid OTP.'});
+      return this.otpVerificationForm.markAllAsTouched();
+    }
+
+    this.isFormSubmited = true;
+    
   }
 }

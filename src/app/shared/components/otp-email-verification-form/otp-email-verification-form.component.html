@@ -1,5 +1,5 @@
 <div class="min-h-screen flex items-center">
-    <form >
+    <form [formGroup]="otpVerificationForm" (submit)="onSubmit();" >
         <div class="p-[80px] pt-[98px] pb-[40px] mr-[49px] bg-white font-roboto font-normal">
             <div>
                 <h1 class="font-roboto font-bold text-[36px]">Verify your Email</h1>
@@ -12,24 +12,27 @@
                     <div>
                         <div class="flex gap-[27px]">
                             <div class="w-[48px] h-[48px]">
-                                <input #otpInput type="number" maxlength="1" (keyup)="show($event, 0)" class="border-[#BEBEBE] border-[1px] rounded-[5.07px] pt-[10px] pb-[10px] pl-[17px] pr-[17px] w-full h-full font-bold text-[24px]" >
+                                <input #otpInput type="number" formControlName="firstDigit" maxlength="1" (keyup)="show($event, 0, 'firstDigit')" class="border-[#BEBEBE] border-[1px] rounded-[5.07px] pt-[10px] pb-[10px] pl-[17px] pr-[17px] w-full h-full font-bold text-[24px]" >
                             </div>
                             <div class="w-[48px] h-[48px]">
-                                <input #otpInput type="number" maxlength="1" (keyup)="show($event, 1)" class="border-[#BEBEBE] border-[1px] rounded-[5.07px] pt-[10px] pb-[10px] pl-[17px] pr-[17px] w-full h-full font-bold text-[24px]" >
+                                <input #otpInput type="number" formControlName="secondDigit" maxlength="1" (keyup)="show($event, 1, 'secondDigit')" class="border-[#BEBEBE] border-[1px] rounded-[5.07px] pt-[10px] pb-[10px] pl-[17px] pr-[17px] w-full h-full font-bold text-[24px]" >
                             </div>
                             <div class="w-[48px] h-[48px]">
-                                <input #otpInput type="number" maxlength="1" (keyup)="show($event, 2)" class="border-[#BEBEBE] border-[1px] rounded-[5.07px] pt-[10px] pb-[10px] pl-[17px] pr-[17px] w-full h-full font-bold text-[24px]" >
+                                <input #otpInput type="number" formControlName="thirdDigit" maxlength="1" (keyup)="show($event, 2, 'thirdDigit')" class="border-[#BEBEBE] border-[1px] rounded-[5.07px] pt-[10px] pb-[10px] pl-[17px] pr-[17px] w-full h-full font-bold text-[24px]" >
                             </div>
                             <div class="w-[48px] h-[48px]">
-                                <input #otpInput type="number" maxlength="1" (keyup)="show($event, 3)" class="border-[#BEBEBE] border-[1px] rounded-[5.07px] pt-[10px] pb-[10px] pl-[17px] pr-[17px] w-full h-full font-bold text-[24px]" >
+                                <input #otpInput type="number" formControlName="fourthDigit" maxlength="1" (keyup)="show($event, 3, 'fourthDigit')" class="border-[#BEBEBE] border-[1px] rounded-[5.07px] pt-[10px] pb-[10px] pl-[17px] pr-[17px] w-full h-full font-bold text-[24px]" >
                             </div>
                             <div class="w-[48px] h-[48px]">
-                                <input #otpInput type="number" maxlength="1" (keyup)="show($event, 4)" class="border-[#BEBEBE] border-[1px] rounded-[5.07px] pt-[10px] pb-[10px] pl-[17px] pr-[17px] w-full h-full font-bold text-[24px]" >
+                                <input #otpInput type="number" formControlName="fivethDigit" maxlength="1" (keyup)="show($event, 4, 'fivethDigit')" class="border-[#BEBEBE] border-[1px] rounded-[5.07px] pt-[10px] pb-[10px] pl-[17px] pr-[17px] w-full h-full font-bold text-[24px]" >
                             </div>
                             <div class="w-[48px] h-[48px]">
-                                <input #otpInput type="number" maxlength="1" (keyup)="show($event, 5)" class="border-[#BEBEBE] border-[1px] rounded-[5.07px] pt-[10px] pb-[10px] pl-[17px] pr-[17px] w-full h-full font-bold text-[24px]" >
+                                <input #otpInput type="number" formControlName="sixthDigit" maxlength="1" (keyup)="show($event, 5, 'sixthDigit')" class="border-[#BEBEBE] border-[1px] rounded-[5.07px] pt-[10px] pb-[10px] pl-[17px] pr-[17px] w-full h-full font-bold text-[24px]" >
                             </div>
                         </div>
+                        @if(otpVerificationForm!.errors){
+                            <p class="text-[13px] text-[#FF6B6B] mt-[12px]">{{ otpVerificationForm.errors['message'] }}</p>
+                        }
                     </div>
                 </div>
                 <div>
