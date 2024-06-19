@@ -76,7 +76,7 @@ export class LoginFormComponent {
           if(errObj.errorField === 'otp') {
             this.messageService.add({ severity: 'info', summary: errObj.message, detail: 'An OTP is send via Email. Verify account now' });
             setTimeout(() => {
-              this.router.navigate(['/verifyEmail']);
+              this.router.navigate(['/auth/verifyEmail']);
             }, 2000);
           }else{
             this.loginForm.get(errObj.errorField!)?.setErrors({ message: errObj.message});

@@ -162,7 +162,7 @@ export class OtpEmailVerificationFormComponent implements AfterViewInit, OnDestr
           }else{
             this.messageService.add({ severity: 'error', summary: 'Error', detail: errObj.message });
             setTimeout(() => {
-              this.router.navigate(['/login']);
+              this.router.navigate(['/auth/login']);
             }, 2000);
           }
           return;
