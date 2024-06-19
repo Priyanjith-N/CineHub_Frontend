@@ -61,15 +61,26 @@ export class LoginFormComponent {
 
     loginAPIResponse$.subscribe(
       (res: ILoginSuccessfullResponse) => {
+        console.log(res);
         this.isFormSubmited = false;
         // navigate to home Page
-        this.router.navigate(['/']);
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: res.message });
+        setTimeout(() => {
+          this.router.navigate(['/']);
+        }, 2000);
       },
       (err: any) => {
         this.isFormSubmited = false;
         if(err?.errorField){
           const errObj: ILoginErrorResponse = err as ILoginErrorResponse;
-          this.loginForm.get(errObj.errorField!)?.setErrors({ message: errObj.message});
+          if(errObj.errorField === 'otp') {
+            this.messageService.add({ severity: 'info', summary: errObj.message, detail: 'An OTP is send via Email. Verify account now' });
+            setTimeout(() => {
+              this.router.navigate(['/verifyEmail']);
+            }, 2000);
+          }else{
+            this.loginForm.get(errObj.errorField!)?.setErrors({ message: errObj.message});
+          }
           return;
         }else if(err?.error){
           // toast message

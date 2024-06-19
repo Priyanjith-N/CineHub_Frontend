@@ -1,12 +1,21 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, QueryList, Renderer2, ViewChildren, input } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { IOTPVerificationErrorResponse, IOTPVerificationSuccessfullResponse } from '../../models/IOTPVerificationResponse.interface';
+import { UserAuthService } from '../../../core/services/user-auth.service';
+
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-otp-email-verification-form',
   standalone: true,
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastModule
   ],
+  providers: [MessageService],
   templateUrl: './otp-email-verification-form.component.html',
   styleUrl: './otp-email-verification-form.component.css'
 })
@@ -19,7 +28,7 @@ export class OtpEmailVerificationFormComponent implements AfterViewInit, OnDestr
   minutes: string = '0';
   seconds: string = '0';
 
-  constructor(private renderer: Renderer2) {
+  constructor(private userAuthService: UserAuthService, private router: Router, private messageService: MessageService, private renderer: Renderer2) {
     this.otpVerificationForm = new FormGroup({
       firstDigit: new FormControl('', [Validators.required]),
       secondDigit: new FormControl('', [Validators.required]),
@@ -123,6 +132,9 @@ export class OtpEmailVerificationFormComponent implements AfterViewInit, OnDestr
   }
 
   async onSubmit(): Promise<void> {
+    Object.values(this.otpVerificationForm.value).reduce((otp: string, digit) => {
+      return otp += (digit as string);
+    }, '');
     if(this.otpVerificationForm.invalid) {
       this.otpVerificationForm.setErrors({message: 'Enter Valid OTP.'});
       return this.otpVerificationForm.markAllAsTouched();
@@ -130,5 +142,38 @@ export class OtpEmailVerificationFormComponent implements AfterViewInit, OnDestr
 
     this.isFormSubmited = true;
     
+    const otp: string = Object.values(this.otpVerificationForm.value).reduce((otp: string, digit) => {
+      return otp += (digit as string);
+    }, '');
+
+    const otpVerificationAPIResponse$: Observable<IOTPVerificationSuccessfullResponse> = this.userAuthService.handelOTPVerificationRequest(otp);
+
+    otpVerificationAPIResponse$.subscribe(
+      (res: IOTPVerificationSuccessfullResponse) => {
+        this.isFormSubmited = false;
+        console.log(res);
+      },
+      (err: any) => {
+        this.isFormSubmited = false;
+        if(err?.errorField){
+          const errObj: IOTPVerificationErrorResponse = err as IOTPVerificationErrorResponse;
+          if(errObj.errorField === 'otp'){
+            this.otpVerificationForm.setErrors({ message: errObj.message });
+          }else{
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: errObj.message });
+            setTimeout(() => {
+              this.router.navigate(['/login']);
+            }, 2000);
+          }
+          return;
+        }else if(err?.error){
+          // toast message
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Internal Server Error.' });
+        }else{
+          // error connecting toast message
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Something Went Wrong.' });
+        }
+      }
+    );
   }
 }

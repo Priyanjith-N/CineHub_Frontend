@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { ILoginCredentials } from '../../shared/models/ILoginCredentials.interface';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { ILoginErrorResponse, ILoginSuccessfullResponse } from '../../shared/models/ILoginResponse.interface';
+import { IOTPVerificationSuccessfullResponse } from '../../shared/models/IOTPVerificationResponse.interface';
 
 interface hello {
   email: string,
@@ -22,9 +23,13 @@ export class UserAuthService {
 
     const loginAPIResponse$: Observable<ILoginSuccessfullResponse> = this.httpClient.post<ILoginSuccessfullResponse>(url, loginCredentials)
     .pipe(
-      map(response => response),
+      map((response: ILoginSuccessfullResponse) => {
+        console.log(response);
+         
+        return response;
+      }),
       catchError((err: any) => {
-        if(err.error) {
+        if(err?.error || err?.errorField) {
           return throwError(err.error as ILoginErrorResponse);
         }else{
           return throwError(err);
@@ -33,6 +38,24 @@ export class UserAuthService {
     );
 
     return loginAPIResponse$;
+  }
+
+  handelOTPVerificationRequest(otp: string): Observable<IOTPVerificationSuccessfullResponse> {
+    const url: string = `${this.api}/otpVerify`;
+
+    const otpVerificationAPIResponse$: Observable<IOTPVerificationSuccessfullResponse> = this.httpClient.post<IOTPVerificationSuccessfullResponse>(url, otp)
+    .pipe(
+      map((response: IOTPVerificationSuccessfullResponse) => response),
+      catchError((err: any) => {
+        if(err?.error || err?.errorField) {
+          return throwError(err.error as IOTPVerificationSuccessfullResponse);
+        }else{
+          return throwError(err);
+        }
+      })
+    );
+
+    return otpVerificationAPIResponse$;
   }
 
 }
