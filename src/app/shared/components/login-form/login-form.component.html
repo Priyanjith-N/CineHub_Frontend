@@ -8,10 +8,10 @@
         <div class="font-roboto font-normal mt-[64px]">
             <div class="mb-[40px]">
                 <div>
-                    <label for="email" class="text-[18px]" [class.error]="this.loginForm.get('email')?.errors  && loginForm.get('email')!.touched">EMAIL ADDRESS</label>
+                    <label for="email" class="text-[18px]" [class.error]="loginForm.get('email')?.errors  && loginForm.get('email')!.touched">EMAIL ADDRESS</label>
                 </div>
                 <div class="mt-[18px] relative">
-                    <input type="text" formControlName="email" [class.error]="this.loginForm.get('email')?.errors  && loginForm.get('email')!.touched" id="email" placeholder="example@gmail.com" spellcheck="false" autocomplete="off">
+                    <input type="text" formControlName="email" [class.error]="loginForm.get('email')?.errors  && loginForm.get('email')!.touched" id="email" placeholder="example@gmail.com" spellcheck="false" autocomplete="off">
                     @if(loginForm.get('email')!.hasError('required')  && loginForm.get('email')!.touched){
                         <p class="text-[13px] text-[#FF6B6B] absolute mt-[12px]">This Field is required.</p>
                     }@else if (loginForm.get('email')!.hasError('pattern')  && loginForm.get('email')!.touched) {
@@ -23,10 +23,10 @@
             </div>
             <div>
                 <div>
-                    <label for="password" class="text-[18px]" [class.error]="this.loginForm.get('password')?.errors  && loginForm.get('password')!.touched">PASSWORD</label>
+                    <label for="password" class="text-[18px]" [class.error]="loginForm.get('password')?.errors  && loginForm.get('password')!.touched">PASSWORD</label>
                 </div>
                 <div class="mt-[18px] relative">
-                    <input type="{{ toggleShowHidePassword?'text':'password' }}" formControlName="password" [class.error]="this.loginForm.get('password')?.errors  && loginForm.get('password')!.touched" id="password" placeholder="* * * * * * * *" spellcheck="false" autocomplete="off">
+                    <input type="{{ toggleShowHidePassword?'text':'password' }}" formControlName="password" [class.error]="loginForm.get('password')?.errors  && loginForm.get('password')!.touched" id="password" placeholder="* * * * * * * *" spellcheck="false" autocomplete="off">
                     @if(loginForm.get('password')!.hasError('required')  && loginForm.get('password')!.touched){
                         <p class="text-[13px] text-[#FF6B6B] absolute mt-[12px]">This Field is required.</p>
                     }@else if (loginForm.get('password')!.errors  && loginForm.get('password')!.touched) {

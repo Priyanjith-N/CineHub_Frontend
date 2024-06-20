@@ -4,6 +4,8 @@ import { ILoginCredentials } from '../../shared/models/ILoginCredentials.interfa
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { ILoginErrorResponse, ILoginSuccessfullResponse } from '../../shared/models/ILoginResponse.interface';
 import { IOTPVerificationSuccessfullResponse } from '../../shared/models/IOTPVerificationResponse.interface';
+import { IUserRegisterCredentials } from '../../shared/models/IRegisterCredentials.interface';
+import { IRegisterSuccessfullResponse } from '../../shared/models/IRegisterResponse.interface';
 
 interface hello {
   email: string,
@@ -23,13 +25,9 @@ export class UserAuthService {
 
     const loginAPIResponse$: Observable<ILoginSuccessfullResponse> = this.httpClient.post<ILoginSuccessfullResponse>(url, loginCredentials)
     .pipe(
-      map((response: ILoginSuccessfullResponse) => {
-        console.log(response);
-         
-        return response;
-      }),
-      catchError((err: any) => {
-        if(err?.error || err?.errorField) {
+      map((response: ILoginSuccessfullResponse) => response as ILoginSuccessfullResponse),
+      catchError((err: any) => { // even the error response is sent it the object send form backend will be in error property if not it is some other err
+        if(err.error) {
           return throwError(err.error as ILoginErrorResponse);
         }else{
           return throwError(err);
@@ -40,6 +38,24 @@ export class UserAuthService {
     return loginAPIResponse$;
   }
 
+  handelRegisterationRequest(registerCredentials: IUserRegisterCredentials): Observable<IRegisterSuccessfullResponse> {
+    const url: string = `${this.api}/register`;
+
+    const registerAPIResponse$: Observable<IRegisterSuccessfullResponse> = this.httpClient.post<IRegisterSuccessfullResponse>(url, registerCredentials)
+    .pipe(
+      map((response: IRegisterSuccessfullResponse) => response as IRegisterSuccessfullResponse),
+      catchError((err: any) => {
+        if(err.error) { // even the error response is sent it the object send form backend will be in error property if not it is some other err
+          return throwError(err.error as IOTPVerificationSuccessfullResponse);
+        }else{
+          return throwError(err);
+        }
+      })
+    );
+
+    return registerAPIResponse$;
+  }
+
   handelOTPVerificationRequest(otp: string): Observable<IOTPVerificationSuccessfullResponse> {
     const url: string = `${this.api}/otpVerify`;
 
@@ -47,7 +63,7 @@ export class UserAuthService {
     .pipe(
       map((response: IOTPVerificationSuccessfullResponse) => response),
       catchError((err: any) => {
-        if(err?.error || err?.errorField) {
+        if(err.error) { // even the error response is sent it the object send form backend will be in error property if not it is some other err
           return throwError(err.error as IOTPVerificationSuccessfullResponse);
         }else{
           return throwError(err);

@@ -1,6 +1,7 @@
+<p-toast />
 
 <div class="min-h-screen">
-    <form>
+    <form [formGroup]="registerFrom" (submit)="onSubmit();" >
         <div class="p-[80px] pt-[98px] pb-[40px] m-[49px] mt-[34px] mb-[34px] bg-white">
             <div>
                 <h1 class="font-roboto font-bold text-[36px]">Register CineHub</h1>
@@ -8,34 +9,58 @@
             <div class="font-roboto font-normal mt-[64px]">
                 <div class="mb-[40px]">
                     <div>
-                        <label for="name" class="text-[18px]" >FULL NAME</label>
+                        <label for="name" class="text-[18px]" [class.error]="registerFrom.get('name')?.errors  && registerFrom.get('name')!.touched" >FULL NAME</label>
                     </div>
                     <div class="mt-[18px] relative">
-                        <input type="text" id="name" placeholder="Joe" spellcheck="false" autocomplete="off">
+                        <input type="text" formControlName="name" [class.error]="registerFrom.get('name')?.errors  && registerFrom.get('name')!.touched" id="name" placeholder="Joe" spellcheck="false" autocomplete="off">
+                        @if(registerFrom.get('name')!.hasError('required')  && registerFrom.get('name')!.touched){
+                            <p class="text-[13px] text-[#FF6B6B] absolute mt-[12px]">This Field is required.</p>
+                        }@else if (registerFrom.get('name')!.errors  && registerFrom.get('name')!.touched) {
+                            <p class="text-[13px] text-[#FF6B6B] absolute mt-[12px]">{{ registerFrom.get('name')?.errors?.['message'] }}</p>
+                        }
                     </div>
                 </div>
                 <div class="mb-[40px]">
                     <div>
-                        <label for="phoneNumber" class="text-[18px]" >MOBILE PHONE NUMBER</label>
+                        <label for="phoneNumber" class="text-[18px]" [class.error]="registerFrom.get('phoneNumber')?.errors  && registerFrom.get('phoneNumber')!.touched" >MOBILE PHONE NUMBER</label>
                     </div>
                     <div class="mt-[18px] relative">
-                        <input type="text" id="phoneNumber" placeholder="918822445566" spellcheck="false" autocomplete="off">
+                        <input type="tel" formControlName="phoneNumber" [class.error]="registerFrom.get('phoneNumber')?.errors  && registerFrom.get('phoneNumber')!.touched" id="phoneNumber" placeholder="918822445566" spellcheck="false" autocomplete="off">
+                        @if(registerFrom.get('phoneNumber')!.hasError('required')  && registerFrom.get('phoneNumber')!.touched){
+                            <p class="text-[13px] text-[#FF6B6B] absolute mt-[12px]">This Field is required.</p>
+                        }@else if (registerFrom.get('phoneNumber')!.hasError('pattern')  && registerFrom.get('phoneNumber')!.touched) {
+                            <p class="text-[13px] text-[#FF6B6B] absolute mt-[12px]">Enter Valid PhoneNumber.</p>
+                        }@else if (registerFrom.get('phoneNumber')!.errors  && registerFrom.get('phoneNumber')!.touched) {
+                            <p class="text-[13px] text-[#FF6B6B] absolute mt-[12px]">{{ registerFrom.get('phoneNumber')?.errors?.['message'] }}</p>
+                        }
                     </div>
                 </div>
                 <div class="mb-[40px]">
                     <div>
-                        <label for="email" class="text-[18px]" >EMAIL ADDRESS</label>
+                        <label for="email" class="text-[18px]" [class.error]="registerFrom.get('email')?.errors  && registerFrom.get('email')!.touched" >EMAIL ADDRESS</label>
                     </div>
                     <div class="mt-[18px] relative">
-                        <input type="text" id="email" placeholder="example@gmail.com" spellcheck="false" autocomplete="off">
+                        <input type="text" formControlName="email" [class.error]="registerFrom.get('email')?.errors  && registerFrom.get('email')!.touched" id="email" placeholder="example@gmail.com" spellcheck="false" autocomplete="off">
+                        @if(registerFrom.get('email')!.hasError('required')  && registerFrom.get('email')!.touched){
+                            <p class="text-[13px] text-[#FF6B6B] absolute mt-[12px]">This Field is required.</p>
+                        }@else if (registerFrom.get('email')!.hasError('pattern')  && registerFrom.get('email')!.touched) {
+                            <p class="text-[13px] text-[#FF6B6B] absolute mt-[12px]">Enter Valid Email.</p>
+                        }@else if (registerFrom.get('email')!.errors  && registerFrom.get('email')!.touched) {
+                            <p class="text-[13px] text-[#FF6B6B] absolute mt-[12px]">{{ registerFrom.get('email')?.errors?.['message'] }}</p>
+                        }
                     </div>
                 </div>
                 <div class="mb-[40px]">
                     <div>
-                        <label for="password" class="text-[18px]">PASSWORD</label>
+                        <label for="password" class="text-[18px]" [class.error]="registerFrom.get('password')?.errors  && registerFrom.get('password')!.touched" >PASSWORD</label>
                     </div>
                     <div class="mt-[18px] relative">
-                        <input type="{{ toggleShowHidePassword?'text':'password' }}" id="password" placeholder="* * * * * * * *" spellcheck="false" autocomplete="off">
+                        <input type="{{ toggleShowHidePassword?'text':'password' }}" formControlName="password" [class.error]="registerFrom.get('password')?.errors  && registerFrom.get('password')!.touched" id="password" placeholder="* * * * * * * *" spellcheck="false" autocomplete="off">
+                        @if(registerFrom.get('password')!.hasError('required')  && registerFrom.get('password')!.touched){
+                            <p class="text-[13px] text-[#FF6B6B] absolute mt-[12px]">This Field is required.</p>
+                        }@else if (registerFrom.get('password')!.errors  && registerFrom.get('password')!.touched) {
+                            <p class="text-[13px] text-[#FF6B6B] absolute mt-[12px]">{{ registerFrom.get('password')?.errors?.['message'] }}</p>
+                        }
                         <div class="absolute top-[-1px] end-0" (click)="toggleShowHide()">
                             @if (toggleShowHidePassword) {
                                 <!-- eye crossed svg -->
@@ -52,10 +77,15 @@
                 </div>
                 <div>
                     <div>
-                        <label for="conPassword" class="text-[18px]">CONFIRM PASSWORD</label>
+                        <label for="conPassword" class="text-[18px]" [class.error]="registerFrom.get('confirmPassword')?.errors  && registerFrom.get('confirmPassword')!.touched" >CONFIRM PASSWORD</label>
                     </div>
                     <div class="mt-[18px] relative">
-                        <input type="{{ toggleShowHideConfirmPassword?'text':'password' }}" id="conPassword" placeholder="* * * * * * * *" spellcheck="false" autocomplete="off">
+                        <input type="{{ toggleShowHideConfirmPassword?'text':'password' }}" formControlName="confirmPassword" [class.error]="registerFrom.get('confirmPassword')?.errors  && registerFrom.get('confirmPassword')!.touched" id="conPassword" placeholder="* * * * * * * *" spellcheck="false" autocomplete="off">
+                        @if(registerFrom.get('confirmPassword')!.hasError('required')  && registerFrom.get('confirmPassword')!.touched){
+                            <p class="text-[13px] text-[#FF6B6B] absolute mt-[12px]">This Field is required.</p>
+                        }@else if (registerFrom.get('confirmPassword')!.errors  && registerFrom.get('confirmPassword')!.touched) {
+                            <p class="text-[13px] text-[#FF6B6B] absolute mt-[12px]">{{ registerFrom.get('confirmPassword')?.errors?.['message'] }}</p>
+                        }
                         <div class="absolute top-[-1px] end-0" (click)="toggleShowHide(false)">
                             @if (toggleShowHideConfirmPassword) {
                                 <!-- eye crossed svg -->
@@ -73,7 +103,7 @@
             </div>
             <div class="mt-[40px] mb-[24px]">
                 <button class="bg-[#1A2C50] font-medium font-roboto hover:bg-[#282764] p-[11px] rounded-[5.07px] text-[20px] text-center text-white w-full" type="submit">
-                    @if(false){
+                    @if(isFormSubmited){
                         <div class="flex justify-center items-center">
                             <div class="animate-spin inline-block size-[30px] border-[3px] border-current border-t-transparent text-white rounded-full dark:text-white" role="status" aria-label="loading">
                                 <span class="sr-only">Loading...</span>

@@ -135,7 +135,7 @@ export class OtpEmailVerificationFormComponent implements AfterViewInit, OnDestr
     Object.values(this.otpVerificationForm.value).reduce((otp: string, digit) => {
       return otp += (digit as string);
     }, '');
-    if(this.otpVerificationForm.invalid) {
+    if(this.otpVerificationForm.invalid || this.isFormSubmited) {
       this.otpVerificationForm.setErrors({message: 'Enter Valid OTP.'});
       return this.otpVerificationForm.markAllAsTouched();
     }
