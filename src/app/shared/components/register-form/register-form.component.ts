@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
 import { IRegisterErrorResponse, IRegisterSuccessfullResponse } from '../../models/IRegisterResponse.interface';
 import { UserAuthService } from '../../../core/services/user-auth.service';
 
-import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
+import { ToastMessageService } from '../../../core/services/toast-message.service';
+import IToastOption from '../../models/IToastOption.interface';
 
 @Component({
   selector: 'app-register-form',
@@ -15,9 +15,7 @@ import { MessageService } from 'primeng/api';
   imports: [
     RouterLink,
     ReactiveFormsModule,
-    ToastModule
   ],
-  providers: [MessageService],
   templateUrl: './register-form.component.html',
   styleUrl: './register-form.component.css'
 })
@@ -27,7 +25,7 @@ export class RegisterFormComponent {
   toggleShowHideConfirmPassword: boolean = false;
   registerFrom: FormGroup;
 
-  constructor(private userAuthService: UserAuthService, private messageService: MessageService) {
+  constructor(private userAuthService: UserAuthService, private toastMessageService: ToastMessageService) {
     this.registerFrom = new FormGroup({
       name: new FormControl('', [Validators.required]),
       phoneNumber: new FormControl('', [Validators.required, Validators.pattern(/^\d{10}$/)]),
@@ -91,12 +89,28 @@ export class RegisterFormComponent {
           this.registerFrom.get(errObj.errorField!)?.setErrors({ message: errObj.message});
         }else if(err?.error){
           // toast message
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Internal Server Error.' });
+          const toastOption: IToastOption = {
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Internal Server Error.'
+          }
+  
+          this.showToast(toastOption); // emit the toast option to show toast.
         }else{
           // error connecting toast message
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Something Went Wrong.' });
+          const toastOption: IToastOption = {
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Something Went Wrong.'
+          }
+  
+          this.showToast(toastOption); // emit the toast option to show toast.
         }
       }
     );
+  }
+
+  private showToast(toastOption: IToastOption): void {
+    this.toastMessageService.showToast(toastOption); // emit value to subject for geting value accross the appliction for toast message.
   }
 }
