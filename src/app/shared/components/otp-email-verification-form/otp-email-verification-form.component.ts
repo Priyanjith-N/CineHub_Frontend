@@ -150,6 +150,7 @@ export class OtpEmailVerificationFormComponent implements AfterViewInit, OnDestr
     otpVerificationAPIResponse$.subscribe(
       (res: IOTPVerificationSuccessfullResponse) => {
         this.isFormSubmited = false;
+        this.resetTimer();
         console.log(res);
       },
       (err: any) => {

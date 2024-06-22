@@ -29,7 +29,7 @@
                         }@else if (registerFrom.get('phoneNumber')!.hasError('pattern')  && registerFrom.get('phoneNumber')!.touched) {
                             <p class="text-[13px] text-[#FF6B6B] absolute mt-[12px]">Enter Valid PhoneNumber.</p>
                         }@else if (registerFrom.get('phoneNumber')!.errors  && registerFrom.get('phoneNumber')!.touched) {
-                            <p class="text-[13px] text-[#FF6B6B] absolute mt-[12px]">{{ registerFrom.get('phoneNumber')?.errors?.['message'] }}</p>
+                            <p class="text-[13px] text-[#FF6B6B] absolute min-w-full mt-[12px]">{{ registerFrom.get('phoneNumber')?.errors?.['message'] }}</p>
                         }
                     </div>
                 </div>

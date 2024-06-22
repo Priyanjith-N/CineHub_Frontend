@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { IUserRegisterCredentials } from '../../models/IRegisterCredentials.interface';
 import { Observable } from 'rxjs';
 import { IRegisterErrorResponse, IRegisterSuccessfullResponse } from '../../models/IRegisterResponse.interface';
@@ -25,7 +25,7 @@ export class RegisterFormComponent {
   toggleShowHideConfirmPassword: boolean = false;
   registerFrom: FormGroup;
 
-  constructor(private userAuthService: UserAuthService, private toastMessageService: ToastMessageService) {
+  constructor(private userAuthService: UserAuthService, private toastMessageService: ToastMessageService, private router: Router) {
     this.registerFrom = new FormGroup({
       name: new FormControl('', [Validators.required]),
       phoneNumber: new FormControl('', [Validators.required, Validators.pattern(/^\d{10}$/)]),
@@ -80,7 +80,8 @@ export class RegisterFormComponent {
     registerAPIResponse$.subscribe(
       (res: IRegisterSuccessfullResponse) => {
         this.isFormSubmited = false;
-        console.log(res);
+        // if needed show toast message
+        this.router.navigate(['/auth/verifyEmail']); // navigate to otp verification page.
       },
       (err: any) => {
         this.isFormSubmited = false;
