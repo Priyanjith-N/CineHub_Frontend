@@ -1,8 +1,6 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  console.log('ksfhjkhkj');
-  
   // clone req and make new request with option withCredentials true to allow cookies to send to backend.
   const authReq = req.clone({
     withCredentials: true

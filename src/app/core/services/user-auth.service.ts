@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ILoginCredentials } from '../../shared/models/ILoginCredentials.interface';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { ILoginErrorResponse, ILoginSuccessfullResponse } from '../../shared/models/ILoginResponse.interface';
-import { IOTPVerificationSuccessfullResponse } from '../../shared/models/IOTPVerificationResponse.interface';
+import { IOTPResendErrorResponse, IOTPResendSuccessfullResponse, IOTPVerificationSuccessfullResponse } from '../../shared/models/IOTPVerificationResponse.interface';
 import { IUserRegisterCredentials } from '../../shared/models/IRegisterCredentials.interface';
 import { IRegisterSuccessfullResponse } from '../../shared/models/IRegisterResponse.interface';
 
@@ -59,7 +59,9 @@ export class UserAuthService {
   handelOTPVerificationRequest(otp: string): Observable<IOTPVerificationSuccessfullResponse> {
     const url: string = `${this.api}/otpVerify`;
 
-    const otpVerificationAPIResponse$: Observable<IOTPVerificationSuccessfullResponse> = this.httpClient.post<IOTPVerificationSuccessfullResponse>(url, otp)
+    const otpVerificationAPIResponse$: Observable<IOTPVerificationSuccessfullResponse> = this.httpClient.post<IOTPVerificationSuccessfullResponse>(url, {
+      otp
+    })
     .pipe(
       map((response: IOTPVerificationSuccessfullResponse) => response),
       catchError((err: any) => {
@@ -72,6 +74,24 @@ export class UserAuthService {
     );
 
     return otpVerificationAPIResponse$;
+  }
+
+  handelOTPRsendRequest(): Observable<IOTPResendSuccessfullResponse> {
+    const url: string = `${this.api}/otpResend`;
+
+    const otpResendAPIResponse$: Observable<IOTPResendSuccessfullResponse> = this.httpClient.post<IOTPResendSuccessfullResponse>(url, {})
+    .pipe(
+      map((response: IOTPResendSuccessfullResponse) => response),
+      catchError((err: any) => {
+        if(err.error) { // even the error response is sent it the object send form backend will be in error property if not it is some other err
+          return throwError(err.error as IOTPResendErrorResponse);
+        }else{
+          return throwError(err);
+        }
+      })
+    );
+
+    return otpResendAPIResponse$;
   }
 
 }

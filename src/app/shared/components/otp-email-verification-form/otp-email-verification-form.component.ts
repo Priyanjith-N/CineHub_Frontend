@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, QueryList, Renderer2, ViewChildren, input } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { IOTPVerificationErrorResponse, IOTPVerificationSuccessfullResponse } from '../../models/IOTPVerificationResponse.interface';
+import { IOTPResendSuccessfullResponse, IOTPVerificationErrorResponse, IOTPVerificationSuccessfullResponse } from '../../models/IOTPVerificationResponse.interface';
 import { UserAuthService } from '../../../core/services/user-auth.service';
 
 import { Router } from '@angular/router';
@@ -19,6 +19,7 @@ import IToastOption from '../../models/IToastOption.interface';
 })
 export class OtpEmailVerificationFormComponent implements AfterViewInit, OnDestroy  {
   @ViewChildren('otpInput') otpInputs!: QueryList<ElementRef>;
+  resendOTPRequest: boolean = false;
   otpVerificationForm: FormGroup;
   isFormSubmited: boolean = false;
   showResendOTPOption: boolean = false;
@@ -124,17 +125,73 @@ export class OtpEmailVerificationFormComponent implements AfterViewInit, OnDestr
   }
 
   resendOTP(): void {
-    this.showResendOTPOption = false;
-    // resend otp logic
-    this.resetTimer();
-    this.startTimer();
+    if(this.resendOTPRequest){
+      return;
+    }
+
+    this.resendOTPRequest = true;
+
+    const otpResendAPIResponse$: Observable<IOTPResendSuccessfullResponse> = this.userAuthService.handelOTPRsendRequest();
+
+    otpResendAPIResponse$.subscribe(
+      (res: IOTPResendSuccessfullResponse) => {
+        this.resendOTPRequest = false;
+        this.showResendOTPOption = false;
+        this.resetTimer();
+        this.startTimer();
+        const toastOption: IToastOption = {
+          severity: 'success',
+          summary: 'Success',
+          detail: res.message!
+        }
+
+        this.showToast(toastOption); // emit the toast option to show toast.
+      },
+      (err: any) => {
+        this.resendOTPRequest = false;
+        this.showResendOTPOption = false;
+        this.resetTimer(); // to resetTimer clear localstrorage stored time.
+
+        if(err?.errorField && err.errorField === 'email'){
+          const errObj: IOTPVerificationErrorResponse = err as IOTPVerificationErrorResponse;
+          const toastOption: IToastOption = {
+            severity: 'error',
+            summary: 'Error',
+            detail: errObj.message!
+          }
+
+          this.showToast(toastOption); // emit the toast option to show toast.
+          
+          this.router.navigate(['/auth/login']); // no email provided so back to login page.
+        }else if(err?.error){
+          // toast message
+          const toastOption: IToastOption = {
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Internal Server Error.'
+          }
+
+          this.showToast(toastOption); // emit the toast option to show toast.
+        }else{
+          // error connecting toast message
+          const toastOption: IToastOption = {
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Something Went Wrong.'
+          }
+
+          this.showToast(toastOption); // emit the toast option to show toast.
+        }
+      }
+    );
   }
 
   async onSubmit(): Promise<void> {
     Object.values(this.otpVerificationForm.value).reduce((otp: string, digit) => {
       return otp += (digit as string);
     }, '');
-    if(this.otpVerificationForm.invalid || this.isFormSubmited) {
+
+    if(this.otpVerificationForm.invalid || this.isFormSubmited || this.resendOTPRequest) {
       this.otpVerificationForm.setErrors({message: 'Enter Valid OTP.'});
       return this.otpVerificationForm.markAllAsTouched();
     }
@@ -151,7 +208,8 @@ export class OtpEmailVerificationFormComponent implements AfterViewInit, OnDestr
       (res: IOTPVerificationSuccessfullResponse) => {
         this.isFormSubmited = false;
         this.resetTimer();
-        console.log(res);
+
+        this.router.navigate(['/']); // navigate to home after verification.
       },
       (err: any) => {
         this.isFormSubmited = false;
@@ -159,6 +217,7 @@ export class OtpEmailVerificationFormComponent implements AfterViewInit, OnDestr
           const errObj: IOTPVerificationErrorResponse = err as IOTPVerificationErrorResponse;
           if(errObj.errorField === 'otp'){
             this.otpVerificationForm.setErrors({ message: errObj.message });
+            this.otpInputs.toArray()[5].nativeElement.focus();
           }else{
             const toastOption: IToastOption = {
               severity: 'error',
