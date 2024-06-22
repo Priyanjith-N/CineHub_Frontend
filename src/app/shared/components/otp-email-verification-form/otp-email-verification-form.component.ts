@@ -1,26 +1,25 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, QueryList, Renderer2, ViewChildren, input } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { IOTPVerificationErrorResponse, IOTPVerificationSuccessfullResponse } from '../../models/IOTPVerificationResponse.interface';
+import { IOTPResendSuccessfullResponse, IOTPVerificationErrorResponse, IOTPVerificationSuccessfullResponse } from '../../models/IOTPVerificationResponse.interface';
 import { UserAuthService } from '../../../core/services/user-auth.service';
 
-import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
+import { ToastMessageService } from '../../../core/services/toast-message.service';
+import IToastOption from '../../models/IToastOption.interface';
 
 @Component({
   selector: 'app-otp-email-verification-form',
   standalone: true,
   imports: [
-    ReactiveFormsModule,
-    ToastModule
+    ReactiveFormsModule
   ],
-  providers: [MessageService],
   templateUrl: './otp-email-verification-form.component.html',
   styleUrl: './otp-email-verification-form.component.css'
 })
 export class OtpEmailVerificationFormComponent implements AfterViewInit, OnDestroy  {
   @ViewChildren('otpInput') otpInputs!: QueryList<ElementRef>;
+  resendOTPRequest: boolean = false;
   otpVerificationForm: FormGroup;
   isFormSubmited: boolean = false;
   showResendOTPOption: boolean = false;
@@ -28,7 +27,7 @@ export class OtpEmailVerificationFormComponent implements AfterViewInit, OnDestr
   minutes: string = '0';
   seconds: string = '0';
 
-  constructor(private userAuthService: UserAuthService, private router: Router, private messageService: MessageService, private renderer: Renderer2) {
+  constructor(private userAuthService: UserAuthService, private router: Router, private renderer: Renderer2, private toastMessageService: ToastMessageService) {
     this.otpVerificationForm = new FormGroup({
       firstDigit: new FormControl('', [Validators.required]),
       secondDigit: new FormControl('', [Validators.required]),
@@ -37,6 +36,7 @@ export class OtpEmailVerificationFormComponent implements AfterViewInit, OnDestr
       fivethDigit: new FormControl('', [Validators.required]),
       sixthDigit: new FormControl('', [Validators.required]),
     });
+
     this.startTimer(); // start otp timer
   }
 
@@ -125,17 +125,73 @@ export class OtpEmailVerificationFormComponent implements AfterViewInit, OnDestr
   }
 
   resendOTP(): void {
-    this.showResendOTPOption = false;
-    // resend otp logic
-    this.resetTimer();
-    this.startTimer();
+    if(this.resendOTPRequest){
+      return;
+    }
+
+    this.resendOTPRequest = true;
+
+    const otpResendAPIResponse$: Observable<IOTPResendSuccessfullResponse> = this.userAuthService.handelOTPRsendRequest();
+
+    otpResendAPIResponse$.subscribe(
+      (res: IOTPResendSuccessfullResponse) => {
+        this.resendOTPRequest = false;
+        this.showResendOTPOption = false;
+        this.resetTimer();
+        this.startTimer();
+        const toastOption: IToastOption = {
+          severity: 'success',
+          summary: 'Success',
+          detail: res.message!
+        }
+
+        this.showToast(toastOption); // emit the toast option to show toast.
+      },
+      (err: any) => {
+        this.resendOTPRequest = false;
+        this.showResendOTPOption = false;
+        this.resetTimer(); // to resetTimer clear localstrorage stored time.
+
+        if(err?.errorField && err.errorField === 'email'){
+          const errObj: IOTPVerificationErrorResponse = err as IOTPVerificationErrorResponse;
+          const toastOption: IToastOption = {
+            severity: 'error',
+            summary: 'Error',
+            detail: errObj.message!
+          }
+
+          this.showToast(toastOption); // emit the toast option to show toast.
+          
+          this.router.navigate(['/auth/login']); // no email provided so back to login page.
+        }else if(err?.error){
+          // toast message
+          const toastOption: IToastOption = {
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Internal Server Error.'
+          }
+
+          this.showToast(toastOption); // emit the toast option to show toast.
+        }else{
+          // error connecting toast message
+          const toastOption: IToastOption = {
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Something Went Wrong.'
+          }
+
+          this.showToast(toastOption); // emit the toast option to show toast.
+        }
+      }
+    );
   }
 
   async onSubmit(): Promise<void> {
     Object.values(this.otpVerificationForm.value).reduce((otp: string, digit) => {
       return otp += (digit as string);
     }, '');
-    if(this.otpVerificationForm.invalid) {
+
+    if(this.otpVerificationForm.invalid || this.isFormSubmited || this.resendOTPRequest) {
       this.otpVerificationForm.setErrors({message: 'Enter Valid OTP.'});
       return this.otpVerificationForm.markAllAsTouched();
     }
@@ -151,7 +207,9 @@ export class OtpEmailVerificationFormComponent implements AfterViewInit, OnDestr
     otpVerificationAPIResponse$.subscribe(
       (res: IOTPVerificationSuccessfullResponse) => {
         this.isFormSubmited = false;
-        console.log(res);
+        this.resetTimer();
+
+        this.router.navigate(['/']); // navigate to home after verification.
       },
       (err: any) => {
         this.isFormSubmited = false;
@@ -159,21 +217,43 @@ export class OtpEmailVerificationFormComponent implements AfterViewInit, OnDestr
           const errObj: IOTPVerificationErrorResponse = err as IOTPVerificationErrorResponse;
           if(errObj.errorField === 'otp'){
             this.otpVerificationForm.setErrors({ message: errObj.message });
+            this.otpInputs.toArray()[5].nativeElement.focus();
           }else{
-            this.messageService.add({ severity: 'error', summary: 'Error', detail: errObj.message });
-            setTimeout(() => {
-              this.router.navigate(['/login']);
-            }, 2000);
+            const toastOption: IToastOption = {
+              severity: 'error',
+              summary: 'Error',
+              detail: errObj.message!
+            }
+
+            this.showToast(toastOption); // emit the toast option to show toast.
+            
+            this.router.navigate(['/auth/login']); // no email provided so back to login page.
           }
           return;
         }else if(err?.error){
           // toast message
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Internal Server Error.' });
+          const toastOption: IToastOption = {
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Internal Server Error.'
+          }
+
+          this.showToast(toastOption); // emit the toast option to show toast.
         }else{
           // error connecting toast message
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Something Went Wrong.' });
+          const toastOption: IToastOption = {
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Something Went Wrong.'
+          }
+
+          this.showToast(toastOption); // emit the toast option to show toast.
         }
       }
     );
+  }
+
+  private showToast(toastOption: IToastOption): void {
+    this.toastMessageService.showToast(toastOption); // emit value to subject for geting value accross the appliction for toast message.
   }
 }

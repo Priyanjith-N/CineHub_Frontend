@@ -1,14 +1,13 @@
 import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from '@angular/router';
 
-const router: Router = inject(Router)
-
-export const authGuard: CanActivateFn = (route, state) => {
-  const url: string = router.url.substring(router.url.lastIndexOf('/'));
-  if(url === '/auth'){
+export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+  const router: Router = inject(Router);
+  const activeUrl: string = state.url.substring(state.url.lastIndexOf('/'));
+  
+  if(activeUrl === '/auth'){
     router.navigate(['/auth/login']);
     return false;
   }
-  
   return true;
 };
