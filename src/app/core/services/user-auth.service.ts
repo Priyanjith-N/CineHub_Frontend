@@ -6,6 +6,8 @@ import { ILoginErrorResponse, ILoginSuccessfullResponse } from '../../shared/mod
 import { IOTPResendErrorResponse, IOTPResendSuccessfullResponse, IOTPVerificationSuccessfullResponse } from '../../shared/models/IOTPVerificationResponse.interface';
 import { IUserRegisterCredentials } from '../../shared/models/IRegisterCredentials.interface';
 import { IRegisterSuccessfullResponse } from '../../shared/models/IRegisterResponse.interface';
+import { IVerifyAuthTokenErrorResponse, IVerifyAuthTokenSuccessfullResponse } from '../../shared/models/IVerifyAuthTokenResponse.interface';
+import { ILogoutErrorResponse, ILogoutSuccessfullResponse } from '../../shared/models/ILogoutResponse.interface';
 
 interface hello {
   email: string,
@@ -92,6 +94,42 @@ export class UserAuthService {
     );
 
     return otpResendAPIResponse$;
+  }
+
+  handelVerifyAuthTokenRequest(): Promise<IVerifyAuthTokenSuccessfullResponse | undefined> {
+    const url: string = `${this.api}/verifyToken`;
+
+    const verifyAuthTokenAPIResponse$: Observable<IVerifyAuthTokenSuccessfullResponse> = this.httpClient.get<IVerifyAuthTokenSuccessfullResponse>(url)
+    .pipe(
+      map((response: IVerifyAuthTokenSuccessfullResponse) => response),
+      catchError((err: any) => {
+        if(err.error){
+          return throwError(err as IVerifyAuthTokenErrorResponse);
+        }else{
+          return throwError(err);
+        }
+      })
+    );
+
+    return verifyAuthTokenAPIResponse$.toPromise();
+  }
+
+  handelLogoutRequest(): Observable<ILogoutSuccessfullResponse> {
+    const url: string = `${this.api}/logout`;
+
+    const LogoutAPIResponse$: Observable<ILogoutSuccessfullResponse> = this.httpClient.post<ILogoutSuccessfullResponse>(url, {})
+    .pipe(
+      map((response: ILogoutSuccessfullResponse) => response),
+      catchError((err: any) => {
+        if(err.error) { // even the error response is sent it the object send form backend will be in error property if not it is some other err
+          return throwError(err.error as ILogoutErrorResponse);
+        }else{
+          return throwError(err);
+        }
+      })
+    );
+
+    return LogoutAPIResponse$;
   }
 
 }

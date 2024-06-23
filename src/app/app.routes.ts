@@ -4,33 +4,35 @@ import { LoginFormComponent } from './shared/components/login-form/login-form.co
 import { RegisterFormComponent } from './shared/components/register-form/register-form.component';
 import { OtpEmailVerificationFormComponent } from './shared/components/otp-email-verification-form/otp-email-verification-form.component';
 import { HomePageComponent } from './features/home/user/home-page/home-page.component';
-import { authGuard } from './core/guards/auth.guard';
+import { userAuthRouteGuard } from './core/guards/auth.guard';
+import { userAuthGuard } from './core/guards/user-auth.guard';
 
 export const routes: Routes = [
     {
         path: 'auth',
         component: AuthBGComponent,
-        canActivate: [authGuard],
+        canActivate: [userAuthRouteGuard],
         children: [
             {
                 path: 'login',
-                canActivate: [authGuard],
+                canActivate: [userAuthRouteGuard],
                 component: LoginFormComponent
             },
             {
                 path: 'register',
-                canActivate: [authGuard],
+                canActivate: [userAuthRouteGuard],
                 component: RegisterFormComponent
             },
             {
                 path: 'verifyEmail',
-                canActivate: [authGuard],
+                canActivate: [userAuthRouteGuard],
                 component: OtpEmailVerificationFormComponent
             },
         ]
     },
     {
         path: '',
+        canActivate: [userAuthGuard], // for sample useage temp
         component: HomePageComponent
     }
 ];
