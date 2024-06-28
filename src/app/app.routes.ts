@@ -33,7 +33,7 @@ export const routes: Routes = [
     },
     {
         path: '',
-        canActivate: [userAuthGuard], // for sample useage temp
+        canActivate: [], // for sample useage temp userAuthGuard
         component: HomePageComponent
     }
 ];
