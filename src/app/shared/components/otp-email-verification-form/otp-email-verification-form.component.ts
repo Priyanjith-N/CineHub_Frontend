@@ -7,6 +7,7 @@ import { UserAuthService } from '../../../core/services/user-auth.service';
 import { Router } from '@angular/router';
 import { ToastMessageService } from '../../../core/services/toast-message.service';
 import IToastOption from '../../models/IToastOption.interface';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-otp-email-verification-form',
@@ -19,6 +20,7 @@ import IToastOption from '../../models/IToastOption.interface';
 })
 export class OtpEmailVerificationFormComponent implements AfterViewInit, OnDestroy  {
   @ViewChildren('otpInput') otpInputs!: QueryList<ElementRef>;
+  email: string;
   resendOTPRequest: boolean = false;
   otpVerificationForm: FormGroup;
   isFormSubmited: boolean = false;
@@ -27,7 +29,9 @@ export class OtpEmailVerificationFormComponent implements AfterViewInit, OnDestr
   minutes: string = '0';
   seconds: string = '0';
 
-  constructor(private userAuthService: UserAuthService, private router: Router, private renderer: Renderer2, private toastMessageService: ToastMessageService) {
+  constructor(private userAuthService: UserAuthService, private router: Router, private renderer: Renderer2, private toastMessageService: ToastMessageService, private cookieService: CookieService) {
+    this.email = cookieService.get('emailToBeVerified');
+    
     this.otpVerificationForm = new FormGroup({
       firstDigit: new FormControl('', [Validators.required]),
       secondDigit: new FormControl('', [Validators.required]),

@@ -2,11 +2,14 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserAuthService } from '../../../../core/services/user-auth.service';
 import { ILogoutSuccessfullResponse } from '../../../../shared/models/ILogoutResponse.interface';
+import { UserHeaderComponent } from '../../../../core/components/user-header/user-header.component';
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [],
+  imports: [
+    UserHeaderComponent
+  ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css'
 })

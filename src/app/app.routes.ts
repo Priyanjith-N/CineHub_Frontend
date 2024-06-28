@@ -6,6 +6,7 @@ import { OtpEmailVerificationFormComponent } from './shared/components/otp-email
 import { HomePageComponent } from './features/home/user/home-page/home-page.component';
 import { userAuthRouteGuard } from './core/guards/auth.guard';
 import { userAuthGuard } from './core/guards/user-auth.guard';
+import { canAcessOTPVerifyGuard } from './core/guards/can-acess-otpverify.guard';
 
 export const routes: Routes = [
     {
@@ -25,7 +26,7 @@ export const routes: Routes = [
             },
             {
                 path: 'verifyEmail',
-                canActivate: [userAuthRouteGuard],
+                canActivate: [userAuthRouteGuard, canAcessOTPVerifyGuard],
                 component: OtpEmailVerificationFormComponent
             },
         ]
