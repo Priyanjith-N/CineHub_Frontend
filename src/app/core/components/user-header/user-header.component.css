@@ -4,10 +4,6 @@ li {
   transition: transform 0.2s ease-in-out;
 }
 
-li:active:after{
-    background-color: #383782;
-}
-
 li::before{
     content: '';
     position: absolute;
@@ -25,4 +21,8 @@ li::before{
 li:hover::before{
     transform-origin: 0% 50%;
     transform: scale3d(1,1,1);
+}
+
+li:active:before{
+    background-color: #383782;
 }
