@@ -12,5 +12,5 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './user-header.component.css'
 })
 export class UserHeaderComponent {
-
+  isUserAuth = false;
 }

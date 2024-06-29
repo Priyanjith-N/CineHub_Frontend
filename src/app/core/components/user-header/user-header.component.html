@@ -42,9 +42,18 @@
                     <path d="M16 6C16.5305 6 17.0392 6.21072 17.4142 6.58579C17.7893 6.96087 18 7.46958 18 8.00002V9.00003H14V8.00002C14 7.46958 14.2107 6.96087 14.5858 6.58579C14.9609 6.21072 15.4696 6 16 6Z" stroke="#333333" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>      
             </div>
-            <div class="w-[40px] h-[40px] rounded-[50%] bg-[linear-gradient(to_bottom,#f2c446,#c6943f)] relative cursor-pointer">
-                <span class="h-fit w-fit font-roboto text-white text-[18px] font-medium absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">A</span>
-            </div>
+            
+            @if(isUserAuth){
+                <div class="w-[40px] h-[40px] rounded-[50%] bg-[linear-gradient(to_bottom,#f2c446,#c6943f)] relative cursor-pointer font-roboto font-medium text-[18px]">
+                    <span class="h-fit w-fit text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">A</span>
+                </div>
+            }@else{
+                <div class="font-roboto font-medium text-[18px] text-[#F2C46F]">
+                    <a routerLink="/auth/login" >
+                        <button class="bg-[#1A2C50] hover:bg-[#282764] text-center p-2 pl-[1.35rem] pr-[1.35rem] rounded-[5.07px]" >Login</button>
+                    </a>
+                </div>
+            }
         </div>
     </div>
 </div>
