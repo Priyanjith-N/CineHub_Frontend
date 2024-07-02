@@ -1,6 +1,6 @@
-<div class="flex items-center justify-center gap-[24px]">
+<div class="flex gap-[24px] items-center pr-[30px] pl-[30px]">
   <div>
-    <button class="cursor-pointer">
+    <button (click)="moveSlide(false);" class="cursor-pointer">
       <svg
         width="86"
         height="86"
@@ -76,19 +76,28 @@
       </svg>
     </button>
   </div>
-  <div class="flex items-center gap-[50px]">
-    <div>
-      <img class="w-[320px] h-[452px] rounded-[16px]" src="assets/images/spider.jpg" alt="" />
+  <div class="keen-slider" #sliderRef>
+    <div class="keen-slider__slide">
+      <img class="rounded-[16px]" src="assets/images/spider.jpg" alt="">
     </div>
-    <div>
-      <img class="w-[320px] h-[452px] rounded-[16px]" src="assets/images/spider.jpg" alt="" />
+    <div class="keen-slider__slide">
+      <img class="rounded-[16px]" src="assets/images/spider.jpg" alt="">
     </div>
-    <div>
-      <img class="w-[320px] h-[452px] rounded-[16px]" src="assets/images/spider.jpg" alt="" />
+    <div class="keen-slider__slide">
+      <img class="rounded-[16px]" src="assets/images/spider.jpg" alt="">
+    </div>
+    <div class="keen-slider__slide">
+      <img class="rounded-[16px]" src="assets/images/spider.jpg" alt="">
+    </div>
+    <div class="keen-slider__slide">
+      <img class="rounded-[16px]" src="assets/images/spider.jpg" alt="">
+    </div>
+    <div class="keen-slider__slide">
+      <img class="rounded-[16px]" src="assets/images/spider.jpg" alt="">
     </div>
   </div>
   <div>
-    <button class="cursor-pointer">
+    <button (click)="moveSlide();" class="cursor-pointer">
       <svg
         width="86"
         height="86"
