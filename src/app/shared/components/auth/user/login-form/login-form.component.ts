@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { UserAuthService } from '../../../core/services/user-auth.service';
-import { ILoginErrorResponse, ILoginSuccessfullResponse } from '../../models/ILoginResponse.interface';
+import { UserAuthService } from '../../../../../core/services/user-auth.service';
+import { ILoginErrorResponse, ILoginSuccessfullResponse } from '../../../../models/ILoginResponse.interface';
 import { Observable } from 'rxjs';
-import { ILoginCredentials } from '../../models/ILoginCredentials.interface';
+import { ILoginCredentials } from '../../../../models/ILoginCredentials.interface';
 
-import IToastOption from '../../models/IToastOption.interface';
-import { ToastMessageService } from '../../../core/services/toast-message.service';
+import IToastOption from '../../../../models/IToastOption.interface';
+import { ToastMessageService } from '../../../../../core/services/toast-message.service';
 
 @Component({
   selector: 'app-login-form',

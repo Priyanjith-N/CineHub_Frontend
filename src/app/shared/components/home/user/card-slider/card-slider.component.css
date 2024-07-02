@@ -1,0 +1,4 @@
+@import url(../../../../../../../node_modules/keen-slider/keen-slider.min.css);
+.keen-slider__slide {
+    width: 300px !important; /* Use with caution */
+}

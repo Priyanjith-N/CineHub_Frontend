@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { IUserRegisterCredentials } from '../../models/IRegisterCredentials.interface';
+import { IUserRegisterCredentials } from '../../../../models/IRegisterCredentials.interface';
 import { Observable } from 'rxjs';
-import { IRegisterErrorResponse, IRegisterSuccessfullResponse } from '../../models/IRegisterResponse.interface';
-import { UserAuthService } from '../../../core/services/user-auth.service';
+import { IRegisterErrorResponse, IRegisterSuccessfullResponse } from '../../../../models/IRegisterResponse.interface';
+import { UserAuthService } from '../../../../../core/services/user-auth.service';
 
-import { ToastMessageService } from '../../../core/services/toast-message.service';
-import IToastOption from '../../models/IToastOption.interface';
+import { ToastMessageService } from '../../../../../core/services/toast-message.service';
+import IToastOption from '../../../../models/IToastOption.interface';
 
 @Component({
   selector: 'app-register-form',

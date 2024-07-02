@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AuthComponentBGComponent } from './auth-component-bg.component';
+import { AuthBgComponent } from './auth-bg.component';
 
-describe('AuthComponentBGComponent', () => {
-  let component: AuthComponentBGComponent;
-  let fixture: ComponentFixture<AuthComponentBGComponent>;
+describe('AuthBgComponent', () => {
+  let component: AuthBgComponent;
+  let fixture: ComponentFixture<AuthBgComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AuthComponentBGComponent]
+      imports: [AuthBgComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(AuthComponentBGComponent);
+    fixture = TestBed.createComponent(AuthBgComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

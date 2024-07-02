@@ -1,12 +1,12 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, QueryList, Renderer2, ViewChildren, input } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { IOTPResendSuccessfullResponse, IOTPVerificationErrorResponse, IOTPVerificationSuccessfullResponse } from '../../models/IOTPVerificationResponse.interface';
-import { UserAuthService } from '../../../core/services/user-auth.service';
+import { IOTPResendSuccessfullResponse, IOTPVerificationErrorResponse, IOTPVerificationSuccessfullResponse } from '../../../../models/IOTPVerificationResponse.interface';
+import { UserAuthService } from '../../../../../core/services/user-auth.service';
 
 import { Router } from '@angular/router';
-import { ToastMessageService } from '../../../core/services/toast-message.service';
-import IToastOption from '../../models/IToastOption.interface';
+import { ToastMessageService } from '../../../../../core/services/toast-message.service';
+import IToastOption from '../../../../models/IToastOption.interface';
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({
