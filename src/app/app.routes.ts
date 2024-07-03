@@ -7,7 +7,8 @@ import { HomePageComponent } from './features/home/user/home-page/home-page.comp
 import { userAuthRouteGuard } from './core/guards/auth.guard';
 import { userAuthGuard } from './core/guards/user-auth.guard';
 import { canAcessOTPVerifyGuard } from './core/guards/can-acess-otpverify.guard';
-import { AuthBgComponent } from './features/auth/admin/auth-bg/auth-bg.component';
+import { AdminAuthBGComponent } from './features/auth/admin/admin-auth-bg/admin-auth-bg.component';
+import { AdminLoginFormComponent } from './shared/components/auth/admin/admin-login-form/admin-login-form.component';
 
 export const routes: Routes = [
     {
@@ -38,8 +39,13 @@ export const routes: Routes = [
         component: HomePageComponent
     },
     {
-        path: 'admin',
-        component: AuthBgComponent,
-        children: []
+        path: 'admin/auth',
+        component: AdminAuthBGComponent,
+        children: [
+            {
+                path: 'login',
+                component: AdminLoginFormComponent
+            }
+        ]
     }
 ];
