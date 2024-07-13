@@ -9,6 +9,7 @@ import { userAuthGuard } from './core/guards/user-auth.guard';
 import { canAcessOTPVerifyGuard } from './core/guards/can-acess-otpverify.guard';
 import { AdminAuthBGComponent } from './features/auth/admin/admin-auth-bg/admin-auth-bg.component';
 import { AdminLoginFormComponent } from './shared/components/auth/admin/admin-login-form/admin-login-form.component';
+import { AdminHomePageComponent } from './features/home/admin/admin-home-page/admin-home-page.component';
 
 export const routes: Routes = [
     {
@@ -47,5 +48,9 @@ export const routes: Routes = [
                 component: AdminLoginFormComponent
             }
         ]
+    },
+    {
+        path: 'admin',
+        component: AdminHomePageComponent,
     }
 ];

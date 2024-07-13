@@ -69,7 +69,7 @@ export class AdminLoginFormComponent {
 
         this.showToast(toastOption); // emit the toast option to show toast.
         
-        this.router.navigate(['/']); // navigate to home Page after successfull login.
+        this.router.navigate(['/admin']); // navigate to home Page after successfull login.
       },
       (err: any) => {
         this.isFormSubmited = false;
