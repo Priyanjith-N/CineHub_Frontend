@@ -2,9 +2,4 @@
 .keen-slider__slide {
     display: flex;
     justify-content: center;
-    /* min-width: fit-content !important;  */
-}
-
-.keen-slider {
-    /* width: 81.4% !important; */
 }
