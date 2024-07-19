@@ -1,0 +1,68 @@
+<form [formGroup]="loginForm" (submit)="onSubmit()">
+    <div class="p-[80px] pt-[98px] pb-[40px] m-[49px] mt-[30px] mb-[30px] bg-white">
+        <div>
+            <h1 class="font-roboto font-bold text-[36px]">Theater Log In</h1>
+        </div>
+        <div class="font-roboto font-normal mt-[64px]">
+            <div class="mb-[40px]">
+                <div>
+                    <label for="email" class="text-[18px]" [class.error]="loginForm.get('email')?.errors  && loginForm.get('email')!.touched">EMAIL ADDRESS</label>
+                </div>
+                <div class="mt-[18px] relative">
+                    <input type="text" formControlName="email" [class.error]="loginForm.get('email')?.errors  && loginForm.get('email')!.touched" id="email" placeholder="example@gmail.com" spellcheck="false" autocomplete="off">
+                    @if(loginForm.get('email')!.hasError('required')  && loginForm.get('email')!.touched){
+                        <p class="text-[13px] text-[#FF6B6B] absolute mt-[12px]">This Field is required.</p>
+                    }@else if (loginForm.get('email')!.hasError('pattern')  && loginForm.get('email')!.touched) {
+                        <p class="text-[13px] text-[#FF6B6B] absolute mt-[12px]">Enter Valid Email.</p>
+                    }@else if (loginForm.get('email')!.errors  && loginForm.get('email')!.touched) {
+                        <p class="text-[13px] text-[#FF6B6B] absolute mt-[12px]">{{ loginForm.get('email')?.errors?.['message'] }}</p>
+                    }
+                </div>
+            </div>
+            <div>
+                <div>
+                    <label for="password" class="text-[18px]" [class.error]="loginForm.get('password')?.errors  && loginForm.get('password')!.touched">PASSWORD</label>
+                </div>
+                <div class="mt-[18px] relative">
+                    <input type="{{ toggleShowHidePassword?'text':'password' }}" formControlName="password" [class.error]="loginForm.get('password')?.errors  && loginForm.get('password')!.touched" id="password" placeholder="* * * * * * * *" spellcheck="false" autocomplete="off">
+                    @if(loginForm.get('password')!.hasError('required')  && loginForm.get('password')!.touched){
+                        <p class="text-[13px] text-[#FF6B6B] absolute mt-[12px]">This Field is required.</p>
+                    }@else if (loginForm.get('password')!.errors  && loginForm.get('password')!.touched) {
+                        <p class="text-[13px] text-[#FF6B6B] absolute mt-[12px]">{{ loginForm.get('password')?.errors?.['message'] }}</p>
+                    }
+                    <div (click)="toggleShowHide()" class="absolute top-[-1px] end-0">
+                        @if (toggleShowHidePassword) {
+                            <!-- eye crossed svg -->
+                              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path fill-rule="evenodd" clip-rule="evenodd" d="M19.6503 9.65276C18.5108 9.23035 17.2816 9.00006 16 9.00006C11.4498 9.00006 7.56109 11.9027 6 16.0001C6.64042 17.6809 7.67257 19.1608 8.98141 20.3216L10.3984 18.9046C9.47831 18.1112 8.71736 17.1243 8.1755 16.0001C9.61369 13.016 12.5953 11.0001 16 11.0001C16.7057 11.0001 17.3932 11.0867 18.0525 11.2505L19.6503 9.65276ZM18.186 13.9454C18.1869 13.9464 18.1878 13.9474 18.1887 13.9483L20.0901 12.0469C20.0889 12.0462 20.0877 12.0456 20.0865 12.0449L21.5488 10.5827C21.5499 10.5834 21.5511 10.5841 21.5522 10.5848L24.1998 7.93718C24.5903 7.54666 25.2235 7.54666 25.614 7.93718C26.0046 8.3277 26.0046 8.96087 25.614 9.35139L23.1596 11.8058C24.4016 12.9467 25.3828 14.38 26 16.0001C24.4389 20.0974 20.5502 23.0001 16 23.0001C14.792 23.0001 13.6307 22.7955 12.5471 22.4183L9.61403 25.3514C9.2235 25.7419 8.59034 25.7419 8.19981 25.3514C7.80929 24.9609 7.80929 24.3277 8.19981 23.9372L10.6181 21.5189C10.6169 21.5182 10.6158 21.5175 10.6146 21.5168L12.085 20.0464C12.0862 20.0471 12.0874 20.0477 12.0887 20.0483L13.9482 18.1888C13.9473 18.1879 13.9463 18.187 13.9454 18.1861L18.186 13.9454ZM16.2892 13.0138C16.194 13.0047 16.0976 13.0001 16 13.0001C14.3431 13.0001 13 14.3432 13 16.0001C13 16.0976 13.0046 16.1941 13.0138 16.2893L16.2892 13.0138ZM21.7442 13.2212L18.9998 15.9656L19 16.0001C19 17.6569 17.6568 19.0001 16 19.0001L15.9656 18.9999L14.1649 20.8006C14.7575 20.9314 15.3715 21.0001 16 21.0001C19.4047 21.0001 22.3863 18.9841 23.8245 16.0001C23.3109 14.9344 22.6005 13.9922 21.7442 13.2212Z" fill="#333333"/>
+                              </svg>                         
+                         } @else {
+                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M16 21C12.5953 21 9.61369 18.984 8.1755 16C9.61369 13.016 12.5953 11 16 11C19.4047 11 22.3863 13.016 23.8245 16C22.3863 18.984 19.4047 21 16 21ZM16 9C20.5502 9 24.4389 11.9026 26 16C24.4389 20.0974 20.5502 23 16 23C11.4498 23 7.56109 20.0974 6 16C7.56109 11.9026 11.4498 9 16 9ZM16 19C17.6569 19 19 17.6569 19 16C19 14.3431 17.6569 13 16 13C14.3431 13 13 14.3431 13 16C13 17.6569 14.3431 19 16 19Z" fill="#9DA8BE"/>
+                            </svg>
+                         }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-[66px] mb-[24px]">
+            <button class="select-none bg-[#1A2C50] font-medium font-roboto hover:bg-[#282764] p-[11px] rounded-[5.07px] text-[20px] text-center text-white w-full" type="submit">
+                @if(isFormSubmited){
+                    <div class="flex justify-center items-center">
+                        <div class="animate-spin inline-block size-[30px] border-[3px] border-current border-t-transparent text-white rounded-full dark:text-white" role="status" aria-label="loading">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                }@else{
+                    Login
+                }
+            </button>
+        </div>
+        <div class="mb-[28px]">
+            <p class="text-[#5A637A] text-[12px] font-normal text-center">Don't have an account yet? <span class="text-[#DC3558] cursor-pointer" routerLink="/theaterOwner/auth/register" >Sign up</span></p>
+        </div>
+        <div>
+            <p class="font-roboto font-normal text-[12px]">2024 CineHub.</p>
+        </div>
+    </div>
+</form>

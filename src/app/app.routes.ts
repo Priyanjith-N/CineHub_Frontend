@@ -10,6 +10,10 @@ import { canAcessOTPVerifyGuard } from './core/guards/can-acess-otpverify.guard'
 import { AdminAuthBGComponent } from './features/auth/admin/admin-auth-bg/admin-auth-bg.component';
 import { AdminLoginFormComponent } from './shared/components/auth/admin/admin-login-form/admin-login-form.component';
 import { AdminHomePageComponent } from './features/home/admin/admin-home-page/admin-home-page.component';
+import { TheaterOwerAuthBgComponent } from './features/auth/theaterOwner/theater-owner-auth-bg/theater-owner-auth-bg.component';
+import { TheaterOwerLoginFormComponent } from './shared/components/auth/theaterOwner/theater-owner-login-form/theater-owner-login-form.component';
+import { TheaterOwnerOtpEmailVerifcationFormComponent } from './shared/components/auth/theaterOwner/theater-owner-otp-email-verifcation-form/theater-owner-otp-email-verifcation-form.component';
+import { TheaterOwnerRegisterFormComponent } from './shared/components/auth/theaterOwner/theater-owner-register-form/theater-owner-register-form.component';
 
 export const routes: Routes = [
     {
@@ -35,11 +39,6 @@ export const routes: Routes = [
         ]
     },
     {
-        path: '',
-        canActivate: [], // for sample useage temp userAuthGuard
-        component: HomePageComponent
-    },
-    {
         path: 'admin/auth',
         component: AdminAuthBGComponent,
         children: [
@@ -48,6 +47,29 @@ export const routes: Routes = [
                 component: AdminLoginFormComponent
             }
         ]
+    },
+    {
+        path: 'theaterOwner/auth',
+        component: TheaterOwerAuthBgComponent,
+        children: [
+            {
+                path: 'login',
+                component: TheaterOwerLoginFormComponent
+            },
+            {
+                path: 'register',
+                component: TheaterOwnerRegisterFormComponent
+            },
+            {
+                path: 'verifyEmail',
+                component: TheaterOwnerOtpEmailVerifcationFormComponent
+            },
+        ]
+    },
+    {
+        path: '',
+        canActivate: [], // for sample useage temp userAuthGuard
+        component: HomePageComponent
     },
     {
         path: 'admin',

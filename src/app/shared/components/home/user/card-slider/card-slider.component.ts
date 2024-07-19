@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from "@angular/core"
+import { Component, ElementRef, Input, ViewChild } from "@angular/core"
 import KeenSlider, { KeenSliderInstance } from "keen-slider"
 
 @Component({
@@ -9,6 +9,7 @@ import KeenSlider, { KeenSliderInstance } from "keen-slider"
   styleUrl: './card-slider.component.css'
 })
 export class CardSliderComponent {
+  @Input({ required: true }) cardTitle: string = '';
   @ViewChild("sliderRef") sliderRef: ElementRef<HTMLElement> | undefined;
 
   slider: KeenSliderInstance | undefined;

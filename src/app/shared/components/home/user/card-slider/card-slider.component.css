@@ -1,4 +1,10 @@
 @import url(../../../../../../../node_modules/keen-slider/keen-slider.min.css);
 .keen-slider__slide {
-    width: 300px !important; /* Use with caution */
+    display: flex;
+    justify-content: center;
+    /* min-width: fit-content !important;  */
+}
+
+.keen-slider {
+    /* width: 81.4% !important; */
 }
