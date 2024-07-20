@@ -14,6 +14,7 @@ import { TheaterOwerAuthBgComponent } from './features/auth/theaterOwner/theater
 import { TheaterOwerLoginFormComponent } from './shared/components/auth/theaterOwner/theater-owner-login-form/theater-owner-login-form.component';
 import { TheaterOwnerOtpEmailVerifcationFormComponent } from './shared/components/auth/theaterOwner/theater-owner-otp-email-verifcation-form/theater-owner-otp-email-verifcation-form.component';
 import { TheaterOwnerRegisterFormComponent } from './shared/components/auth/theaterOwner/theater-owner-register-form/theater-owner-register-form.component';
+import { AccountNotVerifiedMessageComponent } from './shared/components/auth/theaterOwner/account-not-verified-message/account-not-verified-message.component';
 
 export const routes: Routes = [
     {
@@ -64,6 +65,10 @@ export const routes: Routes = [
                 path: 'verifyEmail',
                 component: TheaterOwnerOtpEmailVerifcationFormComponent
             },
+            {
+                path: 'accountNotVerified',
+                component: AccountNotVerifiedMessageComponent
+            }
         ]
     },
     {
