@@ -1,7 +1,7 @@
 <div class="ml-[30px] mr-[30px]">
   <div class="flex justify-between items-baseline">
     <div>
-      <h2 class="font-roboto text-[22px] font-medium leading-[32px]">{{ cardTitle }}</h2>
+      <h2 class="font-roboto text-[22px] font-medium leading-[32px] select-none text-[#333333]">{{ cardTitle }}</h2>
     </div>
     <div>
       <p
@@ -15,7 +15,7 @@
     class="flex gap-[24px] items-center justify-center pr-[30px] pl-[30px] mt-[40px] mb-[97px]"
   >
     <div>
-      <button (click)="moveSlide(false)" class="cursor-pointer">
+      <button (click)="moveSlide(false)" class="cursor-pointer outline-none">
         <svg
           width="86"
           height="86"
@@ -101,7 +101,7 @@
               alt=""
             />
           </div>
-          <div class="text-left">
+          <div class="text-left text-[#333333]">
             <h2 class="font-roboto font-bold text-[20px] mb-[4px]">
               Spider-Man: No Way Home
             </h2>
@@ -200,7 +200,7 @@
       </div>
     </div>
     <div>
-      <button (click)="moveSlide()" class="cursor-pointer">
+      <button (click)="moveSlide()" class="cursor-pointer outline-none">
         <svg
           width="86"
           height="86"

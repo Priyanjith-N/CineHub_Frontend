@@ -5,6 +5,7 @@ import { ILogoutSuccessfullResponse } from '../../../../shared/models/ILogoutRes
 import { UserHeaderComponent } from '../../../../core/components/user-header/user-header.component';
 import { UserSubHeaderComponent } from '../../../../core/components/user-sub-header/user-sub-header.component';
 import { LandingPageComponent } from '../../../../shared/components/home/user/landing-page/landing-page.component';
+import { UserFooterComponent } from '../../../../core/components/user-footer/user-footer.component';
 
 @Component({
   selector: 'app-home-page',
@@ -12,7 +13,8 @@ import { LandingPageComponent } from '../../../../shared/components/home/user/la
   imports: [
     UserHeaderComponent,
     UserSubHeaderComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    UserFooterComponent
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css'
