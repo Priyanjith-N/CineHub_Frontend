@@ -14,7 +14,10 @@ import { TheaterOwerAuthBgComponent } from './features/auth/theaterOwner/theater
 import { TheaterOwerLoginFormComponent } from './shared/components/auth/theaterOwner/theater-owner-login-form/theater-owner-login-form.component';
 import { TheaterOwnerOtpEmailVerifcationFormComponent } from './shared/components/auth/theaterOwner/theater-owner-otp-email-verifcation-form/theater-owner-otp-email-verifcation-form.component';
 import { TheaterOwnerRegisterFormComponent } from './shared/components/auth/theaterOwner/theater-owner-register-form/theater-owner-register-form.component';
-import { AccountNotVerifiedMessageComponent } from './shared/components/auth/theaterOwner/account-not-verified-message/account-not-verified-message.component';
+import { DistributerAuthBgComponent } from './features/auth/distributer/distributer-auth-bg/distributer-auth-bg.component';
+import { DistributerLoginFormComponent } from './shared/components/auth/distributer/distributer-login-form/distributer-login-form.component';
+import { TheaterOwnerAccountNotVerifiedMessageComponent } from './shared/components/auth/theaterOwner/theater-owner-account-not-verified-message/theater-owner-account-not-verified-message.component';
+import { DistributerAccountNotVerifiedMessageComponent } from './shared/components/auth/distributer/distributer-account-not-verified-message/distributer-account-not-verified-message.component';
 
 export const routes: Routes = [
     {
@@ -67,7 +70,21 @@ export const routes: Routes = [
             },
             {
                 path: 'accountNotVerified',
-                component: AccountNotVerifiedMessageComponent
+                component: TheaterOwnerAccountNotVerifiedMessageComponent
+            }
+        ]
+    },
+    {
+        path: 'distributer/auth',
+        component: DistributerAuthBgComponent,
+        children: [
+            {
+                path: 'login',
+                component: DistributerLoginFormComponent
+            },
+            {
+                path: 'accountNotVerified',
+                component: DistributerAccountNotVerifiedMessageComponent
             }
         ]
     },
