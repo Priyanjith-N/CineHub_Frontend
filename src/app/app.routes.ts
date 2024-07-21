@@ -72,6 +72,7 @@ export const routes: Routes = [
             },
             {
                 path: 'accountNotVerified',
+                canActivate: [canAcessDocumentVerificationPendingPageGuard],
                 component: TheaterOwnerAccountNotVerifiedMessageComponent
             }
         ]

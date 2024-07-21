@@ -6,13 +6,17 @@ export const canAcessDocumentVerificationPendingPageGuard: CanActivateFn = (rout
   const router: Router = inject(Router);
   const documentVerificationPendingMessagePageService: DocumentVerificationPendingMessagePageService = inject(DocumentVerificationPendingMessagePageService);
 
+  const activeUrl: string = state.url.split('/')[1];
+  const navigateUrl: string = `/${activeUrl}/auth/login`;
+  
+
   const canAcess = documentVerificationPendingMessagePageService.getValue();
   if(canAcess) {
     documentVerificationPendingMessagePageService.setValue(false);
     return true;
   }
 
-  router.navigate(['/distributer/auth/login']);
+  router.navigate([navigateUrl]);
   
   return false;
 };
