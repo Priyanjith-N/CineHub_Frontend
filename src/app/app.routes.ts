@@ -19,6 +19,7 @@ import { DistributerLoginFormComponent } from './shared/components/auth/distribu
 import { TheaterOwnerAccountNotVerifiedMessageComponent } from './shared/components/auth/theaterOwner/theater-owner-account-not-verified-message/theater-owner-account-not-verified-message.component';
 import { DistributerAccountNotVerifiedMessageComponent } from './shared/components/auth/distributer/distributer-account-not-verified-message/distributer-account-not-verified-message.component';
 import { DistributerRegisterFormComponent } from './shared/components/auth/distributer/distributer-register-form/distributer-register-form.component';
+import { canAcessDocumentVerificationPendingPageGuard } from './core/guards/can-acess-document-verification-pending-page.guard';
 
 export const routes: Routes = [
     {
@@ -93,6 +94,7 @@ export const routes: Routes = [
             },
             {
                 path: 'accountNotVerified',
+                canActivate: [canAcessDocumentVerificationPendingPageGuard],
                 component: DistributerAccountNotVerifiedMessageComponent
             }
         ]
