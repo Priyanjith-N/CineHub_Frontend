@@ -1,20 +1,20 @@
 import { Component, ElementRef, QueryList, Renderer2, ViewChildren } from '@angular/core';
-import IToastOption from '../../../../models/IToastOption.interface';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CookieService } from 'ngx-cookie-service';
-import { ToastMessageService } from '../../../../../core/services/toast-message.service';
 import { Router } from '@angular/router';
+import { ToastMessageService } from '../../../../../core/services/toast-message.service';
+import { CookieService } from 'ngx-cookie-service';
+import IToastOption from '../../../../models/IToastOption.interface';
 
 @Component({
-  selector: 'app-theater-owner-otp-email-verifcation-form',
+  selector: 'app-distributer-otp-email-verification-form',
   standalone: true,
   imports: [
     ReactiveFormsModule
   ],
-  templateUrl: './theater-owner-otp-email-verifcation-form.component.html',
-  styleUrl: './theater-owner-otp-email-verifcation-form.component.css'
+  templateUrl: './distributer-otp-email-verification-form.component.html',
+  styleUrl: './distributer-otp-email-verification-form.component.css'
 })
-export class TheaterOwnerOtpEmailVerifcationFormComponent {
+export class DistributerOtpEmailVerificationFormComponent {
   @ViewChildren('otpInput') otpInputs!: QueryList<ElementRef<HTMLInputElement>>;
   email: string;
   resendOTPRequest: boolean = false;
@@ -26,7 +26,7 @@ export class TheaterOwnerOtpEmailVerifcationFormComponent {
   seconds: string = '0';
 
   constructor(private router: Router, private renderer: Renderer2, private toastMessageService: ToastMessageService, private cookieService: CookieService) {
-    this.email = cookieService.get('theaterOwnerEmailToBeVerified') || "example@gmail.com";
+    this.email = cookieService.get('distributerEmailToBeVerified') || "example@gmail.com";
     
     this.otpVerificationForm = new FormGroup({
       firstDigit: new FormControl('', [Validators.required]),
@@ -49,8 +49,8 @@ export class TheaterOwnerOtpEmailVerifcationFormComponent {
   }
 
   private startTimer(): void {
-    this.minutes = localStorage.getItem('theaterOwnerMinutes') || '01';
-    this.seconds = localStorage.getItem('theaterOwnerSeconds') || '30';
+    this.minutes = localStorage.getItem('distributerMinutes') || '01';
+    this.seconds = localStorage.getItem('distributerSeconds') || '30';
 
     const alreadyRunedInSeconds: number = 90 - ((Number(this.minutes) * 60) + Number(this.seconds)); // how many seconds timer run
     
@@ -76,8 +76,8 @@ export class TheaterOwnerOtpEmailVerifcationFormComponent {
         this.seconds = this.getTimeInStarndardFormat((seconds - 1));  // get time if less than 10 get 1 if greater than 9 get normal 10.
       }
 
-      localStorage.setItem('theaterOwnerMinutes', this.minutes); // store minutes and time in localstorage so we get the track of time even page gets reloaded mannuly.
-      localStorage.setItem('theaterOwnerSeconds', this.seconds);
+      localStorage.setItem('distributerMinutes', this.minutes); // store minutes and time in localstorage so we get the track of time even page gets reloaded mannuly.
+      localStorage.setItem('distributerSeconds', this.seconds);
     }, 1000);
   }
 
@@ -90,8 +90,8 @@ export class TheaterOwnerOtpEmailVerifcationFormComponent {
   }
 
   private resetTimer(): void {
-    localStorage.removeItem('theaterOwnerMinutes');
-    localStorage.removeItem('theaterOwnerSeconds');
+    localStorage.removeItem('distributerMinutes');
+    localStorage.removeItem('distributerSeconds');
     clearInterval(this.otpTimer);
   }
 

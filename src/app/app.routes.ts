@@ -88,6 +88,10 @@ export const routes: Routes = [
                 component: DistributerRegisterFormComponent
             },
             {
+                path: 'verifyEmail',
+                component: TheaterOwnerOtpEmailVerifcationFormComponent
+            },
+            {
                 path: 'accountNotVerified',
                 component: DistributerAccountNotVerifiedMessageComponent
             }
