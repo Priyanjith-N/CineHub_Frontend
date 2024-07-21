@@ -79,7 +79,7 @@ export class DistributerLoginFormComponent {
 
           this.loginForm.get(errObj.errorField!)?.setErrors({ message: errObj.message});
         }else if(err?.notOTPVerified) {
-          const errObj: ILoginErrorResponse = err as ILoginErrorResponse;
+          const errObj: ILoginErrorResponse = err.error as ILoginErrorResponse;
 
           const toastOption: IToastOption = {
             severity: 'info',

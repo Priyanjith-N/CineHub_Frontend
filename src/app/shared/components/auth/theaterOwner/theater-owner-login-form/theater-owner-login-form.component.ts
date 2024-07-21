@@ -3,6 +3,11 @@ import IToastOption from '../../../../models/IToastOption.interface';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastMessageService } from '../../../../../core/services/toast-message.service';
 import { Router, RouterLink } from '@angular/router';
+import { TheaterOwnerAuthService } from '../../../../../core/services/theater-owner-auth.service';
+import { ILoginCredentials } from '../../../../models/ILoginCredentials.interface';
+import { Observable } from 'rxjs';
+import { ILoginErrorResponse, ILoginSuccessfullResponse } from '../../../../models/ILoginResponse.interface';
+import { DocumentVerificationPendingMessagePageService } from '../../../../../core/services/document-verification-pending-message-page.service';
 
 @Component({
   selector: 'app-theater-ower-login-form',
@@ -19,7 +24,7 @@ export class TheaterOwerLoginFormComponent {
   toggleShowHidePassword: boolean = false; // defaultly hides the password
   loginForm: FormGroup;
   
-  constructor(private router: Router, private toastMessageService: ToastMessageService) {
+  constructor(private router: Router, private toastMessageService: ToastMessageService, private theaterOwnerAuthService: TheaterOwnerAuthService, private documentVerificationPendingMessagePageService: DocumentVerificationPendingMessagePageService) {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z0-9]+@gmail\.com$/)]),
       password: new FormControl('', [Validators.required])
@@ -47,6 +52,61 @@ export class TheaterOwerLoginFormComponent {
     }
 
     this.isFormSubmited = true; // make it true when form is submite with valid and make it flase when get a response
+
+    const loginCredentials: ILoginCredentials = this.loginForm.value;
+
+    const loginAPIResponse$: Observable<ILoginSuccessfullResponse> = this.theaterOwnerAuthService.handleLoginRequest(loginCredentials);
+
+    loginAPIResponse$.subscribe(
+      (res: ILoginSuccessfullResponse) => {
+        this.isFormSubmited = false;
+        
+        const toastOption: IToastOption = {
+          severity: 'success',
+          summary: 'Success',
+          detail: res.message
+        }
+
+        this.showToast(toastOption); // emit the toast option to show toast.
+        
+        this.router.navigate(['/theaterOwner']); // navigate to home Page after successfull login.
+      },
+      ((err: any) => {
+        this.isFormSubmited = false;
+        
+        if(err?.errorField){
+          const errObj: ILoginErrorResponse = err as ILoginErrorResponse; // err is the backend err modified in pipe
+
+          this.loginForm.get(errObj.errorField!)?.setErrors({ message: errObj.message});
+        }else if(err?.notOTPVerified) {
+          const errObj: ILoginErrorResponse = err.error as ILoginErrorResponse; // same err object with backend defined error in error key
+
+          const toastOption: IToastOption = {
+            severity: 'info',
+            summary: errObj.message!,
+            detail: 'An OTP is send via Email. Verify account now'
+          }
+
+          this.showToast(toastOption); // emit the toast option to show toast.
+
+          this.router.navigate(['/theaterOwner/auth/verifyEmail']);// navigating to otp verification page for account verfication step.
+        }else if(err?.notDocumentVerified) {
+          this.documentVerificationPendingMessagePageService.setValue(true);
+
+          this.router.navigate(['/theaterOwner/auth/accountNotVerified']); // navigating to account not verified page for showing welcome message.
+        }else {
+          const errMessage: string = err?.requiredErrMessage || 'Something Went Wrong.';
+
+          const toastOption: IToastOption = {
+            severity: 'error',
+            summary: 'Error',
+            detail: errMessage
+          }
+  
+          this.showToast(toastOption); // emit the toast option to show toast.
+        }
+      })
+    );
   }
 
   private showToast(toastOption: IToastOption): void {
