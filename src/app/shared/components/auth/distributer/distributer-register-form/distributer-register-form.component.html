@@ -98,7 +98,7 @@
                         </div>
                     </div>
                 </div>
-                <div>
+                <div class="mb-[40px]">
                     <div>
                         <label for="IDProof" class="text-[18px]">ID PROOF</label>
                     </div>
@@ -152,6 +152,35 @@
                         <input id="imageUpload" type="file" class="hidden" accept="image/*" />
                     </div>
                 </div>
+                <div>
+                    <div>
+                        <label for="licence" class="text-[18px]">DISTRIBUTER LICENCE</label>
+                    </div>
+                    <div class="mt-[18px]">
+                        <label for="imageUploadLicence">
+                            <div class="w-[332px] h-[168px] bg-[rgba(55,65,81,0.71)] border-[1.5px] rounded-[5.07px] border-dashed border-[rgba(0,0,0,0.7)] flex flex-col justify-center items-center gap-[5px] cursor-pointer">
+                                <div>
+                                    <div>
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <rect width="24" height="24" fill="url(#pattern0_204_1114)"/>
+                                            <defs>
+                                            <pattern id="pattern0_204_1114" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                            <use xlink:href="#image0_204_1114" transform="scale(0.01)"/>
+                                            </pattern>
+                                            <image id="image0_204_1114" width="100" height="100" xlink:href="data:image/png;base64,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"/>
+                                            </defs>
+                                        </svg>                                            
+                                    </div>
+                                </div>
+                                <div class="text-center font-roboto font-normal text-[rgba(255,255,255,0.65)]">
+                                    <p class="text-[12px]"><span class="font-bold">Click to upload</span>  or drag and drop</p>
+                                    <p class="text-[10px]" >SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                                </div>
+                            </div>
+                        </label>
+                        <input id="imageUploadLicence" type="file" class="hidden" accept="image/*" />
+                    </div>
+                </div>
             </div>
             <div class="mt-[60px] mb-[12px]">
                 <button class="bg-[#1A2C50] font-medium font-roboto hover:bg-[#282764] p-[11px] rounded-[5.07px] text-[20px] text-center text-white w-full" type="submit">
@@ -167,7 +196,7 @@
                 </button>
             </div>
             <div class="font-roboto font-normal text-[12px] text-[rgba(0,0,0,0.7)] text-center leading-[28px]">
-                <p>Already have an account? <span class="text-[#DC3558]"><a routerLink="/theaterOwner/auth/login">Login</a></span></p>
+                <p>Already have an account? <span class="text-[#DC3558]"><a routerLink="/distributer/auth/login">Login</a></span></p>
             </div>
             <div class="mt-[43px]">
                 <p class="font-roboto font-normal text-[12px]">2024 CineHub.</p>

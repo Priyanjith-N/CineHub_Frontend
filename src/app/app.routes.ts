@@ -18,6 +18,7 @@ import { DistributerAuthBgComponent } from './features/auth/distributer/distribu
 import { DistributerLoginFormComponent } from './shared/components/auth/distributer/distributer-login-form/distributer-login-form.component';
 import { TheaterOwnerAccountNotVerifiedMessageComponent } from './shared/components/auth/theaterOwner/theater-owner-account-not-verified-message/theater-owner-account-not-verified-message.component';
 import { DistributerAccountNotVerifiedMessageComponent } from './shared/components/auth/distributer/distributer-account-not-verified-message/distributer-account-not-verified-message.component';
+import { DistributerRegisterFormComponent } from './shared/components/auth/distributer/distributer-register-form/distributer-register-form.component';
 
 export const routes: Routes = [
     {
@@ -81,6 +82,10 @@ export const routes: Routes = [
             {
                 path: 'login',
                 component: DistributerLoginFormComponent
+            },
+            {
+                path: 'register',
+                component: DistributerRegisterFormComponent
             },
             {
                 path: 'accountNotVerified',
