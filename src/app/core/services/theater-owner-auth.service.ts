@@ -5,7 +5,7 @@ import { catchError, map, Observable, throwError } from 'rxjs';
 import { ILoginErrorResponse, ILoginSuccessfullResponse } from '../../shared/models/ILoginResponse.interface';
 import { ITheaterOwnerRegisterCredentials } from '../../shared/models/IRegisterCredentials.interface';
 import { IRegisterSuccessfullResponse } from '../../shared/models/IRegisterResponse.interface';
-import { IOTPResendErrorResponse, IOTPVerificationErrorResponse, IOTPVerificationSuccessfullResponse } from '../../shared/models/IOTPVerificationResponse.interface';
+import { IOTPResendErrorResponse, IOTPResendSuccessfullResponse, IOTPVerificationErrorResponse, IOTPVerificationSuccessfullResponse } from '../../shared/models/IOTPVerificationResponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -103,5 +103,23 @@ export class TheaterOwnerAuthService {
     );
 
     return otpVerificationAPIResponse$;
+  }
+
+  handelOTPRsendRequest(): Observable<IOTPResendSuccessfullResponse> {
+    const url: string = `${this.api}/otpResend`;
+
+    const otpResendAPIResponse$: Observable<IOTPResendSuccessfullResponse> = this.httpClient.post<IOTPResendSuccessfullResponse>(url, {})
+    .pipe(
+      map((response => response as IOTPResendSuccessfullResponse)),
+      catchError((err: any) => {
+        if(err?.error) {
+          return throwError(err.error as IOTPResendErrorResponse);
+        }else{
+          return throwError(err);
+        }
+      })
+    );
+
+    return otpResendAPIResponse$;
   }
 }

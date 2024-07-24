@@ -5,8 +5,9 @@ import { CookieService } from 'ngx-cookie-service';
 import { ToastMessageService } from '../../../../../core/services/toast-message.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { IOTPVerificationErrorResponse, IOTPVerificationSuccessfullResponse } from '../../../../models/IOTPVerificationResponse.interface';
+import { IOTPResendSuccessfullResponse, IOTPVerificationErrorResponse, IOTPVerificationSuccessfullResponse } from '../../../../models/IOTPVerificationResponse.interface';
 import { TheaterOwnerAuthService } from '../../../../../core/services/theater-owner-auth.service';
+import { DocumentVerificationPendingMessagePageService } from '../../../../../core/services/document-verification-pending-message-page.service';
 
 @Component({
   selector: 'app-theater-owner-otp-email-verifcation-form',
@@ -28,7 +29,7 @@ export class TheaterOwnerOtpEmailVerifcationFormComponent {
   minutes: string = '0';
   seconds: string = '0';
 
-  constructor(private router: Router, private renderer: Renderer2, private toastMessageService: ToastMessageService, private cookieService: CookieService, private theaterOwnerAuthService: TheaterOwnerAuthService) {
+  constructor(private router: Router, private renderer: Renderer2, private toastMessageService: ToastMessageService, private cookieService: CookieService, private theaterOwnerAuthService: TheaterOwnerAuthService, private documentVerificationPendingMessagePageService: DocumentVerificationPendingMessagePageService) {
     this.email = cookieService.get('theaterOwnerEmailToBeVerified') || "example@gmail.com";
     
     this.otpVerificationForm = new FormGroup({
@@ -133,6 +134,60 @@ export class TheaterOwnerOtpEmailVerifcationFormComponent {
     }
 
     this.resendOTPRequest = true;
+
+    const otpResendAPIResponse$: Observable<IOTPResendSuccessfullResponse> = this.theaterOwnerAuthService.handelOTPRsendRequest();
+
+    otpResendAPIResponse$.subscribe(
+      ((res: IOTPResendSuccessfullResponse) => {
+        this.resendOTPRequest = false;
+        this.showResendOTPOption = false;
+        this.resetTimer();
+        this.startTimer();
+        const toastOption: IToastOption = {
+          severity: 'success',
+          summary: 'Success',
+          detail: res.message!
+        }
+
+        this.showToast(toastOption); // emit the toast option to show toast.
+      }),
+      ((err: any) => {
+        this.resendOTPRequest = false;
+        this.showResendOTPOption = false;
+        this.resetTimer(); // to resetTimer clear localstrorage stored time.
+
+        if(err?.errorField && err.errorField === 'email'){
+          const errObj: IOTPVerificationErrorResponse = err as IOTPVerificationErrorResponse;
+          const toastOption: IToastOption = {
+            severity: 'error',
+            summary: 'Error',
+            detail: errObj.message!
+          }
+
+          this.showToast(toastOption); // emit the toast option to show toast.
+          
+          this.router.navigate(['/theaterOwner/auth/login']); // no email provided so back to login page.
+        }else if(err?.error){
+          // toast message
+          const toastOption: IToastOption = {
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Internal Server Error.'
+          }
+
+          this.showToast(toastOption); // emit the toast option to show toast.
+        }else{
+          // error connecting toast message
+          const toastOption: IToastOption = {
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Something Went Wrong.'
+          }
+
+          this.showToast(toastOption); // emit the toast option to show toast.
+        }
+      })
+    );
   }
 
   async onSubmit(): Promise<void> {
@@ -159,7 +214,8 @@ export class TheaterOwnerOtpEmailVerifcationFormComponent {
         this.showResendOTPOption = false;
         this.resetTimer();
         console.log(res);
-        this.router.navigate(['/theaterOwner']); // navigate to home after verification.
+        this.documentVerificationPendingMessagePageService.setValue(true);
+        this.router.navigate(['/theaterOwner/auth/accountNotVerified']); // navigate to wllcome message page after verification.
       }),
       ((err: any) => {
         this.isFormSubmited = false;
