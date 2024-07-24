@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { ILoginCredentials } from '../../shared/models/ILoginCredentials.interface';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { ILoginErrorResponse, ILoginSuccessfullResponse } from '../../shared/models/ILoginResponse.interface';
+import { ITheaterOwnerRegisterCredentials } from '../../shared/models/IRegisterCredentials.interface';
+import { IRegisterSuccessfullResponse } from '../../shared/models/IRegisterResponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -42,5 +44,33 @@ export class TheaterOwnerAuthService {
     );
 
     return loginAPIResponse$;
+  }
+
+  handelRegisterationRequest(registerCredentials: ITheaterOwnerRegisterCredentials): Observable<IRegisterSuccessfullResponse> {
+    const url: string = `${this.api}/register`;
+
+    const registerAPIResponse$: Observable<IRegisterSuccessfullResponse> = this.httpClient.post<IRegisterSuccessfullResponse>(url, registerCredentials)
+    .pipe(
+      map((response) => response as IRegisterSuccessfullResponse),
+      catchError((err: any) => {
+        if(err.error) {
+          const errObj: ILoginErrorResponse = err.error as ILoginErrorResponse;
+
+          const errorField: string | undefined = errObj.errorField;
+
+          if(errorField !== 'Required') {
+            return throwError(err.error as ILoginErrorResponse);
+          }
+          
+          err['requiredErr'] = errObj.message;
+
+          return throwError(err);
+        }else{
+          return throwError(err);
+        }
+      })
+    );
+
+    return registerAPIResponse$;
   }
 }
