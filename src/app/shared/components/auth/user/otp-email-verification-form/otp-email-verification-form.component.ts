@@ -217,6 +217,8 @@ export class OtpEmailVerificationFormComponent implements AfterViewInit, OnDestr
       },
       (err: any) => {
         this.isFormSubmited = false;
+        this.otpVerificationForm.markAllAsTouched();
+
         if(err?.errorField){
           const errObj: IOTPVerificationErrorResponse = err as IOTPVerificationErrorResponse;
           if(errObj.errorField === 'otp'){

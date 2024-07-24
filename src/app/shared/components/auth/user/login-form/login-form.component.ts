@@ -74,6 +74,8 @@ export class LoginFormComponent {
       },
       (err: any) => {
         this.isFormSubmited = false;
+        this.loginForm.markAllAsTouched();
+        
         if(err?.errorField){
           const errObj: ILoginErrorResponse = err as ILoginErrorResponse;
           if(errObj.errorField === 'otp') {

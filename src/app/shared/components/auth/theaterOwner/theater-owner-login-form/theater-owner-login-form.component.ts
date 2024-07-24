@@ -73,6 +73,7 @@ export class TheaterOwerLoginFormComponent {
       },
       ((err: any) => {
         this.isFormSubmited = false;
+        this.loginForm.markAllAsTouched();
         
         if(err?.errorField){
           const errObj: ILoginErrorResponse = err as ILoginErrorResponse; // err is the backend err modified in pipe

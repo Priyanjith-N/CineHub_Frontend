@@ -20,6 +20,7 @@ import { TheaterOwnerAccountNotVerifiedMessageComponent } from './shared/compone
 import { DistributerAccountNotVerifiedMessageComponent } from './shared/components/auth/distributer/distributer-account-not-verified-message/distributer-account-not-verified-message.component';
 import { DistributerRegisterFormComponent } from './shared/components/auth/distributer/distributer-register-form/distributer-register-form.component';
 import { canAcessDocumentVerificationPendingPageGuard } from './core/guards/can-acess-document-verification-pending-page.guard';
+import { TheaterOwnerHomePageComponent } from './features/home/theaterOwner/theater-owner-home-page/theater-owner-home-page.component';
 
 export const routes: Routes = [
     {
@@ -108,5 +109,9 @@ export const routes: Routes = [
     {
         path: 'admin',
         component: AdminHomePageComponent,
+    },
+    {
+        path: 'theaterOwner',
+        component: TheaterOwnerHomePageComponent
     }
 ];

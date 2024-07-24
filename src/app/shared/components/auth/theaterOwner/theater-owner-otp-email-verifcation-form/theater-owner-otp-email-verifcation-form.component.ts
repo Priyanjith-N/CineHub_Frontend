@@ -4,6 +4,9 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CookieService } from 'ngx-cookie-service';
 import { ToastMessageService } from '../../../../../core/services/toast-message.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { IOTPVerificationErrorResponse, IOTPVerificationSuccessfullResponse } from '../../../../models/IOTPVerificationResponse.interface';
+import { TheaterOwnerAuthService } from '../../../../../core/services/theater-owner-auth.service';
 
 @Component({
   selector: 'app-theater-owner-otp-email-verifcation-form',
@@ -25,7 +28,7 @@ export class TheaterOwnerOtpEmailVerifcationFormComponent {
   minutes: string = '0';
   seconds: string = '0';
 
-  constructor(private router: Router, private renderer: Renderer2, private toastMessageService: ToastMessageService, private cookieService: CookieService) {
+  constructor(private router: Router, private renderer: Renderer2, private toastMessageService: ToastMessageService, private cookieService: CookieService, private theaterOwnerAuthService: TheaterOwnerAuthService) {
     this.email = cookieService.get('theaterOwnerEmailToBeVerified') || "example@gmail.com";
     
     this.otpVerificationForm = new FormGroup({
@@ -147,6 +150,51 @@ export class TheaterOwnerOtpEmailVerifcationFormComponent {
     const otp: string = Object.values(this.otpVerificationForm.value).reduce((otp: string, digit) => {
       return otp += (digit as string);
     }, '');
+
+    const otpVerificationAPIResponse$: Observable<IOTPVerificationSuccessfullResponse> = this.theaterOwnerAuthService.handelOTPVerificationRequest(otp);
+
+    otpVerificationAPIResponse$.subscribe(
+      ((res: IOTPVerificationSuccessfullResponse) => {
+        this.isFormSubmited = false;
+        this.showResendOTPOption = false;
+        this.resetTimer();
+        console.log(res);
+        this.router.navigate(['/theaterOwner']); // navigate to home after verification.
+      }),
+      ((err: any) => {
+        this.isFormSubmited = false;
+        this.otpVerificationForm.markAllAsTouched();
+
+        if(err?.errorField){
+          const errObj: IOTPVerificationErrorResponse = err as IOTPVerificationErrorResponse;
+
+          if(errObj.errorField === 'otp'){
+            this.otpVerificationForm.setErrors({ message: errObj.message });
+            this.otpInputs.toArray()[5].nativeElement.focus();
+          }else{
+            const toastOption: IToastOption = {
+              severity: 'error',
+              summary: 'Error',
+              detail: errObj.message!
+            }
+
+            this.showToast(toastOption); // emit the toast option to show toast.
+            
+            this.router.navigate(['/theaterOwner/auth/login']); // no email provided so back to login page.
+          }
+        }else {
+          const errMessage: string = err?.requiredErrMessage || 'Something Went Wrong.';
+
+          const toastOption: IToastOption = {
+            severity: 'error',
+            summary: 'Error',
+            detail: errMessage
+          }
+  
+          this.showToast(toastOption); // emit the toast option to show toast.
+        }
+      })
+    );
   }
 
   private showToast(toastOption: IToastOption): void {

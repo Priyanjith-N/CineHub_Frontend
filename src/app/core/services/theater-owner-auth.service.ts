@@ -5,6 +5,7 @@ import { catchError, map, Observable, throwError } from 'rxjs';
 import { ILoginErrorResponse, ILoginSuccessfullResponse } from '../../shared/models/ILoginResponse.interface';
 import { ITheaterOwnerRegisterCredentials } from '../../shared/models/IRegisterCredentials.interface';
 import { IRegisterSuccessfullResponse } from '../../shared/models/IRegisterResponse.interface';
+import { IOTPResendErrorResponse, IOTPVerificationErrorResponse, IOTPVerificationSuccessfullResponse } from '../../shared/models/IOTPVerificationResponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,7 @@ export class TheaterOwnerAuthService {
           }else if(errorField === 'document') {
             err['notDocumentVerified'] = true;
           }else {
-            err['requiredErr'] = errObj.message;
+            err['requiredErrMessage'] = errObj.message;
           }
 
           return throwError(err);
@@ -62,7 +63,7 @@ export class TheaterOwnerAuthService {
             return throwError(err.error as ILoginErrorResponse);
           }
           
-          err['requiredErr'] = errObj.message;
+          err['requiredErrMessage'] = errObj.message;
 
           return throwError(err);
         }else{
@@ -72,5 +73,35 @@ export class TheaterOwnerAuthService {
     );
 
     return registerAPIResponse$;
+  }
+
+  handelOTPVerificationRequest(otp: string): Observable<IOTPVerificationSuccessfullResponse> {
+    const url: string = `${this.api}/otpVerify`;
+
+    const otpVerificationAPIResponse$: Observable<IOTPVerificationSuccessfullResponse> = this.httpClient.post<IOTPVerificationSuccessfullResponse>(url, {
+      otp
+    })
+    .pipe(
+      map((response) => response as IOTPVerificationSuccessfullResponse),
+      catchError((err: any) => {
+        if(err.error) {
+          const errObj: IOTPVerificationErrorResponse = err.error as IOTPVerificationErrorResponse;
+
+          const errorField: string | undefined = errObj.errorField;
+
+          if(errorField !== 'Required') {
+            return throwError(err.error as IOTPResendErrorResponse);
+          }
+          
+          err['requiredErrMessage'] = errObj.message;
+
+          return throwError(err);
+        }else{
+          return throwError(err)
+        }
+      })
+    );
+
+    return otpVerificationAPIResponse$;
   }
 }
