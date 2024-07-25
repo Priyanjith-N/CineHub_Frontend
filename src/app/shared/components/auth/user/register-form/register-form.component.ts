@@ -85,11 +85,11 @@ export class RegisterFormComponent {
       },
       (err: any) => {
         this.isFormSubmited = false;
-        this.registerFrom.markAllAsTouched();
         
         if(err?.errorField){
           const errObj: IRegisterErrorResponse = err as IRegisterErrorResponse;
           this.registerFrom.get(errObj.errorField!)?.setErrors({ message: errObj.message});
+          this.registerFrom.markAllAsTouched();
         }else if(err?.error){
           // toast message
           const toastOption: IToastOption = {

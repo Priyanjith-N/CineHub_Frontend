@@ -73,12 +73,12 @@ export class TheaterOwerLoginFormComponent {
       },
       ((err: any) => {
         this.isFormSubmited = false;
-        this.loginForm.markAllAsTouched();
         
         if(err?.errorField){
           const errObj: ILoginErrorResponse = err as ILoginErrorResponse; // err is the backend err modified in pipe
-
+          
           this.loginForm.get(errObj.errorField!)?.setErrors({ message: errObj.message});
+          this.loginForm.markAllAsTouched();
         }else if(err?.notOTPVerified) {
           const errObj: ILoginErrorResponse = err.error as ILoginErrorResponse; // same err object with backend defined error in error key
 

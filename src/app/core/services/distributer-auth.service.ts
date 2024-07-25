@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { ILoginCredentials } from '../../shared/models/ILoginCredentials.interface';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { ILoginErrorResponse, ILoginSuccessfullResponse } from '../../shared/models/ILoginResponse.interface';
+import { IDistributerRegisterCredentials } from '../../shared/models/IRegisterCredentials.interface';
+import { IRegisterSuccessfullResponse } from '../../shared/models/IRegisterResponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -42,5 +44,33 @@ export class DistributerAuthService {
     );
 
     return loginAPIResponse$;
+  }
+  
+  handelRegisterationRequest(registerData: IDistributerRegisterCredentials): Observable<IRegisterSuccessfullResponse> {
+    const url: string = `${this.api}/register`;
+
+    const registerAPIResponse$: Observable<IRegisterSuccessfullResponse> = this.httpClient.post<IRegisterSuccessfullResponse>(url, registerData)
+    .pipe(
+      map((response => response as IRegisterSuccessfullResponse)),
+      catchError((err: any) => {
+        if(err.error) {
+          const errObj: ILoginErrorResponse = err.error as ILoginErrorResponse;
+
+          const errorField: string | undefined = errObj.errorField;
+
+          if(errorField !== 'Required') {
+            return throwError(err.error as ILoginErrorResponse);
+          }
+          
+          err['requiredErrMessage'] = errObj.message;
+
+          return throwError(err);
+        }else{
+          return throwError(err);
+        }
+      })
+    );
+
+    return registerAPIResponse$;
   }
 }

@@ -219,13 +219,13 @@ export class TheaterOwnerOtpEmailVerifcationFormComponent {
       }),
       ((err: any) => {
         this.isFormSubmited = false;
-        this.otpVerificationForm.markAllAsTouched();
-
+        
         if(err?.errorField){
           const errObj: IOTPVerificationErrorResponse = err as IOTPVerificationErrorResponse;
 
           if(errObj.errorField === 'otp'){
             this.otpVerificationForm.setErrors({ message: errObj.message });
+            this.otpVerificationForm.markAllAsTouched();
             this.otpInputs.toArray()[5].nativeElement.focus();
           }else{
             const toastOption: IToastOption = {

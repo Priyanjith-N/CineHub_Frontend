@@ -138,12 +138,12 @@ export class TheaterOwnerRegisterFormComponent {
       },
       (err: any) => {
         this.isFormSubmited = false;
-        this.registerFrom.markAllAsTouched();
-
+        
         if(err?.errorField){
           const errObj: IRegisterErrorResponse = err as IRegisterErrorResponse; // err is the backend err modified in pipe
-
+          
           this.registerFrom.get(errObj.errorField!)?.setErrors({ message: errObj.message});
+          this.registerFrom.markAllAsTouched();
         }else {
           const errMessage: string = err?.requiredErrMessage || 'Something Went Wrong.';
 

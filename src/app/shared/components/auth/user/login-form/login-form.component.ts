@@ -74,7 +74,6 @@ export class LoginFormComponent {
       },
       (err: any) => {
         this.isFormSubmited = false;
-        this.loginForm.markAllAsTouched();
         
         if(err?.errorField){
           const errObj: ILoginErrorResponse = err as ILoginErrorResponse;
@@ -84,12 +83,13 @@ export class LoginFormComponent {
               summary: errObj.message!,
               detail: 'An OTP is send via Email. Verify account now'
             }
-    
+            
             this.showToast(toastOption); // emit the toast option to show toast.
-
+            
             this.router.navigate(['/auth/verifyEmail']);// navigating to otp verification page for account verfication step.
           }else{
             this.loginForm.get(errObj.errorField!)?.setErrors({ message: errObj.message});
+            this.loginForm.markAllAsTouched();
           }
           return;
         }else if(err?.error){
