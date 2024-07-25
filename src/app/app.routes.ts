@@ -22,6 +22,7 @@ import { DistributerRegisterFormComponent } from './shared/components/auth/distr
 import { canAcessDocumentVerificationPendingPageGuard } from './core/guards/can-acess-document-verification-pending-page.guard';
 import { TheaterOwnerHomePageComponent } from './features/home/theaterOwner/theater-owner-home-page/theater-owner-home-page.component';
 import { DistributerOtpEmailVerificationFormComponent } from './shared/components/auth/distributer/distributer-otp-email-verification-form/distributer-otp-email-verification-form.component';
+import { DistributerHomePageComponent } from './features/home/distributer/distributer-home-page/distributer-home-page.component';
 
 export const routes: Routes = [
     {
@@ -110,6 +111,10 @@ export const routes: Routes = [
     {
         path: 'admin',
         component: AdminHomePageComponent,
+    },
+    {
+        path: 'distributer',
+        component: DistributerHomePageComponent
     },
     {
         path: 'theaterOwner',
