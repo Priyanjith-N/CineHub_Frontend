@@ -4,6 +4,10 @@ import { Router } from '@angular/router';
 import { ToastMessageService } from '../../../../../core/services/toast-message.service';
 import { CookieService } from 'ngx-cookie-service';
 import IToastOption from '../../../../models/IToastOption.interface';
+import { IOTPVerificationErrorResponse, IOTPVerificationSuccessfullResponse } from '../../../../models/IOTPVerificationResponse.interface';
+import { Observable } from 'rxjs';
+import { DistributerAuthService } from '../../../../../core/services/distributer-auth.service';
+import { DocumentVerificationPendingMessagePageService } from '../../../../../core/services/document-verification-pending-message-page.service';
 
 @Component({
   selector: 'app-distributer-otp-email-verification-form',
@@ -25,7 +29,7 @@ export class DistributerOtpEmailVerificationFormComponent {
   minutes: string = '0';
   seconds: string = '0';
 
-  constructor(private router: Router, private renderer: Renderer2, private toastMessageService: ToastMessageService, private cookieService: CookieService) {
+  constructor(private router: Router, private renderer: Renderer2, private toastMessageService: ToastMessageService, private cookieService: CookieService, private distributerAuthService: DistributerAuthService, private documentVerificationPendingMessagePageService: DocumentVerificationPendingMessagePageService) {
     this.email = cookieService.get('distributerEmailToBeVerified') || "example@gmail.com";
     
     this.otpVerificationForm = new FormGroup({
@@ -133,10 +137,6 @@ export class DistributerOtpEmailVerificationFormComponent {
   }
 
   async onSubmit(): Promise<void> {
-    Object.values(this.otpVerificationForm.value).reduce((otp: string, digit) => {
-      return otp += (digit as string);
-    }, '');
-
     if(this.otpVerificationForm.invalid || this.isFormSubmited || this.resendOTPRequest) {
       this.otpVerificationForm.setErrors({message: 'Enter Valid OTP.'});
       return this.otpVerificationForm.markAllAsTouched();
@@ -147,6 +147,52 @@ export class DistributerOtpEmailVerificationFormComponent {
     const otp: string = Object.values(this.otpVerificationForm.value).reduce((otp: string, digit) => {
       return otp += (digit as string);
     }, '');
+
+    const otpVerificationAPIResponse$: Observable<IOTPVerificationSuccessfullResponse> = this.distributerAuthService.handelOTPVerificationRequest(otp);
+
+    otpVerificationAPIResponse$.subscribe(
+      ((res: IOTPVerificationSuccessfullResponse) => {
+        this.isFormSubmited = false;
+        this.showResendOTPOption = false;
+        this.resetTimer();
+        console.log(res);
+        this.documentVerificationPendingMessagePageService.setValue(true);
+        this.router.navigate(['/distributer/auth/accountNotVerified']); // navigate to welcome message page after verification.
+      }),
+      ((err: any) => {
+        this.isFormSubmited = false;
+        
+        if(err?.errorField){
+          const errObj: IOTPVerificationErrorResponse = err as IOTPVerificationErrorResponse;
+
+          if(errObj.errorField === 'otp'){
+            this.otpVerificationForm.setErrors({ message: errObj.message });
+            this.otpVerificationForm.markAllAsTouched();
+            this.otpInputs.toArray()[5].nativeElement.focus();
+          }else{
+            const toastOption: IToastOption = {
+              severity: 'error',
+              summary: 'Error',
+              detail: errObj.message!
+            }
+
+            this.showToast(toastOption); // emit the toast option to show toast.
+            
+            this.router.navigate(['/distributer/auth/login']); // no email provided so back to login page.
+          }
+        }else {
+          const errMessage: string = err?.requiredErrMessage || 'Something Went Wrong.';
+
+          const toastOption: IToastOption = {
+            severity: 'error',
+            summary: 'Error',
+            detail: errMessage
+          }
+  
+          this.showToast(toastOption); // emit the toast option to show toast.
+        }
+      })
+    );
   }
 
   private showToast(toastOption: IToastOption): void {

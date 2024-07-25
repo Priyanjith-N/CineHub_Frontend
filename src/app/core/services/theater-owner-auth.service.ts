@@ -90,7 +90,7 @@ export class TheaterOwnerAuthService {
           const errorField: string | undefined = errObj.errorField;
 
           if(errorField !== 'Required') {
-            return throwError(err.error as IOTPResendErrorResponse);
+            return throwError(err.error as IOTPVerificationErrorResponse);
           }
           
           err['requiredErrMessage'] = errObj.message;

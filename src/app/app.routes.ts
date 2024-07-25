@@ -21,6 +21,7 @@ import { DistributerAccountNotVerifiedMessageComponent } from './shared/componen
 import { DistributerRegisterFormComponent } from './shared/components/auth/distributer/distributer-register-form/distributer-register-form.component';
 import { canAcessDocumentVerificationPendingPageGuard } from './core/guards/can-acess-document-verification-pending-page.guard';
 import { TheaterOwnerHomePageComponent } from './features/home/theaterOwner/theater-owner-home-page/theater-owner-home-page.component';
+import { DistributerOtpEmailVerificationFormComponent } from './shared/components/auth/distributer/distributer-otp-email-verification-form/distributer-otp-email-verification-form.component';
 
 export const routes: Routes = [
     {
@@ -92,7 +93,7 @@ export const routes: Routes = [
             },
             {
                 path: 'verifyEmail',
-                component: TheaterOwnerOtpEmailVerifcationFormComponent
+                component: DistributerOtpEmailVerificationFormComponent
             },
             {
                 path: 'accountNotVerified',

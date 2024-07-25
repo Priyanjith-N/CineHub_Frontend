@@ -191,10 +191,6 @@ export class TheaterOwnerOtpEmailVerifcationFormComponent {
   }
 
   async onSubmit(): Promise<void> {
-    Object.values(this.otpVerificationForm.value).reduce((otp: string, digit) => {
-      return otp += (digit as string);
-    }, '');
-
     if(this.otpVerificationForm.invalid || this.isFormSubmited || this.resendOTPRequest) {
       this.otpVerificationForm.setErrors({message: 'Enter Valid OTP.'});
       return this.otpVerificationForm.markAllAsTouched();
