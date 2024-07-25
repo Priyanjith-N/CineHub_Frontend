@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ToastMessageService } from '../../../../../core/services/toast-message.service';
 import { CookieService } from 'ngx-cookie-service';
 import IToastOption from '../../../../models/IToastOption.interface';
-import { IOTPVerificationErrorResponse, IOTPVerificationSuccessfullResponse } from '../../../../models/IOTPVerificationResponse.interface';
+import { IOTPResendSuccessfullResponse, IOTPVerificationErrorResponse, IOTPVerificationSuccessfullResponse } from '../../../../models/IOTPVerificationResponse.interface';
 import { Observable } from 'rxjs';
 import { DistributerAuthService } from '../../../../../core/services/distributer-auth.service';
 import { DocumentVerificationPendingMessagePageService } from '../../../../../core/services/document-verification-pending-message-page.service';
@@ -134,6 +134,62 @@ export class DistributerOtpEmailVerificationFormComponent {
     }
 
     this.resendOTPRequest = true;
+
+    const otpResendAPIResponse$: Observable<IOTPResendSuccessfullResponse> = this.distributerAuthService.handelOTPRsendRequest();
+
+    otpResendAPIResponse$.subscribe(
+      ((res: IOTPResendSuccessfullResponse) => {
+        this.resendOTPRequest = false;
+        this.showResendOTPOption = false;
+        this.resetTimer();
+        this.startTimer();
+        const toastOption: IToastOption = {
+          severity: 'success',
+          summary: 'Success',
+          detail: res.message!
+        }
+
+        this.showToast(toastOption); // emit the toast option to show toast.
+      }),
+      ((err: any) => {
+        console.log(err);
+        
+        this.resendOTPRequest = false;
+        this.showResendOTPOption = false;
+        this.resetTimer(); // to resetTimer clear localstrorage stored time.
+
+        if(err?.errorField && err.errorField === 'email'){
+          const errObj: IOTPVerificationErrorResponse = err as IOTPVerificationErrorResponse;
+          const toastOption: IToastOption = {
+            severity: 'error',
+            summary: 'Error',
+            detail: errObj.message!
+          }
+
+          this.showToast(toastOption); // emit the toast option to show toast.
+          
+          this.router.navigate(['/distributer/auth/login']); // no email provided so back to login page.
+        }else if(err?.error){
+          // toast message
+          const toastOption: IToastOption = {
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Internal Server Error.'
+          }
+
+          this.showToast(toastOption); // emit the toast option to show toast.
+        }else{
+          // error connecting toast message
+          const toastOption: IToastOption = {
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Something Went Wrong.'
+          }
+
+          this.showToast(toastOption); // emit the toast option to show toast.
+        }
+      })
+    );
   }
 
   async onSubmit(): Promise<void> {
