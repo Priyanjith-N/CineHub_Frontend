@@ -23,6 +23,10 @@ import { canAcessDocumentVerificationPendingPageGuard } from './core/guards/can-
 import { TheaterOwnerHomePageComponent } from './features/home/theaterOwner/theater-owner-home-page/theater-owner-home-page.component';
 import { DistributerOtpEmailVerificationFormComponent } from './shared/components/auth/distributer/distributer-otp-email-verification-form/distributer-otp-email-verification-form.component';
 import { DistributerHomePageComponent } from './features/home/distributer/distributer-home-page/distributer-home-page.component';
+import { AdminManagementComponent } from './shared/components/home/admin/admin-management/admin-management.component';
+import { AdminUserManagementComponent } from './shared/components/home/admin/admin-user-management/admin-user-management.component';
+import { AdminDistributerManagementComponent } from './shared/components/home/admin/admin-distributer-management/admin-distributer-management.component';
+import { AdminTheaterOwnerManagementComponent } from './shared/components/home/admin/admin-theater-owner-management/admin-theater-owner-management.component';
 
 export const routes: Routes = [
     {
@@ -111,6 +115,26 @@ export const routes: Routes = [
     {
         path: 'admin',
         component: AdminHomePageComponent,
+        children: [
+            {
+                path: 'administration',
+                component: AdminManagementComponent,
+                children: [
+                    {
+                        path: 'userManagement',
+                        component: AdminUserManagementComponent
+                    },
+                    {
+                        path: 'theaterOwnerManagement',
+                        component: AdminTheaterOwnerManagementComponent
+                    },
+                    {
+                        path: 'distributerManagement',
+                        component: AdminDistributerManagementComponent
+                    }
+                ]
+            }
+        ]
     },
     {
         path: 'distributer',

@@ -1,17 +1,21 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { ToastMessageService } from '../../../../core/services/toast-message.service';
 import IToastOption from '../../../../shared/models/IToastOption.interface';
 import { Subscription } from 'rxjs';
+import { SidebarComponent } from '../../../../shared/components/home/admin/sidebar/sidebar.component';
+import { AdminHeaderComponent } from '../../../../shared/components/home/admin/admin-header/admin-header.component';
 
 @Component({
   selector: 'app-admin-home-page',
   standalone: true,
   imports: [
     RouterOutlet,
-    ToastModule
+    ToastModule,
+    SidebarComponent,
+    AdminHeaderComponent
   ],
   providers: [MessageService],
   templateUrl: './admin-home-page.component.html',
