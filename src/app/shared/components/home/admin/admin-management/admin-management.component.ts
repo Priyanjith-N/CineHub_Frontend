@@ -36,13 +36,11 @@ export class AdminManagementComponent {
       this.router.url.lastIndexOf('/')
     );
 
-    if(url === '/administration') {
-      this.router.navigate(['/admin/administration/userManagement']);
-    }else if (url === '/userManagement') {
+    if(url === '/administration' || url === '/userManagement') {
       this.title = 'Manage User';
-      this.subDescription =
-        'Administer and oversee user accounts and privileges within the platform.';
-    } else if (url === '/theaterOwnerManagement') {
+      this.subDescription = 'Administer and oversee user accounts and privileges within the platform.';
+      this.router.navigate(['/admin/administration/userManagement']);
+    }else if (url === '/theaterOwnerManagement') {
       this.title = 'Manage Theater Owner';
       this.subDescription =
         'Administer and oversee Theater Owner accounts and privileges within the platform.';

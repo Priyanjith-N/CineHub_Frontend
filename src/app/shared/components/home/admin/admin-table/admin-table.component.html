@@ -29,6 +29,14 @@
                 </tr>
             </thead>
             <tbody>
+                @if(!tableData.length) {
+                    <tr class="bg-[rgba(238,238,238,0.25)]" >
+                        <td colspan="4" class="font-normal text-[14px] font-roboto text-left pl-[24px] py-[11px]">
+                            No Data available.
+                        </td>
+                    </tr>
+                }
+                
                 @for(data of tableData; track $index) {
                     @if($index % 2 === 0) {
                         <tr class="bg-[rgba(238,238,238,0.25)]" >
