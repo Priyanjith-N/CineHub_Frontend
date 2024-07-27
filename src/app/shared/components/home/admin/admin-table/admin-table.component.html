@@ -7,7 +7,7 @@
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                 </svg>
             </div>
-            <input type="text" id="table-search-users" class="outline-none block py-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50" placeholder="Search">
+            <input (keyup)="search($event);" type="text" id="table-search-users" class="outline-none block py-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50" placeholder="Search">
         </div>
     </div>
     <div class="rounded-lg w-fit h-fit">
@@ -29,106 +29,87 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="bg-[rgba(238,238,238,0.25)]">
-                    <td class="font-normal text-[14px] font-roboto text-left pl-[24px] py-[11px]">
-                        Priyanjith N
-                    </td>
-                    <td class="font-normal text-[14px] font-roboto text-left pl-[24px] py-[11px]">
-                        jithpriyan{{ '@' }}gmail.com
-                    </td>
-                    <td class="font-normal text-[14px] font-roboto text-left pl-[24px] py-[11px]">
-                        9188336166
-                    </td>
-                    <td class="font-normal text-[14px] font-roboto text-left pl-[24px] py-[11px]">
-                        <div>
-                            <button class="bg-black py-1 px-3 rounded-[5px]">
-                                <div class="flex gap-[8px]">
-                                    <div>
-                                        <p class="text-white" >Block</p>
-                                    </div>
-                                    <div>
-                                        <i class="fa-solid fa-ban" style="color: red;"></i>
-                                    </div>
+                @for(data of tableData; track $index) {
+                    @if($index % 2 === 0) {
+                        <tr class="bg-[rgba(238,238,238,0.25)]" >
+                            <td class="font-normal text-[14px] font-roboto text-left pl-[24px] py-[11px]">
+                                {{ data.name }}
+                            </td>
+                            <td class="font-normal text-[14px] font-roboto text-left pl-[24px] py-[11px]">
+                                {{ data.email }}
+                            </td>
+                            <td class="font-normal text-[14px] font-roboto text-left pl-[24px] py-[11px]">
+                                {{ data.phoneNumber }}
+                            </td>
+                            <td class="font-normal text-[14px] font-roboto text-left px-[24px] py-[11px]">
+                                <div>
+                                    @if(!data.isBlocked) {
+                                        <button class="w-full bg-black py-1 px-3 rounded-[5px]">
+                                            <div class="flex gap-[8px] justify-center">
+                                                <div>
+                                                    <p class="text-white" >Block</p>
+                                                </div>
+                                                <div>
+                                                    <i class="fa-solid fa-ban" style="color: red;"></i>
+                                                </div>
+                                            </div>
+                                        </button>
+                                    }@else {
+                                        <button class="w-full bg-black py-1 px-3 rounded-[5px]">
+                                            <div class="flex gap-[8px] justify-center">
+                                                <div>
+                                                    <p class="text-white" >UnBlock</p>
+                                                </div>
+                                                <div>
+                                                    <i class="fa-solid fa-ban" style="color: red;"></i>
+                                                </div>
+                                            </div>
+                                        </button>
+                                    }
                                 </div>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="bg-white">
-                    <td class="font-normal text-[14px] font-roboto text-left pl-[24px] py-[11px]">
-                        Priyanjith N
-                    </td>
-                    <td class="font-normal text-[14px] font-roboto text-left pl-[24px] py-[11px]">
-                        jithpriyan{{ '@' }}gmail.com
-                    </td>
-                    <td class="font-normal text-[14px] font-roboto text-left pl-[24px] py-[11px]">
-                        9188336166
-                    </td>
-                    <td class="font-normal text-[14px] font-roboto text-left pl-[24px] py-[11px]">
-                        <div>
-                            <button class="bg-black py-1 px-3 rounded-[5px]">
-                                <div class="flex gap-[8px]">
-                                    <div>
-                                        <p class="text-white" >Block</p>
-                                    </div>
-                                    <div>
-                                        <i class="fa-solid fa-ban" style="color: red;"></i>
-                                    </div>
+                            </td>
+                        </tr>
+                    }@else {
+                        <tr class="bg-white" >
+                            <td class="font-normal text-[14px] font-roboto text-left pl-[24px] py-[11px]">
+                                {{ data.name }}
+                            </td>
+                            <td class="font-normal text-[14px] font-roboto text-left pl-[24px] py-[11px]">
+                                {{ data.email }}
+                            </td>
+                            <td class="font-normal text-[14px] font-roboto text-left pl-[24px] py-[11px]">
+                                {{ data.phoneNumber }}
+                            </td>
+                            <td class="font-normal text-[14px] font-roboto text-left px-[24px] py-[11px]">
+                                <div>
+                                    @if(!data.isBlocked) {
+                                        <button class="w-full bg-black py-1 px-3 rounded-[5px]">
+                                            <div class="flex gap-[8px] justify-center">
+                                                <div>
+                                                    <p class="text-white" >Block</p>
+                                                </div>
+                                                <div>
+                                                    <i class="fa-solid fa-ban" style="color: red;"></i>
+                                                </div>
+                                            </div>
+                                        </button>
+                                    }@else {
+                                        <button class="w-full bg-black py-1 px-3 rounded-[5px]">
+                                            <div class="flex gap-[8px] justify-center">
+                                                <div>
+                                                    <p class="text-white" >UnBlock</p>
+                                                </div>
+                                                <div>
+                                                    <i class="fa-solid fa-ban" style="color: red;"></i>
+                                                </div>
+                                            </div>
+                                        </button>
+                                    }
                                 </div>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="bg-[rgba(238,238,238,0.25)]">
-                    <td class="font-normal text-[14px] font-roboto text-left pl-[24px] py-[11px]">
-                        Priyanjith N
-                    </td>
-                    <td class="font-normal text-[14px] font-roboto text-left pl-[24px] py-[11px]">
-                        jithpriyan{{ '@' }}gmail.com
-                    </td>
-                    <td class="font-normal text-[14px] font-roboto text-left pl-[24px] py-[11px]">
-                        9188336166
-                    </td>
-                    <td class="font-normal text-[14px] font-roboto text-left pl-[24px] py-[11px]">
-                        <div>
-                            <button class="bg-black py-1 px-3 rounded-[5px]">
-                                <div class="flex gap-[8px]">
-                                    <div>
-                                        <p class="text-white" >Block</p>
-                                    </div>
-                                    <div>
-                                        <i class="fa-solid fa-ban" style="color: red;"></i>
-                                    </div>
-                                </div>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="bg-white">
-                    <td class="font-normal text-[14px] font-roboto text-left pl-[24px] py-[11px]">
-                        Priyanjith N
-                    </td>
-                    <td class="font-normal text-[14px] font-roboto text-left pl-[24px] py-[11px]">
-                        jithpriyan{{ '@' }}gmail.com
-                    </td>
-                    <td class="font-normal text-[14px] font-roboto text-left pl-[24px] py-[11px]">
-                        9188336166
-                    </td>
-                    <td class="font-normal text-[14px] font-roboto text-left pl-[24px] py-[11px]">
-                        <div>
-                            <button class="bg-black py-1 px-3 rounded-[5px]">
-                                <div class="flex gap-[8px]">
-                                    <div>
-                                        <p class="text-white" >Block</p>
-                                    </div>
-                                    <div>
-                                        <i class="fa-solid fa-ban" style="color: red;"></i>
-                                    </div>
-                                </div>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
+                            </td>
+                        </tr>
+                    }
+                }
             </tbody>
         </table>
     </div>
