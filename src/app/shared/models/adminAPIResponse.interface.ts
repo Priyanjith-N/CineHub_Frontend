@@ -45,3 +45,12 @@ export interface IDistributerData {
     idProofUpdateDocumentImage: string[] | undefined | null;
     isBlocked: boolean;
 }
+
+export interface IBlockOrUnblockAPISucessfullResponse {
+    message: string;
+}
+
+export interface IBlockOrUnblockAPIErrorResponse {
+    requiredCredentialsError?: boolean;
+    message?: string;
+}

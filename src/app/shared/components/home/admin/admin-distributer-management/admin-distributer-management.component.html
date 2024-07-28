@@ -1,1 +1,5 @@
-<app-admin-table [tableData]="distributerData" (searchEvent)="search($event);" ></app-admin-table>
+@if(blockDistributerData) {
+    <app-modal [name]="blockDistributerData.name!" [text]="blockDistributerData.isBlocked?'Block':'UnBlock'" (confirmStatusEvent)="confirm($event);" ></app-modal>
+}
+
+<app-admin-table [tableData]="distributerData" (searchEvent)="search($event);" (blockOrUnblockEvent)="popConfimationModal($event);" ></app-admin-table>

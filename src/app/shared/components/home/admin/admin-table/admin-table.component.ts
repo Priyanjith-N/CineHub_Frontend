@@ -11,6 +11,7 @@ import { IDistributerData, ITheaterOwnerData, IUserData } from '../../../../mode
 export class AdminTableComponent  {
   @Input() tableData: IUserData[] | ITheaterOwnerData[] | IDistributerData[] = [];
   @Output() searchEvent: EventEmitter<string> = new EventEmitter<string>;
+  @Output() blockOrUnblockEvent: EventEmitter<{_id: string, isBlocked: boolean, name: string}> = new EventEmitter<{_id: string, isBlocked: boolean,  name: string}>;
 
   search(event: Event) {
     try {
@@ -22,5 +23,9 @@ export class AdminTableComponent  {
     } catch (err: any) {
       console.error(err);
     }
+  }
+
+  action(_id: string, blockStatus: boolean, name: string) {
+    this.blockOrUnblockEvent.emit({ _id, isBlocked: !blockStatus, name });
   }
 }

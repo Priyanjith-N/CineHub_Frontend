@@ -23,7 +23,7 @@
                     <th class="font-semibold text-[14px] font-roboto text-left pl-[24px] min-w-[200px] py-[11px]">
                         PhoneNumber
                     </th>
-                    <th class="font-semibold text-[14px] font-roboto text-left pl-[24px] min-w-[120px] py-[11px]">
+                    <th class="font-semibold text-[14px] font-roboto text-left pl-[24px] min-w-[147px] py-[11px]">
                         Action
                     </th>
                 </tr>
@@ -31,12 +31,12 @@
             <tbody>
                 @if(!tableData.length) {
                     <tr class="bg-[rgba(238,238,238,0.25)]" >
-                        <td colspan="4" class="font-normal text-[14px] font-roboto text-left pl-[24px] py-[11px]">
+                        <td colspan="4" class="font-normal text-[14px] font-roboto pl-[24px] py-[11px] text-center">
                             No Data available.
                         </td>
                     </tr>
                 }
-                
+
                 @for(data of tableData; track $index) {
                     @if($index % 2 === 0) {
                         <tr class="bg-[rgba(238,238,238,0.25)]" >
@@ -49,10 +49,10 @@
                             <td class="font-normal text-[14px] font-roboto text-left pl-[24px] py-[11px]">
                                 {{ data.phoneNumber }}
                             </td>
-                            <td class="font-normal text-[14px] font-roboto text-left px-[24px] py-[11px]">
+                            <td class="font-normal text-[14px] font-roboto text-center px-[24px] py-[11px]">
                                 <div>
-                                    @if(!data.isBlocked) {
-                                        <button class="w-full bg-black py-1 px-3 rounded-[5px]">
+                                    <button (click)="action(data._id, data.isBlocked, data.name);" class="w-fit bg-black py-1 px-3 rounded-[5px]">
+                                        @if(!data.isBlocked) {
                                             <div class="flex gap-[8px] justify-center">
                                                 <div>
                                                     <p class="text-white" >Block</p>
@@ -61,9 +61,7 @@
                                                     <i class="fa-solid fa-ban" style="color: red;"></i>
                                                 </div>
                                             </div>
-                                        </button>
-                                    }@else {
-                                        <button class="w-full bg-black py-1 px-3 rounded-[5px]">
+                                        }@else {
                                             <div class="flex gap-[8px] justify-center">
                                                 <div>
                                                     <p class="text-white" >UnBlock</p>
@@ -72,8 +70,8 @@
                                                     <i class="fa-solid fa-ban" style="color: red;"></i>
                                                 </div>
                                             </div>
-                                        </button>
-                                    }
+                                        }
+                                    </button>
                                 </div>
                             </td>
                         </tr>
@@ -88,10 +86,10 @@
                             <td class="font-normal text-[14px] font-roboto text-left pl-[24px] py-[11px]">
                                 {{ data.phoneNumber }}
                             </td>
-                            <td class="font-normal text-[14px] font-roboto text-left px-[24px] py-[11px]">
+                            <td class="font-normal text-[14px] font-roboto text-center px-[24px] py-[11px] ">
                                 <div>
-                                    @if(!data.isBlocked) {
-                                        <button class="w-full bg-black py-1 px-3 rounded-[5px]">
+                                    <button (click)="action(data._id, data.isBlocked, data.name);" class="w-fit bg-black py-1 px-3 rounded-[5px]">
+                                        @if(!data.isBlocked) {
                                             <div class="flex gap-[8px] justify-center">
                                                 <div>
                                                     <p class="text-white" >Block</p>
@@ -100,9 +98,7 @@
                                                     <i class="fa-solid fa-ban" style="color: red;"></i>
                                                 </div>
                                             </div>
-                                        </button>
-                                    }@else {
-                                        <button class="w-full bg-black py-1 px-3 rounded-[5px]">
+                                        }@else {
                                             <div class="flex gap-[8px] justify-center">
                                                 <div>
                                                     <p class="text-white" >UnBlock</p>
@@ -111,8 +107,8 @@
                                                     <i class="fa-solid fa-ban" style="color: red;"></i>
                                                 </div>
                                             </div>
-                                        </button>
-                                    }
+                                        }
+                                    </button>
                                 </div>
                             </td>
                         </tr>

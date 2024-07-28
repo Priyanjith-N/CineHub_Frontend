@@ -1,1 +1,5 @@
-<app-admin-table [tableData]="userData" (searchEvent)="search($event);" ></app-admin-table>
+@if(blockUserData) {
+    <app-modal [name]="blockUserData.name!" [text]="blockUserData.isBlocked?'Block':'UnBlock'" (confirmStatusEvent)="confirm($event);" ></app-modal>
+}
+
+<app-admin-table [tableData]="userData" (searchEvent)="search($event);" (blockOrUnblockEvent)="popConfimationModal($event);" ></app-admin-table>

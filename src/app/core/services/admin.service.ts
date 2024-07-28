@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { IDistributerData, IRetriveDataSucessfullAPIResponse, ITheaterOwnerData, IUserData } from '../../shared/models/adminAPIResponse.interface';
+import { IBlockOrUnblockAPIErrorResponse, IBlockOrUnblockAPISucessfullResponse, IDistributerData, IRetriveDataSucessfullAPIResponse, ITheaterOwnerData, IUserData } from '../../shared/models/adminAPIResponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -48,5 +48,65 @@ export class AdminService {
     );
 
     return getDistributerAPIResponse$;
+  }
+
+  blockOrUnblockUser(data: {_id: string, isBlocked: boolean, name: string}): Observable<IBlockOrUnblockAPISucessfullResponse> {
+    const url: string = `${this.api}/users/${data._id}`;
+
+    const blockOrUnblockAPIResponse$: Observable<IBlockOrUnblockAPISucessfullResponse> = this.httpClient.patch<IBlockOrUnblockAPISucessfullResponse>(url, {
+      isBlocked: data.isBlocked
+    })
+    .pipe(
+      map((response) => response as IBlockOrUnblockAPISucessfullResponse),
+      catchError((err: any) => {
+        if(err.error) {
+          return throwError(err.error as IBlockOrUnblockAPIErrorResponse)
+        }else{
+          return throwError(err);
+        }
+      })
+    );
+
+    return blockOrUnblockAPIResponse$;
+  }
+
+  blockOrUnblockTheaterOwner(data: {_id: string, isBlocked: boolean, name: string}): Observable<IBlockOrUnblockAPISucessfullResponse> {
+    const url: string = `${this.api}/theaterOwners/${data._id}`;
+
+    const blockOrUnblockAPIResponse$: Observable<IBlockOrUnblockAPISucessfullResponse> = this.httpClient.patch<IBlockOrUnblockAPISucessfullResponse>(url, {
+      isBlocked: data.isBlocked
+    })
+    .pipe(
+      map((response) => response as IBlockOrUnblockAPISucessfullResponse),
+      catchError((err: any) => {
+        if(err.error) {
+          return throwError(err.error as IBlockOrUnblockAPIErrorResponse)
+        }else{
+          return throwError(err);
+        }
+      })
+    );
+
+    return blockOrUnblockAPIResponse$;
+  }
+
+  blockOrUnblockDistributer(data: {_id: string, isBlocked: boolean, name: string}): Observable<IBlockOrUnblockAPISucessfullResponse> {
+    const url: string = `${this.api}/distributers/${data._id}`;
+
+    const blockOrUnblockAPIResponse$: Observable<IBlockOrUnblockAPISucessfullResponse> = this.httpClient.patch<IBlockOrUnblockAPISucessfullResponse>(url, {
+      isBlocked: data.isBlocked
+    })
+    .pipe(
+      map((response) => response as IBlockOrUnblockAPISucessfullResponse),
+      catchError((err: any) => {
+        if(err.error) {
+          return throwError(err.error as IBlockOrUnblockAPIErrorResponse)
+        }else{
+          return throwError(err);
+        }
+      })
+    );
+
+    return blockOrUnblockAPIResponse$;
   }
 }

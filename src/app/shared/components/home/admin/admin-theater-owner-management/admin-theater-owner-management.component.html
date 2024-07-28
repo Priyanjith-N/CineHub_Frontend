@@ -1,1 +1,6 @@
-<app-admin-table [tableData]="theaterOwnerData" (searchEvent)="search($event);" ></app-admin-table>
+@if(blockTheaterOwnerData) {
+    <app-modal [name]="blockTheaterOwnerData.name!" [text]="blockTheaterOwnerData.isBlocked?'Block':'UnBlock'" (confirmStatusEvent)="confirm($event);" ></app-modal>
+}
+
+
+<app-admin-table [tableData]="theaterOwnerData" (searchEvent)="search($event);" (blockOrUnblockEvent)="popConfimationModal($event);" ></app-admin-table>
