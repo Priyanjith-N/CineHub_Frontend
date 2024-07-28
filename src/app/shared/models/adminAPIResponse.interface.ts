@@ -54,3 +54,36 @@ export interface IBlockOrUnblockAPIErrorResponse {
     requiredCredentialsError?: boolean;
     message?: string;
 }
+
+export interface INotVerifiedTheaterOwners {
+    _id: string;
+    name: string;
+    email: string;
+    phoneNumber: string;
+    idProof: string;
+    idProofImage: string[];
+    OTPVerificationStatus: boolean;
+    documentVerificationStatus: string;
+    idProofUpdateVerificationStatus: boolean;
+    idProofUpdateDocumentImage: string[] | null | undefined;
+    isBlocked: boolean;
+    role: string;
+}
+
+export interface INotVerifiedDistributers {
+    _id: string;
+    name: string;
+    email: string;
+    phoneNumber: string;
+    licence: string;
+    idProof: string;
+    idProofImage: string[];
+    OTPVerificationStatus: boolean;
+    documentVerificationStatus: string;
+    licenceUpdateDocument: string | undefined | null;
+    licenceUpdateVerificationStatus: boolean;
+    idProofUpdateVerificationStatus: boolean;
+    idProofUpdateDocumentImage: string[] | undefined | null;
+    isBlocked: boolean;
+    role: string;
+}

@@ -27,6 +27,8 @@ import { AdminManagementComponent } from './shared/components/home/admin/admin-m
 import { AdminUserManagementComponent } from './shared/components/home/admin/admin-user-management/admin-user-management.component';
 import { AdminDistributerManagementComponent } from './shared/components/home/admin/admin-distributer-management/admin-distributer-management.component';
 import { AdminTheaterOwnerManagementComponent } from './shared/components/home/admin/admin-theater-owner-management/admin-theater-owner-management.component';
+import { AccountVerificationManagementComponent } from './shared/components/home/admin/account-verification-management/account-verification-management.component';
+import { AdminAccountVerificationDetailPageComponent } from './shared/components/home/admin/admin-account-verification-detail-page/admin-account-verification-detail-page.component';
 
 export const routes: Routes = [
     {
@@ -116,6 +118,14 @@ export const routes: Routes = [
         path: 'admin',
         component: AdminHomePageComponent,
         children: [
+            {
+                path: 'verifyRequest',
+                component: AccountVerificationManagementComponent
+            },
+            {
+                path: 'verifyRequest/:id',
+                component: AdminAccountVerificationDetailPageComponent
+            },
             {
                 path: 'administration',
                 component: AdminManagementComponent,

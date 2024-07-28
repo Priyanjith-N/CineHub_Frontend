@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { IBlockOrUnblockAPIErrorResponse, IBlockOrUnblockAPISucessfullResponse, IDistributerData, IRetriveDataSucessfullAPIResponse, ITheaterOwnerData, IUserData } from '../../shared/models/adminAPIResponse.interface';
+import { IBlockOrUnblockAPIErrorResponse, IBlockOrUnblockAPISucessfullResponse, IDistributerData, INotVerifiedDistributers, INotVerifiedTheaterOwners, IRetriveDataSucessfullAPIResponse, ITheaterOwnerData, IUserData } from '../../shared/models/adminAPIResponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -108,5 +108,18 @@ export class AdminService {
     );
 
     return blockOrUnblockAPIResponse$;
+  }
+
+  getAllVerificationDocument(): Observable<IRetriveDataSucessfullAPIResponse<(INotVerifiedDistributers | INotVerifiedTheaterOwners)>> {
+    const url: string = `${this.api}/getAllDoumentVerificationRequests`;
+
+    const getAllVerificationDocumentAPIResponse$: Observable<IRetriveDataSucessfullAPIResponse<(INotVerifiedDistributers | INotVerifiedTheaterOwners)>> = this.httpClient.get<IRetriveDataSucessfullAPIResponse<(INotVerifiedDistributers | INotVerifiedTheaterOwners)>>(url).pipe(
+      map((response) => response as IRetriveDataSucessfullAPIResponse<(INotVerifiedDistributers | INotVerifiedTheaterOwners)>),
+      catchError((err: any) => {
+        return throwError(err);
+      })
+    );
+
+    return getAllVerificationDocumentAPIResponse$;
   }
 }

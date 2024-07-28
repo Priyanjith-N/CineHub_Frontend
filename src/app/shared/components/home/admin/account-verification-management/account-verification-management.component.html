@@ -1,0 +1,91 @@
+<div class="p-[40px]">
+    <div class="mb-[40px] flex gap-[18px] font-roboto font-normal text-[16px]">
+        <div class="border-[1px] border-solid border-[black] transition-all duration-[300ms] ease-in-out rounded-[24px] hover:text-white hover:bg-black" [class.active]="requestType === 'All'" >
+            <button (click)="changeRequestType('All');" class="px-[20px] py-[12px] border-collapse">All</button>
+        </div>
+        <div class="border-[1px] transition-all duration-[300ms] ease-in-out border-solid border-[black] rounded-[24px] hover:text-white hover:bg-black" [class.active]="requestType === 'Theater Owner'" >
+            <button (click)="changeRequestType('Theater Owner');" class="px-[20px] py-[12px] border-collapse">Theater Owners</button>
+        </div>
+        <div class="border-[1px] border-solid border-[black] rounded-[24px] transition-all duration-[300ms] ease-in-out hover:text-white hover:bg-black" [class.active]="requestType === 'Distributer'" >
+            <button (click)="changeRequestType('Distributer');" class="px-[20px] py-[12px] border-collapse">Distributer</button>
+        </div>
+        <div class="border-[1px] border-solid border-[black] rounded-[24px] hover:text-white hover:bg-black transition-all duration-[300ms] ease-in-out" [class.active]="requestType === 'update'" >
+            <button (click)="changeRequestType('update');" class="px-[20px] py-[12px] border-collapse">Update Requests</button>
+        </div>
+    </div>
+    <div class="mb-[30px] flex justify-end">
+        <label for="table-search" class="sr-only">Search</label>
+        <div class="relative">
+            <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
+                <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                </svg>
+            </div>
+            <input #searchBox (keyup)="search($event);" type="text" id="table-search-users" class="outline-none block py-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50" placeholder="Search">
+        </div>
+    </div>
+    <table class="font-roboto font-normal w-full border-[rgba(238,238,238,0.5)] border-[2px] border-solid rounded-[8px]">
+        <thead>
+            <tr class="">
+                <th class="font-semibold text-[14px] font-roboto text-left px-[24px] py-[11px]">
+                    Name
+                </th>
+                <th class="font-semibold text-[14px] font-roboto text-left px-[24px] py-[11px]">
+                    Email
+                </th>
+                <th class="font-semibold text-[14px] font-roboto text-left px-[24px] py-[11px]">
+                    PhoneNumber
+                </th>
+                <th class="font-semibold text-[14px] font-roboto text-left px-[24px] py-[11px]">
+                    Role
+                </th>
+                <th class="font-semibold text-[14px] font-roboto text-left px-[24px] py-[11px]">
+                    ID Proof Type
+                </th>
+                <th class="font-semibold text-[14px] font-roboto text-left px-[24px] py-[11px]">
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if(!displayData.length) {
+                <tr class="bg-[rgba(238,238,238,0.25)]" >
+                    <td colspan="6" class="font-normal text-[14px] font-roboto pl-[24px] py-[11px] text-center">
+                        No Data available.
+                    </td>
+                </tr>
+            }
+
+            @for (data of displayData; track $index) {
+                <tr [ngClass]="{'evenColor': $index % 2 === 0, 'oddColor': $index % 2 !== 0}" >
+                    <td class="font-normal text-[14px] font-roboto text-left px-[24px] py-[11px]">
+                        {{ data.name }}
+                    </td>
+                    <td class="font-normal text-[14px] font-roboto text-left px-[24px] py-[11px]">
+                        {{ data.email}}
+                    </td>
+                    <td class="font-normal text-[14px] font-roboto text-left px-[24px] py-[11px]">
+                        {{ data.phoneNumber }}
+                    </td>
+                    <td class="font-normal text-[14px] font-roboto text-left px-[24px] py-[11px]">
+                        {{ data.role}}
+                    </td>
+                    <td class="font-normal text-[14px] font-roboto text-left px-[24px] py-[11px]">
+                        {{ data.idProof }}
+                    </td>
+                    <td [routerLink]="['/admin/verifyRequest/', data._id]" class="font-normal text-[14px] font-roboto px-[24px] py-[11px] text-center">
+                        <div>
+                            <button class="bg-black py-1 px-3 rounded-[5px]">
+                                <div class="flex gap-[8px]">
+                                    <div>
+                                        <p class="text-white" >View</p>
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

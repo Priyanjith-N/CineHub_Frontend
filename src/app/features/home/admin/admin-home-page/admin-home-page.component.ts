@@ -25,7 +25,7 @@ export class AdminHomePageComponent {
 
   private toastOptionSubscription: Subscription | undefined; // for later unsubcribing variable is needed
   
-  constructor(private toastMessageService: ToastMessageService, private messageService: MessageService) {}
+  constructor(private toastMessageService: ToastMessageService, private messageService: MessageService) {  }
 
   ngOnInit(): void {
     this.toastOptionSubscription = this.toastMessageService.toastOption$.subscribe(

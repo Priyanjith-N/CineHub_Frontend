@@ -32,6 +32,8 @@ export class AdminHeaderComponent {
     
     if(url === '/admin') {
       this.heading = 'Dashboard';
+    }else if(url === '/verifyRequest' || this.router.url.includes('/verifyRequest')){
+      this.heading = 'Verify Requests'
     }else if(['/userManagement', '/theaterOwnerManagement', '/distributerManagement'].includes(url)){
       this.heading = 'Administration';
     }

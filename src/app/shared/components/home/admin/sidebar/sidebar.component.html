@@ -20,8 +20,8 @@
                     </div>
                 </li>
             </a>
-            <a routerLink="/admin/applicationRequest">
-                    <li #sourceLi (click)="selectOption(1);" class="py-[18px] pl-[17px] relative" routerLinkActive="activeOption" [routerLinkActiveOptions]="{ exact: true }">
+            <a routerLink="/admin/verifyRequest">
+                    <li #sourceLi (click)="selectOption(1);" class="py-[18px] pl-[17px] relative" routerLinkActive="activeOption" [routerLinkActiveOptions]="{ exact: false }">
                     <div class="flex gap-[8px] items-center">
                         <div>
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -29,13 +29,13 @@
                             </svg>                                                                 
                         </div>
                         <div>
-                            <p>Application Requests</p>
+                            <p>Verify Requests</p>
                         </div>
                     </div>
                 </li>
             </a>
             <a routerLink="/admin/administration" >
-                <li #sourceLi (click)="selectOption(2);" class="py-[18px] pl-[17px] relative" routerLinkActive="activeOption" [routerLinkActiveOptions]="{ exact: true }">
+                <li #sourceLi (click)="selectOption(2);" class="py-[18px] pl-[17px] relative" routerLinkActive="activeOption" [routerLinkActiveOptions]="{ exact: false }">
                     <div class="flex gap-[8px] items-center">
                         <div>
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
