@@ -22,10 +22,12 @@ export interface ITheaterOwnerData {
     idProof: string;
     idProofImage: string[];
     OTPVerificationStatus: boolean;
-    documentVerificationStatus: boolean;
+    documentVerificationStatus: string;
     idProofUpdateVerificationStatus: boolean;
     idProofUpdateDocumentImage: string[] | null | undefined;
     isBlocked: boolean;
+    role?: string;
+    licence?: string;
 }
 
 export interface IDistributerData {
@@ -38,12 +40,13 @@ export interface IDistributerData {
     idProof: string;
     idProofImage: string[];
     OTPVerificationStatus: boolean;
-    documentVerificationStatus: boolean;
+    documentVerificationStatus: string;
     licenceUpdateDocument: string | undefined | null
     licenceUpdateVerificationStatus: boolean;
     idProofUpdateVerificationStatus: boolean;
     idProofUpdateDocumentImage: string[] | undefined | null;
     isBlocked: boolean;
+    role?: string;
 }
 
 export interface IBlockOrUnblockAPISucessfullResponse {
@@ -86,4 +89,9 @@ export interface INotVerifiedDistributers {
     idProofUpdateDocumentImage: string[] | undefined | null;
     isBlocked: boolean;
     role: string;
+}
+
+export interface ISingleDataRetrivalAPIResponse<T> {
+    message: string;
+    data: T;
 }

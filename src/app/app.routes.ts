@@ -123,7 +123,7 @@ export const routes: Routes = [
                 component: AccountVerificationManagementComponent
             },
             {
-                path: 'verifyRequest/:id',
+                path: 'verifyRequest/:role/:id',
                 component: AdminAccountVerificationDetailPageComponent
             },
             {

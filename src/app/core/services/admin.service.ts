@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { IBlockOrUnblockAPIErrorResponse, IBlockOrUnblockAPISucessfullResponse, IDistributerData, INotVerifiedDistributers, INotVerifiedTheaterOwners, IRetriveDataSucessfullAPIResponse, ITheaterOwnerData, IUserData } from '../../shared/models/adminAPIResponse.interface';
+import { IBlockOrUnblockAPIErrorResponse, IBlockOrUnblockAPISucessfullResponse, IDistributerData, INotVerifiedDistributers, INotVerifiedTheaterOwners, IRetriveDataSucessfullAPIResponse, ISingleDataRetrivalAPIResponse, ITheaterOwnerData, IUserData } from '../../shared/models/adminAPIResponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -121,5 +121,67 @@ export class AdminService {
     );
 
     return getAllVerificationDocumentAPIResponse$;
+  }
+
+  getTheaterOwner(id: string): Observable<ISingleDataRetrivalAPIResponse<ITheaterOwnerData>> {
+    const url: string = `${this.api}/theaterOwner/${id}`;
+
+    const getDataAPIResponse$: Observable<ISingleDataRetrivalAPIResponse<ITheaterOwnerData>> = this.httpClient.get<ISingleDataRetrivalAPIResponse<ITheaterOwnerData>>(url)
+    .pipe(
+      map((response) => response as ISingleDataRetrivalAPIResponse<ITheaterOwnerData>),
+      catchError((err: any) => {
+        return throwError(err);
+      })
+    );
+
+    return getDataAPIResponse$;
+  }
+
+  getDistributer(id: string): Observable<ISingleDataRetrivalAPIResponse<IDistributerData>> {
+    const url: string = `${this.api}/distributers/${id}`;
+
+    const getDataAPIResponse$: Observable<ISingleDataRetrivalAPIResponse<IDistributerData>> = this.httpClient.get<ISingleDataRetrivalAPIResponse<IDistributerData>>(url)
+    .pipe(
+      map((response) => response as ISingleDataRetrivalAPIResponse<IDistributerData>),
+      catchError((err: any) => {
+        return throwError(err);
+      })
+    );
+
+    return getDataAPIResponse$;
+  }
+
+  theaterOwnerVerifyDocument(id: string, status: string, message: string | undefined): Observable<{ message: string }> {
+    const url: string = `${this.api}/theaterOwnerVerifyDocument/${id}`;
+
+    const theaterOwnerVerifyDocumentAPIResponse$: Observable<{ message: string }> = this.httpClient.patch<{ message: string }>(url, {
+      status,
+      message
+    })
+    .pipe(
+      map((response) => response as { message: string }),
+      catchError((err: any) => {
+        return throwError(err);
+      })
+    );
+
+    return theaterOwnerVerifyDocumentAPIResponse$;
+  }
+
+  distributerVerifyDocument(id: string, status: string, message: string | undefined): Observable<{ message: string }> {
+    const url: string = `${this.api}/distributersVerifyDocument/${id}`;
+
+    const distributerVerifyDocumentAPIResponse$: Observable<{ message: string }> = this.httpClient.patch<{ message: string }>(url, {
+      status,
+      message
+    })
+    .pipe(
+      map((response) => response as { message: string }),
+      catchError((err: any) => {
+        return throwError(err);
+      })
+    );
+
+    return distributerVerifyDocumentAPIResponse$;
   }
 }

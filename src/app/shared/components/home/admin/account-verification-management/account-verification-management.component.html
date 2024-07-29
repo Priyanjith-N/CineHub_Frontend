@@ -73,7 +73,7 @@
                     <td class="font-normal text-[14px] font-roboto text-left px-[24px] py-[11px]">
                         {{ data.idProof }}
                     </td>
-                    <td [routerLink]="['/admin/verifyRequest/', data._id]" class="font-normal text-[14px] font-roboto px-[24px] py-[11px] text-center">
+                    <td [routerLink]="['/admin/verifyRequest', data.role, data._id]" class="font-normal text-[14px] font-roboto px-[24px] py-[11px] text-center">
                         <div>
                             <button class="bg-black py-1 px-3 rounded-[5px]">
                                 <div class="flex gap-[8px]">
