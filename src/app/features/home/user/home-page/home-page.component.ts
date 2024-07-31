@@ -25,12 +25,12 @@ export class HomePageComponent {
   constructor(private router: Router, private userAuthService: UserAuthService, private authService: SocialAuthService) { }
 
   async logout() {
-    this.authService.signOut();
     
     const logoutAPIResponse$ = this.userAuthService.handelLogoutRequest();
     
     logoutAPIResponse$.subscribe(
       (res: ILogoutSuccessfullResponse) => {
+        this.authService.signOut();
         // toast message if needed
         this.router.navigate(['/auth/login']);
       },

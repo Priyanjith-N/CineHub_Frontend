@@ -7,6 +7,7 @@ import { IDistributerRegisterCredentials } from '../../shared/models/IRegisterCr
 import { IRegisterSuccessfullResponse } from '../../shared/models/IRegisterResponse.interface';
 import { IOTPResendErrorResponse, IOTPResendSuccessfullResponse, IOTPVerificationErrorResponse, IOTPVerificationSuccessfullResponse } from '../../shared/models/IOTPVerificationResponse.interface';
 import { IVerifyAuthTokenErrorResponse, IVerifyAuthTokenSuccessfullResponse } from '../../shared/models/IVerifyAuthTokenResponse.interface';
+import { ILogoutErrorResponse, ILogoutSuccessfullResponse } from '../../shared/models/ILogoutResponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -162,5 +163,23 @@ export class DistributerAuthService {
     );
 
     return verifyAuthTokenAPIResponse$.toPromise();
+  }
+
+  handelLogoutRequest(): Observable<ILogoutSuccessfullResponse> {
+    const url: string = `${this.api}/logout`;
+
+    const LogoutAPIResponse$: Observable<ILogoutSuccessfullResponse> = this.httpClient.post<ILogoutSuccessfullResponse>(url, {})
+    .pipe(
+      map((response: ILogoutSuccessfullResponse) => response),
+      catchError((err: any) => {
+        if(err.error) { // even the error response is sent it the object send form backend will be in error property if not it is some other err
+          return throwError(err.error as ILogoutErrorResponse);
+        }else{
+          return throwError(err);
+        }
+      })
+    );
+
+    return LogoutAPIResponse$;
   }
 }

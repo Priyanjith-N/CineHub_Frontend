@@ -32,6 +32,8 @@ import { canAcessUserAuthRoutesGuard } from './core/guards/can-acess-user-auth-r
 import { canAcessTheaterOwnerAuthRoutesGuard } from './core/guards/can-acess-theater-owner-auth-routes.guard';
 import { canAcessDistributerAuthRoutesGuard } from './core/guards/can-acess-distributer-auth-routes.guard';
 import { distributerAuthGuard } from './core/guards/distributer-auth.guard';
+import { canAcessAdminAuthRoutesGuard } from './core/guards/can-acess-admin-auth-routes.guard';
+import { adminAuthGuard } from './core/guards/admin-auth.guard';
 
 export const routes: Routes = [
     {
@@ -58,10 +60,12 @@ export const routes: Routes = [
     },
     {
         path: 'admin/auth',
+        canActivate: [canAcessAdminAuthRoutesGuard],
         component: AdminAuthBGComponent,
         children: [
             {
                 path: 'login',
+                canActivate: [canAcessAdminAuthRoutesGuard],
                 component: AdminLoginFormComponent
             }
         ]
@@ -127,30 +131,37 @@ export const routes: Routes = [
     },
     {
         path: 'admin',
+        canActivate: [adminAuthGuard],
         component: AdminHomePageComponent,
         children: [
             {
                 path: 'verifyRequest',
+                canActivate: [adminAuthGuard],
                 component: AccountVerificationManagementComponent
             },
             {
                 path: 'verifyRequest/:role/:id',
+                canActivate: [adminAuthGuard],
                 component: AdminAccountVerificationDetailPageComponent
             },
             {
                 path: 'administration',
+                canActivate: [adminAuthGuard],
                 component: AdminManagementComponent,
                 children: [
                     {
                         path: 'userManagement',
+                        canActivate: [adminAuthGuard],
                         component: AdminUserManagementComponent
                     },
                     {
                         path: 'theaterOwnerManagement',
+                        canActivate: [adminAuthGuard],
                         component: AdminTheaterOwnerManagementComponent
                     },
                     {
                         path: 'distributerManagement',
+                        canActivate: [adminAuthGuard],
                         component: AdminDistributerManagementComponent
                     }
                 ]

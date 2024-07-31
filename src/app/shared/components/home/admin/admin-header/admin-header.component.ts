@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
+import { ILogoutSuccessfullResponse } from '../../../../models/ILogoutResponse.interface';
+import { AdminAuthService } from '../../../../../core/services/admin-auth.service';
 
 @Component({
   selector: 'app-admin-header',
@@ -11,7 +13,7 @@ import { filter } from 'rxjs';
 })
 export class AdminHeaderComponent {
   heading: string = '';
-  constructor(private router: Router) {
+  constructor(private router: Router, private adminAuthService: AdminAuthService) {
     this.changeHeading();
   }
 
@@ -38,6 +40,25 @@ export class AdminHeaderComponent {
       this.heading = 'Administration';
     }
     
+  }
+
+  async logout() {
+    
+    const logoutAPIResponse$ = this.adminAuthService.handelLogoutRequest();
+    
+    logoutAPIResponse$.subscribe(
+      (res: ILogoutSuccessfullResponse) => {
+        // toast message if needed
+        this.router.navigate(['/admin/auth/login']);
+      },
+      (err: any) => {
+        if(err.error) {
+          // toast message if needed
+        }else{
+          // toast message if needed
+        }
+      }
+    );
   }
 
 }
