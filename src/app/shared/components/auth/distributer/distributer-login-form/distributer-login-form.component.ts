@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 import { ILoginErrorResponse, ILoginSuccessfullResponse } from '../../../../models/ILoginResponse.interface';
 import { ILoginCredentials } from '../../../../models/ILoginCredentials.interface';
 import { DocumentVerificationPendingMessagePageService } from '../../../../../core/services/document-verification-pending-message-page.service';
+import { GoogleBtnComponent } from '../../../authButtons/google-btn/google-btn.component';
+import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 
 @Component({
   selector: 'app-distributer-login-form',
@@ -15,6 +17,7 @@ import { DocumentVerificationPendingMessagePageService } from '../../../../../co
   imports: [
     RouterLink, 
     ReactiveFormsModule,
+    GoogleBtnComponent
   ],
   templateUrl: './distributer-login-form.component.html',
   styleUrl: './distributer-login-form.component.css'
@@ -24,10 +27,19 @@ export class DistributerLoginFormComponent {
   toggleShowHidePassword: boolean = false; // defaultly hides the password
   loginForm: FormGroup;
   
-  constructor(private router: Router, private toastMessageService: ToastMessageService, private distributerAuthService: DistributerAuthService, private documentVerificationPendingMessagePageService: DocumentVerificationPendingMessagePageService) {
+  constructor(private router: Router, private toastMessageService: ToastMessageService, private distributerAuthService: DistributerAuthService, private documentVerificationPendingMessagePageService: DocumentVerificationPendingMessagePageService, private authService: SocialAuthService) {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z0-9]+@gmail\.com$/)]),
       password: new FormControl('', [Validators.required])
+    });
+  }
+
+  ngOnInit(): void {
+    this.authService.authState.subscribe((user: SocialUser) => {
+      if(user) {
+        const idToken: string = user.idToken;
+        // this.googleAuthLogin(idToken);
+      }
     });
   }
 

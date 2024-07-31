@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import IToastOption from '../../../../models/IToastOption.interface';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastMessageService } from '../../../../../core/services/toast-message.service';
@@ -8,6 +8,8 @@ import { ILoginCredentials } from '../../../../models/ILoginCredentials.interfac
 import { Observable } from 'rxjs';
 import { ILoginErrorResponse, ILoginSuccessfullResponse } from '../../../../models/ILoginResponse.interface';
 import { DocumentVerificationPendingMessagePageService } from '../../../../../core/services/document-verification-pending-message-page.service';
+import { GoogleBtnComponent } from '../../../authButtons/google-btn/google-btn.component';
+import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 
 @Component({
   selector: 'app-theater-ower-login-form',
@@ -15,19 +17,29 @@ import { DocumentVerificationPendingMessagePageService } from '../../../../../co
   imports: [
     RouterLink, 
     ReactiveFormsModule,
+    GoogleBtnComponent
   ],
   templateUrl: './theater-owner-login-form.component.html',
   styleUrl: './theater-owner-login-form.component.css'
 })
-export class TheaterOwerLoginFormComponent {
+export class TheaterOwerLoginFormComponent implements OnInit {
   isFormSubmited: boolean = false;
   toggleShowHidePassword: boolean = false; // defaultly hides the password
   loginForm: FormGroup;
   
-  constructor(private router: Router, private toastMessageService: ToastMessageService, private theaterOwnerAuthService: TheaterOwnerAuthService, private documentVerificationPendingMessagePageService: DocumentVerificationPendingMessagePageService) {
+  constructor(private router: Router, private toastMessageService: ToastMessageService, private theaterOwnerAuthService: TheaterOwnerAuthService, private documentVerificationPendingMessagePageService: DocumentVerificationPendingMessagePageService, private authService: SocialAuthService) {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z0-9]+@gmail\.com$/)]),
       password: new FormControl('', [Validators.required])
+    });
+  }
+
+  ngOnInit(): void {
+    this.authService.authState.subscribe((user: SocialUser) => {
+      if(user) {
+        const idToken: string = user.idToken;
+        // this.googleAuthLogin(idToken);
+      }
     });
   }
 

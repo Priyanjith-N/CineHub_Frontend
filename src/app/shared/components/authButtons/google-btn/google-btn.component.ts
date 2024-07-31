@@ -12,5 +12,5 @@ import { Component, Input } from '@angular/core';
   styleUrl: './google-btn.component.css'
 })
 export class GoogleBtnComponent {
-  @Input({required: true}) text: string = '';
+  @Input({required: true}) text: "signin_with" | "signup_with" | "continue_with" = "continue_with";
 }
