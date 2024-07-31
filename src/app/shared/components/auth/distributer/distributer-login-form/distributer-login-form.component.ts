@@ -38,9 +38,48 @@ export class DistributerLoginFormComponent {
     this.authService.authState.subscribe((user: SocialUser) => {
       if(user) {
         const idToken: string = user.idToken;
-        // this.googleAuthLogin(idToken);
+        this.googleAuthLogin(idToken);
       }
     });
+  }
+
+  private googleAuthLogin(idToken: string) {
+    const loginAPIResponse$: Observable<ILoginSuccessfullResponse> = this.distributerAuthService.handelGoogleLogin(idToken);
+
+    loginAPIResponse$.subscribe(
+      ((res) => {
+        const toastOption: IToastOption = {
+          severity: 'success',
+          summary: 'Success',
+          detail: res.message
+        }
+
+        this.showToast(toastOption); // emit the toast option to show toast.
+        
+        this.router.navigate(['/distributer']); // navigate to home Page after successfull login.
+      }),
+      ((err: any) => {
+        console.log(err);
+        
+        const toastOption: IToastOption = {
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Internal Server Error.'
+        }
+
+        if(err.requiredErrMessage) {
+          toastOption.detail = err.requiredErrMessage;
+        }else if(err?.notDocumentVerified) {
+          this.documentVerificationPendingMessagePageService.setValue(true);
+
+          this.authService.signOut();
+          this.router.navigate(['/distributer/auth/accountNotVerified']); // navigating to account not verified page for showing welcome message.
+          return;
+        }
+
+        this.showToast(toastOption);
+      })
+    );
   }
 
   toggleShowHide(): void {
