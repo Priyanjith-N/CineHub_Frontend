@@ -5,7 +5,6 @@ import { UserAuthService } from '../services/user-auth.service';
 export const canAcessUserAuthRoutesGuard: CanActivateFn = async (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
   const router: Router = inject(Router);
   const userAuthService: UserAuthService = inject(UserAuthService);
-  console.log(state.url);
   
   const activeUrl: string = state.url;
 
