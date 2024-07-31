@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserAuthService } from '../../../../../core/services/user-auth.service';
@@ -8,6 +8,9 @@ import { ILoginCredentials } from '../../../../models/ILoginCredentials.interfac
 
 import IToastOption from '../../../../models/IToastOption.interface';
 import { ToastMessageService } from '../../../../../core/services/toast-message.service';
+import { GoogleBtnComponent } from '../../../authButtons/google-btn/google-btn.component';
+import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login-form',
@@ -15,20 +18,63 @@ import { ToastMessageService } from '../../../../../core/services/toast-message.
   imports: [
     RouterLink, 
     ReactiveFormsModule,
+    GoogleBtnComponent,
   ],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.css'
 })
-export class LoginFormComponent {
+export class LoginFormComponent implements OnInit {
   isFormSubmited: boolean = false;
   toggleShowHidePassword: boolean = false; // defaultly hides the password
   loginForm: FormGroup;
   
-  constructor(private userAuthService: UserAuthService, private router: Router, private toastMessageService: ToastMessageService) {
+  constructor(private userAuthService: UserAuthService, private router: Router, private toastMessageService: ToastMessageService, private authService: SocialAuthService) {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z0-9]+@gmail\.com$/)]),
       password: new FormControl('', [Validators.required])
     });
+  }
+
+  ngOnInit(): void {
+    this.authService.authState.subscribe((user: SocialUser) => {
+      if(user) {
+        const idToken: string = user.idToken;
+        this.googleAuthLogin(idToken);
+      }
+    });
+  }
+
+  private googleAuthLogin(idToken: string) {
+    const loginAPIResponse$: Observable<ILoginSuccessfullResponse> = this.userAuthService.handelGoogleLogin(idToken);
+
+    loginAPIResponse$.subscribe(
+      ((res) => {
+        const toastOption: IToastOption = {
+          severity: 'success',
+          summary: 'Success',
+          detail: res.message
+        }
+
+        this.showToast(toastOption); // emit the toast option to show toast.
+        
+        this.router.navigate(['/']); // navigate to home Page after successfull login.
+      }),
+      ((err: any) => {
+        console.log(err);
+        
+        const toastOption: IToastOption = {
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Internal Server Error.'
+        }
+
+        if(err.requiredErrMessage) {
+          toastOption.detail = err.requiredErrMessage;
+        }
+
+        this.showToast(toastOption);
+      })
+    );
   }
 
   toggleShowHide(): void {

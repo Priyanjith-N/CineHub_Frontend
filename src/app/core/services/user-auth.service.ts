@@ -132,4 +132,25 @@ export class UserAuthService {
     return LogoutAPIResponse$;
   }
 
+  handelGoogleLogin(idToken: string): Observable<ILoginSuccessfullResponse>{
+    const url: string = `${this.api}/googleauthlogin`;
+
+    const loginAPIResponse$: Observable<ILoginSuccessfullResponse> = this.httpClient.post<ILoginSuccessfullResponse>(url, {
+      token: idToken
+    })
+    .pipe(
+      map((response: ILoginSuccessfullResponse) => response as ILoginSuccessfullResponse),
+      catchError((err: any) => { // even the error response is sent it the object send form backend will be in error property if not it is some other err
+        if(err.error && err.error.requiredCredentialsError) {
+          err['requiredErrMessage'] = err.error.message;
+          return throwError(err);
+        }else{
+          return throwError(err);
+        }
+      })
+    );
+
+    return loginAPIResponse$;
+  }
+
 }

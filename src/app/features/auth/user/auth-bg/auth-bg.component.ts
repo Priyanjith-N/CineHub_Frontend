@@ -20,7 +20,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './auth-bg.component.html',
   styleUrl: './auth-bg.component.css'
 })
-export class AuthBGComponent implements OnInit, OnDestroy {
+export class AuthBGComponent implements OnDestroy {
   private toastOptionSubscription: Subscription | undefined; // for later unsubcribing variable is needed
   
   constructor(private toastMessageService: ToastMessageService, private messageService: MessageService) {}

@@ -6,6 +6,7 @@ import { UserHeaderComponent } from '../../../../core/components/user-header/use
 import { UserSubHeaderComponent } from '../../../../core/components/user-sub-header/user-sub-header.component';
 import { LandingPageComponent } from '../../../../shared/components/home/user/landing-page/landing-page.component';
 import { UserFooterComponent } from '../../../../core/components/user-footer/user-footer.component';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 
 @Component({
   selector: 'app-home-page',
@@ -21,13 +22,19 @@ import { UserFooterComponent } from '../../../../core/components/user-footer/use
 })
 export class HomePageComponent {
 
-  constructor(private router: Router, private userAuthService: UserAuthService) { }
+  constructor(private router: Router, private userAuthService: UserAuthService, private authService: SocialAuthService) { }
 
-  logout() {
+  async logout() {
+    
     const logoutAPIResponse$ = this.userAuthService.handelLogoutRequest();
-
+    
     logoutAPIResponse$.subscribe(
       (res: ILogoutSuccessfullResponse) => {
+        this.authService.authState.subscribe(async (user) => {
+          if(user) {
+            await this.authService.signOut();
+          }
+        });
         // toast message if needed
         this.router.navigate(['/auth/login']);
       },
