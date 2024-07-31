@@ -4,8 +4,6 @@ import { LoginFormComponent } from './shared/components/auth/user/login-form/log
 import { RegisterFormComponent } from './shared/components/auth/user/register-form/register-form.component';
 import { OtpEmailVerificationFormComponent } from './shared/components/auth/user/otp-email-verification-form/otp-email-verification-form.component';
 import { HomePageComponent } from './features/home/user/home-page/home-page.component';
-import { userAuthRouteGuard } from './core/guards/auth.guard';
-import { userAuthGuard } from './core/guards/user-auth.guard';
 import { canAcessOTPVerifyGuard } from './core/guards/can-acess-otpverify.guard';
 import { AdminAuthBGComponent } from './features/auth/admin/admin-auth-bg/admin-auth-bg.component';
 import { AdminLoginFormComponent } from './shared/components/auth/admin/admin-login-form/admin-login-form.component';
@@ -29,26 +27,31 @@ import { AdminDistributerManagementComponent } from './shared/components/home/ad
 import { AdminTheaterOwnerManagementComponent } from './shared/components/home/admin/admin-theater-owner-management/admin-theater-owner-management.component';
 import { AccountVerificationManagementComponent } from './shared/components/home/admin/account-verification-management/account-verification-management.component';
 import { AdminAccountVerificationDetailPageComponent } from './shared/components/home/admin/admin-account-verification-detail-page/admin-account-verification-detail-page.component';
+import { theaterOwnerAuthGuard } from './core/guards/theater-owner-auth.guard';
+import { canAcessUserAuthRoutesGuard } from './core/guards/can-acess-user-auth-routes.guard';
+import { canAcessTheaterOwnerAuthRoutesGuard } from './core/guards/can-acess-theater-owner-auth-routes.guard';
+import { canAcessDistributerAuthRoutesGuard } from './core/guards/can-acess-distributer-auth-routes.guard';
+import { distributerAuthGuard } from './core/guards/distributer-auth.guard';
 
 export const routes: Routes = [
     {
         path: 'auth',
         component: AuthBGComponent,
-        canActivate: [userAuthRouteGuard],
+        canActivate: [canAcessUserAuthRoutesGuard],
         children: [
             {
                 path: 'login',
-                canActivate: [userAuthRouteGuard],
+                canActivate: [canAcessUserAuthRoutesGuard],
                 component: LoginFormComponent
             },
             {
                 path: 'register',
-                canActivate: [userAuthRouteGuard],
+                canActivate: [canAcessUserAuthRoutesGuard],
                 component: RegisterFormComponent
             },
             {
                 path: 'verifyEmail',
-                canActivate: [userAuthRouteGuard, canAcessOTPVerifyGuard],
+                canActivate: [canAcessUserAuthRoutesGuard, canAcessOTPVerifyGuard],
                 component: OtpEmailVerificationFormComponent
             },
         ]
@@ -66,45 +69,53 @@ export const routes: Routes = [
     {
         path: 'theaterOwner/auth',
         component: TheaterOwerAuthBgComponent,
+        canActivate: [canAcessTheaterOwnerAuthRoutesGuard],
         children: [
             {
                 path: 'login',
+                canActivate: [canAcessTheaterOwnerAuthRoutesGuard],
                 component: TheaterOwerLoginFormComponent
             },
             {
                 path: 'register',
+                canActivate: [canAcessTheaterOwnerAuthRoutesGuard],
                 component: TheaterOwnerRegisterFormComponent
             },
             {
                 path: 'verifyEmail',
+                canActivate: [canAcessTheaterOwnerAuthRoutesGuard],
                 component: TheaterOwnerOtpEmailVerifcationFormComponent
             },
             {
                 path: 'accountNotVerified',
-                canActivate: [canAcessDocumentVerificationPendingPageGuard],
+                canActivate: [canAcessTheaterOwnerAuthRoutesGuard, canAcessDocumentVerificationPendingPageGuard],
                 component: TheaterOwnerAccountNotVerifiedMessageComponent
             }
         ]
     },
     {
         path: 'distributer/auth',
+        canActivate: [canAcessDistributerAuthRoutesGuard],
         component: DistributerAuthBgComponent,
         children: [
             {
                 path: 'login',
+                canActivate: [canAcessDistributerAuthRoutesGuard],
                 component: DistributerLoginFormComponent
             },
             {
                 path: 'register',
+                canActivate: [canAcessDistributerAuthRoutesGuard],
                 component: DistributerRegisterFormComponent
             },
             {
                 path: 'verifyEmail',
+                canActivate: [canAcessDistributerAuthRoutesGuard],
                 component: DistributerOtpEmailVerificationFormComponent
             },
             {
                 path: 'accountNotVerified',
-                canActivate: [canAcessDocumentVerificationPendingPageGuard],
+                canActivate: [canAcessDistributerAuthRoutesGuard, canAcessDocumentVerificationPendingPageGuard],
                 component: DistributerAccountNotVerifiedMessageComponent
             }
         ]
@@ -148,10 +159,12 @@ export const routes: Routes = [
     },
     {
         path: 'distributer',
+        canActivate: [distributerAuthGuard],
         component: DistributerHomePageComponent
     },
     {
         path: 'theaterOwner',
+        canActivate: [theaterOwnerAuthGuard],
         component: TheaterOwnerHomePageComponent
     }
 ];

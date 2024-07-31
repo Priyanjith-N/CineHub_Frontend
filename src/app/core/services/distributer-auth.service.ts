@@ -6,6 +6,7 @@ import { ILoginErrorResponse, ILoginSuccessfullResponse } from '../../shared/mod
 import { IDistributerRegisterCredentials } from '../../shared/models/IRegisterCredentials.interface';
 import { IRegisterSuccessfullResponse } from '../../shared/models/IRegisterResponse.interface';
 import { IOTPResendErrorResponse, IOTPResendSuccessfullResponse, IOTPVerificationErrorResponse, IOTPVerificationSuccessfullResponse } from '../../shared/models/IOTPVerificationResponse.interface';
+import { IVerifyAuthTokenErrorResponse, IVerifyAuthTokenSuccessfullResponse } from '../../shared/models/IVerifyAuthTokenResponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -143,5 +144,23 @@ export class DistributerAuthService {
     );
 
     return loginAPIResponse$;
+  }
+
+  handelVerifyAuthTokenRequest(): Promise<IVerifyAuthTokenSuccessfullResponse | undefined> {
+    const url: string = `${this.api}/verifyToken`;
+
+    const verifyAuthTokenAPIResponse$: Observable<IVerifyAuthTokenSuccessfullResponse> = this.httpClient.get<IVerifyAuthTokenSuccessfullResponse>(url)
+    .pipe(
+      map((response: IVerifyAuthTokenSuccessfullResponse) => response),
+      catchError((err: any) => {
+        if(err.error){
+          return throwError(err as IVerifyAuthTokenErrorResponse);
+        }else{
+          return throwError(err);
+        }
+      })
+    );
+
+    return verifyAuthTokenAPIResponse$.toPromise();
   }
 }
