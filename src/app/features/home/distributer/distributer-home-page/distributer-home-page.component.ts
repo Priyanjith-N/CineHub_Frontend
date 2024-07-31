@@ -21,7 +21,7 @@ export class DistributerHomePageComponent {
     
     logoutAPIResponse$.subscribe(
       (res: ILogoutSuccessfullResponse) => {
-        this.authService.signOut();
+        this.authService.signOut(true);
         // toast message if needed
         this.router.navigate(['/distributer/auth/login']);
       },

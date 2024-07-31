@@ -38,6 +38,7 @@ export class TheaterOwerLoginFormComponent implements OnInit {
     this.authService.authState.subscribe((user: SocialUser) => {
       if(user) {
         const idToken: string = user.idToken;
+        this.authService.signOut();
         this.googleAuthLogin(idToken);
       }
     });
@@ -59,7 +60,7 @@ export class TheaterOwerLoginFormComponent implements OnInit {
         this.router.navigate(['/theaterOwner']); // navigate to home Page after successfull login.
       }),
       ((err: any) => {
-        console.log(err);
+        this.authService.signOut();
         
         const toastOption: IToastOption = {
           severity: 'error',
@@ -71,10 +72,14 @@ export class TheaterOwerLoginFormComponent implements OnInit {
           toastOption.detail = err.requiredErrMessage;
         }else if(err?.notDocumentVerified) {
           this.documentVerificationPendingMessagePageService.setValue(true);
-
-          this.authService.signOut();
           this.router.navigate(['/theaterOwner/auth/accountNotVerified']); // navigating to account not verified page for showing welcome message.
           return;
+        }else if(err.isBlocked) {
+          const errObj: ILoginErrorResponse = err.error as ILoginErrorResponse;
+
+          toastOption.severity = 'warn';
+          toastOption.summary = errObj.message!;
+          toastOption.detail = 'contact with admins.'
         }
 
         this.showToast(toastOption);
@@ -146,7 +151,17 @@ export class TheaterOwerLoginFormComponent implements OnInit {
           this.documentVerificationPendingMessagePageService.setValue(true);
 
           this.router.navigate(['/theaterOwner/auth/accountNotVerified']); // navigating to account not verified page for showing welcome message.
-        }else {
+        }else if(err.isBlocked) {
+          const errObj: ILoginErrorResponse = err.error as ILoginErrorResponse;
+
+          const toastOption: IToastOption = {
+            severity: 'warn',
+            summary: errObj.message!,
+            detail: 'contact with admins.'
+          }
+          
+          this.showToast(toastOption);
+        }else{
           const errMessage: string = err?.requiredErrMessage || 'Something Went Wrong.';
 
           const toastOption: IToastOption = {

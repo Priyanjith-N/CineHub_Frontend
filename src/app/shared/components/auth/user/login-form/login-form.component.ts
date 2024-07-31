@@ -10,7 +10,6 @@ import IToastOption from '../../../../models/IToastOption.interface';
 import { ToastMessageService } from '../../../../../core/services/toast-message.service';
 import { GoogleBtnComponent } from '../../../authButtons/google-btn/google-btn.component';
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
-import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login-form',
@@ -18,7 +17,7 @@ import { CookieService } from 'ngx-cookie-service';
   imports: [
     RouterLink, 
     ReactiveFormsModule,
-    GoogleBtnComponent,
+    GoogleBtnComponent
   ],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.css'
@@ -39,6 +38,7 @@ export class LoginFormComponent implements OnInit {
     this.authService.authState.subscribe((user: SocialUser) => {
       if(user) {
         const idToken: string = user.idToken;
+        this.authService.signOut();
         this.googleAuthLogin(idToken);
       }
     });
@@ -60,7 +60,7 @@ export class LoginFormComponent implements OnInit {
         this.router.navigate(['/']); // navigate to home Page after successfull login.
       }),
       ((err: any) => {
-        console.log(err);
+        this.authService.signOut();
         
         const toastOption: IToastOption = {
           severity: 'error',
@@ -70,6 +70,12 @@ export class LoginFormComponent implements OnInit {
 
         if(err.requiredErrMessage) {
           toastOption.detail = err.requiredErrMessage;
+        }else if(err.isBlocked) {
+          const errObj: ILoginErrorResponse = err.error as ILoginErrorResponse;
+
+          toastOption.severity = 'warn';
+          toastOption.summary = errObj.message!;
+          toastOption.detail = 'contact with admins.'
         }
 
         this.showToast(toastOption);
@@ -123,7 +129,15 @@ export class LoginFormComponent implements OnInit {
         
         if(err?.errorField){
           const errObj: ILoginErrorResponse = err as ILoginErrorResponse;
-          if(errObj.errorField === 'otp') {
+          if(errObj.errorField === 'blocked') {
+            const toastOption: IToastOption = {
+              severity: 'warn',
+              summary: errObj.message!,
+              detail: 'contact with admins.'
+            }
+            
+            this.showToast(toastOption);
+          }else if(errObj.errorField === 'otp') {
             const toastOption: IToastOption = {
               severity: 'info',
               summary: errObj.message!,

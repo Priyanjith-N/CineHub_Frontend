@@ -29,14 +29,16 @@ export class TheaterOwnerAuthService {
 
           const errorField: string | undefined = errObj.errorField;
 
-          if((errorField !== 'otp') && (errorField !== 'document') && (errorField !== 'Required')) {
+          if((errorField !== 'otp') && (errorField !== 'document') && (errorField !== 'Required') && (errorField !== 'blocked')) {
             return throwError(err.error as ILoginErrorResponse);
           }else if(errorField === 'otp') {
             err['notOTPVerified'] = true;
           }else if(errorField === 'document') {
             err['notDocumentVerified'] = true;
-          }else {
+          }else if(errorField === 'Required'){
             err['requiredErrMessage'] = errObj.message;
+          }else{
+            err['isBlocked'] = true;
           }
 
           return throwError(err);
@@ -138,6 +140,8 @@ export class TheaterOwnerAuthService {
           err['requiredErrMessage'] = err.error.message;
         }else if(err.error && (err.error.errorField === 'document')){
           err['notDocumentVerified'] = true;
+        }else if(err.error && (err.error.errorField === 'blocked')) {
+          err['isBlocked'] = true;
         }
 
         return throwError(err);

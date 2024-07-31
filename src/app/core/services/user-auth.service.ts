@@ -143,10 +143,12 @@ export class UserAuthService {
       catchError((err: any) => { // even the error response is sent it the object send form backend will be in error property if not it is some other err
         if(err.error && err.error.requiredCredentialsError) {
           err['requiredErrMessage'] = err.error.message;
-          return throwError(err);
+        }else if(err.error && (err.error.errorField === 'blocked')) {
+          err['isBlocked'] = true;
         }else{
           return throwError(err);
         }
+        return throwError(err);
       })
     );
 
