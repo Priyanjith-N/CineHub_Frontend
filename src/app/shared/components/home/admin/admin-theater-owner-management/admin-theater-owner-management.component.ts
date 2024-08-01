@@ -37,7 +37,7 @@ export class AdminTheaterOwnerManagementComponent {
 
    search(searchText: string) {
     this.theaterOwnerData = this.data.filter((theaterOwner) => {
-      return (theaterOwner.name.toLowerCase().includes(searchText.toLowerCase()) || theaterOwner.email.toLowerCase().includes(searchText.toLowerCase()) || theaterOwner.phoneNumber.toLowerCase().includes(searchText.toLowerCase()));
+      return theaterOwner.name.toLowerCase().startsWith(searchText);
     });
    }
 

@@ -37,7 +37,7 @@ export class AdminUserManagementComponent {
 
    search(searchText: string) {
     this.userData = this.data.filter((user) => {
-      return (user.name.toLowerCase().includes(searchText.toLowerCase()) || user.email.toLowerCase().includes(searchText.toLowerCase()) || user.phoneNumber.toLowerCase().includes(searchText.toLowerCase()));
+      return user.name.toLowerCase().startsWith(searchText);
     });
    }
 

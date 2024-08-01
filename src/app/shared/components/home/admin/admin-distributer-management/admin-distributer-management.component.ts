@@ -39,7 +39,7 @@ export class AdminDistributerManagementComponent {
 
    search(searchText: string) {
     this.distributerData = this.data.filter((distributer) => {
-      return (distributer.name.toLowerCase().includes(searchText.toLowerCase()) || distributer.email.toLowerCase().includes(searchText.toLowerCase()) || distributer.phoneNumber.toLowerCase().includes(searchText.toLowerCase()));
+      return distributer.name.toLowerCase().startsWith(searchText);
     });
    }
 

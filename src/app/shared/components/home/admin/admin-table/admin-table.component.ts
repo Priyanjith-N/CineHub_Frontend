@@ -17,7 +17,7 @@ export class AdminTableComponent  {
     try {
       const inputElement: HTMLInputElement = event.target as HTMLInputElement;
 
-      const searchText: string = inputElement.value;
+      const searchText: string = inputElement.value.toLowerCase();
 
       this.searchEvent.emit(searchText);
     } catch (err: any) {

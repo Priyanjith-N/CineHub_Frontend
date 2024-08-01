@@ -47,7 +47,7 @@ export class AccountVerificationManagementComponent {
     const searchText = inputElement.value.toLowerCase();
 
     this.displayData = this.data.filter((data) => {
-      return ((data.name.toLowerCase().includes(searchText) || data.email.toLowerCase().includes(searchText) || data.phoneNumber.toLowerCase().includes(searchText) || data.role.toLowerCase().includes(searchText)) && (this.requestType === 'All' || this.requestType === data.role));
+      return (data.name.toLowerCase().startsWith(searchText) && (this.requestType === 'All' || this.requestType === data.role));
     });
   }
 }
