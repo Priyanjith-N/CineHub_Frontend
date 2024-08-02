@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { TheaterOwnerAuthService } from '../../../../core/services/theater-owner-auth.service';
-import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { ILogoutSuccessfullResponse } from '../../../../shared/models/ILogoutResponse.interface';
 
 @Component({
@@ -12,7 +11,6 @@ import { ILogoutSuccessfullResponse } from '../../../../shared/models/ILogoutRes
   styleUrl: './theater-owner-home-page.component.css'
 })
 export class TheaterOwnerHomePageComponent {
-  private authService: SocialAuthService = inject(SocialAuthService);
 
   constructor(private router: Router, private theaterOwnerAuthService: TheaterOwnerAuthService) { }
 
@@ -22,8 +20,6 @@ export class TheaterOwnerHomePageComponent {
     
     logoutAPIResponse$.subscribe(
       (res: ILogoutSuccessfullResponse) => {
-        this.authService.signOut();
-        
         // toast message if needed
         this.router.navigate(['/theaterOwner/auth/login']);
       },
