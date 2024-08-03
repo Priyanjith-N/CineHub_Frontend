@@ -5,12 +5,13 @@ import { ILoginErrorResponse, ILoginSuccessfullResponse } from '../../shared/mod
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { ILogoutErrorResponse, ILogoutSuccessfullResponse } from '../../shared/models/ILogoutResponse.interface';
 import { IVerifyAuthTokenErrorResponse, IVerifyAuthTokenSuccessfullResponse } from '../../shared/models/IVerifyAuthTokenResponse.interface';
+import { environment } from '../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminAuthService {
-  private api: string = 'http://localhost:8080/api/admin';
+  private api: string = `${environment.BACKEND_DOMAIN}/api/admin`;
 
   constructor(private httpClient: HttpClient) { }
 

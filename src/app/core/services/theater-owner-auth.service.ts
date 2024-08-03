@@ -8,12 +8,13 @@ import { IRegisterSuccessfullResponse } from '../../shared/models/IRegisterRespo
 import { IOTPResendErrorResponse, IOTPResendSuccessfullResponse, IOTPVerificationErrorResponse, IOTPVerificationSuccessfullResponse } from '../../shared/models/IOTPVerificationResponse.interface';
 import { IVerifyAuthTokenErrorResponse, IVerifyAuthTokenSuccessfullResponse } from '../../shared/models/IVerifyAuthTokenResponse.interface';
 import { ILogoutErrorResponse, ILogoutSuccessfullResponse } from '../../shared/models/ILogoutResponse.interface';
+import { environment } from '../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TheaterOwnerAuthService {
-  private api: string = 'http://localhost:8080/api/theaterOwner';
+  private api: string = `${environment.BACKEND_DOMAIN}/api/theaterOwner`;
 
   constructor(private httpClient: HttpClient) { }
 

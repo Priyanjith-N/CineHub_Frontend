@@ -8,6 +8,7 @@ import { IUserRegisterCredentials } from '../../shared/models/IRegisterCredentia
 import { IRegisterSuccessfullResponse } from '../../shared/models/IRegisterResponse.interface';
 import { IVerifyAuthTokenErrorResponse, IVerifyAuthTokenSuccessfullResponse } from '../../shared/models/IVerifyAuthTokenResponse.interface';
 import { ILogoutErrorResponse, ILogoutSuccessfullResponse } from '../../shared/models/ILogoutResponse.interface';
+import { environment } from '../../../environments/environment.development';
 
 interface hello {
   email: string,
@@ -18,7 +19,7 @@ interface hello {
   providedIn: 'root'
 })
 export class UserAuthService {
-  private api: string = 'http://localhost:8080/api/user';
+  private api: string = `${environment.BACKEND_DOMAIN}/api/user`;
 
   constructor(private httpClient: HttpClient) { }
 
