@@ -48,9 +48,23 @@
                     </div>
                 </li>
             </a>
+            <a routerLink="/admin/moviemanagement" >
+                <li #sourceLi (click)="selectOption(3);" class="py-[18px] pl-[17px] relative" routerLinkActive="activeOption" [routerLinkActiveOptions]="{ exact: false }">
+                    <div class="flex gap-[8px] items-center">
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="m160-800 80 160h120l-80-160h80l80 160h120l-80-160h80l80 160h120l-80-160h120q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800Zm0 240v320h640v-320H160Zm0 0v320-320Z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p>Movie Management</p>
+                        </div>
+                    </div>
+                </li>
+            </a>
             <li class="my-[8px] h-[1px] w-full bg-[rgba(255,255,255,0.25)]"></li>
             <a routerLink="/admin/notification">
-                <li #sourceLi (click)="selectOption(3);" class="py-[18px] pl-[17px] relative" routerLinkActive="activeOption" [routerLinkActiveOptions]="{ exact: true }">
+                <li #sourceLi (click)="selectOption(4);" class="py-[18px] pl-[17px] relative" routerLinkActive="activeOption" [routerLinkActiveOptions]="{ exact: true }">
                     <div class="flex gap-[8px] items-center">
                         <div>
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -64,7 +78,7 @@
                 </li>
             </a>
             <a routerLink="/admin/settings">
-                <li #sourceLi (click)="selectOption(4);" class="py-[18px] pl-[17px] relative" routerLinkActive="activeOption" [routerLinkActiveOptions]="{ exact: true }">
+                <li #sourceLi (click)="selectOption(5);" class="py-[18px] pl-[17px] relative" routerLinkActive="activeOption" [routerLinkActiveOptions]="{ exact: true }">
                     <div class="flex gap-[8px] items-center">
                         <div>
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

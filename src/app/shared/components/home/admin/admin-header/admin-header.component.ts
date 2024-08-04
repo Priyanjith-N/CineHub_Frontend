@@ -38,6 +38,8 @@ export class AdminHeaderComponent {
       this.heading = 'Verify Requests'
     }else if(['/userManagement', '/theaterOwnerManagement', '/distributerManagement'].includes(url)){
       this.heading = 'Administration';
+    }else if(url === '/moviemanagement' || url === '/addmovie') {
+      this.heading = 'Movie Management'
     }
     
   }

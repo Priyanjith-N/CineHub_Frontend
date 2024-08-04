@@ -34,6 +34,8 @@ import { canAcessDistributerAuthRoutesGuard } from './core/guards/can-acess-dist
 import { distributerAuthGuard } from './core/guards/distributer-auth.guard';
 import { canAcessAdminAuthRoutesGuard } from './core/guards/can-acess-admin-auth-routes.guard';
 import { adminAuthGuard } from './core/guards/admin-auth.guard';
+import { AdminMovieManagementComponent } from './shared/components/home/admin/admin-movie-management/admin-movie-management.component';
+import { AddMovieFormComponent } from './shared/components/home/admin/add-movie-form/add-movie-form.component';
 
 export const routes: Routes = [
     {
@@ -165,6 +167,15 @@ export const routes: Routes = [
                         component: AdminDistributerManagementComponent
                     }
                 ]
+            },
+            {
+                path: 'moviemanagement',
+                canActivate: [adminAuthGuard],
+                component: AdminMovieManagementComponent
+            },
+            {
+                path: 'moviemanagement/addmovie',
+                component: AddMovieFormComponent
             }
         ]
     },

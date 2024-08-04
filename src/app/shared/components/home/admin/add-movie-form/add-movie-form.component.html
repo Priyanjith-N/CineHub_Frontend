@@ -1,0 +1,266 @@
+@if(member) {
+    <div class="w-[80.65%] h-screen bg-[rgba(21,19,23,0.49)] fixed top-0 right-0 z-40 flex justify-center items-center">
+        <div class="bg-white p-[24px] font-roboto w-1/2">
+            <div class="flex justify-between items-center mb-[24px]">
+                <div>
+                    <p class="font-medium text-[24px]">Add {{ member }}</p>
+                </div>
+                <div (click)="closeModal();" class="cursor-pointer">
+                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.89949 6.31372L0.656854 2.07108C0.26633 1.68056 0.26633 1.04739 0.656854 0.656867C1.04738 0.266342 1.68054 0.266342 2.07107 0.656866L6.31371 4.89951L10.5563 0.656867C10.9469 0.266342 11.58 0.266342 11.9706 0.656867C12.3611 1.04739 12.3611 1.68056 11.9706 2.07108L7.72792 6.31372L11.9706 10.5564C12.3611 10.9469 12.3611 11.5801 11.9706 11.9706C11.58 12.3611 10.9469 12.3611 10.5563 11.9706L6.31371 7.72793L2.07107 11.9706C1.68054 12.3611 1.04738 12.3611 0.656853 11.9706C0.266329 11.58 0.26633 10.9469 0.656854 10.5564L4.89949 6.31372Z" fill="#333333"/>
+                    </svg>                        
+                </div>
+            </div>
+            <div>
+                <form >
+                    <div class="font-normal text-[18px] mb-[24px] w-3/4">
+                        <div class="mb-[18px]">
+                            <label class="leading-[28px]" for="name1">Name</label>
+                        </div>
+                        <div>
+                            <input id="name1" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="text" placeholder="name">
+                        </div>
+                    </div>
+                    <div class="font-normal text-[18px] mb-[40px] w-3/4">
+                        <div class="mb-[18px]">
+                            <label class="leading-[28px]" for="role">Role</label>
+                        </div>
+                        <div>
+                            <input id="role" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="text" placeholder="Their Role">
+                        </div>
+                    </div>
+                    <div class="font-normal text-[18px] mb-[40px]">
+                        <div class="mb-[18px]">
+                            <label class="leading-[28px]" for="profileImage">Image</label>
+                        </div>
+                        <div>
+                            <label for="image">
+                                <div class="cursor-pointer border-solid border-[1px] border-[rgba(0,0,0,0.65)] rounded-[44px] py-[4px] px-[36px] w-fit hover:bg-black hover:text-white">
+                                    <p class="font-normal text-[16px] leading-[28px]">Choose File</p>
+                                </div>
+                            </label>
+                            <input id="image" class="hidden" type="file">
+                        </div>
+                    </div>
+                    <div class="flex justify-end items-center gap-[20px]">
+                        <div>
+                            <button (click)="closeModal();" type="button" class="py-[6px] px-[16px] font-medium text-16px rounded-[5.07px] text-red-600 border-[1px] border-solid border-red-600 hover:bg-red-600 hover:text-white">Cancel</button>
+                        </div>
+                        <div>
+                            <button type="submit" class="py-[6px] px-[16px] bg-black font-medium text-16px rounded-[5.07px] text-white">Add</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}
+<div class="font-roboto p-[40px] px-[55px]">
+    <h2 class="text-[22px] font-bold mb-[40px]" >Add Movie</h2>
+    <form >
+        <div class="flex gap-[50px] mb-[30px]">
+            <div class="w-1/2">
+                <div class="font-normal text-[18px] mb-[40px]">
+                    <div class="mb-[18px]">
+                        <label class="leading-[28px]" for="name">Name</label>
+                    </div>
+                    <div>
+                        <input id="name" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="text" placeholder="Movie name">
+                    </div>
+                </div>
+                <div class="font-normal text-[18px] mb-[40px]">
+                    <div class="mb-[18px]">
+                        <label class="leading-[28px]" for="movieDescription">About this movie</label>
+                    </div>
+                    <div>
+                        <textarea rows="4"  id="movieDescription" class="border-[#9DA8BE] resize-none border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" placeholder="Movie description"></textarea>
+                    </div>
+                </div>
+                <div class="font-normal text-[18px] mb-[40px]">
+                    <div class="mb-[18px]">
+                        <label class="leading-[28px]" for="genere">Category (Genere)</label>
+                    </div>
+                    <div>
+                        <input id="genere" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="text" placeholder="Action, Comedy, Drama ...">
+                    </div>
+                </div>
+                <div class="font-normal text-[18px] mb-[40px]">
+                    <div class="mb-[18px]">
+                        <label class="leading-[28px]" for="type">Movie Type</label>
+                    </div>
+                    <div>
+                        <input id="type" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="text" placeholder="2D">
+                    </div>
+                </div>
+                <div class="font-normal text-[18px] mb-[40px]">
+                    <div>
+                        <p class="font-bold">Cast</p>
+                        <p class="font-semibold text-[10px] leading-[28px] mb-[7px]" >*Add your cast information.</p>
+                    </div>
+                    <div>
+                        <div (click)="lauchAddModal('Cast');" class="cursor-pointer w-[100px] h-[100px] rounded-full border-[1px] border-solid border-[rgba(0,0,0,0.65)] flex justify-center items-center" >
+                            <div class="w-fit h-fit">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="rgba(0,0,0,0.65)">
+                                    <path d="M446.67-446.67H200v-66.66h246.67V-760h66.66v246.67H760v66.66H513.33V-200h-66.66v-246.67Z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="font-normal text-[18px] mb-[40px]">
+                    <div>
+                        <p class="font-bold">Crew</p>
+                        <p class="font-semibold text-[10px] leading-[28px] mb-[7px]" >*Add your Crew information.</p>
+                    </div>
+                    <div>
+                        <div (click)="lauchAddModal('Crew');" class="cursor-pointer w-[100px] h-[100px] rounded-full border-[1px] border-solid border-[rgba(0,0,0,0.65)] flex justify-center items-center" >
+                            <div class="w-fit h-fit">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="rgba(0,0,0,0.65)">
+                                    <path d="M446.67-446.67H200v-66.66h246.67V-760h66.66v246.67H760v66.66H513.33V-200h-66.66v-246.67Z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-1/2">
+                <div class="font-normal text-[18px] mb-[40px]">
+                    <div class="mb-[18px]">
+                        <label class="leading-[28px]" for="Language">Language</label>
+                    </div>
+                    <div>
+                        <input id="Language" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="text" placeholder="Malayalam, English ...">
+                    </div>
+                </div>
+                <div class="font-normal text-[18px] mb-[40px]">
+                    <div class="mb-[18px]">
+                        <label class="leading-[28px]" for="releaseData">Release Date</label>
+                    </div>
+                    <div>
+                        <div class="relative max-w-sm">
+                            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                               <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                  <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                                </svg>
+                            </div>
+                            <input id="datepicker-autohide" datepicker datepicker-autohide type="date" class="w-1/2 bg-gray-50 border border-gray-300 text-sm rounded-lg block ps-10 p-2.5 outline-none" placeholder="Select date">
+                        </div>
+                    </div>
+                </div>
+                <div class="font-normal text-[18px] mb-[40px]">
+                    <div class="mb-[18px]">
+                        <p class="font-bold">Duration Of The Movie</p>
+                    </div>
+                    <div class="flex gap-[40px]">
+                        <div class="font-normal text-[18px] mb-[40px] w-1/2">
+                            <div class="mb-[18px]">
+                                <label class="leading-[28px]" for="hours">Hours (HH)</label>
+                            </div>
+                            <div>
+                                <input id="hours" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="number" placeholder="HH">
+                            </div>
+                        </div>
+                        <div class="font-normal text-[18px] mb-[40px] w-1/2">
+                            <div class="mb-[18px]">
+                                <label class="leading-[28px]" for="minutes">Minutes (MM)</label>
+                            </div>
+                            <div>
+                                <input id="minutes" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="number" placeholder="MM">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="font-normal text-[18px] mb-[40px]">
+                    <div>
+                        <p class="font-bold mb-[18px]">Movie Cover Photo (Portrait Image)</p>
+                    </div>
+                    <div>
+                        <label for="movieCoverPhoto" >
+                            <div class="w-[332px] h-[168px] bg-[rgba(55,65,81,0.71)] border-[1.5px] rounded-[5.07px] border-dashed border-[rgba(0,0,0,0.7)] flex flex-col justify-center items-center gap-[5px] cursor-pointer" >
+                                <div>
+                                    <div>
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <rect width="24" height="24" fill="url(#pattern0_204_1114)"/>
+                                            <defs>
+                                            <pattern id="pattern0_204_1114" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                            <use xlink:href="#image0_204_1114" transform="scale(0.01)"/>
+                                            </pattern>
+                                            <image id="image0_204_1114" width="100" height="100" xlink:href="data:image/png;base64,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"/>
+                                            </defs>
+                                        </svg>                                            
+                                    </div>
+                                </div>
+                                <div class="text-center font-roboto font-normal text-[rgba(255,255,255,0.65)]">
+                                    <p class="text-[12px]"><span class="font-bold">Click to upload</span>  or drag and drop</p>
+                                    <p class="text-[10px]" >SVG, PNG, JPG or AVIF (MAX. 800x400px)</p>
+                                </div>
+                            </div>
+                        </label>
+                        <input id="movieCoverPhoto" type="file" class="hidden" />
+                    </div>
+                </div>
+                <div class="font-normal text-[18px] mb-[40px]">
+                    <div>
+                        <p class="font-bold mb-[18px]">Movie Banner Photo (Landscape Image)</p>
+                    </div>
+                    <div>
+                        <label for="movieBannerPhoto" >
+                            <div class="w-[332px] h-[168px] bg-[rgba(55,65,81,0.71)] border-[1.5px] rounded-[5.07px] border-dashed border-[rgba(0,0,0,0.7)] flex flex-col justify-center items-center gap-[5px] cursor-pointer" >
+                                <div>
+                                    <div>
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <rect width="24" height="24" fill="url(#pattern0_204_1114)"/>
+                                            <defs>
+                                            <pattern id="pattern0_204_1114" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                            <use xlink:href="#image0_204_1114" transform="scale(0.01)"/>
+                                            </pattern>
+                                            <image id="image0_204_1114" width="100" height="100" xlink:href="data:image/png;base64,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"/>
+                                            </defs>
+                                        </svg>                                            
+                                    </div>
+                                </div>
+                                <div class="text-center font-roboto font-normal text-[rgba(255,255,255,0.65)]">
+                                    <p class="text-[12px]"><span class="font-bold">Click to upload</span>  or drag and drop</p>
+                                    <p class="text-[10px]" >SVG, PNG, JPG or AVIF (MAX. 800x400px)</p>
+                                </div>
+                            </div>
+                        </label>
+                        <input id="movieBannerPhoto" type="file" class="hidden" />
+                    </div>
+                </div>
+                <div class="font-normal text-[18px] mb-[40px]">
+                    <div>
+                        <p class="font-bold mb-[18px]">Movie Trailer</p>
+                    </div>
+                    <div>
+                        <label for="movieTrailer" >
+                            <div class="w-[332px] h-[168px] bg-[rgba(55,65,81,0.71)] border-[1.5px] rounded-[5.07px] border-dashed border-[rgba(0,0,0,0.7)] flex flex-col justify-center items-center gap-[5px] cursor-pointer" >
+                                <div>
+                                    <div>
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <rect width="24" height="24" fill="url(#pattern0_204_1114)"/>
+                                            <defs>
+                                            <pattern id="pattern0_204_1114" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                            <use xlink:href="#image0_204_1114" transform="scale(0.01)"/>
+                                            </pattern>
+                                            <image id="image0_204_1114" width="100" height="100" xlink:href="data:image/png;base64,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"/>
+                                            </defs>
+                                        </svg>                                            
+                                    </div>
+                                </div>
+                                <div class="text-center font-roboto font-normal text-[rgba(255,255,255,0.65)]">
+                                    <p class="text-[12px]"><span class="font-bold">Click to upload</span>  or drag and drop</p>
+                                    <p class="text-[10px]" >SVG, PNG, JPG or AVIF (MAX. 800x400px)</p>
+                                </div>
+                            </div>
+                        </label>
+                        <input id="movieTrailer" type="file" class="hidden" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="w-3/4 text-center text-white font-semibold text-[16px] bg-[#000] p-[10px]">Add Movie</button>
+        </div>
+    </form>
+</div>
