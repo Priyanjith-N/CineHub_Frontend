@@ -1,0 +1,143 @@
+@if(movieId) {
+    <div class="w-[80.65%] h-screen bg-[rgba(21,19,23,0.49)] fixed top-0 right-0 z-40 flex justify-center items-center">
+        <div class="bg-white p-[24px] font-roboto w-1/2">
+            <div class="flex justify-between items-center mb-[24px]">
+                <div>
+                    <p class="font-medium text-[24px]">Edit Profit Sharing of {{ movieName }}</p>
+                </div>
+                <div (click)="closeModal()" class="cursor-pointer">
+                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.89949 6.31372L0.656854 2.07108C0.26633 1.68056 0.26633 1.04739 0.656854 0.656867C1.04738 0.266342 1.68054 0.266342 2.07107 0.656866L6.31371 4.89951L10.5563 0.656867C10.9469 0.266342 11.58 0.266342 11.9706 0.656867C12.3611 1.04739 12.3611 1.68056 11.9706 2.07108L7.72792 6.31372L11.9706 10.5564C12.3611 10.9469 12.3611 11.5801 11.9706 11.9706C11.58 12.3611 10.9469 12.3611 10.5563 11.9706L6.31371 7.72793L2.07107 11.9706C1.68054 12.3611 1.04738 12.3611 0.656853 11.9706C0.266329 11.58 0.26633 10.9469 0.656854 10.5564L4.89949 6.31372Z" fill="#333333"/>
+                    </svg>                        
+                </div>
+            </div>
+            <div>
+                <form >
+                    <div class="font-normal text-[18px] mb-[24px] w-3/4">
+                        <div class="mb-[18px]">
+                            <label class="leading-[28px]" for="name1">Profit Sharing Per Ticket (%)</label>
+                        </div>
+                        <div>
+                            <input id="name1" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-3/4 outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="number" placeholder="12">
+                        </div>
+                    </div>
+                    <div class="font-normal text-[18px] mb-[40px] w-3/4">
+                        <div class="font-normal text-[18px] mb-[40px]">
+                            <div class="mb-[18px]">
+                                <label class="leading-[28px]" for="releaseData">Release Date</label>
+                            </div>
+                            <div>
+                                <div class="relative max-w-sm">
+                                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                       <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                          <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                                        </svg>
+                                    </div>
+                                    <input id="datepicker-autohide" datepicker datepicker-autohide type="date" class="w-1/2 bg-gray-50 border border-gray-300 text-sm rounded-lg block ps-10 p-2.5 outline-none" placeholder="Select date">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-end items-center gap-[20px]">
+                        <div>
+                            <button (click)="closeModal()" type="button" class="py-[6px] px-[16px] font-medium text-16px rounded-[5.07px] text-red-600 border-[1px] border-solid border-red-600 hover:bg-red-600 hover:text-white">Cancel</button>
+                        </div>
+                        <div>
+                            <button type="submit" class="py-[6px] px-[16px] bg-black font-medium text-16px rounded-[5.07px] text-white">Add</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="p-[40px]">
+    <div class="mb-[30px] flex justify-end">
+        <div>
+            <label for="table-search" class="sr-only">Search</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                    </svg>
+                </div>
+                <input #searchBox (keyup)="search($event);" type="text" id="table-search-users" class="outline-none block py-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50" placeholder="Search name">
+            </div>
+        </div>
+    </div>
+    <table class="shadow-lg font-roboto font-normal w-full border-[rgba(238,238,238,0.5)] border-[2px] border-solid rounded-[8px]">
+        <thead>
+            <tr class="">
+                <th class="font-semibold text-[14px] font-roboto text-left px-[24px] py-[11px]">
+                    Movie Details
+                </th>
+                <th class="font-semibold text-[14px] font-roboto text-left px-[24px] py-[11px]">
+                    Type
+                </th>
+                <th class="font-semibold text-[14px] font-roboto text-left px-[24px] py-[11px]">
+                    Duration
+                </th>
+                <th class="font-semibold text-[14px] font-roboto text-left px-[24px] py-[11px]">
+                    Language
+                </th>
+                <th class="font-semibold text-[14px] font-roboto text-left px-[24px] py-[11px]">
+                    Release Date
+                </th>
+                <th class="font-semibold text-[14px] font-roboto text-left px-[24px] py-[11px]">
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if(!true) {
+                <tr class="bg-[rgba(238,238,238,0.25)]" >
+                    <td colspan="6" class="font-normal text-[14px] font-roboto pl-[24px] py-[11px] text-center">
+                        No Data available.
+                    </td>
+                </tr>
+            }
+
+            @for (data of [1,2]; track $index) {
+                <tr [ngClass]="{'evenColor': $index % 2 === 0, 'oddColor': $index % 2 !== 0}" >
+                    <td class="font-normal text-[14px] font-roboto text-left px-[24px] py-[11px]">
+                        <div class="flex gap-[12px] items-center">
+                            <div>
+                                <img class="w-[60px] h-auto" src="assets/images/turbo.jpeg" alt="movieCoverImage">
+                            </div>
+                            <div>
+                                <h2 class="text-[14px] font-bold">Turbo</h2>
+                                <p class="text-[11px] text-[#6B7280]">Action/Adventure</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="font-normal text-[14px] font-roboto text-left px-[24px] py-[11px]">
+                        2D
+                    </td>
+                    <td class="font-normal text-[14px] font-roboto text-left px-[24px] py-[11px]">
+                        2hrs 42min
+                    </td>
+                    <td class="font-normal text-[14px] font-roboto text-left px-[24px] py-[11px]">
+                        Malayalam
+                    </td>
+                    <td class="font-normal text-[14px] font-roboto text-left px-[24px] py-[11px]">
+                        Sun Aug 04 2024
+                    </td>
+                    <td class="font-normal text-[14px] font-roboto px-[24px] py-[11px] text-center">
+                        <div class="flex items-center gap-[12px]">
+                            <div>
+                                <button (click)="openModal('68776', 'Turbo')" class="py-1 px-3 rounded-[5.07px] w-full text-black border-solid border-[1px] border-black hover:text-white hover:bg-black transition-all duration-[300ms]">
+                                    <div class="flex justify-center">
+                                        <div>
+                                            <p class="font-bold leading-[24px]" >Edit Profit Sharing</p>
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

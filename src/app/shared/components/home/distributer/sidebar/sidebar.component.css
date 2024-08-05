@@ -1,0 +1,22 @@
+.activeOption {
+    color: rgba(255,255,255, 1);
+    border-radius: 8px;
+}
+
+svg {
+    fill: white;
+    fill-opacity: 0.8;
+}
+
+.activeOption svg {
+    fill-opacity: 1;
+}
+
+li, .highlightDiv {
+    transition: top ease-in-out 300ms;
+}
+
+.highlightDiv {
+    top: 112.1875px;
+    height: 60px;
+}

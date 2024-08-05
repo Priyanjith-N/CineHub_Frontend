@@ -36,6 +36,8 @@ import { canAcessAdminAuthRoutesGuard } from './core/guards/can-acess-admin-auth
 import { adminAuthGuard } from './core/guards/admin-auth.guard';
 import { AdminMovieManagementComponent } from './shared/components/home/admin/admin-movie-management/admin-movie-management.component';
 import { AddMovieFormComponent } from './shared/components/home/admin/add-movie-form/add-movie-form.component';
+import { DistributeMoviesComponent } from './shared/components/home/distributer/distribute-movies/distribute-movies.component';
+import { MyMoviesComponent } from './shared/components/home/distributer/my-movies/my-movies.component';
 
 export const routes: Routes = [
     {
@@ -182,7 +184,19 @@ export const routes: Routes = [
     {
         path: 'distributer',
         canActivate: [distributerAuthGuard],
-        component: DistributerHomePageComponent
+        component: DistributerHomePageComponent,
+        children: [
+            {
+                path: 'distributemovies',
+                canActivate: [distributerAuthGuard],
+                component: DistributeMoviesComponent
+            },
+            {
+                path: 'mymovies',
+                canActivate: [distributerAuthGuard],
+                component: MyMoviesComponent
+            }
+        ]
     },
     {
         path: 'theaterOwner',
