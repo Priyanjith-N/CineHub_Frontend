@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { ILogoutSuccessfullResponse } from '../../../../models/ILogoutResponse.interface';
@@ -11,7 +11,7 @@ import { AdminAuthService } from '../../../../../core/services/admin-auth.servic
   templateUrl: './admin-header.component.html',
   styleUrl: './admin-header.component.css'
 })
-export class AdminHeaderComponent {
+export class AdminHeaderComponent implements OnInit {
   heading: string = '';
   constructor(private router: Router, private adminAuthService: AdminAuthService) {
     this.changeHeading();

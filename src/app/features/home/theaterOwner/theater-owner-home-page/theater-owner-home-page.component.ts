@@ -1,12 +1,20 @@
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { TheaterOwnerAuthService } from '../../../../core/services/theater-owner-auth.service';
 import { ILogoutSuccessfullResponse } from '../../../../shared/models/ILogoutResponse.interface';
+import { CommonModule } from '@angular/common';
+import { SidebarComponent } from '../../../../shared/components/home/theaterOwner/sidebar/sidebar.component';
+import { HeaderComponent } from '../../../../shared/components/home/theaterOwner/header/header.component';
 
 @Component({
   selector: 'app-theater-owner-home-page',
   standalone: true,
-  imports: [],
+  imports: [
+    CommonModule,
+    SidebarComponent,
+    HeaderComponent,
+    RouterOutlet
+  ],
   templateUrl: './theater-owner-home-page.component.html',
   styleUrl: './theater-owner-home-page.component.css'
 })

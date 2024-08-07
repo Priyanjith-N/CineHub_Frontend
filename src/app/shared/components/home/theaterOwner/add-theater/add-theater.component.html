@@ -1,0 +1,105 @@
+<div class="font-roboto p-[40px] px-[55px]">
+    <h2 class="text-[22px] font-bold mb-[40px]" >Add Theater</h2>
+    <form >
+        <div class="flex gap-[50px] mb-[60px]">
+            <div class="min-w-1/2">
+                <div class="font-normal text-[18px] mb-[40px]">
+                    <div class="mb-[18px]">
+                        <label class="leading-[28px]" for="name">Name</label>
+                    </div>
+                    <div>
+                        <input id="name" class="max-w-[438px] border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="text" placeholder="Movie name">
+                    </div>
+                </div>
+                <div class="font-normal text-[18px] mb-[40px]">
+                    <div class="mb-[18px]">
+                        <label class="leading-[28px]" for="movieDescription">Location Of Theater</label>
+                    </div>
+                    <div>
+                        <div class="cursor-pointer w-fit flex gap-[12px] py-[8px] px-[23px] bg-[rgba(59,63,71,0.92)] items-center rounded-[17px]">
+                            <div>
+                                <p class="font-medium text-white">Choose location</p>
+                            </div>
+                            <div>
+                                <svg width="32" height="23" viewBox="0 0 32 23" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <rect width="32" height="23" transform="matrix(1 0 0 -1 0 23)" fill="url(#pattern0_305_1598)"/>
+                                    <defs>
+                                    <pattern id="pattern0_305_1598" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                    <use xlink:href="#image0_305_1598" transform="matrix(0.0071875 0 0 0.01 0.140625 0)"/>
+                                    </pattern>
+                                    <image id="image0_305_1598" width="100" height="100" xlink:href="data:image/png;base64,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"/>
+                                    </defs>
+                                </svg>                                    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="font-normal text-[18px] mb-[40px]">
+                    <div class="mb-[18px]">
+                        <label class="leading-[28px]" for="theaterImage">Images Of Theater</label>
+                    </div>
+                    <div>
+                        <label for="image">
+                            <div class="cursor-pointer border-solid border-[1px] border-[rgba(0,0,0,0.65)] rounded-[44px] py-[4px] px-[36px] w-fit hover:bg-black hover:text-white">
+                                <p class="font-normal text-[16px] leading-[28px]">Choose File</p>
+                            </div>
+                        </label>
+                        <input id="theaterImage" class="hidden" type="file">
+                    </div>
+                </div>
+                @if(false) {
+                    <div class="font-normal text-[18px] mb-[40px]">
+                        <div class="flex gap-[24px] items-center">
+                            <div class="relative">
+                                <img class="w-[148px] h-auto" src="../../../../../../assets/images/logo.png" alt="">
+                                <div class="absolute right-[8px] top-[8px]">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <rect width="24" height="24" fill="url(#pattern0_305_1580)"/>
+                                        <defs>
+                                        <pattern id="pattern0_305_1580" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                        <use xlink:href="#image0_305_1580" transform="scale(0.01)"/>
+                                        </pattern>
+                                        <image id="image0_305_1580" width="100" height="100" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAAAsTAAALEwEAmpwYAAAI7klEQVR4nO1dWWwcRRBtkEDiCPcVMIStWsfBKPZ2jwET7kvABwmBPwi3kCAgAeILEpBAhhDxxQ/iPgNIfHEIIpI4IECERMkPipC4fiAmbPfYcYIJVxyjmt0g2/Fud8/0XLvzpJFQWE8fb6q6qrq6mrECBQoUKFCgQIECBQoUKNAQw314ql8pXa5EeakU8KgUuFIJfF5yfIue4L8FrpQePEK/od/S3zR+YwFjbO/pOazK8apggjluVALGlMCJcA+MSQ5fS4FPVQVeSe8uqDCAf3b5CMlLt0sO6yWHf8IT0PyRAv6WHAerAm5VC7pmFeRMg6yULwpUDsfdcZHQ8OH4h+S4SorSBW1PTNWD86XAdYmTIBqS86Xi5WsmGDugrciRvPNCJXBz6gSIRioNN9HHwlodo/0dx9Qtob1pT7rSk7JXCnhjew+cwFoRvge3SIEjaU+0siWG47DieBNrFZCJKQW87naSgCyw70jtSYFrpYD3ag+uravC751baRxfHfJmH8ryjOFePFMK+DbiF7qH/BDyIVQFF8me0twJzztI1zb9RvWd3hX8DfkyAjfRu6KpMdjq884zWB6hPLxYchyNQMIaxctLRjw40lWf6F1+BW+uSRWOhyMFd5BRwvIEX8BixfHPMINVAgb83s5TYu/j/HKH4vBEqI+GxubhtSwPqHK4zVY1BF+dwIddSoMpdvTOOUpyXGZLDI2RPH2WZSiOCyWHf+2+Nnj3t3NKJ6bd9+pZc04iM9fGJA9I4aXrWVbXDBs1JQX8ojy8hGUMisNlUsA2G/WVuTUlsKZsRJ7jR0Pe3ONYRvFrpXy8ErDaRuVmxvqq+xnmpi3Hx/IQK5pg7ABa9C0kfmsm/BTJ8TXDr2iv5OUHWM6gBN5jYSK/nHo4xJCMceXBDSynUKJ0ozEpvLwklU7SGiA5+IbifB/LOZQHdxtaXsO0BmVWVSmOj7MWgRIwYKa64KU0NpZM7PWP87CAm4LGIgV8YLJeViu4gCUFk80l8jNsTVv/7PIRFHaJr+fT2hOwmNq0+RtSRyZ+CiVVsCQgK3C1yRdi6/TVEhxgQ21jCO9kMYPaqFl+sMGWlJrzqNcQvle6Ir4R/N8Z/MJAOt4IQ4aaTKgoL41rDLJSvmOa1bR5dP5pR1u9o5YHpltLPotrDLVOVMoXGUjHDpvY1HQy1CRS4pCUfZIxg4qxkhTpnTZbctipm49Y9+aVwLe1YirwoahkqJhIaURGaFI4LDfQFm+yOEAdpRym5gsZjlI42wUZyrH6mkFNNXqM1RdtF9T2cJqqrbFYkvEoo9BAZw6Yvs/ncJ1pqFtGlBSdZExvi/pm+m6TeBdFNML2vfGgOKzXSMce250+24mSIUiJuw3aedRJHm0ZM5egKCblwzYnBD4J8+4gl9cwTiQt1ZeFmoqkGnXZlzR3ThO8KQs9zqBaHKTIhMgwDbI69Unq5zCaqquo++EuVYtMQBVOBhkBujwCyXFFlDamDjA4n9G0sY1O2hHRJzJpMkzDSWRRuts5E/C7ZmBPOWmMRVNfSaqp/fsNT2sI2eUk0EpHwrQD5LiQOYQM8ZWnJRn7QHlaunad5JvVzvRpBtl3ehdzDGk/wamRQaAkB337cGnkhkisNaL4j0mubdykqBTJIEx0dx+szUnjcFfkhui0q2ag3zsZUcykyATC+orDj5qPd3kCi5UbC8vVQq8akBFnON/Y0hK4MnIjUuBzGkIGnYwmJlJkQmTU+gifaubqWQeN4KrmA4b3nIwmBlJkgmQE/RPwfuyh+EwRUjH3M1qXkKyorIodGS2ssjKwqFfCkdGii7rO7IUfnIymNczen2I3ewvHMGOOIeUgab/AInTCjEInLg4oBYcjdQ1VcBFr8+CiTwdddW3zrpPzF36vhA+hx7kdnJnwe72xrzWD28TafYOKw5bmbcFXzBWCKgpN2cc9pvlYLbmF299xjDbzhMOTzBWoLJ5eP4Yv0BLHTp9MUH3R2XxdG7SvxFymASkBf2mkZE2Yd8e57SoTIkWXs0Zz93N/xyFh3t2kURzUDGicLLJ2S5Qb7sNT9eoq3McaWSwprbLdUkklxxV6dYU3M9eodncfrivVSun5mU225sbqy3myNc1d1P6HCsXXxXNZ2xxHENrtbevDS5YDKl1gQMgoHWZp9QM7inedTM6ebj6qHpznegzTOoKfG5CyKtNH2vh+6sv6SJsS+I5+HmA9ixsmPkkwoRwua9VDn75XusLEQLCdg9CgUImB7txmW9HAz8GxaCobKwUMGYzfXahEB9KLZmYkrJ5g7EDWIphg7EA6B2OgIcaHOZ6baOeUwFcMxdbYN8k6THyO+phfSLxzO8+ad6zioEw6KAXcz3IOpUmpnWTQDKdWnI0CimaEkEVTupHlFIqXlxgnWaRdhooqPhuSQuU2HmQ5g8/xXvNaWfBi2v3ddyB0q1GHawv9QB4qBE0EC7jhmhGQgd84j+hG2eDXx3SmWl+pFPmyMW0NrKlJ0j+ivDnzWObuBLErE7stMcfJ0ukz8TMmScbuzN41QrfT2BdSxg+zcJOapGIyIQop24TqUwGV37YuNU4BSQ7Lo+7Lhz7STFfwGQQK9yMjjpIZcSA4ABmmGD/HUXIkbXcewyDY6eO4wqTE0kxqynUuWiJrit1CP2WRHKdyFfQF2kZhm4HeVZfgwQjXVYxkds0ws75sTGKcUTUEN+lweDrIDvTmzKM8Wl3b9Btqn/4mSGLjsCVKBn1dMr7JnDUVLmPFMO4lTEmCf+uZ5nTl0bpJVx5REZjN9P+sjQvtAy9lxs9wFn6gC7acThLG/gTFotMOh8QF0uGK4zORVYdI7tq8LDuwzkBFhnX5wipVMuArX5T7WbuBrBVyDNMmQE27epW1O2qly+HNaFd0h31gjFRT7NkheYRa0DWrfiPoWl0ucUQS/qL0TsoojC2JrdUw5M0+NAj01bzpDbahjSlrAoddtC7QkQDKQm8p8zVN+L2dp1CJI7rLg2JfdG6FztEH96EHd6Ljc8G/cVxGByzpt0nciVigQIECBQoUKFCgQIECLMf4D5UBKkDydvK3AAAAAElFTkSuQmCC"/>
+                                        </defs>
+                                    </svg>                                        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div class="font-normal text-[18px]">
+                    <div>
+                        <p class="font-bold mb-[18px]">Licence Of Theater</p>
+                    </div>
+                    <div>
+                        <label for="licenceTheater" >
+                            <div class="w-[332px] h-[168px] bg-[rgba(55,65,81,0.71)] border-[1.5px] rounded-[5.07px] border-dashed border-[rgba(0,0,0,0.7)] flex flex-col justify-center items-center gap-[5px] cursor-pointer" >
+                                <div>
+                                    <div>
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <rect width="24" height="24" fill="url(#pattern0_204_1114)"/>
+                                            <defs>
+                                            <pattern id="pattern0_204_1114" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                            <use xlink:href="#image0_204_1114" transform="scale(0.01)"/>
+                                            </pattern>
+                                            <image id="image0_204_1114" width="100" height="100" xlink:href="data:image/png;base64,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"/>
+                                            </defs>
+                                        </svg>                                            
+                                    </div>
+                                </div>
+                                <div class="text-center font-roboto font-normal text-[rgba(255,255,255,0.65)]">
+                                    <p class="text-[12px]"><span class="font-bold">Click to upload</span>  or drag and drop</p>
+                                    <p class="text-[10px]" >SVG, PNG, JPG or AVIF (MAX. 800x400px)</p>
+                                </div>
+                            </div>
+                        </label>
+                        <input id="licenceTheater" type="file" class="hidden" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="w-3/4 text-center text-white font-semibold text-[16px] bg-[#000] p-[10px]">Add Theater</button>
+        </div>
+    </form>
+</div>

@@ -38,6 +38,8 @@ import { AdminMovieManagementComponent } from './shared/components/home/admin/ad
 import { AddMovieFormComponent } from './shared/components/home/admin/add-movie-form/add-movie-form.component';
 import { DistributeMoviesComponent } from './shared/components/home/distributer/distribute-movies/distribute-movies.component';
 import { MyMoviesComponent } from './shared/components/home/distributer/my-movies/my-movies.component';
+import { ManageTheaterComponent } from './shared/components/home/theaterOwner/manage-theater/manage-theater.component';
+import { AddTheaterComponent } from './shared/components/home/theaterOwner/add-theater/add-theater.component';
 
 export const routes: Routes = [
     {
@@ -201,6 +203,18 @@ export const routes: Routes = [
     {
         path: 'theaterOwner',
         canActivate: [theaterOwnerAuthGuard],
-        component: TheaterOwnerHomePageComponent
+        component: TheaterOwnerHomePageComponent,
+        children: [
+            {
+                path: 'managetheater',
+                canActivate: [theaterOwnerAuthGuard],
+                component: ManageTheaterComponent
+            },
+            {
+                path: 'managetheater/addtheater',
+                canActivate: [theaterOwnerAuthGuard],
+                component: AddTheaterComponent
+            }
+        ]
     }
 ];
