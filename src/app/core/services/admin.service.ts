@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { IBlockOrUnblockAPIErrorResponse, IBlockOrUnblockAPISucessfullResponse, IDistributerData, INotVerifiedDistributers, INotVerifiedTheaterOwners, IRetriveDataSucessfullAPIResponse, ISingleDataRetrivalAPIResponse, ITheaterOwnerData, IUserData } from '../../shared/models/adminAPIResponse.interface';
 import { environment } from '../../../environments/environment.development';
+import IMovieData from '../../shared/models/IMovieCredentials.interface';
+import { IAddMovieErrorResponse } from '../../shared/models/IMovieAPIResponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -184,5 +186,23 @@ export class AdminService {
     );
 
     return distributerVerifyDocumentAPIResponse$;
+  }
+
+  addMovie(movieData: IMovieData): Observable<{ message: string }> {
+    const url: string = `${this.api}/addmovie`;
+
+    const addMovieAPIResponse$: Observable<{ message: string }> = this.httpClient.post<{ message: string }>(url, movieData)
+    .pipe(
+      map(res => res as { message: string }),
+      catchError((err: any) => {
+        if(err.error) {
+          return throwError(err.error as IAddMovieErrorResponse)
+        }
+
+        return throwError(err);
+      })
+    );
+
+    return addMovieAPIResponse$;
   }
 }

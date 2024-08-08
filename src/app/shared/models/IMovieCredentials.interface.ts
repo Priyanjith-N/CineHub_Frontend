@@ -5,7 +5,7 @@ export default interface IMovieData {
     duration: IDuration;
     coverPhoto: string;
     bannerPhoto: string;
-    trailer: string;
+    trailer?: string;
     category: string[];
     type: "2D" | "3D" | string;
     cast: IMovieWorkerDetails<string>[];

@@ -19,6 +19,9 @@
                         </div>
                         <div>
                             <input formControlName="name" id="name1" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="text" placeholder="name">
+                            @if(addMemberForm.get('name')!.hasError('required')  && addMemberForm.get('name')!.touched){
+                                <p class="text-[13px] text-[#FF6B6B] absolute mt-[9px]">This Field is required.</p>
+                            }
                         </div>
                     </div>
                     <div class="font-normal text-[18px] mb-[40px] w-3/4">
@@ -27,6 +30,9 @@
                         </div>
                         <div>
                             <input formControlName="role" id="role" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="text" placeholder="Their Role">
+                            @if(addMemberForm.get('role')!.hasError('required')  && addMemberForm.get('role')!.touched){
+                                <p class="text-[13px] text-[#FF6B6B] absolute mt-[9px]">This Field is required.</p>
+                            }
                         </div>
                     </div>
                     <div class="font-normal text-[18px] mb-[40px]">
@@ -41,6 +47,9 @@
                                     </div>
                                 </label>
                                 <input (change)="uploadMemberImage($event)" id="image" class="hidden" type="file">
+                                @if (addMemberForm.get('image')!.errors  && addMemberForm.get('image')!.touched) {
+                                    <p class="text-[13px] text-[#FF6B6B] absolute mt-[12px]">{{ addMemberForm.get('image')?.errors?.['message'] }}</p>
+                                }
                             </div>
                         }@else {
                             <div class="relative w-fit">
@@ -73,32 +82,46 @@
                     <div class="mb-[18px]">
                         <label class="leading-[28px]" for="name">Name</label>
                     </div>
-                    <div>
+                    <div class="relative">
                         <input formControlName="name" id="name" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="text" placeholder="Movie name">
+                        @if(addForm.get('name')!.hasError('required')  && addForm.get('name')!.touched){
+                            <p class="text-[13px] text-[#FF6B6B] absolute mt-[9px]">This Field is required.</p>
+                        }@else if (addForm.get('name')!.errors  && addForm.get('name')!.touched) {
+                            <p class="text-[13px] text-[#FF6B6B] absolute mt-[12px]">{{ addForm.get('name')?.errors?.['message'] }}</p>
+                        }
                     </div>
                 </div>
                 <div class="font-normal text-[18px] mb-[40px]">
                     <div class="mb-[18px]">
                         <label class="leading-[28px]" for="movieDescription">About this movie</label>
                     </div>
-                    <div>
+                    <div class="relative">
                         <textarea formControlName="about" rows="4"  id="movieDescription" class="border-[#9DA8BE] resize-none border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" placeholder="Movie description"></textarea>
+                        @if(addForm.get('about')!.hasError('required')  && addForm.get('about')!.touched){
+                            <p class="text-[13px] text-[#FF6B6B] absolute mt-[9px]">This Field is required.</p>
+                        }
                     </div>
                 </div>
                 <div class="font-normal text-[18px] mb-[40px]">
                     <div class="mb-[18px]">
                         <label class="leading-[28px]" for="genere">Category (Genere)</label>
                     </div>
-                    <div>
+                    <div class="relative">
                         <input formControlName="category" id="genere" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="text" placeholder="Action, Comedy, Drama ...">
+                        @if(addForm.get('category')!.hasError('required')  && addForm.get('category')!.touched){
+                            <p class="text-[13px] text-[#FF6B6B] absolute mt-[9px]">This Field is required.</p>
+                        }
                     </div>
                 </div>
                 <div class="font-normal text-[18px] mb-[40px]">
                     <div class="mb-[18px]">
                         <label class="leading-[28px]" for="type">Movie Type</label>
                     </div>
-                    <div>
+                    <div class="relative">
                         <input formControlName="type" id="type" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="text" placeholder="2D">
+                        @if(addForm.get('type')!.hasError('required')  && addForm.get('type')!.touched){
+                            <p class="text-[13px] text-[#FF6B6B] absolute mt-[9px]">This Field is required.</p>
+                        }
                     </div>
                 </div>
                 <div class="font-normal text-[18px] mb-[40px]">
@@ -106,11 +129,11 @@
                         <p class="font-bold">Cast</p>
                         <p class="font-semibold text-[10px] leading-[28px] mb-[7px]" >*Add your cast information.</p>
                     </div>
-                    <div class="flex gap-[24px] items-center">
+                    <div class="flex gap-[24px] items-center relative">
                         @for (each of previewCast; track $index) {
                             <div class="font-roboto font-normal">
                                 <div class="relative w-fit">
-                                    <button (click)="deleteImage('Cast', $index);" class="absolute right-0 top-0">
+                                    <button (click)="deleteMovieWorkerImage('Cast', $index);" class="absolute right-0 top-0">
                                         <i class="fa-regular fa-circle-xmark" style="color: #000000;"></i>
                                     </button>
                                     <img class="w-[120px] h-[120px] rounded-full object-center object-cover" [src]="each.image" alt="">
@@ -126,6 +149,9 @@
                                 </svg>
                             </div>
                         </div>
+                        @if (addForm.get('cast')!.errors  && addForm.get('cast')!.touched) {
+                            <p class="text-[13px] text-[#FF6B6B] absolute left-0 bottom-[-24px]">{{ addForm.get('cast')?.errors?.['message'] }}</p>
+                        }
                     </div>
                 </div>
                 <div class="font-normal text-[18px] mb-[40px]">
@@ -133,11 +159,11 @@
                         <p class="font-bold">Crew</p>
                         <p class="font-semibold text-[10px] leading-[28px] mb-[7px]" >*Add your Crew information.</p>
                     </div>
-                    <div class="flex gap-[24px] items-center">
+                    <div class="flex gap-[24px] items-center relative">
                         @for (each of previewCrew; track $index) {
                             <div class="font-roboto font-normal">
                                 <div class="relative w-fit">
-                                    <button (click)="deleteImage('Crew', $index);" class="absolute right-0 top-0">
+                                    <button (click)="deleteMovieWorkerImage('Crew', $index);" class="absolute right-0 top-0">
                                         <i class="fa-regular fa-circle-xmark" style="color: #000000;"></i>
                                     </button>
                                     <img class="w-[120px] h-[120px] rounded-full object-center object-cover" [src]="each.image" alt="">
@@ -153,6 +179,9 @@
                                 </svg>
                             </div>
                         </div>
+                        @if (addForm.get('crew')!.errors  && addForm.get('crew')!.touched) {
+                            <p class="text-[13px] text-[#FF6B6B] absolute left-0 bottom-[-24px]">{{ addForm.get('crew')?.errors?.['message'] }}</p>
+                        }
                     </div>
                 </div>
             </div>
@@ -161,8 +190,11 @@
                     <div class="mb-[18px]">
                         <label class="leading-[28px]" for="Language">Language</label>
                     </div>
-                    <div>
+                    <div class="relative">
                         <input formControlName="language" id="Language" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="text" placeholder="Malayalam, English ...">
+                        @if(addForm.get('language')!.hasError('required')  && addForm.get('language')!.touched){
+                            <p class="text-[13px] text-[#FF6B6B] absolute mt-[9px]">This Field is required.</p>
+                        }
                     </div>
                 </div>
                 <div class="font-normal text-[18px] mb-[40px]">
@@ -176,6 +208,9 @@
                             </div>
                             <div>
                                 <input formControlName="hours" id="hours" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="number" placeholder="HH">
+                                @if(addForm.get('hours')!.hasError('required')  && addForm.get('hours')!.touched){
+                                    <p class="text-[13px] text-[#FF6B6B] absolute mt-[9px]">This Field is required.</p>
+                                }
                             </div>
                         </div>
                         <div class="font-normal text-[18px] mb-[40px] w-1/2">
@@ -184,6 +219,9 @@
                             </div>
                             <div>
                                 <input formControlName="minutes" id="minutes" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="number" placeholder="MM">
+                                @if(addForm.get('minutes')!.hasError('required')  && addForm.get('minutes')!.touched){
+                                    <p class="text-[13px] text-[#FF6B6B] absolute mt-[9px]">This Field is required.</p>
+                                }
                             </div>
                         </div>
                     </div>
@@ -192,58 +230,86 @@
                     <div>
                         <p class="font-bold mb-[18px]">Movie Cover Photo (Portrait Image)</p>
                     </div>
-                    <div>
-                        <label for="movieCoverPhoto" >
-                            <div class="w-[332px] h-[168px] bg-[rgba(55,65,81,0.71)] border-[1.5px] rounded-[5.07px] border-dashed border-[rgba(0,0,0,0.7)] flex flex-col justify-center items-center gap-[5px] cursor-pointer" >
-                                <div>
+                    <div class="relative">
+                        @if(!coverPhotoPreview) {
+                            <label for="movieCoverPhoto" >
+                                <div class="w-[332px] h-[168px] bg-[rgba(55,65,81,0.71)] border-[1.5px] rounded-[5.07px] border-dashed border-[rgba(0,0,0,0.7)] flex flex-col justify-center items-center gap-[5px] cursor-pointer" >
                                     <div>
-                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                            <rect width="24" height="24" fill="url(#pattern0_204_1114)"/>
-                                            <defs>
-                                            <pattern id="pattern0_204_1114" patternContentUnits="objectBoundingBox" width="1" height="1">
-                                            <use xlink:href="#image0_204_1114" transform="scale(0.01)"/>
-                                            </pattern>
-                                            <image id="image0_204_1114" width="100" height="100" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAAAsTAAALEwEAmpwYAAAGPklEQVR4nO2da4xdUxTHdzvaKlWhaFW0QgWdSkMbrxH1Kh80aZB6tA2RJtVKWqSkoT7cpLQN4QOdDzT4IIrQqEcjFPUmRYpoCUZRMxqPKqNUq36yM+vKGDN373PvPufsc+/6JefbOfuuvf/3nr3W2mvva4yiKIqiKIqiKIqiKIqiKKkBHAScCVwCzAYWynU9cBVwDnAU0F9lSEeAYTLwTwCb8Wc7sBa4GThexalNhP7ANOA5YBdh+BS4wf7CVBx/IZqAGcAm0mMHcCcwQoWpLMZ44N0UhehNmBIwUIX5rxCDgTuA3eTDB8BYFaVLjMMy/lX0xe/WQ2toUYBTgA7i4vaGdJeBs+UdXgt/Az8BbXK1B/LIHmwoUYBJwG9VDNS3wD3ATOAYoF8vbe8FHCku893AVzWI8r/26w5gItCZYGD2AI9KZJ74W2sHFTgNWFnFr2exqWeAQ4CvEwzIamBcwM8/WqL9JFxm6hF5lazzHIQfgUtTtGUqsNXTll+AMabgbux0YAnwJPCeTLg2r+TD+8DIjOx829OmNws1yQPHAcsCpDueB/bLOCBd42nbHBMzMllOlW9PCF4BBuXQj4GSEXZh3ev9TYwA50q6IRSfAAfm2J+hwMeF87rES3qYsOyMIY8EjPUIVO0EP9TEAHCGRMKhuclEAl1rJS7mx2Do/JQysR9ad9jE5ZpvdNi8MW8j7Vp1Wkw2kUFXysXF+LyMW1rDYH8HrJJ4ZI6sAtr45GoR+RoT79Jxm6NvrwK3AguAC23gmHqcAlxbhQjtIkCwdEce2Hmtir5/DzxiMwzA3mm4tTap50uHVIVkHkekgeS8amGbrIAOD2HMiAR5Hrse0RqNKxgQ4DNqZ4e82gbXYojNP/lg1zMuMhEAHGGvwG0+RDi+AE6vxogpCbKxJ5t4xNgsVzBRgOsIiw0bFiSth/rco+HOCMUoE0wU4HzSodXLIxOX1GfOiOk1tbkXG4OIAowiPdzLw8BHHg21mrjFCCaKZLO7LzX/IUlQmxl+Ftgg3qX9klbD0koffpJHAx0xeFO4xQgpyhRZjz/UsdA1F3ihCnGm9dXoco+HZ5viiFEm6ETvYd8E4EX8sauoo3trqMMjAh9UMDFyEaXbfGwrIX1Y3fPhYz0eWmKKKUaeokyUOjIfzuv+oE38uRhXYDHyFGWsLGq5eKP7Q9YvdmVt+xVcjDxFucAzL9hSfsA1Ca3KsgMpipGnKK4vvWVF+ea22OYP0hMjL+9ruEf57M/AAHvzD44b52ZleEZi5CWKXSdy0WKk6qMSM+tQjMxFke16LhYZj4rw6XUqRh6iuPr3mJGKvFwj9BzFyFQU4D4qs8F4bGgpZWDoaEk7TPC8fCpDpiVsc3QG/bRFEZXYam96zXHTShMZQLOHIM0mMoArHTbvsDetcNzUZiKD4gpyucPm3UYObHGRaSBVx4LYypxKbCunjF0sNBFBcQVxxSJfltfSbR2R69CWaHYQUVxB7IakSqxNUvJysYkECiiI7EH502Hz8vLNkz06uCmWQ1oopiC2xNTFjPLNTZ7blReZCKBggkjBxFseNo/suQfEhU2znJpr70whBbEV8i7W93xoH8+a3va83WAKJIjdVexZJzyvGj+5jP2AUbn00BRHENlr8pSHrb/2uulVGnjHU5QtwAk5dbQ5dkFk3rgrRNHcuAQlLLaab17WMQqRCwLsCzyeoHB9mKvBWSRjvd2lm2GHm2MVRHYr282svszybfhekvM6cAUwpJEEoetV3wI8k3C81nhX9Ehs4rt5pyc75aiM20SgsxKuTYxMWxD7GQlt6nlNkjfJigQ7zrrzTeLzg+3mReBpsqeUgSD2eNi82FZ18aFspr8/Y4NLdSzI9n+L4mpBvClXhUooSnUqSEfQQwekgNjn1JxaKdWhIOsq7TOpRZQBwI0JD7JsZEE65VCbpuBi9PIfHosTHN3XaILsAh4ADg8++I6ODZFqipeAvwJ1plRgQbbIcYf51yEAB0iq2R5g/HIN52uVCiLIHimys/9xcotdmohpqbtSLHOwnDZ9Yp0EhmOkoj3sITNFhchSJw0PKkhcoILEBSpIXKCCxAUqSFyggsQFXTHAMsdV+3mHiqIoiqIoiqIoiqIoiqKYvvgHLHqxt7JYAgoAAAAASUVORK5CYII="/>
-                                            </defs>
-                                        </svg>                                            
+                                        <div>
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                <rect width="24" height="24" fill="url(#pattern0_204_1114)"/>
+                                                <defs>
+                                                <pattern id="pattern0_204_1114" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                                <use xlink:href="#image0_204_1114" transform="scale(0.01)"/>
+                                                </pattern>
+                                                <image id="image0_204_1114" width="100" height="100" xlink:href="data:image/png;base64,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"/>
+                                                </defs>
+                                            </svg>                                            
+                                        </div>
+                                    </div>
+                                    <div class="text-center font-roboto font-normal text-[rgba(255,255,255,0.65)]">
+                                        <p class="text-[12px]"><span class="font-bold">Click to upload</span>  or drag and drop</p>
+                                        <p class="text-[10px]" >SVG, PNG, JPG or AVIF (MAX. 800x400px)</p>
                                     </div>
                                 </div>
-                                <div class="text-center font-roboto font-normal text-[rgba(255,255,255,0.65)]">
-                                    <p class="text-[12px]"><span class="font-bold">Click to upload</span>  or drag and drop</p>
-                                    <p class="text-[10px]" >SVG, PNG, JPG or AVIF (MAX. 800x400px)</p>
+                            </label>
+                            <input formControllName="coverPhoto" (change)="uploadImage($event, 'coverPhoto')" id="movieCoverPhoto" type="file" class="hidden" />
+                            @if (addForm.get('coverPhoto')!.errors  && addForm.get('coverPhoto')!.touched) {
+                                <p class="text-[13px] text-[#FF6B6B] absolute mt-[16px]">{{ addForm.get('coverPhoto')?.errors?.['message'] }}</p>
+                            }
+                        }@else{
+                            <div class="font-roboto font-normal">
+                                <div class="relative w-fit">
+                                    <button (click)="deleteImage('coverPhoto');" class="absolute right-0 top-0">
+                                        <i class="fa-regular fa-circle-xmark" style="color: #000000;"></i>
+                                    </button>
+                                    <img class="w-[180px] h-auto object-center object-cover" [src]="coverPhotoPreview" alt="">
                                 </div>
                             </div>
-                        </label>
-                        <input id="movieCoverPhoto" type="file" class="hidden" />
+                        }
                     </div>
                 </div>
                 <div class="font-normal text-[18px] mb-[40px]">
                     <div>
                         <p class="font-bold mb-[18px]">Movie Banner Photo (Landscape Image)</p>
                     </div>
-                    <div>
-                        <label for="movieBannerPhoto" >
-                            <div class="w-[332px] h-[168px] bg-[rgba(55,65,81,0.71)] border-[1.5px] rounded-[5.07px] border-dashed border-[rgba(0,0,0,0.7)] flex flex-col justify-center items-center gap-[5px] cursor-pointer" >
-                                <div>
+                    <div class="relative">
+                        @if(!bannerPhotoPreview){
+                            <label for="movieBannerPhoto" >
+                                <div class="w-[332px] h-[168px] bg-[rgba(55,65,81,0.71)] border-[1.5px] rounded-[5.07px] border-dashed border-[rgba(0,0,0,0.7)] flex flex-col justify-center items-center gap-[5px] cursor-pointer" >
                                     <div>
-                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                            <rect width="24" height="24" fill="url(#pattern0_204_1114)"/>
-                                            <defs>
-                                            <pattern id="pattern0_204_1114" patternContentUnits="objectBoundingBox" width="1" height="1">
-                                            <use xlink:href="#image0_204_1114" transform="scale(0.01)"/>
-                                            </pattern>
-                                            <image id="image0_204_1114" width="100" height="100" xlink:href="data:image/png;base64,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"/>
-                                            </defs>
-                                        </svg>                                            
+                                        <div>
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                <rect width="24" height="24" fill="url(#pattern0_204_1114)"/>
+                                                <defs>
+                                                <pattern id="pattern0_204_1114" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                                <use xlink:href="#image0_204_1114" transform="scale(0.01)"/>
+                                                </pattern>
+                                                <image id="image0_204_1114" width="100" height="100" xlink:href="data:image/png;base64,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"/>
+                                                </defs>
+                                            </svg>                                            
+                                        </div>
+                                    </div>
+                                    <div class="text-center font-roboto font-normal text-[rgba(255,255,255,0.65)]">
+                                        <p class="text-[12px]"><span class="font-bold">Click to upload</span>  or drag and drop</p>
+                                        <p class="text-[10px]" >SVG, PNG, JPG or AVIF (MAX. 800x400px)</p>
                                     </div>
                                 </div>
-                                <div class="text-center font-roboto font-normal text-[rgba(255,255,255,0.65)]">
-                                    <p class="text-[12px]"><span class="font-bold">Click to upload</span>  or drag and drop</p>
-                                    <p class="text-[10px]" >SVG, PNG, JPG or AVIF (MAX. 800x400px)</p>
+                            </label>
+                            <input formControllName="bannerPhoto" (change)="uploadImage($event, 'bannerPhoto');" id="movieBannerPhoto" type="file" class="hidden" />
+                            @if (addForm.get('bannerPhoto')!.errors  && addForm.get('bannerPhoto')!.touched) {
+                                <p class="text-[13px] text-[#FF6B6B] absolute mt-[16px]">{{ addForm.get('bannerPhoto')?.errors?.['message'] }}</p>
+                            }
+                        }@else {
+                            <div class="font-roboto font-normal">
+                                <div class="relative w-fit">
+                                    <button (click)="deleteImage('bannerPhoto');" class="absolute right-0 top-0">
+                                        <i class="fa-regular fa-circle-xmark" style="color: #000000;"></i>
+                                    </button>
+                                    <img class="w-[332px] h-auto object-center object-cover" [src]="bannerPhotoPreview" alt="">
                                 </div>
                             </div>
-                        </label>
-                        <input id="movieBannerPhoto" type="file" class="hidden" />
+                        }
                     </div>
                 </div>
                 <div class="font-normal text-[18px] mb-[40px]">
@@ -278,7 +344,17 @@
             </div>
         </div>
         <div class="text-center">
-            <button type="submit" class="w-3/4 text-center text-white font-semibold text-[16px] bg-[#000] p-[10px]">Add Movie</button>
+            <button type="submit" class="w-3/4 text-center text-white font-semibold text-[16px] bg-[#000] p-[10px]">
+                @if(isFormSubmited){
+                    <div class="flex justify-center items-center">
+                        <div class="animate-spin inline-block size-[30px] border-[3px] border-current border-t-transparent text-white rounded-full dark:text-white" role="status" aria-label="loading">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                }@else{
+                    Add Movie
+                }
+            </button>
         </div>
     </form>
 </div>
