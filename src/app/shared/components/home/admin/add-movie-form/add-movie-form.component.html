@@ -12,13 +12,13 @@
                 </div>
             </div>
             <div>
-                <form >
+                <form [formGroup]="addMemberForm" (submit)="addMember();" >
                     <div class="font-normal text-[18px] mb-[24px] w-3/4">
                         <div class="mb-[18px]">
                             <label class="leading-[28px]" for="name1">Name</label>
                         </div>
                         <div>
-                            <input id="name1" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="text" placeholder="name">
+                            <input formControlName="name" id="name1" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="text" placeholder="name">
                         </div>
                     </div>
                     <div class="font-normal text-[18px] mb-[40px] w-3/4">
@@ -26,21 +26,30 @@
                             <label class="leading-[28px]" for="role">Role</label>
                         </div>
                         <div>
-                            <input id="role" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="text" placeholder="Their Role">
+                            <input formControlName="role" id="role" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="text" placeholder="Their Role">
                         </div>
                     </div>
                     <div class="font-normal text-[18px] mb-[40px]">
                         <div class="mb-[18px]">
                             <label class="leading-[28px]" for="profileImage">Image</label>
                         </div>
-                        <div>
-                            <label for="image">
-                                <div class="cursor-pointer border-solid border-[1px] border-[rgba(0,0,0,0.65)] rounded-[44px] py-[4px] px-[36px] w-fit hover:bg-black hover:text-white">
-                                    <p class="font-normal text-[16px] leading-[28px]">Choose File</p>
-                                </div>
-                            </label>
-                            <input id="image" class="hidden" type="file">
-                        </div>
+                        @if(!previewMember) {
+                            <div>
+                                <label for="image">
+                                    <div class="cursor-pointer border-solid border-[1px] border-[rgba(0,0,0,0.65)] rounded-[44px] py-[4px] px-[36px] w-fit hover:bg-black hover:text-white">
+                                        <p class="font-normal text-[16px] leading-[28px]">Choose File</p>
+                                    </div>
+                                </label>
+                                <input (change)="uploadMemberImage($event)" id="image" class="hidden" type="file">
+                            </div>
+                        }@else {
+                            <div class="relative w-fit">
+                                <button (click)="deleteImageMember();" type="button" class="absolute right-0 top-0">
+                                    <i class="fa-regular fa-circle-xmark" style="color: #000000;"></i>
+                                </button>
+                                <img class="w-[140px] h-[140px] rounded-full object-center object-cover" [src]="previewMember" alt="">
+                            </div>
+                        }
                     </div>
                     <div class="flex justify-end items-center gap-[20px]">
                         <div>
@@ -57,7 +66,7 @@
 }
 <div class="font-roboto p-[40px] px-[55px]">
     <h2 class="text-[22px] font-bold mb-[40px]" >Add Movie</h2>
-    <form >
+    <form [formGroup]="addForm" (submit)="onSubmit();" >
         <div class="flex gap-[50px] mb-[30px]">
             <div class="w-1/2">
                 <div class="font-normal text-[18px] mb-[40px]">
@@ -65,7 +74,7 @@
                         <label class="leading-[28px]" for="name">Name</label>
                     </div>
                     <div>
-                        <input id="name" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="text" placeholder="Movie name">
+                        <input formControlName="name" id="name" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="text" placeholder="Movie name">
                     </div>
                 </div>
                 <div class="font-normal text-[18px] mb-[40px]">
@@ -73,7 +82,7 @@
                         <label class="leading-[28px]" for="movieDescription">About this movie</label>
                     </div>
                     <div>
-                        <textarea rows="4"  id="movieDescription" class="border-[#9DA8BE] resize-none border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" placeholder="Movie description"></textarea>
+                        <textarea formControlName="about" rows="4"  id="movieDescription" class="border-[#9DA8BE] resize-none border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" placeholder="Movie description"></textarea>
                     </div>
                 </div>
                 <div class="font-normal text-[18px] mb-[40px]">
@@ -81,7 +90,7 @@
                         <label class="leading-[28px]" for="genere">Category (Genere)</label>
                     </div>
                     <div>
-                        <input id="genere" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="text" placeholder="Action, Comedy, Drama ...">
+                        <input formControlName="category" id="genere" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="text" placeholder="Action, Comedy, Drama ...">
                     </div>
                 </div>
                 <div class="font-normal text-[18px] mb-[40px]">
@@ -89,7 +98,7 @@
                         <label class="leading-[28px]" for="type">Movie Type</label>
                     </div>
                     <div>
-                        <input id="type" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="text" placeholder="2D">
+                        <input formControlName="type" id="type" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="text" placeholder="2D">
                     </div>
                 </div>
                 <div class="font-normal text-[18px] mb-[40px]">
@@ -97,8 +106,20 @@
                         <p class="font-bold">Cast</p>
                         <p class="font-semibold text-[10px] leading-[28px] mb-[7px]" >*Add your cast information.</p>
                     </div>
-                    <div>
-                        <div (click)="lauchAddModal('Cast');" class="cursor-pointer w-[100px] h-[100px] rounded-full border-[1px] border-solid border-[rgba(0,0,0,0.65)] flex justify-center items-center" >
+                    <div class="flex gap-[24px] items-center">
+                        @for (each of previewCast; track $index) {
+                            <div class="font-roboto font-normal">
+                                <div class="relative w-fit">
+                                    <button (click)="deleteImage('Cast', $index);" class="absolute right-0 top-0">
+                                        <i class="fa-regular fa-circle-xmark" style="color: #000000;"></i>
+                                    </button>
+                                    <img class="w-[120px] h-[120px] rounded-full object-center object-cover" [src]="each.image" alt="">
+                                    <p class="text-center text-[16px] text-[#333333] leading-[24px]">{{ each.name }}</p>
+                                    <p class="text-center text-[13px] text-[rgba(0,0,0,0.65)] leading-[17px]">{{ each.role }}</p>
+                                </div>
+                            </div>
+                        }
+                        <div (click)="lauchAddModal('Cast');" class="cursor-pointer w-[120px] h-[120px] rounded-full border-[1px] border-solid border-[rgba(0,0,0,0.65)] flex justify-center items-center" >
                             <div class="w-fit h-fit">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="rgba(0,0,0,0.65)">
                                     <path d="M446.67-446.67H200v-66.66h246.67V-760h66.66v246.67H760v66.66H513.33V-200h-66.66v-246.67Z"/>
@@ -112,8 +133,20 @@
                         <p class="font-bold">Crew</p>
                         <p class="font-semibold text-[10px] leading-[28px] mb-[7px]" >*Add your Crew information.</p>
                     </div>
-                    <div>
-                        <div (click)="lauchAddModal('Crew');" class="cursor-pointer w-[100px] h-[100px] rounded-full border-[1px] border-solid border-[rgba(0,0,0,0.65)] flex justify-center items-center" >
+                    <div class="flex gap-[24px] items-center">
+                        @for (each of previewCrew; track $index) {
+                            <div class="font-roboto font-normal">
+                                <div class="relative w-fit">
+                                    <button (click)="deleteImage('Crew', $index);" class="absolute right-0 top-0">
+                                        <i class="fa-regular fa-circle-xmark" style="color: #000000;"></i>
+                                    </button>
+                                    <img class="w-[120px] h-[120px] rounded-full object-center object-cover" [src]="each.image" alt="">
+                                    <p class="text-center text-[16px] text-[#333333] leading-[24px]">{{ each.name }}</p>
+                                    <p class="text-center text-[13px] text-[rgba(0,0,0,0.65)] leading-[17px]">{{ each.role }}</p>
+                                </div>
+                            </div>
+                        }
+                        <div (click)="lauchAddModal('Crew');" class="cursor-pointer w-[120px] h-[120px] rounded-full border-[1px] border-solid border-[rgba(0,0,0,0.65)] flex justify-center items-center" >
                             <div class="w-fit h-fit">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="rgba(0,0,0,0.65)">
                                     <path d="M446.67-446.67H200v-66.66h246.67V-760h66.66v246.67H760v66.66H513.33V-200h-66.66v-246.67Z"/>
@@ -129,7 +162,7 @@
                         <label class="leading-[28px]" for="Language">Language</label>
                     </div>
                     <div>
-                        <input id="Language" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="text" placeholder="Malayalam, English ...">
+                        <input formControlName="language" id="Language" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="text" placeholder="Malayalam, English ...">
                     </div>
                 </div>
                 <div class="font-normal text-[18px] mb-[40px]">
@@ -142,7 +175,7 @@
                                 <label class="leading-[28px]" for="hours">Hours (HH)</label>
                             </div>
                             <div>
-                                <input id="hours" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="number" placeholder="HH">
+                                <input formControlName="hours" id="hours" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="number" placeholder="HH">
                             </div>
                         </div>
                         <div class="font-normal text-[18px] mb-[40px] w-1/2">
@@ -150,7 +183,7 @@
                                 <label class="leading-[28px]" for="minutes">Minutes (MM)</label>
                             </div>
                             <div>
-                                <input id="minutes" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="number" placeholder="MM">
+                                <input formControlName="minutes" id="minutes" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="number" placeholder="MM">
                             </div>
                         </div>
                     </div>
