@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
-import { IDistributeMovieErrorResponse, IDistributeMovieSuccessfullResponse, IGetAllAvaliableMovieDataSuccessfullResponse } from '../../shared/models/IMovieAPIResponse.interface';
+import { IDistributeMovieErrorResponse, IDistributeMovieSuccessfullResponse, IGetAllAvaliableMovieDataSuccessfullResponse, IMyDistributedMoviesErrorResponse, IMyDistributedMoviesSuccessfullResponse } from '../../shared/models/IMovieAPIResponse.interface';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { IDistributeMovieData } from '../../shared/models/IMovieCredentials.interface';
 
@@ -46,5 +46,22 @@ export class DistributerService {
     );
 
     return distributeMovieAPIResponse$;
+  }
+
+  getAllDistributedMovies(): Observable<IMyDistributedMoviesSuccessfullResponse> {
+    const url: string = `${this.api}/getmymovies`;
+
+    const getAllDistributedMoviesAPIResponse$: Observable<IMyDistributedMoviesSuccessfullResponse> = this.httpClient.get<IMyDistributedMoviesSuccessfullResponse>(url)
+    .pipe(
+      map(res => res as IMyDistributedMoviesSuccessfullResponse),
+      catchError((err: any) => {
+        if(err.error) {
+          return throwError(err.error as IMyDistributedMoviesErrorResponse);
+        }
+        return throwError(err);
+      })
+    );
+
+    return getAllDistributedMoviesAPIResponse$;
   }
 }

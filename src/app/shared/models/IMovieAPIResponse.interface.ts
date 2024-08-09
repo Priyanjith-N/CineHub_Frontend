@@ -36,3 +36,15 @@ export interface IDistributeMovieErrorResponse {
     requiredCredentialsError?: boolean;
     message?: string;
 }
+
+export interface IMyDistributedMoviesSuccessfullResponse {
+    message: string;
+    data: IMovie[];
+}
+
+export interface IMyDistributedMoviesErrorResponse {
+    error?: string;
+    errorField?: string;
+    requiredCredentialsError?: boolean;
+    message?: string;
+}
