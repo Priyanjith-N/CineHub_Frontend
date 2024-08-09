@@ -20,3 +20,19 @@ export interface IListOrUnlistAPIErrorResponse {
     requiredCredentialsError?: boolean;
     message?: string;
 }
+
+export interface IGetAllAvaliableMovieDataSuccessfullResponse {
+    message: string;
+    data: IMovie[];
+}
+
+export interface IDistributeMovieSuccessfullResponse {
+    message: string
+}
+
+export interface IDistributeMovieErrorResponse {
+    error?: string;
+    errorField?: string;
+    requiredCredentialsError?: boolean;
+    message?: string;
+}

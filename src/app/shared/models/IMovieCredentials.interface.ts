@@ -39,5 +39,12 @@ export interface IMovie {
     crew: IMovieWorkerDetails<string>[];
     isTakenByDistributer: boolean;
     distributerId: string;
+    profitSharingPerTicket: number;
     isListed: boolean;
+}
+
+export interface IDistributeMovieData {
+    profitSharingPerTicket: number;
+    releaseDate: Date;
+    movieId: string;
 }
