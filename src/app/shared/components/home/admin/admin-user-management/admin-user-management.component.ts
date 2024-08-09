@@ -36,9 +36,11 @@ export class AdminUserManagementComponent {
    }
 
    search(searchText: string) {
-    this.userData = this.data.filter((user) => {
-      return user.name.toLowerCase().startsWith(searchText);
+     this.userData = this.data.filter((user) => {
+       return user.name.toLowerCase().startsWith(searchText);
     });
+
+    console.log(this.data);
    }
 
    confirm(confirm: boolean) {

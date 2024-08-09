@@ -4,7 +4,7 @@ import { catchError, map, Observable, throwError } from 'rxjs';
 import { IBlockOrUnblockAPIErrorResponse, IBlockOrUnblockAPISucessfullResponse, IDistributerData, INotVerifiedDistributers, INotVerifiedTheaterOwners, IRetriveDataSucessfullAPIResponse, ISingleDataRetrivalAPIResponse, ITheaterOwnerData, IUserData } from '../../shared/models/adminAPIResponse.interface';
 import { environment } from '../../../environments/environment.development';
 import IMovieData from '../../shared/models/IMovieCredentials.interface';
-import { IAddMovieErrorResponse } from '../../shared/models/IMovieAPIResponse.interface';
+import { IAddMovieErrorResponse, IGetMoviesSuccessfullResponse, IListOrUnlistAPIErrorResponse, IListOrUnlistAPISucessfullResponse } from '../../shared/models/IMovieAPIResponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -204,5 +204,39 @@ export class AdminService {
     );
 
     return addMovieAPIResponse$;
+  }
+
+  getAllMovies(): Observable<IGetMoviesSuccessfullResponse> {
+    const url: string = `${this.api}/movie`;
+
+    const getDataAPIResponse$: Observable<IGetMoviesSuccessfullResponse> = this.httpClient.get<IGetMoviesSuccessfullResponse>(url)
+    .pipe(
+      map((response) => response as IGetMoviesSuccessfullResponse),
+      catchError((err: any) => {
+        return throwError(err);
+      })
+    );
+
+    return getDataAPIResponse$;
+  }
+
+  listOrUnlistMovie(data: {_id: string, isListed: boolean, name: string}): Observable<IListOrUnlistAPISucessfullResponse> {
+    const url: string = `${this.api}/listorunlist/${data._id}`;
+
+    const listOrUnlistMovieAPIResponse$: Observable<IListOrUnlistAPISucessfullResponse> = this.httpClient.patch<IListOrUnlistAPISucessfullResponse>(url, {
+      isListed: data.isListed
+    })
+    .pipe(
+      map((response) => response as IListOrUnlistAPISucessfullResponse),
+      catchError((err: any) => {
+        if(err.error) {
+          return throwError(err.error as IListOrUnlistAPIErrorResponse)
+        }else{
+          return throwError(err);
+        }
+      })
+    );
+
+    return listOrUnlistMovieAPIResponse$;
   }
 }
