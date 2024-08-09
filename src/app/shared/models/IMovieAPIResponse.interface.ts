@@ -37,6 +37,17 @@ export interface IDistributeMovieErrorResponse {
     message?: string;
 }
 
+export interface IEditProfitSharingSuccessfullResponse {
+    message: string
+}
+
+export interface IEditProfitSharingErrorResponse {
+    error?: string;
+    errorField?: string;
+    requiredCredentialsError?: boolean;
+    message?: string;
+}
+
 export interface IMyDistributedMoviesSuccessfullResponse {
     message: string;
     data: IMovie[];

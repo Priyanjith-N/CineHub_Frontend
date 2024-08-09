@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
-import { IDistributeMovieErrorResponse, IDistributeMovieSuccessfullResponse, IGetAllAvaliableMovieDataSuccessfullResponse, IMyDistributedMoviesErrorResponse, IMyDistributedMoviesSuccessfullResponse } from '../../shared/models/IMovieAPIResponse.interface';
+import { IDistributeMovieErrorResponse, IDistributeMovieSuccessfullResponse, IEditProfitSharingErrorResponse, IEditProfitSharingSuccessfullResponse, IGetAllAvaliableMovieDataSuccessfullResponse, IMyDistributedMoviesErrorResponse, IMyDistributedMoviesSuccessfullResponse } from '../../shared/models/IMovieAPIResponse.interface';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { IDistributeMovieData } from '../../shared/models/IMovieCredentials.interface';
 
@@ -63,5 +63,25 @@ export class DistributerService {
     );
 
     return getAllDistributedMoviesAPIResponse$;
+  }
+
+  editProfitSharing(distributeData: IDistributeMovieData): Observable<IEditProfitSharingSuccessfullResponse> {
+    const url: string = `${this.api}/editprofitsharingofdistributedmovie/${distributeData.movieId}`;
+
+    const editProfitSharingAPIResponse$: Observable<IEditProfitSharingSuccessfullResponse> = this.httpClient.patch<IEditProfitSharingSuccessfullResponse>(url, {
+      releaseDate: distributeData.releaseDate,
+      profitSharingPerTicket: distributeData.profitSharingPerTicket
+    })
+    .pipe(
+      map(res => res as IEditProfitSharingSuccessfullResponse),
+      catchError((err: any) => {
+        if(err.error) {
+          return throwError(err.error as IEditProfitSharingErrorResponse);
+        }
+        return throwError(err);
+      })
+    );
+
+    return editProfitSharingAPIResponse$;
   }
 }
