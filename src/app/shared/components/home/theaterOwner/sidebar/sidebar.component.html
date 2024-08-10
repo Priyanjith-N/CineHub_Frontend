@@ -34,8 +34,22 @@
                     </div>
                 </li>
             </a>
-            <a routerLink="/theaterOwner/managestreaming" >
+            <a routerLink="/theaterOwner/distributors">
                 <li #sourceLi (click)="selectOption(2);" class="py-[18px] pl-[17px] relative" routerLinkActive="activeOption" [routerLinkActiveOptions]="{ exact: false }">
+                    <div class="flex gap-[8px] items-center">
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                <path d="m380-300 280-180-280-180v360ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/>
+                            </svg>                                                         
+                        </div>
+                        <div>
+                            <p>Distributors</p>
+                        </div>
+                    </div>
+                </li>
+            </a>
+            <a routerLink="/theaterOwner/managestreaming" >
+                <li #sourceLi (click)="selectOption(3);" class="py-[18px] pl-[17px] relative" routerLinkActive="activeOption" [routerLinkActiveOptions]="{ exact: false }">
                     <div class="flex gap-[8px] items-center">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
@@ -49,7 +63,7 @@
                 </li>
             </a>
             <a routerLink="/theaterOwner/mymovies" >
-                <li #sourceLi (click)="selectOption(3);" class="py-[18px] pl-[17px] relative" routerLinkActive="activeOption" [routerLinkActiveOptions]="{ exact: false }">
+                <li #sourceLi (click)="selectOption(4);" class="py-[18px] pl-[17px] relative" routerLinkActive="activeOption" [routerLinkActiveOptions]="{ exact: false }">
                     <div class="flex gap-[8px] items-center">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
@@ -64,7 +78,7 @@
             </a>
             <li class="my-[8px] h-[1px] w-full bg-[rgba(255,255,255,0.25)]"></li>
             <a routerLink="/theaterOwner/notification">
-                <li #sourceLi (click)="selectOption(4);" class="py-[18px] pl-[17px] relative" routerLinkActive="activeOption" [routerLinkActiveOptions]="{ exact: true }">
+                <li #sourceLi (click)="selectOption(5);" class="py-[18px] pl-[17px] relative" routerLinkActive="activeOption" [routerLinkActiveOptions]="{ exact: true }">
                     <div class="flex gap-[8px] items-center">
                         <div>
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -78,7 +92,7 @@
                 </li>
             </a>
             <a routerLink="/theaterOwner/settings">
-                <li #sourceLi (click)="selectOption(5);" class="py-[18px] pl-[17px] relative" routerLinkActive="activeOption" [routerLinkActiveOptions]="{ exact: true }">
+                <li #sourceLi (click)="selectOption(6);" class="py-[18px] pl-[17px] relative" routerLinkActive="activeOption" [routerLinkActiveOptions]="{ exact: true }">
                     <div class="flex gap-[8px] items-center">
                         <div>
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

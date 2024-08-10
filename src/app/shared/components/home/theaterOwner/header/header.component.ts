@@ -35,6 +35,8 @@ export class HeaderComponent implements OnInit {
       this.heading = 'Dashboard';
     }else if(['/managetheater', '/addtheater'].includes(url)){
       this.heading = 'Manage Theater'
+    }else if(url === '/distributors') {
+      this.heading = 'Distributors'
     }else if(url === '/managestreaming'){
       this.heading = 'Manage Streaming';
     }else if(url === '/mymovies') {

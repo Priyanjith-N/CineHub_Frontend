@@ -8,3 +8,11 @@ input::-webkit-inner-spin-button {
   @apply border-[#FF6B6B];
   @apply text-[#FF6B6B];
 }
+
+.evenColor {
+  @apply bg-[rgba(238,238,238,0.25)];
+}
+
+.oddColor {
+  @apply bg-white;
+}

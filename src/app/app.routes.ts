@@ -40,6 +40,7 @@ import { DistributeMoviesComponent } from './shared/components/home/distributer/
 import { MyMoviesComponent } from './shared/components/home/distributer/my-movies/my-movies.component';
 import { ManageTheaterComponent } from './shared/components/home/theaterOwner/manage-theater/manage-theater.component';
 import { AddTheaterComponent } from './shared/components/home/theaterOwner/add-theater/add-theater.component';
+import { DistributerListingComponent } from './shared/components/home/theaterOwner/distributer-listing/distributer-listing.component';
 
 export const routes: Routes = [
     {
@@ -214,6 +215,11 @@ export const routes: Routes = [
                 path: 'managetheater/addtheater',
                 canActivate: [theaterOwnerAuthGuard],
                 component: AddTheaterComponent
+            },
+            {
+                path: 'distributors',
+                canActivate: [theaterOwnerAuthGuard],
+                component: DistributerListingComponent
             }
         ]
     }
