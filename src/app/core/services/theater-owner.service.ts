@@ -2,8 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { IGetDistributerListAPISucessfullResponse } from '../../shared/models/ITheaterOwnerAPIResponse.interface';
+import { IAddTheaterErrorResponse, IAddTheaterSucessfullResponse, IGetDistributerListAPISucessfullResponse } from '../../shared/models/ITheaterOwnerAPIResponse.interface';
 import { IGetMovieListOfDistributerDataAPISucessfullResponse } from '../../shared/models/theaterOwnerAPIResponse.interface';
+import ITheaterCredentials from '../../shared/models/ITheaterCredentials.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -41,5 +42,23 @@ export class TheaterOwnerService {
     ); 
 
     return getMovieListOfDistributerDataAPIResponse$;
+  }
+
+  addTheater(data: ITheaterCredentials): Observable<IAddTheaterSucessfullResponse> {
+    const url: string = `${this.api}/addtheater`;
+
+    const addTheaterAPIResponse$: Observable<IAddTheaterSucessfullResponse> = this.httpClient.post<IAddTheaterSucessfullResponse>(url, data)
+    .pipe(
+      map(res => res as IAddTheaterSucessfullResponse),
+      catchError((err: any) => {
+        if(err.error) {
+          return throwError(err.error as IAddTheaterErrorResponse)
+        }else{
+          return throwError(err);
+        }
+      })
+    );
+
+    return addTheaterAPIResponse$;
   }
 }

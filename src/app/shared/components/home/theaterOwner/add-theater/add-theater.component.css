@@ -1,0 +1,4 @@
+.error {
+    @apply border-[#FF6B6B];
+    @apply text-[#FF6B6B];
+}
