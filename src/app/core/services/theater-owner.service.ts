@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { IAddTheaterErrorResponse, IAddTheaterSucessfullResponse, IGetDistributerListAPISucessfullResponse } from '../../shared/models/ITheaterOwnerAPIResponse.interface';
+import { IAddTheaterErrorResponse, IAddTheaterSucessfullResponse, IGetDistributerListAPISucessfullResponse, IGetAllTheatersSucessfullResponse } from '../../shared/models/ITheaterOwnerAPIResponse.interface';
 import { IGetMovieListOfDistributerDataAPISucessfullResponse } from '../../shared/models/theaterOwnerAPIResponse.interface';
 import ITheaterCredentials from '../../shared/models/ITheaterCredentials.interface';
 
@@ -60,5 +60,19 @@ export class TheaterOwnerService {
     );
 
     return addTheaterAPIResponse$;
+  }
+
+  getAllTheaters(): Observable<IGetAllTheatersSucessfullResponse> {
+    const url: string = `${this.api}/theater`;
+
+    const getTheatersAPIResponse$: Observable<IGetAllTheatersSucessfullResponse> = this.httpClient.get<IGetAllTheatersSucessfullResponse>(url)
+    .pipe(
+      map(res => res as IGetAllTheatersSucessfullResponse),
+      catchError((err: any) => {
+        return throwError(err);
+      })
+    ); 
+
+    return getTheatersAPIResponse$;
   }
 }
