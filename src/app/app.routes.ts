@@ -41,6 +41,7 @@ import { MyMoviesComponent } from './shared/components/home/distributer/my-movie
 import { ManageTheaterComponent } from './shared/components/home/theaterOwner/manage-theater/manage-theater.component';
 import { AddTheaterComponent } from './shared/components/home/theaterOwner/add-theater/add-theater.component';
 import { DistributerListingComponent } from './shared/components/home/theaterOwner/distributer-listing/distributer-listing.component';
+import { MovieLisingBasedOnDistributerComponent } from './shared/components/home/theaterOwner/movie-lising-based-on-distributer/movie-lising-based-on-distributer.component';
 
 export const routes: Routes = [
     {
@@ -220,6 +221,11 @@ export const routes: Routes = [
                 path: 'distributors',
                 canActivate: [theaterOwnerAuthGuard],
                 component: DistributerListingComponent
+            },
+            {
+                path: 'distributors/:distributerId',
+                canActivate: [theaterOwnerAuthGuard],
+                component: MovieLisingBasedOnDistributerComponent
             }
         ]
     }

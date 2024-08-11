@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { IGetDistributerListAPISucessfullResponse } from '../../shared/models/ITheaterOwnerAPIResponse.interface';
+import { IGetMovieListOfDistributerDataAPISucessfullResponse } from '../../shared/models/theaterOwnerAPIResponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +27,19 @@ export class TheaterOwnerService {
     );
 
     return getDistributersListAPIResponse$;
+  }
+
+  getMovieListOfDistributerData(distributerId: string): Observable<IGetMovieListOfDistributerDataAPISucessfullResponse> {
+    const url: string = `${this.api}/getmovielist/${distributerId}`;
+
+    const getMovieListOfDistributerDataAPIResponse$: Observable<IGetMovieListOfDistributerDataAPISucessfullResponse> = this.httpClient.get<IGetMovieListOfDistributerDataAPISucessfullResponse>(url)
+    .pipe(
+      map(res => res as IGetMovieListOfDistributerDataAPISucessfullResponse),
+      catchError((err: any) => {
+        return throwError(err);
+      })
+    ); 
+
+    return getMovieListOfDistributerDataAPIResponse$;
   }
 }
