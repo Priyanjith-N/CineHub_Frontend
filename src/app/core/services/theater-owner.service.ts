@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { IAddTheaterErrorResponse, IAddTheaterSucessfullResponse, IGetDistributerListAPISucessfullResponse, IGetAllTheatersSucessfullResponse } from '../../shared/models/ITheaterOwnerAPIResponse.interface';
+import { IAddTheaterErrorResponse, IAddTheaterSucessfullResponse, IGetDistributerListAPISucessfullResponse, IGetAllTheatersSucessfullResponse, IAddScreenSucessfullResponse, IAddScreenErrorResponse } from '../../shared/models/ITheaterOwnerAPIResponse.interface';
 import { IGetMovieListOfDistributerDataAPISucessfullResponse } from '../../shared/models/theaterOwnerAPIResponse.interface';
-import ITheaterCredentials from '../../shared/models/ITheaterCredentials.interface';
+import ITheaterCredentials, { IScreenCredentials } from '../../shared/models/ITheaterCredentials.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -74,5 +74,23 @@ export class TheaterOwnerService {
     ); 
 
     return getTheatersAPIResponse$;
+  }
+
+  addScreen(data: IScreenCredentials, theaterId: string): Observable<IAddScreenSucessfullResponse> {
+    const url: string = `${this.api}/addScreen/${theaterId}`;
+
+    const APIResponse$: Observable<IAddScreenSucessfullResponse> = this.httpClient.post<IAddScreenSucessfullResponse>(url, data)
+    .pipe(
+      map(res => res as IAddScreenSucessfullResponse),
+      catchError((err: any) => {
+        if(err.error) {
+          return throwError(err.error as IAddScreenErrorResponse);
+        }else{
+          return throwError(err);
+        }
+      })
+    );
+
+    return APIResponse$;
   }
 }

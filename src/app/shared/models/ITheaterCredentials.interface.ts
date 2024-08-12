@@ -3,3 +3,15 @@ export default interface ITheaterCredentials {
     images: string[];
     licence: string;
 }
+
+export interface IScreenCredentials {
+    name: string;
+    capacity: number;
+    seatCategory: { category: string, price: number }[];
+    seatLayout: boolean[][];
+    seatNumberPattern: {
+        pattern: "Alphanumerical";
+        startFrom: "left" | "right"
+    },
+    seatCategoryPattern: ({ category: string, price: number } | undefined | null)[];
+}

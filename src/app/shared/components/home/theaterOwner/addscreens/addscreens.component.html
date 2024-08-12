@@ -2,7 +2,7 @@
     <div class="text-center text-[24px] font-bold leading-[18px] mb-[24px] flex justify-center">
         <h2 class="-translate-x-[50%]">Add Screen</h2>
     </div>  
-    <form [formGroup]="screenForm" >
+    <form [formGroup]="screenForm" (submit)="onSubmit();" >
         <div class="flex justify-center">
             <div class="w-1/2">
                 <div class="font-normal text-[18px] mb-[40px]">
@@ -11,6 +11,9 @@
                     </div>
                     <div class="relative">
                         <input formControlName="name" id="name" class="max-w-[438px] border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="text" placeholder="Screen name">
+                        @if (screenForm.get('name')!.errors  && screenForm.get('name')!.touched) {
+                            <p class="text-[13px] text-[#FF6B6B] absolute mt-[12px]">{{ screenForm.get('name')?.errors?.['message'] || 'This Field is required.' }}</p>
+                        }
                     </div>
                 </div>
                 <div class="font-normal text-[18px] mb-[40px]">
@@ -18,7 +21,10 @@
                         <label class="leading-[28px]" for="capacity">Capacity</label>
                     </div>
                     <div class="relative">
-                        <input formControlName="capacity" id="capacity" class="max-w-[438px] border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="text" placeholder="56">
+                        <input formControlName="capacity" id="capacity" class="max-w-[438px] border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="number" placeholder="56">
+                        @if (screenForm.get('capacity')!.errors  && screenForm.get('capacity')!.touched) {
+                            <p class="text-[13px] text-[#FF6B6B] absolute mt-[12px]">{{ screenForm.get('capacity')?.errors?.['message'] || 'This Field is required.' }}</p>
+                        }
                     </div>
                 </div>
                 <div class="font-normal text-[18px] mb-[40px]">
@@ -26,7 +32,43 @@
                         <label class="leading-[28px]" for="seatCategory">Seat Category</label>
                     </div>
                     <div class="relative">
-                        <input formControlName="seatCategory" id="seatCategory" class="max-w-[438px] border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="text" placeholder="Recliner, Premium, Regular">
+                        <div class="flex w-full gap-[24px] mb-[20px]">
+                            <div class="w-fit">
+                                <div class="mb-[18px]">
+                                    <label class="leading-[28px]" for="seatCategory">Seat Category Name</label>
+                                </div>
+                                <div class="relative">
+                                    <input formControlName="categoryName" id="seatCategory" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="text" placeholder="Recliner">
+                                    @if (screenForm.get('categoryName')!.errors  && screenForm.get('categoryName')!.touched) {
+                                        <p class="text-[13px] text-[#FF6B6B] absolute mt-[12px]">{{ screenForm.get('categoryName')?.errors?.['message'] }}</p>
+                                    }
+                                </div>
+                            </div>
+                            <div class="w-fit">
+                                <div class="mb-[18px]">
+                                    <label class="leading-[28px]" for="seatCategoryPrice">Seat Price</label>
+                                </div>
+                                <div class="relative w-[inherit]">
+                                    <input formControlName="seatPrice" id="seatCategoryPrice" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="number" placeholder="120">
+                                    @if (screenForm.get('seatPrice')!.errors  && screenForm.get('seatPrice')!.touched) {
+                                        <p class="text-[13px] text-[#FF6B6B] absolute mt-[12px]">{{ screenForm.get('seatPrice')?.errors?.['message'] }}</p>
+                                    }
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <button (click)="addCategory();" type="button" class="py-[6px] h-fit px-[16px] bg-black font-medium text-16px rounded-[5.07px] text-white">Add</button>
+                            </div>
+                        </div>
+                        <div>
+                            <p>
+                                @for (item of seatCategory; track $index) {
+                                    {{ item.category }}
+                                    @if($index !== seatCategory.length - 1) {
+                                        , 
+                                    }
+                                }
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -41,7 +83,10 @@
                         <label class="leading-[28px]" for="noOfRows">Number Of Rows</label>
                     </div>
                     <div class="relative">
-                        <input formControlName="rows" id="noOfRows" class="max-w-[438px] border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="number" placeholder="7">
+                        <input (ngModelChange)="seatCategoryEffectChange();" formControlName="rows" id="noOfRows" class="max-w-[438px] border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="number" placeholder="7">
+                        @if (screenForm.get('rows')!.errors  && screenForm.get('rows')!.touched) {
+                            <p class="text-[13px] text-[#FF6B6B] absolute mt-[12px]">{{ screenForm.get('rows')?.errors?.['message'] || 'This Field is required.' }}</p>
+                        }
                     </div>
                 </div>
                 <div class="font-normal text-[18px] mb-[40px]">
@@ -50,33 +95,55 @@
                     </div>
                     <div class="relative">
                         <input formControlName="cols"  id="noOfColums" class="max-w-[438px] border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-full outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="number" placeholder="21">
+                        @if (screenForm.get('cols')!.errors  && screenForm.get('cols')!.touched) {
+                            <p class="text-[13px] text-[#FF6B6B] absolute mt-[12px]">{{ screenForm.get('cols')?.errors?.['message'] || 'This Field is required.' }}</p>
+                        }
                     </div>
                 </div>
                 <div class="font-normal text-[18px] mb-[40px]">
-                    <div>
-                        <button (click)="setSeatLayout();" class="w-1/2 py-[8px] px-[16px] hover:bg-black hover:text-white border border-black text-black transition-all ease-in-out duration-300 text-[16px] font-bold rounded-[4px]">
+                    <div class="relative">
+                        <button (click)="setSeatLayout();" type="button" class="w-1/2 py-[8px] px-[16px] hover:bg-black hover:text-white border border-black text-black transition-all ease-in-out duration-300 text-[16px] font-bold rounded-[4px]">
                             Set Seat Layout
                         </button>
+                        @if (screenForm.get('setSeatLayout')!.errors  && screenForm.get('setSeatLayout')!.touched) {
+                            <p class="text-[13px] text-[#FF6B6B] absolute mt-[12px]">{{ screenForm.get('setSeatLayout')?.errors?.['message'] }}</p>
+                        }
                     </div>
                 </div>
                 <div class="font-normal text-[18px] mb-[40px]">
-                    <div>
-                        <button (click)="openShowSeatPatternModal();" class="w-1/2 py-[8px] px-[16px] hover:bg-black hover:text-white border border-black text-black transition-all ease-in-out duration-300 text-[16px] font-bold rounded-[4px]">
+                    <div class="relative">
+                        <button (click)="openShowSeatPatternModal();" type="button" class="w-1/2 py-[8px] px-[16px] hover:bg-black hover:text-white border border-black text-black transition-all ease-in-out duration-300 text-[16px] font-bold rounded-[4px]">
                             Set Number Pattern
                         </button>
+                        @if (screenForm.get('setSeatNumberPattern')!.errors  && screenForm.get('setSeatNumberPattern')!.touched) {
+                            <p class="text-[13px] text-[#FF6B6B] absolute mt-[12px]">{{ screenForm.get('setSeatNumberPattern')?.errors?.['message'] }}</p>
+                        }
                     </div>
                 </div>
                 <div class="font-normal text-[18px] mb-[40px]">
-                    <div>
-                        <button (click)="setSeatCategory();" class="w-1/2 py-[8px] px-[16px] hover:bg-black hover:text-white border border-black text-black transition-all ease-in-out duration-300 text-[16px] font-bold rounded-[4px]">
+                    <div class="relative">
+                        <button (click)="setSeatCategory();" type="button" class="w-1/2 py-[8px] px-[16px] hover:bg-black hover:text-white border border-black text-black transition-all ease-in-out duration-300 text-[16px] font-bold rounded-[4px]">
                             Set Category
                         </button>
+                        @if (screenForm.get('setSeatCategory')!.errors  && screenForm.get('setSeatCategory')!.touched) {
+                            <p class="text-[13px] text-[#FF6B6B] absolute mt-[12px]">{{ screenForm.get('setSeatCategory')?.errors?.['message'] }}</p>
+                        }
                     </div>
                 </div>
             </div>
         </div>
         <div class="text-center">
-            <button type="submit" class="w-3/4 text-center text-white font-semibold text-[16px] bg-[#000] p-[10px]">Add Screen</button>
+            <button type="submit" class="w-3/4 text-center text-white font-semibold text-[16px] bg-[#000] p-[10px]">
+                @if(isFormSubmited){
+                    <div class="flex justify-center items-center">
+                        <div class="animate-spin inline-block size-[30px] border-[3px] border-current border-t-transparent text-white rounded-full dark:text-white" role="status" aria-label="loading">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                }@else{
+                    Add Screen
+                }
+            </button>
         </div>
     </form>
 </div>
@@ -97,7 +164,7 @@
             </div>
             <div class="mb-[24px]">
                 <!-- row -->
-                <div class="flex gap-[12px] mb-[12px]" *ngFor="let row of selectSeatLayout; let i = index">
+                <div class="flex justify-center gap-[12px] mb-[12px]" *ngFor="let row of selectSeatLayout; let i = index">
                     <div (click)="selectSeat(i, j);" class="cursor-pointer min-w-[32px] min-h-[32px] rounded-[6px] border border-solid border-[#9DA8BE]" *ngFor="let col of row; let j = index" [class.selectedSeats]="col"></div>
                 </div>
                 <!-- end row -->
@@ -192,16 +259,16 @@
                     </svg>                        
                 </div>
             </div>
-            <div class="mb-[24px]" *ngFor="let category of seatCategory; let i = index">
+            <div class="mb-[24px]" *ngFor="let obj of seatCategory; let i = index">
                 <div class="mb-[8px]">
-                    <p class="text-[15px] font-medium">{{ category }}</p>
+                    <p class="text-[15px] font-medium">{{ obj.category }}</p>
                 </div>
                 <div>
                     <div class="flex gap-[12px]">
                         @for (item of selectedSeatCategory; track $index) {
                             <div class="flex gap-[8px] items-center">
                                 <div class="h-fit">
-                                    <input (click)="selectOption($index, category);" [disabled]="item && item !== category" [checked]="item && item === category" class="w-[14px] h-[14px]" type="radio">
+                                    <input (click)="selectOption($index, obj);" [disabled]="item === null" [checked]="item && item.category === obj.category" class="w-[14px] h-[14px]" type="radio">
                                 </div>
                                 <div>
                                     <p class="text-[16px]">{{ $index + 1 }}</p>

@@ -12,4 +12,5 @@ input::-webkit-inner-spin-button {
   input[type="radio"][disabled]{
     @apply bg-[#DADFE8];
     @apply border-none;
+    @apply border-0;
 }

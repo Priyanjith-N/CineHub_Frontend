@@ -21,3 +21,14 @@ export interface IGetAllTheatersSucessfullResponse {
     message: string;
     data: ITheater[];
 }
+
+export interface IAddScreenSucessfullResponse {
+    message: string;
+}
+
+export interface IAddScreenErrorResponse {
+    requiredCredentialsError?: boolean;
+    error?: string;
+    message?: string;
+    errorField?: string;
+}
