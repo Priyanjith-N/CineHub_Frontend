@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
     
     if(url === '/theaterOwner') {
       this.heading = 'Dashboard';
-    }else if(['/managetheater', '/addtheater'].includes(url)){
+    }else if(['/managetheater', '/addtheater'].includes(url) || this.router.url.startsWith('/theaterOwner/managetheater/')){
       this.heading = 'Manage Theater'
     }else if(url === '/distributors') {
       this.heading = 'Distributors'

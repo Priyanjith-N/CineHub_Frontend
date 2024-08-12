@@ -1,0 +1,4 @@
+.selectedSeats {
+    @apply bg-[#1A2C50];
+    @apply border-none;
+}

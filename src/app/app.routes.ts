@@ -42,6 +42,9 @@ import { ManageTheaterComponent } from './shared/components/home/theaterOwner/ma
 import { AddTheaterComponent } from './shared/components/home/theaterOwner/add-theater/add-theater.component';
 import { DistributerListingComponent } from './shared/components/home/theaterOwner/distributer-listing/distributer-listing.component';
 import { MovieLisingBasedOnDistributerComponent } from './shared/components/home/theaterOwner/movie-lising-based-on-distributer/movie-lising-based-on-distributer.component';
+import { SingletheatermangeComponent } from './shared/components/home/theaterOwner/singletheatermange/singletheatermange.component';
+import { ScreensComponent } from './shared/components/home/theaterOwner/screens/screens.component';
+import { AddscreensComponent } from './shared/components/home/theaterOwner/addscreens/addscreens.component';
 
 export const routes: Routes = [
     {
@@ -226,7 +229,24 @@ export const routes: Routes = [
                 path: 'distributors/:distributerId',
                 canActivate: [theaterOwnerAuthGuard],
                 component: MovieLisingBasedOnDistributerComponent
-            }
+            },
+            {
+                path: 'managetheater/:theaterId',
+                canActivate: [theaterOwnerAuthGuard],
+                component: SingletheatermangeComponent,
+                children: [
+                    {
+                        path: '',
+                        canActivate: [theaterOwnerAuthGuard],
+                        component: ScreensComponent
+                    },
+                    {
+                        path: 'addscreen',
+                        canActivate: [theaterOwnerAuthGuard],
+                        component: AddscreensComponent
+                    }
+                ]
+            },
         ]
     }
 ];
