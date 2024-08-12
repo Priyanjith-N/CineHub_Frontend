@@ -23,6 +23,11 @@ export interface IGetAllTheatersSucessfullResponse {
     data: ITheater[];
 }
 
+export interface IGetTheaterSucessfullResponse {
+    message: string;
+    data: ITheater;
+}
+
 export interface IAddScreenSucessfullResponse {
     message: string;
 }
