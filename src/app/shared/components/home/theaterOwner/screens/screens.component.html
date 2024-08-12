@@ -1,17 +1,11 @@
 <div>
-    <div class="w- overflow-x-hidden flex border-b-[#BDC5D4] border-b border-solid mb-[24px]">
-        <div class="cursor-pointer min-w-[152px] text-center py-[12px] bg-black text-white rounded-[3px_0px_0px_3px] border-r-[#BDC5D4] border-r border-solid mb-[2px]">
-            <p class="text-[14px] font-bold">AUDI 1</p>
-            <p class="font-medium text-[11px] text-[rgba(255,255,255,0.65)]">Screen 1</p>
-        </div>
-        <div class="cursor-pointer min-w-[152px] text-center py-[12px] text-black rounded-[3px_0px_0px_3px] border-r-[#BDC5D4] border-r border-solid mb-[2px]">
-            <p class="text-[14px] font-bold">AUDI 2</p>
-            <p class="font-medium text-[11px] text-[rgba(0,0,0,0.65)]">Screen 2</p>
-        </div>
-        <div class="cursor-pointer min-w-[152px] text-center py-[12px] text-black rounded-[3px_0px_0px_3px] border-r-[#BDC5D4] border-r border-solid mb-[2px]">
-            <p class="text-[14px] font-bold">AUDI 3</p>
-            <p class="font-medium text-[11px] text-[rgba(0,0,0,0.65)]">Screen 3</p>
-        </div>
+    <div class="w- overflow-x-hidden flex border-b-[rgb(189,197,212)] border-b border-solid mb-[24px]">
+        @for (each of screens; track $index) {
+            <div (click)="changeScreen($index)" class="cursor-pointer min-w-[152px] text-center py-[12px] text-black rounded-[3px_0px_0px_3px] border-r-[#BDC5D4] border-r border-solid mb-[2px]" [class.selectedScreen]="selectedIdx === $index">
+                <p class="text-[14px] font-bold">{{ each.name }}</p>
+                <p class="font-medium text-[11px] text-[rgba(0,0,0,0.65)]" [class.screenColor]="selectedIdx === $index">Screen {{ $index + 1 }}</p>
+            </div>
+        }
     </div>
     <div class="mb-[24px]">
         <a routerLink="addscreen">
@@ -63,64 +57,65 @@
                 </tr>
             </thead>
             <tbody>
-                @if(!true) {
+                @if(!screens.length) {
                     <tr class="bg-[rgba(238,238,238,0.25)]" >
                         <td colspan="6" class="font-normal text-[14px] font-roboto pl-[24px] py-[11px] text-center">
                             No Movies Distibuted.
                         </td>
                     </tr>
-                }
-                <tr>
-                    <td class="font-normal text-[14px] font-roboto text-left pl-[24px] py-[11px]">
-                        AUDI 1
-                    </td>
-                    <td class="font-normal text-[14px] font-roboto text-left px-[24px] py-[11px]">
-                        63
-                    </td>
-                    <td class="font-normal text-[14px] font-roboto text-left px-[24px] py-[11px]">
-                        Recliner, Premium, Regular
-                    </td>
-                    <td class="font-normal text-[14px] font-roboto text-center px-[24px] py-[11px]">
-                        <button (click)="openModal('seatArrangement');" class="py-1 px-3 rounded-[5.07px] text-black border-solid border-[1px] border-black hover:text-white hover:bg-black transition-all duration-[300ms]">
-                            <div class="flex justify-center">
-                                <div>
-                                    <p class="font-bold leading-[24px]" >View</p>
-                                </div>
-                            </div>
-                        </button>
-                    </td>
-                    <td class="font-normal text-[14px] font-roboto text-center px-[24px] py-[11px]">
-                        <button (click)="openModal('seatNumberPattern');" class="py-1 px-3 rounded-[5.07px] text-black border-solid border-[1px] border-black hover:text-white hover:bg-black transition-all duration-[300ms]">
-                            <div class="flex justify-center">
-                                <div>
-                                    <p class="font-bold leading-[24px]" >View</p>
-                                </div>
-                            </div>
-                        </button>
-                    </td>
-                    <td class="font-normal text-[14px] font-roboto text-center px-[24px] py-[11px]">
-                        <button class="py-1 px-3 rounded-[5.07px] text-black border-solid border-[1px] border-black hover:text-white hover:bg-black transition-all duration-[300ms]">
-                            <div class="flex justify-center">
-                                <div>
-                                    <p class="font-bold leading-[24px]" >Manage</p>
-                                </div>
-                            </div>
-                        </button>
-                    </td>
-                    <td class="font-normal text-[14px] font-roboto px-[24px] py-[11px] text-center">
-                        <div class="flex items-center gap-[12px]">
-                            <div>
-                                <button class="py-1 px-3 rounded-[5.07px] w-full text-black border-solid border-[1px] border-black hover:text-white hover:bg-black transition-all duration-[300ms]">
-                                    <div class="flex justify-center">
-                                        <div>
-                                            <p class="font-bold leading-[24px]" >Edit</p>
-                                        </div>
+                }@else {
+                    <tr>
+                        <td class="font-normal text-[14px] font-roboto text-left pl-[24px] py-[11px]">
+                            {{ screens[selectedIdx].name }}
+                        </td>
+                        <td class="font-normal text-[14px] font-roboto text-left px-[24px] py-[11px]">
+                            {{ screens[selectedIdx].capacity }}
+                        </td>
+                        <td class="font-normal text-[14px] font-roboto text-left px-[24px] py-[11px]">
+                            {{ seatCategory.join(', ') }}
+                        </td>
+                        <td class="font-normal text-[14px] font-roboto text-center px-[24px] py-[11px]">
+                            <button (click)="openModal('seatArrangement');" class="py-1 px-3 rounded-[5.07px] text-black border-solid border-[1px] border-black hover:text-white hover:bg-black transition-all duration-[300ms]">
+                                <div class="flex justify-center">
+                                    <div>
+                                        <p class="font-bold leading-[24px]" >View</p>
                                     </div>
-                                </button>
+                                </div>
+                            </button>
+                        </td>
+                        <td class="font-normal text-[14px] font-roboto text-center px-[24px] py-[11px]">
+                            <button (click)="openModal('seatNumberPattern');" class="py-1 px-3 rounded-[5.07px] text-black border-solid border-[1px] border-black hover:text-white hover:bg-black transition-all duration-[300ms]">
+                                <div class="flex justify-center">
+                                    <div>
+                                        <p class="font-bold leading-[24px]" >View</p>
+                                    </div>
+                                </div>
+                            </button>
+                        </td>
+                        <td class="font-normal text-[14px] font-roboto text-center px-[24px] py-[11px]">
+                            <button class="py-1 px-3 rounded-[5.07px] text-black border-solid border-[1px] border-black hover:text-white hover:bg-black transition-all duration-[300ms]">
+                                <div class="flex justify-center">
+                                    <div>
+                                        <p class="font-bold leading-[24px]" >Manage</p>
+                                    </div>
+                                </div>
+                            </button>
+                        </td>
+                        <td class="font-normal text-[14px] font-roboto px-[24px] py-[11px] text-center">
+                            <div class="flex items-center gap-[12px]">
+                                <div>
+                                    <button class="py-1 px-3 rounded-[5.07px] w-full text-black border-solid border-[1px] border-black hover:text-white hover:bg-black transition-all duration-[300ms]">
+                                        <div class="flex justify-center">
+                                            <div>
+                                                <p class="font-bold leading-[24px]" >Edit</p>
+                                            </div>
+                                        </div>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
@@ -140,11 +135,11 @@
                 </div>
             </div>
             <div class="mb-[24px]">
-                @for (row of seatArrangment; track $index) {
+                @for (row of screens[selectedIdx].seatLayout; track $index) {
                     <!-- row -->
                     <div class="flex gap-[12px] mb-[12px]">
-                        @for (col of row; track $index) {
-                            <div class="cursor-pointer min-w-[32px] min-h-[32px] rounded-[6px]" [class.selectedSeats]="col"></div>
+                        @for (seat of row; track $index) {
+                            <div class="cursor-pointer min-w-[32px] min-h-[32px] rounded-[6px]" [class.selectedSeats]="seat"></div>
                         }
                     </div>
                     <!-- end row -->
@@ -172,15 +167,11 @@
                     <thead>
                         <tr class="bg-[rgba(238,238,238,0.5)]">
                             <th class="font-semibold text-[14px] font-roboto text-left px-[24px] py-[11px]"></th>
-                            <th class="font-semibold text-[14px] font-roboto text-left px-[24px] py-[11px]">
-                                Recliner
-                            </th>
-                            <th class="font-semibold text-[14px] font-roboto text-left px-[24px] py-[11px]">
-                                Premium
-                            </th>
-                            <th class="font-semibold text-[14px] font-roboto text-left px-[24px] py-[11px]">
-                                Regular
-                            </th>
+                            @for (item of screens[selectedIdx].seatCategory; track $index) {
+                                <th class="font-semibold text-[14px] font-roboto text-left px-[24px] py-[11px]">
+                                    {{ item.category }}
+                                </th>
+                            }
                         </tr>
                     </thead>
                     <tbody>
@@ -188,15 +179,11 @@
                             <td class="font-semibold text-[14px] font-roboto text-left px-[24px] py-[11px] bg-[rgba(238,238,238,0.5)]">
                                 Row Number
                             </td>
-                            <td class="font-normal text-[14px] font-roboto text-left pl-[24px] py-[11px]">
-                                1
-                            </td>
-                            <td class="font-normal text-[14px] font-roboto text-left px-[24px] py-[11px]">
-                                2, 3, 4, 5
-                            </td>
-                            <td class="font-normal text-[14px] font-roboto text-left px-[24px] py-[11px]">
-                                6, 7
-                            </td>
+                            @for (item of screens[selectedIdx].seatCategory; track $index) {
+                                <td class="font-normal text-[14px] font-roboto text-left pl-[24px] py-[11px]">
+                                    {{ item.rowNumbers.join(', ') }}
+                                </td>
+                            }
                         </tr>
                     </tbody>
                 </table>

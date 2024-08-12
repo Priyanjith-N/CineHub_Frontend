@@ -1,4 +1,5 @@
 import { IDistributerList } from "./distributer.entity";
+import IScreen from "./screen.entity";
 import ITheater from "./theater.entity";
 
 export interface IGetDistributerListAPISucessfullResponse {
@@ -31,4 +32,9 @@ export interface IAddScreenErrorResponse {
     error?: string;
     message?: string;
     errorField?: string;
+}
+
+export interface IGetAllScreensSucessfullResponse {
+    message: string;
+    data: IScreen[];
 }
