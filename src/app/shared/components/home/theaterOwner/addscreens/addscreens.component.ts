@@ -253,12 +253,30 @@ export class AddscreensComponent {
   }
 
   setLayout() {
+    const capacity = this.screenForm.value.capacity;
+    let selectedSeats: number = 0;
+
     this.seatLayout = [];
     for(let i = 0;i<this.selectSeatLayout.length;i++) {
       this.seatLayout.push([]);
       for(let j = 0;j<this.selectSeatLayout[i].length;j++) {
+        if(this.selectSeatLayout[i][j]) {
+          selectedSeats++;
+        }
         this.seatLayout[i].push(this.selectSeatLayout[i][j]);
       }
+    }
+
+    if(capacity !== selectedSeats) {
+      this.seatLayout = []
+      const toastOptions: IToastOption = {
+        severity: 'warn',
+        summary: 'Error',
+        detail: `Select ${capacity} seats in total.`
+      }
+
+      this.showToast(toastOptions);
+      return;
     }
     this.closeModal();
   }

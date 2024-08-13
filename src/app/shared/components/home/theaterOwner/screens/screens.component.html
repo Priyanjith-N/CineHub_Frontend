@@ -46,7 +46,7 @@
                         Seat Arrangement
                     </th>
                     <th class="font-semibold text-[14px] font-roboto text-left px-[24px] py-[11px]">
-                        Seat Number Pattern
+                        Seat Category Pattern
                     </th>
                     <th class="font-semibold text-[14px] font-roboto text-left px-[24px] py-[11px]">
                         Movie Schedule
@@ -134,7 +134,7 @@
                     </svg>                        
                 </div>
             </div>
-            <div class="mb-[24px]">
+            <div class="mb-[50px]">
                 @for (row of screens[selectedIdx].seatLayout; track $index) {
                     <!-- row -->
                     <div class="flex gap-[12px] mb-[12px]">
@@ -145,6 +145,21 @@
                     <!-- end row -->
                 }
             </div>
+            <div class="mb-[24px]">
+                <div class="flex justify-center">
+                    <svg width="336" height="39" viewBox="0 0 336 39" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <rect x="3" y="6.5" width="315" height="23" fill="url(#pattern0_117_1071)"/>
+                        <path d="M18 24L25.5 34H0V3H56L18 24Z" fill="white"/>
+                        <path d="M315 23.5L306 38.5H335.5V0H270L315 23.5Z" fill="white"/>
+                        <defs>
+                        <pattern id="pattern0_117_1071" patternContentUnits="objectBoundingBox" width="1" height="1">
+                        <use xlink:href="#image0_117_1071" transform="matrix(0.0031746 0 0 0.0434783 0 -2.28261)"/>
+                        </pattern>
+                        <image id="image0_117_1071" width="318" height="82" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAT4AAABSCAYAAADNebilAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAASeSURBVHhe7dxLb9pYGIfxY3OHXJSk6qaL2cz3/0SzmUUXo5ncuRqw5/3bRgKaNCQxYPI+PykiDRJFkfr0PcfHREmSZAEAHInLRwBwg/ABcIfwAXCH8AFwh/ABcIfwAXCH8AFwh/ABcIfwAXCH8AFwh/ABcIfwAXCH8AFwh/ABcIfwAXCH8AFwh/ABcIfwAXCH8AFwh/ABcIfwAXCH8AFwh/ABcIfwAXCH8AFwh/ABcIfwAXCH8AFwh/ABcIfwAXCH8AFwh/ABcIfwAXCH8AFwh/ABcIfwAXCH8AFwh/ABcIfwAXCH8AFwh/ABcIfwAXCH8AFwh/ABcIfwAXCH8AFwh/ABcIfwAXCH8AFwh/ABcIfwAXDnZMOXZeU3AGqrrv9OoyRJTi4ht8MQniYhzBblDzZE5SOAw/o1Je1mCJe9EG7Oyh/UxEmF725UfHWamf0yM/ulMvYBdZYsovA4iWxIicL1IORfdXAS4XsYF8FrxkXwOi2CB5yS2bwI4HxpAbTp76pfPnEktQ7foy1nFbw4suB1s9Btb77VSRKHJQ0EakmbToNOWvyhNC0DuEyjfPmrZfAx1DJ82r9T8OSyl4beVvCm8ziMZnH+vweA+optlXbWTkN/K4CTRAEsrq1qArzo5t8eTK3CN5yGcGvBS+13pOD1O5tvTePyMGmE+YLgAaekYQHU9Ne3CK4bK4Dj2FZ1RQDPDxTAWoRvNCuu1C7K4A1eCN7IgqeNUgCn67UAjmbFBNi0IVABPOuUT+zJUcM3TmxJa8HTsRQF76y7+VYUuqEtaZMF56yBr0QXKhXA3lYAh9MigDoGoz3Afrt8omJHCd9kXkx4U3u87KbhvPdr8EZJbJMewQO+smbDAmjx2w7gcxnAbqsIYM8eq3TQ8GmyU/C0tNWxlAub8tZp707B08ULAH68FsAni5+uAg9s6asAdmwSrMJBwpcsLXjPqngRPC1r12+wWCyLJS3BA3xrKYC2BO621gJohXqcWgDHUX7x4+Y8hHajfO6D9hq+hQXvP5vwdB5vFbxoK3ia8HQeDwBWXgqg7vvV8lcToM7/fbMJsPnBAO4lfEt7rwre/UhvMM2jp/M8K0tNeAQPwBtaTZ0DXG7crZWm2v8r9gCvBlkewMY7U1Jp+FJ7JS1p7/KR1ILXzULDyr2i09o6eDzeIXjroQTwdSlkb2k303wPcD2AGqAep1F4tmXwdT/Ll8A6D7iLSsKnF9BFizub8PTmNOFpsxIA9k1bZpoAtW12bRPgzcDC9kYAPx2+8SyEv++Kv6VlU1rM6hXAEeiOr3k5Pf5xnYX+bw5Bfyp8utPir38iW4fvPmICwD5py22+DOHP77byfGUQ+/TEdzuM8jswvl+wtAVwfP8+RaHb1lXf15v06YXpjb246jqx+AHAMalDOjf8u+hJJTtyit/9mLUugON6sA6pR2+pJHw6TKhzNLozAwCOQf3RxdVdPty0snN82uf7eR+FH1fs9QE4vFV/dvlEl8rCJz8fovzDRN91hZcVMoCXvKNMupKrz/DbdfCqNHwAcAoq2eMDgFNC+AC4Q/gAuEP4ALhD+AA4E8L/rZm6HvVY3gwAAAAASUVORK5CYII="/>
+                        </defs>
+                    </svg>
+                </div> 
+            </div>
         </div>
     </div>
 }
@@ -154,7 +169,7 @@
         <div class="bg-white p-[24px] font-roboto min-w-1/2 rounded-[5.07px]">
             <div class="flex justify-between items-center mb-[24px]">
                 <div>
-                    <p class="font-medium text-[24px] leading-[32px]">Set New Seat Category</p>
+                    <p class="font-medium text-[24px] leading-[32px]">Seat Category Pattern</p>
                 </div>
                 <div (click)="closeModal();" class="cursor-pointer">
                     <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
