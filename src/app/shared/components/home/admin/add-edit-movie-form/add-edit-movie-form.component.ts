@@ -326,7 +326,6 @@ export class AddEditMovieFormComponent implements AfterViewInit {
 
   async onSubmit() {
     this.isFormInvalid();
-    console.log(this.form.errors);
     
     if (this.form.invalid || this.isFormSubmited) {
       return this.form.markAllAsTouched();

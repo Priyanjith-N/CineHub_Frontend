@@ -35,7 +35,6 @@ import { distributerAuthGuard } from './core/guards/distributer-auth.guard';
 import { canAcessAdminAuthRoutesGuard } from './core/guards/can-acess-admin-auth-routes.guard';
 import { adminAuthGuard } from './core/guards/admin-auth.guard';
 import { AdminMovieManagementComponent } from './shared/components/home/admin/admin-movie-management/admin-movie-management.component';
-import { AddMovieFormComponent } from './shared/components/home/admin/add-movie-form/add-movie-form.component';
 import { DistributeMoviesComponent } from './shared/components/home/distributer/distribute-movies/distribute-movies.component';
 import { MyMoviesComponent } from './shared/components/home/distributer/my-movies/my-movies.component';
 import { ManageTheaterComponent } from './shared/components/home/theaterOwner/manage-theater/manage-theater.component';
@@ -46,6 +45,7 @@ import { SingletheatermangeComponent } from './shared/components/home/theaterOwn
 import { ScreensComponent } from './shared/components/home/theaterOwner/screens/screens.component';
 import { AddscreensComponent } from './shared/components/home/theaterOwner/addscreens/addscreens.component';
 import { EditMovieComponentComponent } from './shared/components/home/admin/edit-movie-component/edit-movie-component.component';
+import { AddMovieComponent } from './shared/components/home/admin/add-movie/add-movie.component';
 
 export const routes: Routes = [
     {
@@ -185,7 +185,7 @@ export const routes: Routes = [
             },
             {
                 path: 'moviemanagement/addmovie',
-                component: AddMovieFormComponent
+                component: AddMovieComponent
             },
             {
                 path: 'moviemanagement/editmovie/:movieId',
