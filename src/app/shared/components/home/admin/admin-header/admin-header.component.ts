@@ -38,10 +38,9 @@ export class AdminHeaderComponent implements OnInit {
       this.heading = 'Verify Requests'
     }else if(['/userManagement', '/theaterOwnerManagement', '/distributerManagement'].includes(url)){
       this.heading = 'Administration';
-    }else if(url === '/moviemanagement' || url === '/addmovie') {
+    }else if(url === '/moviemanagement' || url === '/addmovie' || this.router.url.startsWith('/admin/moviemanagement/editmovie')) {
       this.heading = 'Movie Management'
     }
-    
   }
 
   async logout() {

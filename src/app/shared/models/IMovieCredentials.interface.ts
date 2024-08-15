@@ -1,3 +1,5 @@
+import IImage from "./common.entity";
+
 export default interface IMovieData {
     name: string;
     about: string;
@@ -30,13 +32,13 @@ export interface IMovie {
     language: string[];
     duration: IDuration;
     releaseDate: Date | undefined;
-    coverPhoto: string;
-    bannerPhoto: string;
+    coverPhoto: IImage;
+    bannerPhoto: IImage;
     trailer: string;
     category: string[];
     type: "2D" | "3D" | string;
-    cast: IMovieWorkerDetails<string>[];
-    crew: IMovieWorkerDetails<string>[];
+    cast: IMovieWorkerDetails<IImage>[];
+    crew: IMovieWorkerDetails<IImage>[];
     isTakenByDistributer: boolean;
     distributerId: string;
     profitSharingPerTicket: number;

@@ -1,6 +1,6 @@
 import IMovieData, { IMovie } from "./IMovieCredentials.interface";
 
-export interface IAddMovieErrorResponse {
+export interface IAddEditMovieErrorResponse {
     error?: string;
     message?: string;
     errorField?: string;
@@ -10,6 +10,11 @@ export interface IAddMovieErrorResponse {
 export interface IGetMoviesSuccessfullResponse {
     message: string;
     data: IMovie[];
+}
+
+export interface IGetMovieSuccessfullResponse {
+    message: string;
+    data: IMovie;
 }
 
 export interface IListOrUnlistAPISucessfullResponse {

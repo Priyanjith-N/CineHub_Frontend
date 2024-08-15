@@ -1,3 +1,5 @@
+import IImage from "./common.entity";
+
 export interface IRetriveDataSucessfullAPIResponse<T> {
     message: string;
     data: T[]
@@ -8,7 +10,7 @@ export interface IUserData {
     name: string;
     email: string;
     phoneNumber: string;
-    password?: string;
+    password: string;
     OTPVerification: boolean;
     isBlocked: boolean;
 }
@@ -18,16 +20,14 @@ export interface ITheaterOwnerData {
     name: string;
     email: string;
     phoneNumber: string;
-    password?: string;
+    password: string;
     idProof: string;
-    idProofImage: string[];
+    idProofImage: IImage[];
     OTPVerificationStatus: boolean;
     documentVerificationStatus: string;
-    idProofUpdateVerificationStatus: boolean;
-    idProofUpdateDocumentImage: string[] | null | undefined;
     isBlocked: boolean;
     role?: string;
-    licence?: string;
+    licence?: IImage;
 }
 
 export interface IDistributerData {
@@ -35,16 +35,13 @@ export interface IDistributerData {
     name: string;
     email: string;
     phoneNumber: string;
-    password?: string;
-    licence: string;
+    password: string;
+    licence: IImage;
     idProof: string;
-    idProofImage: string[];
+    idProofImage: IImage[];
     OTPVerificationStatus: boolean;
     documentVerificationStatus: string;
-    licenceUpdateDocument: string | undefined | null
-    licenceUpdateVerificationStatus: boolean;
-    idProofUpdateVerificationStatus: boolean;
-    idProofUpdateDocumentImage: string[] | undefined | null;
+    distributedMoviesList: string[],
     isBlocked: boolean;
     role?: string;
 }

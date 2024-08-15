@@ -1,45 +1,51 @@
-import { Component, inject } from '@angular/core';
+import { AfterViewInit, Component, inject, Input } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import IMovieData, {
+  IMovie,
   IMovieWorkerDetails,
 } from '../../../../models/IMovieCredentials.interface';
 import { AdminService } from '../../../../../core/services/admin.service';
 import { Observable } from 'rxjs';
-import { IAddEditMovieErrorResponse } from '../../../../models/IMovieAPIResponse.interface';
+import { IAddEditMovieErrorResponse, IGetMovieSuccessfullResponse } from '../../../../models/IMovieAPIResponse.interface';
 import IToastOption from '../../../../models/IToastOption.interface';
 import { ToastMessageService } from '../../../../../core/services/toast-message.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-add-movie-form',
+  selector: 'app-add-edit-movie-form',
   standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './add-movie-form.component.html',
-  styleUrl: './add-movie-form.component.css',
+  imports: [
+    ReactiveFormsModule
+  ],
+  templateUrl: './add-edit-movie-form.component.html',
+  styleUrl: './add-edit-movie-form.component.css'
 })
-export class AddMovieFormComponent {
+export class AddEditMovieFormComponent implements AfterViewInit {
+  @Input({ required: true }) formType: "Add Movie" | "Edit Movie" = "Add Movie";
+
   private adminService: AdminService = inject(AdminService);
   private toastMessageService: ToastMessageService = inject(ToastMessageService);
+  private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private router: Router = inject(Router);
 
   isFormSubmited: boolean = false;
-  addForm: FormGroup;
+  form: FormGroup;
   addMemberForm: FormGroup;
   member: string | null = null;
   private memberFile: File | null = null;
   previewMember: string | null = null;
-  private cast: IMovieWorkerDetails<File>[] = [];
+  private cast: IMovieWorkerDetails<File | Blob>[] = [];
   previewCast: IMovieWorkerDetails<string>[] = [];
-  private crew: IMovieWorkerDetails<File>[] = [];
+  private crew: IMovieWorkerDetails<File | Blob>[] = [];
   previewCrew: IMovieWorkerDetails<string>[] = [];
-  private coverPhoto: File | null = null;
-  private bannerPhoto: File | null = null;
-  private trailler: File | null = null;
+  private coverPhoto: File | Blob | null = null;
+  private bannerPhoto: File | Blob | null = null;
+  private trailler: File | Blob | null = null;
   coverPhotoPreview: string | null = null;
   bannerPhotoPreview: string | null = null;
 
   constructor() {
-    this.addForm = new FormGroup({
+    this.form = new FormGroup({
       name: new FormControl('', Validators.required),
       about: new FormControl('', Validators.required),
       bannerPhoto: new FormControl(''),
@@ -59,6 +65,86 @@ export class AddMovieFormComponent {
       role: new FormControl('', Validators.required),
       image: new FormControl(''),
     });
+  }
+  ngAfterViewInit(): void {
+    if(this.formType === "Edit Movie") {
+      const movieId: string = this.activatedRoute.snapshot.params['movieId'];
+
+      this.getMovieData(movieId);
+    }
+  }
+
+  private getMovieData(movieId: string) {
+    const getMovieAPIResponse$: Observable<IGetMovieSuccessfullResponse> = this.adminService.getMovie(movieId);
+
+    getMovieAPIResponse$.subscribe(
+      (res => {
+        const movieData: IMovie = res.data;
+        this.initEditForm(movieData);
+      }),
+      ((err: any) => {
+        console.log(err);
+      })
+    );
+  }
+
+  private async initEditForm(movieData: IMovie) {
+    const category: string = movieData.category.join(', ');
+    const language: string = movieData.language.join(', ');
+
+    this.form.get('name')?.setValue(movieData.name);
+    this.form.get('about')?.setValue(movieData.about);
+    this.form.get('category')?.setValue(category);
+    this.form.get('type')?.setValue(movieData.type);
+    this.form.get('language')?.setValue(language);
+    this.form.get('hours')?.setValue(movieData.duration.hours);
+    this.form.get('minutes')?.setValue(movieData.duration.minutes);
+    
+    this.cast = [];
+
+    for(const cast of movieData.cast) {
+      const blob: Blob = await this.convertImageToBlob(cast.image.imageURL);
+      const castData: IMovieWorkerDetails<Blob> = {
+        image: blob,
+        name: cast.name,
+        role: cast.role
+      }
+
+      this.cast.push(castData);
+    }
+
+    this.crew = [];
+    
+    for(const crew of movieData.crew) {
+      const blob: Blob = await this.convertImageToBlob(crew.image.imageURL);
+      const crewData: IMovieWorkerDetails<Blob> = {
+        image: blob,
+        name: crew.name,
+        role: crew.role
+      }
+
+      this.crew.push(crewData);
+    }
+
+    this.showPreviewMember("Cast");
+    this.showPreviewMember("Crew");
+
+    this.coverPhoto = await this.convertImageToBlob(movieData.coverPhoto.imageURL);
+    this.coverPhotoPreview = URL.createObjectURL(this.coverPhoto);
+    
+    this.bannerPhoto = await this.convertImageToBlob(movieData.bannerPhoto.imageURL);
+    this.bannerPhotoPreview = URL.createObjectURL(this.bannerPhoto);
+  }
+
+  private async convertImageToBlob(imgURL: string): Promise<Blob> {
+    try {
+      const data = await fetch(imgURL);
+      const blob = await data.blob();
+      
+      return blob;
+    } catch (error) {
+      throw new Error(`Error converting image to blob: ${error}`);
+    }
   }
 
   lauchAddModal(member: string) {
@@ -109,10 +195,10 @@ export class AddMovieFormComponent {
   deleteMovieWorkerImage(member: string, idx: number) {
     this.member = member;
     if (this.member === 'Cast') {
-      this.addForm.get('cast')?.setErrors(null);
+      this.form.get('cast')?.setErrors(null);
       this.cast.splice(idx, 1);
     } else if (this.member === 'Crew') {
-      this.addForm.get('crew')?.setErrors(null);
+      this.form.get('crew')?.setErrors(null);
       this.crew.splice(idx, 1);
     }
 
@@ -126,9 +212,9 @@ export class AddMovieFormComponent {
     this.previewMember = null;
   }
 
-  showPreviewMember() {
-    if (this.member === 'Cast') {
-      this.addForm.get('cast')?.setErrors(null);
+  private showPreviewMember(member?: "Cast" | "Crew") {
+    if (this.member === 'Cast' || (member && member === "Cast")) {
+      this.form.get('cast')?.setErrors(null);
       this.previewCast = [];
 
       for (const each of this.cast) {
@@ -140,8 +226,8 @@ export class AddMovieFormComponent {
         };
         this.previewCast.push(memberFile);
       }
-    } else if (this.member === 'Crew') {
-      this.addForm.get('crew')?.setErrors(null);
+    } else if (this.member === 'Crew' || (member && member === "Crew")) {
+      this.form.get('crew')?.setErrors(null);
       this.previewCrew = [];
 
       for (const each of this.crew) {
@@ -172,7 +258,7 @@ export class AddMovieFormComponent {
 
     this.memberFile = fileList[0];
     this.previewMember = URL.createObjectURL(this.memberFile);
-    this.addForm.get('image')?.setErrors(null);
+    this.form.get('image')?.setErrors(null);
 
     inputElement.value = '';
   }
@@ -196,11 +282,11 @@ export class AddMovieFormComponent {
       
 
     if (typeOfPhoto === 'coverPhoto') {
-      this.addForm.get('coverPhoto')?.setErrors(null);
+      this.form.get('coverPhoto')?.setErrors(null);
       this.coverPhoto = fileList[0];
       this.coverPhotoPreview = URL.createObjectURL(this.coverPhoto);
     } else if (typeOfPhoto === 'bannerPhoto') {
-      this.addForm.get('bannerPhoto')?.setErrors(null);
+      this.form.get('bannerPhoto')?.setErrors(null);
       this.bannerPhoto = fileList[0];
       this.bannerPhotoPreview = URL.createObjectURL(this.bannerPhoto);
     }
@@ -219,31 +305,31 @@ export class AddMovieFormComponent {
   }
 
   private isFormInvalid() {
-    this.addForm.get('cast')?.setErrors(null);
-    this.addForm.get('crew')?.setErrors(null);
-    this.addForm.get('coverPhoto')?.setErrors(null);
-    this.addForm.get('bannerPhoto')?.setErrors(null);
+    this.form.get('cast')?.setErrors(null);
+    this.form.get('crew')?.setErrors(null);
+    this.form.get('coverPhoto')?.setErrors(null);
+    this.form.get('bannerPhoto')?.setErrors(null);
 
     if(!this.cast.length) {
-      this.addForm.get('cast')?.setErrors({ message: "This Field is required." });
+      this.form.get('cast')?.setErrors({ message: "This Field is required." });
     }
     if(!this.crew.length) {
-      this.addForm.get('crew')?.setErrors({ message: "This Field is required." });
+      this.form.get('crew')?.setErrors({ message: "This Field is required." });
     }
     if(!this.coverPhoto) {
-      this.addForm.get('coverPhoto')?.setErrors({ message: "This Field is required." });
+      this.form.get('coverPhoto')?.setErrors({ message: "This Field is required." });
     }
     if(!this.bannerPhoto) {
-      this.addForm.get('bannerPhoto')?.setErrors({ message: "This Field is required." });
+      this.form.get('bannerPhoto')?.setErrors({ message: "This Field is required." });
     }
   }
 
   async onSubmit() {
     this.isFormInvalid();
-    console.log(this.addForm.errors);
+    console.log(this.form.errors);
     
-    if (this.addForm.invalid || this.isFormSubmited) {
-      return this.addForm.markAllAsTouched();
+    if (this.form.invalid || this.isFormSubmited) {
+      return this.form.markAllAsTouched();
     }
 
     this.isFormSubmited = true;
@@ -259,69 +345,88 @@ export class AddMovieFormComponent {
     const bannerPhoto: string = await this.ConvertToBase64Helper(this.bannerPhoto!);
     const coverPhoto: string = await this.ConvertToBase64Helper(this.coverPhoto!);
 
-    const language: string[] = this.addForm.value.language.split(',').map((language: string) => {
+    const language: string[] = this.form.value.language.split(',').map((language: string) => {
       return language.trim();
     });
 
-    const category: string[] = this.addForm.value.category.split(',').map((category: string) => {
+    const category: string[] = this.form.value.category.split(',').map((category: string) => {
       return category.trim();
     });
 
     const movieData: IMovieData = {
-      name: this.addForm.value.name.trim(),
-      about: this.addForm.value.about.trim(),
+      name: this.form.value.name.trim(),
+      about: this.form.value.about.trim(),
       bannerPhoto,
       coverPhoto,
       trailer: "demo just",
       cast,
       crew,
       language,
-      type: this.addForm.value.type.trim(),
+      type: this.form.value.type.trim(),
       duration: {
-        hours: this.addForm.value.hours,
-        minutes: this.addForm.value.minutes,
+        hours: this.form.value.hours,
+        minutes: this.form.value.minutes,
       },
       category
     };
 
-    console.log(movieData);
-
-    const addMovieAPIResponse$: Observable<{ message: string }> = this.adminService.addMovie(movieData);
-
-    addMovieAPIResponse$.subscribe(
-      (res => {
-        this.isFormSubmited = false;
-        console.log(res);
-        const toastOption: IToastOption = {
-          severity: 'success',
-          summary: 'Success',
-          detail: res.message
-        }
-
-        this.showToast(toastOption); // emit the toast option to show toast.
-        
-        this.router.navigate(['/admin/moviemanagement']); // navigate.
-      }),
-      (err => {
-        this.isFormSubmited = false;
-        
-        if(err.errorField) {
-          const errObj: IAddEditMovieErrorResponse = err as IAddEditMovieErrorResponse;
-          this.addForm.get(errObj.errorField!)?.setErrors({ message: errObj.message});
-          this.addForm.markAllAsTouched();
-        }else{
-          const message: string = err.message || 'Internal Server Error.'
-          const toastOption: IToastOption = {
-            severity: 'error',
-            summary: 'Error',
-            detail: message
-          }
+    if(this.formType === "Add Movie") {
+      const addMovieAPIResponse$: Observable<{ message: string }> = this.adminService.addMovie(movieData);
   
-          this.showToast(toastOption); // emit the toast option to show toast.
-        }
-      })
-    );
+      addMovieAPIResponse$.subscribe(
+        (res => {
+          this.handelSucessfullResponse(res.message);
+        }),
+        ((err: any) => {
+          this.handelErrorResponse(err);
+        })
+      );
+    }else{
+      const movieId: string = this.activatedRoute.snapshot.params['movieId'];
+
+      const editMovieAPIResponse$: Observable<{ message: string }> = this.adminService.editMovie(movieData, movieId);
+  
+      editMovieAPIResponse$.subscribe(
+        (res => {
+          this.handelSucessfullResponse(res.message);
+        }),
+        ((err: any) => {
+          this.handelErrorResponse(err);
+        })
+      );
+    }
+  }
+
+  private handelSucessfullResponse(message: string) {
+    this.isFormSubmited = false;
+    const toastOption: IToastOption = {
+      severity: 'success',
+      summary: 'Success',
+      detail: message
+    }
+
+    this.showToast(toastOption); // emit the toast option to show toast.
     
+    this.router.navigate(['/admin/moviemanagement']); // navigate.
+  }
+
+  private handelErrorResponse(err: any) {
+    this.isFormSubmited = false;
+          
+    if(err.errorField) {
+      const errObj: IAddEditMovieErrorResponse = err as IAddEditMovieErrorResponse;
+      this.form.get(errObj.errorField!)?.setErrors({ message: errObj.message});
+      this.form.markAllAsTouched();
+    }else{
+      const message: string = err.message || 'Internal Server Error.'
+      const toastOption: IToastOption = {
+        severity: 'error',
+        summary: 'Error',
+        detail: message
+      }
+
+      this.showToast(toastOption); // emit the toast option to show toast.
+    }
   }
 
   private async ConvertToBase64(
@@ -367,7 +472,7 @@ export class AddMovieFormComponent {
     }
   }
 
-  private async ConvertToBase64Helper(file: File): Promise<string> {
+  private async ConvertToBase64Helper(file: File | Blob): Promise<string> {
     try {
       const reader = new FileReader();
       reader.readAsDataURL(file);

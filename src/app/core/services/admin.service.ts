@@ -4,7 +4,7 @@ import { catchError, map, Observable, throwError } from 'rxjs';
 import { IBlockOrUnblockAPIErrorResponse, IBlockOrUnblockAPISucessfullResponse, IDistributerData, INotVerifiedDistributers, INotVerifiedTheaterOwners, IRetriveDataSucessfullAPIResponse, ISingleDataRetrivalAPIResponse, ITheaterOwnerData, IUserData } from '../../shared/models/adminAPIResponse.interface';
 import { environment } from '../../../environments/environment.development';
 import IMovieData from '../../shared/models/IMovieCredentials.interface';
-import { IAddMovieErrorResponse, IGetMoviesSuccessfullResponse, IListOrUnlistAPIErrorResponse, IListOrUnlistAPISucessfullResponse } from '../../shared/models/IMovieAPIResponse.interface';
+import { IAddEditMovieErrorResponse, IGetMoviesSuccessfullResponse, IGetMovieSuccessfullResponse, IListOrUnlistAPIErrorResponse, IListOrUnlistAPISucessfullResponse } from '../../shared/models/IMovieAPIResponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -196,7 +196,7 @@ export class AdminService {
       map(res => res as { message: string }),
       catchError((err: any) => {
         if(err.error) {
-          return throwError(err.error as IAddMovieErrorResponse)
+          return throwError(err.error as IAddEditMovieErrorResponse)
         }
 
         return throwError(err);
@@ -206,12 +206,44 @@ export class AdminService {
     return addMovieAPIResponse$;
   }
 
+  editMovie(movieData: IMovieData, movieId: string): Observable<{ message: string }> {
+    const url: string = `${this.api}/editmovie/${movieId}`;
+
+    const editMovieAPIResponse$: Observable<{ message: string }> = this.httpClient.patch<{ message: string }>(url, movieData)
+    .pipe(
+      map(res => res as { message: string }),
+      catchError((err: any) => {
+        if(err.error) {
+          return throwError(err.error as IAddEditMovieErrorResponse)
+        }
+
+        return throwError(err);
+      })
+    );
+
+    return editMovieAPIResponse$;
+  }
+
   getAllMovies(): Observable<IGetMoviesSuccessfullResponse> {
     const url: string = `${this.api}/movie`;
 
     const getDataAPIResponse$: Observable<IGetMoviesSuccessfullResponse> = this.httpClient.get<IGetMoviesSuccessfullResponse>(url)
     .pipe(
       map((response) => response as IGetMoviesSuccessfullResponse),
+      catchError((err: any) => {
+        return throwError(err);
+      })
+    );
+
+    return getDataAPIResponse$;
+  }
+
+  getMovie(movieId: string): Observable<IGetMovieSuccessfullResponse> {
+    const url: string = `${this.api}/movie/${movieId}`;
+
+    const getDataAPIResponse$: Observable<IGetMovieSuccessfullResponse> = this.httpClient.get<IGetMovieSuccessfullResponse>(url)
+    .pipe(
+      map((response) => response as IGetMovieSuccessfullResponse),
       catchError((err: any) => {
         return throwError(err);
       })

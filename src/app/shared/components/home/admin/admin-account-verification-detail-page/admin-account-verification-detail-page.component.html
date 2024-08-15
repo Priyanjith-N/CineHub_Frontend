@@ -97,9 +97,9 @@
             <div class="mb-[18px]">
                 <p class="mb-[18px]">ID Proof <span class="font-normal">( {{ myData?.idProof}} )</span></p>
                 <div class="flex gap-[18px]">
-                  @for (url of myData?.idProofImage; track $index) {
+                  @for (image of myData?.idProofImage; track $index) {
                     <div>
-                        <img class="w-[290px] h-auto" [src]="url" alt="">
+                        <img class="w-[290px] h-auto" [src]="image.imageURL" alt="">
                     </div>
                   }
                 </div>
@@ -109,7 +109,7 @@
                   <p class="mb-[18px]" >Licence</p>
                   <div class="flex gap-[18px]">
                       <div>
-                          <img class="w-[290px] h-auto" [src]="myData?.licence" alt="">
+                          <img class="w-[290px] h-auto" [src]="myData?.licence?.imageURL" alt="">
                       </div>
                   </div>
               </div>

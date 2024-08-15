@@ -45,6 +45,7 @@ import { MovieLisingBasedOnDistributerComponent } from './shared/components/home
 import { SingletheatermangeComponent } from './shared/components/home/theaterOwner/singletheatermange/singletheatermange.component';
 import { ScreensComponent } from './shared/components/home/theaterOwner/screens/screens.component';
 import { AddscreensComponent } from './shared/components/home/theaterOwner/addscreens/addscreens.component';
+import { EditMovieComponentComponent } from './shared/components/home/admin/edit-movie-component/edit-movie-component.component';
 
 export const routes: Routes = [
     {
@@ -185,6 +186,10 @@ export const routes: Routes = [
             {
                 path: 'moviemanagement/addmovie',
                 component: AddMovieFormComponent
+            },
+            {
+                path: 'moviemanagement/editmovie/:movieId',
+                component: EditMovieComponentComponent
             }
         ]
     },
