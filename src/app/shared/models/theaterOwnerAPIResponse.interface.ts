@@ -1,5 +1,6 @@
 import { IDistributerList } from "./distributer.entity";
 import { IMovie } from "./IMovieCredentials.interface";
+import { IMovieRequestDetails } from "./requestMovie.entity";
 
 export interface IGetMovieListOfDistributerDataAPISucessfullResponse {
     message: string;
@@ -7,4 +8,9 @@ export interface IGetMovieListOfDistributerDataAPISucessfullResponse {
         distributer: IDistributerList,
         movieList: IMovie[];
     };
+}
+
+export interface IGetAllMovieRequestsSucessfullResponse {
+    message: string;
+    data: IMovieRequestDetails[]
 }

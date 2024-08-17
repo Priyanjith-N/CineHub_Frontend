@@ -46,6 +46,7 @@ import { ScreensComponent } from './shared/components/home/theaterOwner/screens/
 import { AddscreensComponent } from './shared/components/home/theaterOwner/addscreens/addscreens.component';
 import { EditMovieComponentComponent } from './shared/components/home/admin/edit-movie-component/edit-movie-component.component';
 import { AddMovieComponent } from './shared/components/home/admin/add-movie/add-movie.component';
+import { MyMovieRequestsComponent } from './shared/components/home/theaterOwner/my-movie-requests/my-movie-requests.component';
 
 export const routes: Routes = [
     {
@@ -234,6 +235,11 @@ export const routes: Routes = [
                 path: 'distributors/:distributerId',
                 canActivate: [theaterOwnerAuthGuard],
                 component: MovieLisingBasedOnDistributerComponent
+            },
+            {
+                path: 'myrequests',
+                canActivate: [theaterOwnerAuthGuard],
+                component: MyMovieRequestsComponent
             },
             {
                 path: 'managetheater/:theaterId',

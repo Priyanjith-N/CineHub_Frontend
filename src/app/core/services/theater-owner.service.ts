@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { IAddTheaterErrorResponse, IAddTheaterSucessfullResponse, IGetDistributerListAPISucessfullResponse, IGetAllTheatersSucessfullResponse, IAddScreenSucessfullResponse, IAddScreenErrorResponse, IGetAllScreensSucessfullResponse, IGetTheaterSucessfullResponse, IRequestMovieSucessfullResponse, IRequestMovieErrorResponse } from '../../shared/models/ITheaterOwnerAPIResponse.interface';
-import { IGetMovieListOfDistributerDataAPISucessfullResponse } from '../../shared/models/theaterOwnerAPIResponse.interface';
+import { IGetAllMovieRequestsSucessfullResponse, IGetMovieListOfDistributerDataAPISucessfullResponse } from '../../shared/models/theaterOwnerAPIResponse.interface';
 import ITheaterCredentials, { IScreenCredentials } from '../../shared/models/ITheaterCredentials.interface';
 import IMovieRequestCredentials from '../../shared/models/requestMovie.entity';
 
@@ -139,5 +139,19 @@ export class TheaterOwnerService {
     );
 
     return requestMovieAPIResponse$;
+  }
+
+  getAllMovieRequests(): Observable<IGetAllMovieRequestsSucessfullResponse> {
+    const url: string = `${this.api}/getallmovierequest`;
+
+    const APIResponse$: Observable<IGetAllMovieRequestsSucessfullResponse> = this.httpClient.get<IGetAllMovieRequestsSucessfullResponse>(url)
+    .pipe(
+      map(res => res as IGetAllMovieRequestsSucessfullResponse),
+      catchError(err => {
+        return throwError(err);
+      })
+    );
+
+    return APIResponse$;
   }
 }
