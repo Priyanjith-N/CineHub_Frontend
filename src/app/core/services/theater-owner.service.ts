@@ -2,9 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { IAddTheaterErrorResponse, IAddTheaterSucessfullResponse, IGetDistributerListAPISucessfullResponse, IGetAllTheatersSucessfullResponse, IAddScreenSucessfullResponse, IAddScreenErrorResponse, IGetAllScreensSucessfullResponse, IGetTheaterSucessfullResponse } from '../../shared/models/ITheaterOwnerAPIResponse.interface';
+import { IAddTheaterErrorResponse, IAddTheaterSucessfullResponse, IGetDistributerListAPISucessfullResponse, IGetAllTheatersSucessfullResponse, IAddScreenSucessfullResponse, IAddScreenErrorResponse, IGetAllScreensSucessfullResponse, IGetTheaterSucessfullResponse, IRequestMovieSucessfullResponse, IRequestMovieErrorResponse } from '../../shared/models/ITheaterOwnerAPIResponse.interface';
 import { IGetMovieListOfDistributerDataAPISucessfullResponse } from '../../shared/models/theaterOwnerAPIResponse.interface';
 import ITheaterCredentials, { IScreenCredentials } from '../../shared/models/ITheaterCredentials.interface';
+import IMovieRequestCredentials from '../../shared/models/requestMovie.entity';
 
 @Injectable({
   providedIn: 'root'
@@ -120,5 +121,23 @@ export class TheaterOwnerService {
     ); 
 
     return getTheaterAPIResponse$;
+  }
+
+  requestForMovie(data: IMovieRequestCredentials): Observable<IRequestMovieSucessfullResponse> {
+    const url: string = `${this.api}/requestmovie`;
+
+    const requestMovieAPIResponse$: Observable<IRequestMovieSucessfullResponse> = this.httpClient.post<IRequestMovieSucessfullResponse>(url, data)
+    .pipe(
+      map(res => res as IRequestMovieSucessfullResponse),
+      catchError((err: any) => {
+        if(err.error) {
+          return throwError(err.error as IRequestMovieErrorResponse);
+        }
+
+        return throwError(err);
+      })
+    );
+
+    return requestMovieAPIResponse$;
   }
 }

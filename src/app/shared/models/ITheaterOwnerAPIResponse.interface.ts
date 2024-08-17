@@ -39,6 +39,17 @@ export interface IAddScreenErrorResponse {
     errorField?: string;
 }
 
+export interface IRequestMovieSucessfullResponse {
+    message: string;
+}
+
+export interface IRequestMovieErrorResponse {
+    requiredCredentialsError?: boolean;
+    error?: string;
+    message?: string;
+    errorField?: "AlreadyRequested" | "blocked";
+}
+
 export interface IGetAllScreensSucessfullResponse {
     message: string;
     data: IScreen[];

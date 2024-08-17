@@ -129,10 +129,10 @@
                         <p class="font-bold">Cast</p>
                         <p class="font-semibold text-[10px] leading-[28px] mb-[7px]" >*Add your cast information.</p>
                     </div>
-                    <div class="flex gap-[24px] items-center relative">
+                    <div class="flex flex-wrap gap-[24px] items-center relative">
                         @for (each of previewCast; track $index) {
                             <div class="font-roboto font-normal">
-                                <div class="relative w-fit">
+                                <div class="relative w-[120px]">
                                     <button (click)="deleteMovieWorkerImage('Cast', $index);" class="absolute right-0 top-0">
                                         <i class="fa-regular fa-circle-xmark" style="color: #000000;"></i>
                                     </button>
@@ -159,10 +159,10 @@
                         <p class="font-bold">Crew</p>
                         <p class="font-semibold text-[10px] leading-[28px] mb-[7px]" >*Add your Crew information.</p>
                     </div>
-                    <div class="flex gap-[24px] items-center relative">
+                    <div class="flex flex-wrap gap-[24px] items-center relative">
                         @for (each of previewCrew; track $index) {
                             <div class="font-roboto font-normal">
-                                <div class="relative w-fit">
+                                <div class="relative w-[120px]">
                                     <button (click)="deleteMovieWorkerImage('Crew', $index);" class="absolute right-0 top-0">
                                         <i class="fa-regular fa-circle-xmark" style="color: #000000;"></i>
                                     </button>
