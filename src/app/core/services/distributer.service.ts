@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { IDistributeMovieErrorResponse, IDistributeMovieSuccessfullResponse, IEditProfitSharingErrorResponse, IEditProfitSharingSuccessfullResponse, IGetAllAvaliableMovieDataSuccessfullResponse, IMyDistributedMoviesErrorResponse, IMyDistributedMoviesSuccessfullResponse } from '../../shared/models/IMovieAPIResponse.interface';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { IDistributeMovieData } from '../../shared/models/IMovieCredentials.interface';
+import { IGetAllMovieRequestsSucessfullResponse } from '../../shared/models/distributerAPIResponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -83,5 +84,19 @@ export class DistributerService {
     );
 
     return editProfitSharingAPIResponse$;
+  }
+
+  getAllMovieRequest(): Observable<IGetAllMovieRequestsSucessfullResponse> {
+    const url: string = `${this.api}/getallmovierequests`;
+
+    const APIResponse$: Observable<IGetAllMovieRequestsSucessfullResponse> = this.httpClient.get<IGetAllMovieRequestsSucessfullResponse>(url)
+    .pipe(
+      map(res => res),
+      catchError((err: any) => {
+        return throwError(err);
+      })
+    );
+
+    return APIResponse$;
   }
 }

@@ -48,8 +48,22 @@
                     </div>
                 </li>
             </a>
-            <a routerLink="/distributer/mymovies" >
+            <a routerLink="/distributer/movierequests" >
                 <li #sourceLi (click)="selectOption(3);" class="py-[18px] pl-[17px] relative" routerLinkActive="activeOption" [routerLinkActiveOptions]="{ exact: false }">
+                    <div class="flex gap-[8px] items-center">
+                        <div>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16.7149 5.35226C16.7149 5.2344 16.6185 5.13797 16.5006 5.13797H6.21491C6.09706 5.13797 6.00063 5.2344 6.00063 5.35226V6.63797C6.00063 6.75583 6.09706 6.85226 6.21491 6.85226H16.5006C16.6185 6.85226 16.7149 6.75583 16.7149 6.63797V5.35226ZM16.5006 8.99512H6.21491C6.09706 8.99512 6.00063 9.09155 6.00063 9.2094V10.4951C6.00063 10.613 6.09706 10.7094 6.21491 10.7094H16.5006C16.6185 10.7094 16.7149 10.613 16.7149 10.4951V9.2094C16.7149 9.09155 16.6185 8.99512 16.5006 8.99512ZM11.1435 12.8523H6.21491C6.09706 12.8523 6.00063 12.9487 6.00063 13.0665V14.3523C6.00063 14.4701 6.09706 14.5665 6.21491 14.5665H11.1435C11.2613 14.5665 11.3578 14.4701 11.3578 14.3523V13.0665C11.3578 12.9487 11.2613 12.8523 11.1435 12.8523ZM9.85777 21.1023H3.85777V2.24512H18.8578V11.4594C18.8578 11.5773 18.9542 11.6737 19.0721 11.6737H20.5721C20.6899 11.6737 20.7863 11.5773 20.7863 11.4594V1.17369C20.7863 0.699581 20.4033 0.316546 19.9292 0.316546H2.78634C2.31223 0.316546 1.9292 0.699581 1.9292 1.17369V22.1737C1.9292 22.6478 2.31223 23.0308 2.78634 23.0308H9.85777C9.97563 23.0308 10.0721 22.9344 10.0721 22.8165V21.3165C10.0721 21.1987 9.97563 21.1023 9.85777 21.1023ZM19.4149 19.1094C20.1917 18.4049 20.6792 17.3871 20.6792 16.254C20.6792 14.1246 18.9515 12.3969 16.8221 12.3969C14.6926 12.3969 12.9649 14.1246 12.9649 16.254C12.9649 17.3871 13.4524 18.4049 14.2292 19.1094C12.7024 19.9799 11.6524 21.5924 11.5721 23.4514C11.5667 23.5719 11.6658 23.6737 11.7863 23.6737H13.0747C13.1872 23.6737 13.281 23.5853 13.289 23.4701C13.3935 21.6165 14.939 20.138 16.8221 20.138C18.7051 20.138 20.2506 21.6165 20.3551 23.4701C20.3605 23.5826 20.4542 23.6737 20.5694 23.6737H21.8578C21.981 23.6737 22.0774 23.5719 22.0721 23.4514C21.9944 21.5898 20.9417 19.9799 19.4149 19.1094ZM16.8221 14.1112C18.006 14.1112 18.9649 15.0701 18.9649 16.254C18.9649 17.438 18.006 18.3969 16.8221 18.3969C15.6381 18.3969 14.6792 17.438 14.6792 16.254C14.6792 15.0701 15.6381 14.1112 16.8221 14.1112Z" fill="white"/>
+                            </svg>                                                           
+                        </div>
+                        <div>
+                            <p>Manage Movie Requests</p>
+                        </div>
+                    </div>
+                </li>
+            </a>
+            <a routerLink="/distributer/mymovies" >
+                <li #sourceLi (click)="selectOption(4);" class="py-[18px] pl-[17px] relative" routerLinkActive="activeOption" [routerLinkActiveOptions]="{ exact: false }">
                     <div class="flex gap-[8px] items-center">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
@@ -64,7 +78,7 @@
             </a>
             <li class="my-[8px] h-[1px] w-full bg-[rgba(255,255,255,0.25)]"></li>
             <a routerLink="/distributer/notification">
-                <li #sourceLi (click)="selectOption(4);" class="py-[18px] pl-[17px] relative" routerLinkActive="activeOption" [routerLinkActiveOptions]="{ exact: true }">
+                <li #sourceLi (click)="selectOption(5);" class="py-[18px] pl-[17px] relative" routerLinkActive="activeOption" [routerLinkActiveOptions]="{ exact: true }">
                     <div class="flex gap-[8px] items-center">
                         <div>
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -78,7 +92,7 @@
                 </li>
             </a>
             <a routerLink="/distributer/settings">
-                <li #sourceLi (click)="selectOption(5);" class="py-[18px] pl-[17px] relative" routerLinkActive="activeOption" [routerLinkActiveOptions]="{ exact: true }">
+                <li #sourceLi (click)="selectOption(6);" class="py-[18px] pl-[17px] relative" routerLinkActive="activeOption" [routerLinkActiveOptions]="{ exact: true }">
                     <div class="flex gap-[8px] items-center">
                         <div>
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

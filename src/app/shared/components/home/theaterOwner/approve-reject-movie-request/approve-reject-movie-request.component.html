@@ -23,8 +23,14 @@
                 </th>
                 <th class="font-semibold text-[14px] font-roboto text-left px-[24px] py-[11px]">
                     <div class="w-fit text-center">
-                        <p class="w-fit">Requested To</p>
-                        <p>( Distributor )</p>
+                        <p>Requested</p>
+                        <p class="w-fit">Theater Owner</p>
+                    </div>
+                </th>
+                <th class="font-semibold text-[14px] font-roboto text-left px-[24px] py-[11px]">
+                    <div class="w-fit text-center">
+                        <p>Distibuted</p>
+                        <p class="w-fit">Profit Sharing Per Ticket (%)</p>
                     </div>
                 </th>
                 <th class="font-semibold text-[14px] font-roboto text-left px-[24px] py-[11px]">
@@ -46,10 +52,7 @@
                     </div>
                 </th>
                 <th class="font-semibold text-[14px] font-roboto text-left px-[24px] py-[11px]">
-                    <div class="w-fit text-center">
-                        <p class="w-fit">Request</p>
-                        <p>Status</p>
-                    </div>
+                    Actions
                 </th>
             </tr>
         </thead>
@@ -67,7 +70,7 @@
                     <td class="font-normal text-[14px] font-roboto text-left px-[24px] py-[11px]">
                         <div class="flex gap-[12px] items-center">
                             <div>
-                                <img class="w-[60px] h-auto object-center object-cover" [src]="data.movieData.coverPhoto.imageURL" alt="movieCoverImage">
+                                <img class="min-w-[60px] max-w-[60px] h-auto object-center object-cover" [src]="data.movieData.coverPhoto.imageURL" alt="movieCoverImage">
                             </div>
                             <div>
                                 <h2 class="text-[14px] font-bold">{{ data.movieData.name }}</h2>
@@ -76,10 +79,13 @@
                         </div>
                     </td>
                     <td class="font-normal text-[14px] font-roboto text-left px-[24px] py-[11px]">
-                        {{ data.distributerData.name }}
+                        {{ data.theaterOwnerData.name }}
                     </td>
                     <td class="font-normal text-[14px] font-roboto text-left px-[24px] py-[11px]">
-                        {{ data.profitSharingPerTicket }} %
+                        {{ data.movieData.profitSharingPerTicket }}
+                    </td>
+                    <td class="font-normal text-[14px] font-roboto text-left px-[24px] py-[11px]">
+                        {{ data.profitSharingPerTicket }}
                     </td>
                     <td class="font-normal text-[14px] font-roboto text-left px-[24px] py-[11px]">
                         {{ data.timePeriod }}
@@ -88,7 +94,14 @@
                         {{ data.date | dateFormatter }}
                     </td>
                     <td class="font-normal text-[14px] font-roboto text-left px-[24px] py-[11px]">
-                        {{ data.requestStatus }}
+                        <div class="flex justify-end items-center gap-[12px]">
+                            <div>
+                                <button type="submit" class="py-[6px] px-[16px] bg-black font-medium text-16px rounded-[5.07px] text-white">Approve</button>
+                            </div>
+                            <div>
+                                <button type="button" class="py-[6px] px-[16px] font-medium text-16px rounded-[5.07px] text-red-600 border-[1px] border-solid border-red-600 hover:bg-red-600 hover:text-white">Reject</button>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             }

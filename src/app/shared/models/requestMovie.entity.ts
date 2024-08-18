@@ -1,5 +1,6 @@
 import { IDistributer } from "./distributer.entity";
 import { IMovie } from "./IMovieCredentials.interface";
+import ITheaterOwner from "./theaterOwner.entity";
 
 export interface IMovieRequest {
     _id: string;
@@ -21,5 +22,10 @@ export default interface IMovieRequestCredentials {
 
 export interface IMovieRequestDetails extends IMovieRequest {
     distributerData: IDistributer,
+    movieData: IMovie
+}
+
+export interface IMovieRequestDetailsForDistributer extends IMovieRequest {
+    theaterOwnerData: ITheaterOwner,
     movieData: IMovie
 }
