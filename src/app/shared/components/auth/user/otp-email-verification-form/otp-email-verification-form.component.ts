@@ -191,6 +191,10 @@ export class OtpEmailVerificationFormComponent implements AfterViewInit, OnDestr
         this.isFormSubmited = false;
         this.resetTimer();
 
+        if(res.token){
+          localStorage.setItem('token', res.token); // seting token in localstorage
+        }
+
         this.router.navigate(['/']); // navigate to home after verification.
       },
       (err: any) => {

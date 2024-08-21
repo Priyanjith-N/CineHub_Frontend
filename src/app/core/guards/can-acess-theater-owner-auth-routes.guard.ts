@@ -14,6 +14,11 @@ export const canAcessTheaterOwnerAuthRoutesGuard: CanActivateFn = async (route: 
   }
 
   try {
+    const token: string | null = localStorage.getItem('token');
+    
+
+    if(!token) throw new Error('NO TOKEN AVAILABLE');
+
     await theaterOwnerAuthService.handelVerifyAuthTokenRequest(); // if it respond other than 200 status code promise will reject it comes in catch.
 
     router.navigate(['/theaterOwner']);

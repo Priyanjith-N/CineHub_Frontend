@@ -14,6 +14,11 @@ export const canAcessUserAuthRoutesGuard: CanActivateFn = async (route: Activate
   }
 
   try {
+    const token: string | null = localStorage.getItem('token');
+    
+
+    if(!token) throw new Error('NO TOKEN AVAILABLE');
+
     await userAuthService.handelVerifyAuthTokenRequest(); // if it respond other than 200 status code promise will reject it comes in catch.
 
     router.navigate(['/']);

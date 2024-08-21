@@ -29,6 +29,7 @@ export class HomePageComponent {
     logoutAPIResponse$.subscribe(
       (res: ILogoutSuccessfullResponse) => {
         // toast message if needed
+        localStorage.removeItem('token') // remove token
         this.router.navigate(['/auth/login']);
       },
       (err: any) => {

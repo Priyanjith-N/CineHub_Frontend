@@ -1,5 +1,6 @@
 export interface ILoginSuccessfullResponse {
     message: string;
+    token: string;
 }
 
 export interface ILoginErrorResponse {

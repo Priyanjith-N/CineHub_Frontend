@@ -7,6 +7,11 @@ export const theaterOwnerAuthGuard: CanActivateFn = async (route: ActivatedRoute
   const theaterOwnerAuthService: TheaterOwnerAuthService = inject(TheaterOwnerAuthService);
 
   try {
+    const token: string | null = localStorage.getItem('token');
+    
+
+    if(!token) throw new Error('NO TOKEN AVAILABLE');
+
     await theaterOwnerAuthService.handelVerifyAuthTokenRequest(); // if it respond other than 200 status code promise will reject it comes in catch.
 
     return true;

@@ -56,6 +56,8 @@ export class TheaterOwerLoginFormComponent implements OnInit {
         }
 
         this.showToast(toastOption); // emit the toast option to show toast.
+
+        localStorage.setItem('token', res.token); // seting token in localstorage
         
         this.router.navigate(['/theaterOwner']); // navigate to home Page after successfull login.
       }),
@@ -107,6 +109,8 @@ export class TheaterOwerLoginFormComponent implements OnInit {
         }
 
         this.showToast(toastOption); // emit the toast option to show toast.
+
+        localStorage.setItem('token', res.token); // seting token in localstorage
         
         this.router.navigate(['/theaterOwner']); // navigate to home Page after successfull login.
       },

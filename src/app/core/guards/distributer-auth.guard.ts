@@ -7,6 +7,11 @@ export const distributerAuthGuard: CanActivateFn = async (route: ActivatedRouteS
   const distributerAuthService: DistributerAuthService = inject(DistributerAuthService);
 
   try {
+    const token: string | null = localStorage.getItem('token');
+    
+
+    if(!token) throw new Error('NO TOKEN AVAILABLE');
+
     await distributerAuthService.handelVerifyAuthTokenRequest(); // if it respond other than 200 status code promise will reject it comes in catch.
 
     return true;

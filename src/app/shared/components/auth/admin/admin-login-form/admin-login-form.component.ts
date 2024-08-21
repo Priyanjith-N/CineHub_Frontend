@@ -68,6 +68,8 @@ export class AdminLoginFormComponent {
         }
 
         this.showToast(toastOption); // emit the toast option to show toast.
+
+        localStorage.setItem('token', res.token); // seting token in localstorage
         
         this.router.navigate(['/admin']); // navigate to home Page after successfull login.
       },

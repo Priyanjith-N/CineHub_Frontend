@@ -28,6 +28,7 @@ export class TheaterOwnerHomePageComponent {
     
     logoutAPIResponse$.subscribe(
       (res: ILogoutSuccessfullResponse) => {
+        localStorage.removeItem('token') // remove token
         // toast message if needed
         this.router.navigate(['/theaterOwner/auth/login']);
       },

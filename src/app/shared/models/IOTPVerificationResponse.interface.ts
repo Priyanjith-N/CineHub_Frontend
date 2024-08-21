@@ -1,5 +1,6 @@
 export interface IOTPVerificationSuccessfullResponse {
     message: string;
+    token?: string;
 }
 
 export interface IOTPVerificationErrorResponse {

@@ -56,6 +56,7 @@ export class HeaderComponent implements OnInit {
     logoutAPIResponse$.subscribe(
       (res: ILogoutSuccessfullResponse) => {
         // toast message if needed
+        localStorage.removeItem('token') // remove token
         this.router.navigate(['/theaterOwner/auth/login']);
       },
       (err: any) => {
