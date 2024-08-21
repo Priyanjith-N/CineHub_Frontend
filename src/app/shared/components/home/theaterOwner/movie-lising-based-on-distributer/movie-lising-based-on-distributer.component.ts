@@ -125,6 +125,14 @@ export class MovieLisingBasedOnDistributerComponent {
           }
   
           this.showToast(toastOption);
+        }else if((err as IRequestMovieErrorResponse).errorField === 'AlreadyExists') {
+          const toastOption: IToastOption = {
+            severity: 'warn',
+            summary: 'Already In Collection',
+            detail: `${this.requestMovie?.name} movie already exist in collections.`
+          }
+  
+          this.showToast(toastOption);
         }else {
           const toastOption: IToastOption = {
             severity: 'error',

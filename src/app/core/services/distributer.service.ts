@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { IDistributeMovieErrorResponse, IDistributeMovieSuccessfullResponse, IEditProfitSharingErrorResponse, IEditProfitSharingSuccessfullResponse, IGetAllAvaliableMovieDataSuccessfullResponse, IMyDistributedMoviesErrorResponse, IMyDistributedMoviesSuccessfullResponse } from '../../shared/models/IMovieAPIResponse.interface';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { IDistributeMovieData } from '../../shared/models/IMovieCredentials.interface';
-import { IGetAllMovieRequestsSucessfullResponse } from '../../shared/models/distributerAPIResponse.interface';
+import { IApproveMovieRequestSucessfullResponse, IGetAllMovieRequestsSucessfullResponse, IRejectMovieRequestSucessfullResponse } from '../../shared/models/distributerAPIResponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -95,6 +95,37 @@ export class DistributerService {
       catchError((err: any) => {
         return throwError(err);
       })
+    );
+
+    return APIResponse$;
+  }
+
+  approveMovieRequest(requestId: string, theaterOwnerEmail: string, movieName: string): Observable<IApproveMovieRequestSucessfullResponse> {
+    const url: string = `${this.api}/approvemovierequest/${requestId}`;
+
+    const APIResponse$: Observable<IApproveMovieRequestSucessfullResponse> = this.httpClient.patch<IApproveMovieRequestSucessfullResponse>(url, {
+      theaterOwnerEmail,
+      movieName
+    })
+    .pipe(
+      map(res => res),
+      catchError((err: any) => throwError(err))
+    );
+
+    return APIResponse$;
+  }
+
+  rejectMovieRequest(requestId: string, theaterOwnerEmail: string, movieName: string, reason: string): Observable<IRejectMovieRequestSucessfullResponse> {
+    const url: string = `${this.api}/rejectmovierequest/${requestId}`;
+
+    const APIResponse$: Observable<IRejectMovieRequestSucessfullResponse> = this.httpClient.patch<IRejectMovieRequestSucessfullResponse>(url, {
+      theaterOwnerEmail,
+      movieName,
+      reason
+    })
+    .pipe(
+      map(res => res),
+      catchError((err: any) => throwError(err))
     );
 
     return APIResponse$;

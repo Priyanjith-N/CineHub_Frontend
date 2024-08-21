@@ -47,7 +47,7 @@ import { AddscreensComponent } from './shared/components/home/theaterOwner/addsc
 import { EditMovieComponentComponent } from './shared/components/home/admin/edit-movie-component/edit-movie-component.component';
 import { AddMovieComponent } from './shared/components/home/admin/add-movie/add-movie.component';
 import { MyMovieRequestsComponent } from './shared/components/home/theaterOwner/my-movie-requests/my-movie-requests.component';
-import { ApproveRejectMovieRequestComponent } from './shared/components/home/theaterOwner/approve-reject-movie-request/approve-reject-movie-request.component';
+import { ApproveRejectMovieRequestComponent } from './shared/components/home/distributer/approve-reject-movie-request/approve-reject-movie-request.component';
 
 export const routes: Routes = [
     {

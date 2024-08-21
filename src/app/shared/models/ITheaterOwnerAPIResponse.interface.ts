@@ -47,7 +47,7 @@ export interface IRequestMovieErrorResponse {
     requiredCredentialsError?: boolean;
     error?: string;
     message?: string;
-    errorField?: "AlreadyRequested" | "blocked";
+    errorField?: "AlreadyRequested" | "blocked" | "AlreadyExists";
 }
 
 export interface IGetAllScreensSucessfullResponse {

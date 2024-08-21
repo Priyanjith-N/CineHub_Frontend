@@ -1,7 +1,0 @@
-.evenColor {
-    @apply bg-[rgba(238,238,238,0.25)];
-}
-
-.oddColor {
-    @apply bg-white;
-}
