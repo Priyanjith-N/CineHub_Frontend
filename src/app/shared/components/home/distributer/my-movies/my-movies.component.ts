@@ -140,44 +140,6 @@ export class MyMoviesComponent {
       }),
       ((err: any) => {
         this.isFormSubmited = false;
-        if(err.errorField) {
-          const errObj: IEditProfitSharingErrorResponse = err as IEditProfitSharingErrorResponse;
-          const toastOption: IToastOption = {
-            severity: 'warn',
-            summary: errObj.message!,
-            detail: 'contact with admins.'
-          }
-          
-          this.showToast(toastOption);
-        }else if(err.requiredCredentialsError) {
-          const errMessage: string = err.message;
-
-          const toastOption: IToastOption = {
-            severity: 'error',
-            summary: 'Error',
-            detail: errMessage
-          }
-  
-          this.showToast(toastOption); // emit the toast option to show toast.
-        }else if(err.message) {
-          const errObj: IEditProfitSharingErrorResponse = err as IEditProfitSharingErrorResponse;
-          const toastOption: IToastOption = {
-            severity: 'warn',
-            summary: 'Token Error',
-            detail: errObj.message!
-          }
-
-          this.showToast(toastOption);
-        }else{
-          console.log(err);
-          const toastOption: IToastOption = {
-            severity: 'error',
-            summary: 'Error',
-            detail: 'Internal Server Error.'
-          }
-  
-          this.showToast(toastOption); // emit the toast option to show toast.
-        }
       })
     );
   }

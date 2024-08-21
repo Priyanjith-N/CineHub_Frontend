@@ -61,24 +61,6 @@ export class LoginFormComponent implements OnInit {
       }),
       ((err: any) => {
         this.authService.signOut();
-        
-        const toastOption: IToastOption = {
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Internal Server Error.'
-        }
-
-        if(err.requiredErrMessage) {
-          toastOption.detail = err.requiredErrMessage;
-        }else if(err.isBlocked) {
-          const errObj: ILoginErrorResponse = err.error as ILoginErrorResponse;
-
-          toastOption.severity = 'warn';
-          toastOption.summary = errObj.message!;
-          toastOption.detail = 'contact with admins.'
-        }
-
-        this.showToast(toastOption);
       })
     );
   }
@@ -129,15 +111,7 @@ export class LoginFormComponent implements OnInit {
         
         if(err?.errorField){
           const errObj: ILoginErrorResponse = err as ILoginErrorResponse;
-          if(errObj.errorField === 'blocked') {
-            const toastOption: IToastOption = {
-              severity: 'warn',
-              summary: errObj.message!,
-              detail: 'contact with admins.'
-            }
-            
-            this.showToast(toastOption);
-          }else if(errObj.errorField === 'otp') {
+          if(errObj.errorField === 'otp') {
             const toastOption: IToastOption = {
               severity: 'info',
               summary: errObj.message!,
@@ -151,25 +125,6 @@ export class LoginFormComponent implements OnInit {
             this.loginForm.get(errObj.errorField!)?.setErrors({ message: errObj.message});
             this.loginForm.markAllAsTouched();
           }
-          return;
-        }else if(err?.error){
-          // toast message
-          const toastOption: IToastOption = {
-            severity: 'error',
-            summary: 'Error',
-            detail: 'Internal Server Error.'
-          }
-  
-          this.showToast(toastOption); // emit the toast option to show toast.
-        }else{
-          // error connecting toast message
-          const toastOption: IToastOption = {
-            severity: 'error',
-            summary: 'Error',
-            detail: 'Something Went Wrong.'
-          }
-  
-          this.showToast(toastOption); // emit the toast option to show toast.
         }
       }
     );

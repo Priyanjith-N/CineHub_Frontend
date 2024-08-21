@@ -117,16 +117,6 @@ export class DistributerRegisterFormComponent {
           
           this.registerFrom.get(errObj.errorField!)?.setErrors({ message: errObj.message});
           this.registerFrom.markAllAsTouched();
-        }else {
-          const errMessage: string = err?.requiredErrMessage || 'Something Went Wrong.';
-
-          const toastOption: IToastOption = {
-            severity: 'error',
-            summary: 'Error',
-            detail: errMessage
-          }
-  
-          this.showToast(toastOption); // emit the toast option to show toast.
         }
       })
     );

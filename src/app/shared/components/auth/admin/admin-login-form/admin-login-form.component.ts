@@ -76,24 +76,6 @@ export class AdminLoginFormComponent {
         if(err?.errorField){
           const errObj: ILoginErrorResponse = err as ILoginErrorResponse;
           this.loginForm.get(errObj.errorField!)?.setErrors({ message: errObj.message});
-        }else if(err?.error){
-          // toast message
-          const toastOption: IToastOption = {
-            severity: 'error',
-            summary: 'Error',
-            detail: 'Internal Server Error.'
-          }
-  
-          this.showToast(toastOption); // emit the toast option to show toast.
-        }else{
-          // error connecting toast message
-          const toastOption: IToastOption = {
-            severity: 'error',
-            summary: 'Error',
-            detail: 'Something Went Wrong.'
-          }
-  
-          this.showToast(toastOption); // emit the toast option to show toast.
         }
       }
     );

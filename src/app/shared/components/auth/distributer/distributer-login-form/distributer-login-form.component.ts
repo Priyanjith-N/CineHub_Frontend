@@ -62,27 +62,11 @@ export class DistributerLoginFormComponent {
       ((err: any) => {
         this.authService.signOut();
         
-        const toastOption: IToastOption = {
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Internal Server Error.'
-        }
-
-        if(err.requiredErrMessage) {
-          toastOption.detail = err.requiredErrMessage;
-        }else if(err?.notDocumentVerified) {
+        if(err?.notDocumentVerified) {
           this.documentVerificationPendingMessagePageService.setValue(true);
           this.router.navigate(['/distributer/auth/accountNotVerified']); // navigating to account not verified page for showing welcome message.
           return;
-        }else if(err.isBlocked) {
-          const errObj: ILoginErrorResponse = err.error as ILoginErrorResponse;
-
-          toastOption.severity = 'warn';
-          toastOption.summary = errObj.message!;
-          toastOption.detail = 'contact with admins.'
         }
-
-        this.showToast(toastOption);
       })
     );
   }
@@ -150,26 +134,6 @@ export class DistributerLoginFormComponent {
           this.documentVerificationPendingMessagePageService.setValue(true);
 
           this.router.navigate(['/distributer/auth/accountNotVerified']); // navigating to account not verified page for showing welcome message.
-        }else if(err.isBlocked) {
-          const errObj: ILoginErrorResponse = err.error as ILoginErrorResponse;
-
-          const toastOption: IToastOption = {
-            severity: 'warn',
-            summary: errObj.message!,
-            detail: 'contact with admins.'
-          }
-          
-          this.showToast(toastOption);
-        }else{
-          const errMessage: string = err?.requiredErrMessage || 'Something Went Wrong.';
-
-          const toastOption: IToastOption = {
-            severity: 'error',
-            summary: 'Error',
-            detail: errMessage
-          }
-  
-          this.showToast(toastOption); // emit the toast option to show toast.
         }
       })
     );

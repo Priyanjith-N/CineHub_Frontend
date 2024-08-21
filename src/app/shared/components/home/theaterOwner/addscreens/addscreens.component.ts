@@ -374,15 +374,6 @@ export class AddscreensComponent {
           const errObj: IAddScreenErrorResponse = err as IAddScreenErrorResponse;
           this.screenForm.get(errObj.errorField!)?.setErrors({ message: errObj.message});
           this.screenForm.markAllAsTouched();
-        }else{
-          const message: string = err.message || 'Internal Server Error.'
-          const toastOption: IToastOption = {
-            severity: 'error',
-            summary: 'Error',
-            detail: message
-          }
-  
-          this.showToast(toastOption); // emit the toast option to show toast.
         }
       })
     );

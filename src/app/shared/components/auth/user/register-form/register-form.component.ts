@@ -90,30 +90,8 @@ export class RegisterFormComponent {
           const errObj: IRegisterErrorResponse = err as IRegisterErrorResponse;
           this.registerFrom.get(errObj.errorField!)?.setErrors({ message: errObj.message});
           this.registerFrom.markAllAsTouched();
-        }else if(err?.error){
-          // toast message
-          const toastOption: IToastOption = {
-            severity: 'error',
-            summary: 'Error',
-            detail: 'Internal Server Error.'
-          }
-  
-          this.showToast(toastOption); // emit the toast option to show toast.
-        }else{
-          // error connecting toast message
-          const toastOption: IToastOption = {
-            severity: 'error',
-            summary: 'Error',
-            detail: 'Something Went Wrong.'
-          }
-  
-          this.showToast(toastOption); // emit the toast option to show toast.
         }
       }
     );
-  }
-
-  private showToast(toastOption: IToastOption): void {
-    this.toastMessageService.showToast(toastOption); // emit value to subject for geting value accross the appliction for toast message.
   }
 }

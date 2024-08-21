@@ -152,15 +152,6 @@ export class AddTheaterComponent {
           const errObj: IAddTheaterErrorResponse = err as IAddTheaterErrorResponse;
           this.form.get(errObj.errorField!)?.setErrors({ message: errObj.message});
           this.form.markAllAsTouched();
-        }else{
-          const message: string = err.message || 'Internal Server Error.'
-          const toastOption: IToastOption = {
-            severity: 'error',
-            summary: 'Error',
-            detail: message
-          }
-  
-          this.showToast(toastOption); // emit the toast option to show toast.
         }
       })
     );

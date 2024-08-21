@@ -133,14 +133,6 @@ export class MovieLisingBasedOnDistributerComponent {
           }
   
           this.showToast(toastOption);
-        }else {
-          const toastOption: IToastOption = {
-            severity: 'error',
-            summary: 'Error',
-            detail: 'Internal Server Error.'
-          }
-  
-          this.showToast(toastOption); // emit the toast option to show toast.
         }
         
         this.closeModal();

@@ -416,15 +416,6 @@ export class AddEditMovieFormComponent implements AfterViewInit {
       const errObj: IAddEditMovieErrorResponse = err as IAddEditMovieErrorResponse;
       this.form.get(errObj.errorField!)?.setErrors({ message: errObj.message});
       this.form.markAllAsTouched();
-    }else{
-      const message: string = err.message || 'Internal Server Error.'
-      const toastOption: IToastOption = {
-        severity: 'error',
-        summary: 'Error',
-        detail: message
-      }
-
-      this.showToast(toastOption); // emit the toast option to show toast.
     }
   }
 

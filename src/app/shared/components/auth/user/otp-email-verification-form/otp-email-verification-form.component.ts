@@ -167,24 +167,6 @@ export class OtpEmailVerificationFormComponent implements AfterViewInit, OnDestr
           this.showToast(toastOption); // emit the toast option to show toast.
           
           this.router.navigate(['/auth/login']); // no email provided so back to login page.
-        }else if(err?.error){
-          // toast message
-          const toastOption: IToastOption = {
-            severity: 'error',
-            summary: 'Error',
-            detail: 'Internal Server Error.'
-          }
-
-          this.showToast(toastOption); // emit the toast option to show toast.
-        }else{
-          // error connecting toast message
-          const toastOption: IToastOption = {
-            severity: 'error',
-            summary: 'Error',
-            detail: 'Something Went Wrong.'
-          }
-
-          this.showToast(toastOption); // emit the toast option to show toast.
         }
       }
     );
@@ -231,25 +213,6 @@ export class OtpEmailVerificationFormComponent implements AfterViewInit, OnDestr
             
             this.router.navigate(['/auth/login']); // no email provided so back to login page.
           }
-          return;
-        }else if(err?.error){
-          // toast message
-          const toastOption: IToastOption = {
-            severity: 'error',
-            summary: 'Error',
-            detail: 'Internal Server Error.'
-          }
-
-          this.showToast(toastOption); // emit the toast option to show toast.
-        }else{
-          // error connecting toast message
-          const toastOption: IToastOption = {
-            severity: 'error',
-            summary: 'Error',
-            detail: 'Something Went Wrong.'
-          }
-
-          this.showToast(toastOption); // emit the toast option to show toast.
         }
       }
     );
