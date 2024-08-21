@@ -25,6 +25,7 @@ export const canAcessTheaterOwnerAuthRoutesGuard: CanActivateFn = async (route: 
 
     return false;
   } catch (err) {
+    localStorage.removeItem('token');
     return true;
   }
 };

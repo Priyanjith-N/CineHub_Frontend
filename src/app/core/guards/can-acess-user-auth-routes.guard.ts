@@ -25,6 +25,7 @@ export const canAcessUserAuthRoutesGuard: CanActivateFn = async (route: Activate
 
     return false;
   } catch (err) {
+    localStorage.removeItem('token');
     return true;
   }
 };

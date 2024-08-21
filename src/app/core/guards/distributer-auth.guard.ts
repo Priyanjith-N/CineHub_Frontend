@@ -17,6 +17,7 @@ export const distributerAuthGuard: CanActivateFn = async (route: ActivatedRouteS
     return true;
   } catch (err) {
     // if you need put toast message here before navigating.
+    localStorage.removeItem('token');
     router.navigate(['/distributer/auth/login']);
     return false;
   }

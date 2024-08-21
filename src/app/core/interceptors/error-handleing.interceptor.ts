@@ -40,6 +40,8 @@ export const errorHandleingInterceptor: HttpInterceptorFn = (req, next) => {
           summary: "Token Error",
           detail: errObj.message
         }
+
+        localStorage.removeItem('token');
       }else if(!errObj.errorField && errObj.message){
         toastOption = {
           severity: 'error',

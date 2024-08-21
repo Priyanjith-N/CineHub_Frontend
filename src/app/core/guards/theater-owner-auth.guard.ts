@@ -17,6 +17,7 @@ export const theaterOwnerAuthGuard: CanActivateFn = async (route: ActivatedRoute
     return true;
   } catch (err) {
     // if you need put toast message here before navigating.
+    localStorage.removeItem('token');
     router.navigate(['/theaterOwner/auth/login']);
     return false;
   }

@@ -17,6 +17,7 @@ export const adminAuthGuard: CanActivateFn = async (route: ActivatedRouteSnapsho
     return true;
   } catch (err) {
     // if you need put toast message here before navigating.
+    localStorage.removeItem('token');
     router.navigate(['/admin/auth/login']);
     return false;
   }

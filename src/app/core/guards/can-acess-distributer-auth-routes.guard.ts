@@ -25,6 +25,7 @@ export const canAcessDistributerAuthRoutesGuard: CanActivateFn = async (route: A
 
     return false;
   } catch (err) {
+    localStorage.removeItem('token');
     return true;
   }
 };

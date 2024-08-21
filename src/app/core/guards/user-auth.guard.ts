@@ -17,6 +17,7 @@ export const userAuthGuard: CanActivateFn = async (route, state) => {
     return true;
   } catch (err) {
     // if you need put toast message here before navigating.
+    localStorage.removeItem('token');
     router.navigate(['/auth/login']);
     return false;
   }
