@@ -1,10 +1,13 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IDistributerData, ITheaterOwnerData, IUserData } from '../../../../models/adminAPIResponse.interface';
+import { PaginationComponent } from '../../../pagination/pagination.component';
 
 @Component({
   selector: 'app-admin-table',
   standalone: true,
-  imports: [],
+  imports: [
+    PaginationComponent
+  ],
   templateUrl: './admin-table.component.html',
   styleUrl: './admin-table.component.css'
 })
@@ -27,5 +30,9 @@ export class AdminTableComponent  {
 
   action(_id: string, blockStatus: boolean, name: string) {
     this.blockOrUnblockEvent.emit({ _id, isBlocked: !blockStatus, name });
+  }
+
+  getData(pageNumber: number = 1) {
+    console.log(pageNumber);
   }
 }

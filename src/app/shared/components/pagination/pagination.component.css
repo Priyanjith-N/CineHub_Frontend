@@ -1,0 +1,7 @@
+.notActivePage {
+    @apply border border-gray-300 text-black bg-white hover:bg-black hover:text-white;
+}
+
+.activePage {
+    @apply text-white bg-black hover:bg-[rgba(0,0,0,0.75)] hover:text-white;
+}

@@ -5,13 +5,15 @@ import { IDistributerList } from '../../../../models/distributer.entity';
 import { Observable } from 'rxjs';
 import { IGetDistributerListAPISucessfullResponse } from '../../../../models/ITheaterOwnerAPIResponse.interface';
 import { RouterLink } from '@angular/router';
+import { PaginationComponent } from '../../../pagination/pagination.component';
 
 @Component({
   selector: 'app-distributer-listing',
   standalone: true,
   imports: [
     CommonModule,
-    RouterLink
+    RouterLink,
+    PaginationComponent
   ],
   templateUrl: './distributer-listing.component.html',
   styleUrl: './distributer-listing.component.css'
@@ -41,5 +43,9 @@ export class DistributerListingComponent {
     const searchText = inputElement.value.toLowerCase();
 
     this.displayData = this.data.filter((distributer) => distributer.name.toLowerCase().startsWith(searchText));
+  }
+
+  getData(pageNumber: number = 1) {
+    console.log(pageNumber);
   }
 }
