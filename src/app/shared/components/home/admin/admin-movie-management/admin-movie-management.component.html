@@ -133,4 +133,7 @@
             }
         </tbody>
     </table>
+    <div>
+        <app-pagination [totalItems]="totalMovies" [pageSize]="limit" (changePage)="getData($event);" ></app-pagination>
+    </div>
 </div>

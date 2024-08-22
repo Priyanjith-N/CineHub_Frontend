@@ -39,6 +39,11 @@ export class PaginationComponent {
     this.changePageAction();
   }
 
+  changePageByClick(pageNumber: number) {
+    this.currentPage = pageNumber;
+    this.changePageAction();
+  }
+
   private changePageAction() {
     this.changePage.emit(this.currentPage);
   }

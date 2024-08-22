@@ -4,7 +4,7 @@
             <div class="flex flex-col items-center">
                 <!-- Help text -->
                 <span class="text-sm text-gray-700">
-                    Showing <span class="font-semibold text-gray-900">{{ ((currentPage - 1) * 10) + 1 }}</span> to <span class="font-semibold text-gray-900">{{ currentPage * pageSize }}</span> of <span class="font-semibold text-gray-900">{{ totalItems }}</span> Entries
+                    Showing <span class="font-semibold text-gray-900">{{ ((currentPage - 1) * pageSize) + 1 }}</span> to <span class="font-semibold text-gray-900">{{ (currentPage * pageSize) <= totalItems?(currentPage * pageSize) : totalItems }}</span> of <span class="font-semibold text-gray-900">{{ totalItems }}</span> Entries
                 </span>
             </div>
         </div>
@@ -16,7 +16,7 @@
                     </li>
                     @for (pageNumber of getPageNumbers(); track $index) {
                         <li class="select-none">
-                          <a class="flex items-center justify-center px-3 h-8 leading-tight cursor-pointer" [class.notActivePage]="pageNumber !== currentPage" [class.activePage]="pageNumber === currentPage">{{ pageNumber }}</a>
+                          <a (click)="changePageByClick(pageNumber);" class="flex items-center justify-center px-3 h-8 leading-tight cursor-pointer" [class.notActivePage]="pageNumber !== currentPage" [class.activePage]="pageNumber === currentPage">{{ pageNumber }}</a>
                         </li>
                     }
                   <li class="select-none">

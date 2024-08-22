@@ -6,6 +6,7 @@ import { AdminService } from '../../../../../core/services/admin.service';
 import { Observable } from 'rxjs';
 import { IGetMoviesSuccessfullResponse, IListOrUnlistAPISucessfullResponse } from '../../../../models/IMovieAPIResponse.interface';
 import { ModalComponent } from '../../../modal/modal/modal.component';
+import { PaginationComponent } from '../../../pagination/pagination.component';
 
 @Component({
   selector: 'app-admin-movie-management',
@@ -13,7 +14,8 @@ import { ModalComponent } from '../../../modal/modal/modal.component';
   imports: [
     CommonModule,
     RouterLink,
-    ModalComponent
+    ModalComponent,
+    PaginationComponent
   ],
   templateUrl: './admin-movie-management.component.html',
   styleUrl: './admin-movie-management.component.css'
@@ -25,32 +27,25 @@ export class AdminMovieManagementComponent {
   private data: IMovie[] = [];
   displayData: IMovie[] = [];
   isListed: boolean = true;
+  totalMovies: number = 0;
+  limit: number = 10;
+  private searchText: string = '';
 
 
   constructor() {
-    const getDataAPIResponse$: Observable<IGetMoviesSuccessfullResponse> = this.adminService.getAllMovies();
-
-    getDataAPIResponse$.subscribe(
-      (res => {
-        this.data = res.data;
-        
-        this.displayData = this.data.filter((movie) => {
-          return movie.isListed === this.isListed;
-        });
-      })
-    );
+    this.getData(1);
   }
 
   changeItems() {
     this.isListed = !this.isListed;
-    this.displayData = this.data.filter((movie) => {
-      return movie.isListed === this.isListed;
-    })
+    this.getData(1);
   }
 
   search(event: Event) {
     const inputElement: HTMLInputElement = event.target as HTMLInputElement;
     const searchText = inputElement.value.toLowerCase();
+
+    this.searchText = searchText;
 
     this.displayData = this.data.filter((movie) => {
       return (movie.isListed === this.isListed && movie.name.toLowerCase().startsWith(searchText));
@@ -75,17 +70,7 @@ export class AdminMovieManagementComponent {
     listOrUnlistMovieAPIResponse$.subscribe(
       ((res: IListOrUnlistAPISucessfullResponse) => {
         console.log(res.message);
-        this.displayData = this.displayData.map((movie) => {
-          if(movie._id === data._id) {
-            movie.isListed = !movie.isListed;
-          }
-
-          return movie;
-        });
-
-        this.displayData = this.displayData.filter((movie) => {
-          return movie.isListed === this.isListed;
-        });
+        this.getData(1);
       }),
       ((err: any) => {
         if(err.requiredCredentialsError) {
@@ -96,4 +81,16 @@ export class AdminMovieManagementComponent {
       })
     );
    }
+
+   getData(pageNumber: number) {
+    const getDataAPIResponse$: Observable<IGetMoviesSuccessfullResponse> = this.adminService.getAllMovies(pageNumber, this.isListed, this.limit);
+
+    getDataAPIResponse$.subscribe(
+      (res => {
+        this.data = res.data.movies;
+        this.displayData = this.data;
+        this.totalMovies = res.data.totalMovieCount;
+      })
+    );
+  }
 }

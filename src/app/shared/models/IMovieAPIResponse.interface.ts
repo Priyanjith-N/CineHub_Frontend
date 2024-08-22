@@ -9,7 +9,10 @@ export interface IAddEditMovieErrorResponse {
 
 export interface IGetMoviesSuccessfullResponse {
     message: string;
-    data: IMovie[];
+    data: {
+        movies: IMovie[];
+        totalMovieCount: number;
+    };
 }
 
 export interface IGetMovieSuccessfullResponse {

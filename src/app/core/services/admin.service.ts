@@ -224,8 +224,8 @@ export class AdminService {
     return editMovieAPIResponse$;
   }
 
-  getAllMovies(): Observable<IGetMoviesSuccessfullResponse> {
-    const url: string = `${this.api}/movie`;
+  getAllMovies(pageNumber: number, isListed: boolean, limit: number): Observable<IGetMoviesSuccessfullResponse> {
+    const url: string = `${this.api}/movie?page=${pageNumber}&isListed=${isListed}&limit=${limit}`;
 
     const getDataAPIResponse$: Observable<IGetMoviesSuccessfullResponse> = this.httpClient.get<IGetMoviesSuccessfullResponse>(url)
     .pipe(
