@@ -21,7 +21,7 @@
                         <label class="leading-[28px]" for="movieDescription" [class.error]="form.get('location')?.errors  && form.get('location')!.touched" >Location Of Theater</label>
                     </div>
                     <div class="relative">
-                        <div class="cursor-pointer w-fit flex gap-[12px] py-[8px] px-[23px] bg-[rgba(59,63,71,0.92)] items-center rounded-[17px]" [class.error]="form.get('location')?.errors  && form.get('location')!.touched" >
+                        <div (click)="openModal();" class="cursor-pointer w-fit flex gap-[12px] py-[8px] px-[23px] bg-[rgba(59,63,71,0.92)] items-center rounded-[17px]" [class.error]="form.get('location')?.errors  && form.get('location')!.touched" >
                             <div>
                                 <p class="font-medium text-white">Choose location</p>
                             </div>
@@ -37,6 +37,19 @@
                                 </svg>                                    
                             </div>
                         </div>
+                        @if(confirmedAddress) {
+                            <div class="flex gap-[12px] items-center cursor-pointer -translate-x-[4px] mt-[18px]">
+                                <div>
+                                    <svg width="31" height="32" viewBox="0 0 31 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M15.0362 16.4286C14.3664 16.4286 13.7117 16.2192 13.1548 15.8267C12.5978 15.4343 12.1638 14.8765 11.9074 14.2239C11.6511 13.5713 11.5841 12.8532 11.7147 12.1604C11.8454 11.4677 12.1679 10.8313 12.6416 10.3318C13.1152 9.83234 13.7186 9.4922 14.3755 9.35439C15.0325 9.21659 15.7134 9.28731 16.3322 9.55763C16.951 9.82794 17.4799 10.2857 17.8521 10.873C18.2242 11.4603 18.4228 12.1508 18.4228 12.8572C18.4217 13.8041 18.0646 14.7118 17.4297 15.3813C16.7948 16.0509 15.9341 16.4275 15.0362 16.4286V16.4286ZM15.0362 10.7143C14.6344 10.7143 14.2415 10.84 13.9073 11.0755C13.5732 11.3109 13.3128 11.6456 13.159 12.0372C13.0052 12.4287 12.9649 12.8596 13.0433 13.2752C13.1217 13.6909 13.3153 14.0727 13.5994 14.3724C13.8836 14.6721 14.2457 14.8762 14.6398 14.9589C15.034 15.0416 15.4425 14.9991 15.8138 14.8369C16.1851 14.6748 16.5025 14.4001 16.7257 14.0477C16.949 13.6953 17.0682 13.281 17.0682 12.8572C17.0676 12.2891 16.8534 11.7443 16.4724 11.3426C16.0915 10.9409 15.575 10.7149 15.0362 10.7143V10.7143Z" fill="#333333" stroke="black" stroke-width="0.25"/>
+                                        <path d="M15.0364 25L9.32258 17.8936C9.24319 17.7869 9.16461 17.6795 9.08687 17.5714C8.11085 16.2156 7.58358 14.5594 7.58595 12.8571C7.58595 10.7733 8.3709 8.7748 9.76813 7.3013C11.1654 5.8278 13.0604 5 15.0364 5C17.0124 5 18.9074 5.8278 20.3047 7.3013C21.7019 8.7748 22.4869 10.7733 22.4869 12.8571C22.4892 14.5587 21.9622 16.214 20.9866 17.5693L20.9859 17.5714C20.9859 17.5714 20.7827 17.8529 20.7523 17.8907L15.0364 25ZM10.1679 16.7107C10.1679 16.7107 10.3264 16.9307 10.3623 16.9779L15.0364 22.7914L19.7166 16.97C19.7464 16.9307 19.9056 16.7086 19.9056 16.7086C20.7029 15.6008 21.1338 14.2479 21.1322 12.8571C21.1322 11.1522 20.49 9.51705 19.3468 8.31146C18.2036 7.10587 16.6531 6.42857 15.0364 6.42857C13.4197 6.42857 11.8692 7.10587 10.726 8.31146C9.58281 9.51705 8.94057 11.1522 8.94057 12.8571C8.93915 14.2487 9.36984 15.6024 10.1679 16.7107Z" fill="#333333" stroke="#333333" stroke-width="0.5"/>
+                                    </svg> 
+                                </div>
+                                <div>
+                                    <p class="font-medium text-[14px] leading-[25px] text-[#5A637A]">{{ confirmedAddress }}</p>
+                                </div>
+                            </div>
+                        }
                         @if (form.get('location')!.errors  && form.get('location')!.touched) {
                             <p class="text-[13px] text-[#FF6B6B] absolute mt-[12px]">{{ form.get('location')?.errors?.['message'] }}</p>
                         }
@@ -148,3 +161,51 @@
         </div>
     </form>
 </div>
+
+@if(chooseLocationModal) {
+    <div class="min-w-[80.65%] h-screen bg-[rgba(21,19,23,0.49)] fixed top-0 right-0 z-40 flex justify-center items-center font-roboto">
+        <div class="bg-white p-6 rounded-lg shadow-md w-[50dvw]">
+            <div class="relative">
+                <h1 class="text-2xl font-bold mb-4 text-center text-gray-800">Choose Location</h1>
+                <div (click)="closeModal();" class="cursor-pointer absolute right-0 top-[35%]">
+                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.89949 6.31372L0.656854 2.07108C0.26633 1.68056 0.26633 1.04739 0.656854 0.656867C1.04738 0.266342 1.68054 0.266342 2.07107 0.656866L6.31371 4.89951L10.5563 0.656867C10.9469 0.266342 11.58 0.266342 11.9706 0.656867C12.3611 1.04739 12.3611 1.68056 11.9706 2.07108L7.72792 6.31372L11.9706 10.5564C12.3611 10.9469 12.3611 11.5801 11.9706 11.9706C11.58 12.3611 10.9469 12.3611 10.5563 11.9706L6.31371 7.72793L2.07107 11.9706C1.68054 12.3611 1.04738 12.3611 0.656853 11.9706C0.266329 11.58 0.26633 10.9469 0.656854 10.5564L4.89949 6.31372Z" fill="#333333"/>
+                    </svg>                        
+                </div>
+            </div>
+            <div class="mb-4 relative">
+                <input #searchBox (keyup)="searchPlace($event);" type="text" id="search-input" placeholder="Search for a place" class="w-full border-[#9DA8BE] border-solid border-b-[1px] text-[18px] outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]">
+                <div class="absolute w-full mt-[12px] bg-white border border-gray-200 rounded-md shadow-lg z-[999999]">
+                    @if(placeResults.length) {
+                        <ul class="py-1">
+                            @for (item of placeResults; track $index) {
+                                <li (click)="selectLocation($index);" class="px-3 py-2 hover:bg-gray-100 cursor-pointer break-words leading-[28px]">{{ item.address }}</li>
+                            }
+                        </ul>
+                    }
+                </div>
+            </div>
+            <div class="w-full h-96 bg-gray-200 rounded-md mb-4 flex items-center justify-center">
+                <div class="w-full h-full" #map></div>
+            </div>
+            <div class="flex justify-between items-center">
+                @if(selectedLocation) {
+                    <div class="flex gap-[12px] items-center cursor-pointer -translate-x-[4px]">
+                        <div>
+                            <svg width="31" height="32" viewBox="0 0 31 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15.0362 16.4286C14.3664 16.4286 13.7117 16.2192 13.1548 15.8267C12.5978 15.4343 12.1638 14.8765 11.9074 14.2239C11.6511 13.5713 11.5841 12.8532 11.7147 12.1604C11.8454 11.4677 12.1679 10.8313 12.6416 10.3318C13.1152 9.83234 13.7186 9.4922 14.3755 9.35439C15.0325 9.21659 15.7134 9.28731 16.3322 9.55763C16.951 9.82794 17.4799 10.2857 17.8521 10.873C18.2242 11.4603 18.4228 12.1508 18.4228 12.8572C18.4217 13.8041 18.0646 14.7118 17.4297 15.3813C16.7948 16.0509 15.9341 16.4275 15.0362 16.4286V16.4286ZM15.0362 10.7143C14.6344 10.7143 14.2415 10.84 13.9073 11.0755C13.5732 11.3109 13.3128 11.6456 13.159 12.0372C13.0052 12.4287 12.9649 12.8596 13.0433 13.2752C13.1217 13.6909 13.3153 14.0727 13.5994 14.3724C13.8836 14.6721 14.2457 14.8762 14.6398 14.9589C15.034 15.0416 15.4425 14.9991 15.8138 14.8369C16.1851 14.6748 16.5025 14.4001 16.7257 14.0477C16.949 13.6953 17.0682 13.281 17.0682 12.8572C17.0676 12.2891 16.8534 11.7443 16.4724 11.3426C16.0915 10.9409 15.575 10.7149 15.0362 10.7143V10.7143Z" fill="#333333" stroke="black" stroke-width="0.25"/>
+                                <path d="M15.0364 25L9.32258 17.8936C9.24319 17.7869 9.16461 17.6795 9.08687 17.5714C8.11085 16.2156 7.58358 14.5594 7.58595 12.8571C7.58595 10.7733 8.3709 8.7748 9.76813 7.3013C11.1654 5.8278 13.0604 5 15.0364 5C17.0124 5 18.9074 5.8278 20.3047 7.3013C21.7019 8.7748 22.4869 10.7733 22.4869 12.8571C22.4892 14.5587 21.9622 16.214 20.9866 17.5693L20.9859 17.5714C20.9859 17.5714 20.7827 17.8529 20.7523 17.8907L15.0364 25ZM10.1679 16.7107C10.1679 16.7107 10.3264 16.9307 10.3623 16.9779L15.0364 22.7914L19.7166 16.97C19.7464 16.9307 19.9056 16.7086 19.9056 16.7086C20.7029 15.6008 21.1338 14.2479 21.1322 12.8571C21.1322 11.1522 20.49 9.51705 19.3468 8.31146C18.2036 7.10587 16.6531 6.42857 15.0364 6.42857C13.4197 6.42857 11.8692 7.10587 10.726 8.31146C9.58281 9.51705 8.94057 11.1522 8.94057 12.8571C8.93915 14.2487 9.36984 15.6024 10.1679 16.7107Z" fill="#333333" stroke="#333333" stroke-width="0.5"/>
+                            </svg> 
+                        </div>
+                        <div>
+                            <p class="font-medium text-[14px] leading-[25px] text-[#5A637A]">{{ selectedLocation }}</p>
+                        </div>
+                    </div>
+                }@else{
+                    <p id="selected-location" class="text-gray-600">No location selected</p>
+                }
+                <button (click)="confirmLocation();" id="confirm-btn" class="bg-black text-white px-4 py-2 rounded-md hover:bg-[rgba(0,0,0,0.95)]">Confirm Location</button>
+            </div>
+        </div>
+    </div>
+}

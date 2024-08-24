@@ -9,3 +9,14 @@ export default interface ITheater {
     licence: IImage;
     isListed: boolean;
 }
+
+export interface ILocation {
+    lat: number;
+    lng: number;
+}
+
+export interface IAddressDetails {
+    lat: number;
+    lng: number;
+    address: string;
+  }

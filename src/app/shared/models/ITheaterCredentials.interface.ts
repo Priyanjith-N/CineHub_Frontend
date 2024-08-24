@@ -1,7 +1,10 @@
+import { ILocation } from "./theater.entity";
+
 export default interface ITheaterCredentials {
     name: string;
     images: string[];
     licence: string;
+    location: ILocation;
 }
 
 export interface IScreenCredentials {
