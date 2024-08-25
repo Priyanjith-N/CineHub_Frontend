@@ -5,6 +5,9 @@ import { Observable } from 'rxjs';
 import { IGetTheaterSucessfullResponse } from '../../../../models/ITheaterOwnerAPIResponse.interface';
 import ITheater from '../../../../models/theater.entity';
 
+import { GeoJsonProperties } from 'geojson';
+import { AddressSearchService } from '../../../../../core/services/address-search.service';
+
 @Component({
   selector: 'app-singletheatermange',
   standalone: true,
@@ -16,9 +19,11 @@ import ITheater from '../../../../models/theater.entity';
 })
 export class SingletheatermangeComponent {
   private theaterOwnerService: TheaterOwnerService = inject(TheaterOwnerService);
+  private addressSearchService: AddressSearchService = inject(AddressSearchService);
   private activeRouter: ActivatedRoute = inject(ActivatedRoute);
 
   data?: ITheater;
+  addressLocation: string = '';
 
   constructor() {
     const theaterId: string = this.activeRouter.snapshot.params['theaterId'];
@@ -28,10 +33,28 @@ export class SingletheatermangeComponent {
     getTheaterAPIResponse$.subscribe(
       (res => {
         this.data = res.data;
+        this.getAddressLocation();
       }),
       ((err: any) => {
         console.log(err);
       })
     );
+  }
+
+  private getAddressLocation() {
+      this.addressSearchService.reverseGeoCoding(this.data!.location.lat, this.data!.location.lng).subscribe(
+        (res => {
+          if(res?.results) {
+            const properites: GeoJsonProperties = res.results[0] as GeoJsonProperties;
+  
+            if(properites) {
+              this.addressLocation = properites['formatted'];
+            }
+          }
+        }),
+        ((err: any) => {
+          console.log(err);
+        })
+      );
   }
 }

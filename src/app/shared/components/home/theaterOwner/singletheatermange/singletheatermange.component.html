@@ -9,7 +9,16 @@
                 </svg> 
             </div>
             <div>
-                <p class="font-medium text-[14px] leading-[25px] text-[#5A637A]">Third floor, Hilite Mall, Poovangal, Kozhikode, Kerala 673014, India</p>
+                @if(!addressLocation) {
+                    <div class='flex space-x-2 justify-center items-center bg-transparent dark:invert'>
+                        <span class='sr-only'>Loading...</span>
+                         <div class='h-[12px] w-[12px] bg-[#5A637A] rounded-full animate-bounce [animation-delay:-0.3s]'></div>
+                       <div class='h-[12px] w-[12px] bg-[#5A637A] rounded-full animate-bounce [animation-delay:-0.15s]'></div>
+                       <div class='h-[12px] w-[12px] bg-[#5A637A] rounded-full animate-bounce'></div>
+                   </div>
+                }@else{
+                    <p class="font-medium text-[14px] leading-[25px] text-[#5A637A]">{{ addressLocation }}</p>
+                }
             </div>
         </div>
     </div>

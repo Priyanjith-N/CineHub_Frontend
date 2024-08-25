@@ -121,6 +121,7 @@ export class AddTheaterComponent {
 
   selectLocation(idx: number) {
     const selectedPlace: IAddressDetails = this.placeResults[idx];
+    
     this.placeResults = [];
 
     const latLng = new L.LatLng(selectedPlace.lat, selectedPlace.lng);
@@ -137,6 +138,11 @@ export class AddTheaterComponent {
     
 
     this.lefletMap.setView(latLng, 17);
+
+    this.location = {
+      lat: latLng.lat,
+      lng: latLng.lng
+    }
 
     this.inputSearch.nativeElement.value = selectedPlace.address;
     this.selectedLocation = selectedPlace.address;

@@ -6,6 +6,7 @@ export default interface ITheater {
     ownerId: string;
     numberOfScreen: number;
     images: IImage[];
+    location: ILocation;
     licence: IImage;
     isListed: boolean;
 }
