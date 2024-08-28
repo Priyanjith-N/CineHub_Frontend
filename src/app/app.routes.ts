@@ -50,6 +50,7 @@ import { MyMovieRequestsComponent } from './shared/components/home/theaterOwner/
 import { ApproveRejectMovieRequestComponent } from './shared/components/home/distributer/approve-reject-movie-request/approve-reject-movie-request.component';
 import { AddScheduleComponent } from './shared/components/home/theaterOwner/add-schedule/add-schedule.component';
 import { ManageScheduleComponent } from './shared/components/home/theaterOwner/manage-schedule/manage-schedule.component';
+import { MyMovieCollectionComponent } from './shared/components/home/theaterOwner/my-movie-collection/my-movie-collection.component';
 
 export const routes: Routes = [
     {
@@ -248,6 +249,11 @@ export const routes: Routes = [
                 path: 'myrequests',
                 canActivate: [theaterOwnerAuthGuard],
                 component: MyMovieRequestsComponent
+            },
+            {
+                path: 'mymoviescollection',
+                canActivate: [theaterOwnerAuthGuard],
+                component: MyMovieCollectionComponent
             },
             {
                 path: 'managetheater/:theaterId',

@@ -43,8 +43,8 @@ export class HeaderComponent implements OnInit {
       this.heading = "Distributed Movies"
     }else if(url === '/managestreaming'){
       this.heading = 'Manage Streaming';
-    }else if(url === '/mymovies') {
-      this.heading = 'My Movies'
+    }else if(url === '/mymoviescollection') {
+      this.heading = 'My Movies Collection'
     }
     
   }
