@@ -1,0 +1,114 @@
+<div class="font-roboto" >
+    <div class="text-center text-[24px] font-bold leading-[18px] mb-[24px] flex justify-center">
+        <h2>Add Schedule</h2>
+    </div>  
+    <form [formGroup]="form" (submit)="onSubmit();" >
+        <div class="flex gap-[80px]">
+            <div class="w-[40%]">
+                <div class="font-bold text-[18px] mb-[40px]">
+                    <div class="mb-[18px]">
+                        <label class="leading-[28px]" [class.error]="form.get('date')?.errors  && form.get('date')!.touched" for="releaseData">Date</label>
+                    </div>
+                    <div class="relative">
+                        <div class="relative max-w-sm">
+                            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                                </svg>
+                            </div>
+                            <input (change)="date();" formControlName="date" id="datepicker-autohide" datepicker datepicker-autohide type="date" class="bg-gray-50 border w-[75%] border-gray-300 font-normal text-sm rounded-lg block ps-10 p-2.5 outline-none" [class.error]="form.get('date')?.errors  && form.get('date')!.touched" placeholder="Select date">
+                            @if(form.get('date')!.hasError('required')  && form.get('date')!.touched){
+                                <p class="text-[13px] text-[#FF6B6B] font-normal absolute mt-[12px]">This Field is required.</p>
+                            }@else if (form.get('date')!.errors  && form.get('date')!.touched) {
+                                <p class="text-[13px] text-[#FF6B6B] font-normal absolute mt-[12px]">{{ form.get('date')?.errors?.['message'] }}</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="font-bold text-[18px] mb-[40px]">
+                    <div class="mb-[18px]">
+                        <label class="leading-[28px]" [class.error]="form.get('movieToPlay')?.errors  && form.get('movieToPlay')!.touched" for="releaseData">Movie To Play</label>
+                    </div>
+                    <div class="mb-4 relative font-normal">
+                        <input #movieSearch (keyup)="showFiltedMovie($event);" (click)="showMovieSuggestionsToPlay();"  type="text" id="search-input" placeholder="Movie Name" class="w-full border-[#9DA8BE] border-solid border-b-[1px] text-[18px] outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" [class.error]="form.get('movieToPlay')?.errors  && form.get('movieToPlay')!.touched">
+                        @if (form.get('movieToPlay')!.errors  && form.get('movieToPlay')!.touched) {
+                            <p class="text-[13px] text-[#FF6B6B] font-normal absolute mt-[12px]">{{ form.get('movieToPlay')?.errors?.['message'] }}</p>
+                        }
+                        @if(displaySuggestions) {
+                            <div class="absolute w-full mt-[12px] bg-white border border-gray-200 rounded-md shadow-lg z-[999999]">
+                                <ul class="py-1 max-h-[170px] overflow-y-scroll scroll-m-0 scroll-p-0 suggestionsDiv">
+                                    @if(!displaySuggestions.length) {
+                                        <li class="px-3 py-2 hover:bg-gray-100 text-[14px] cursor-pointer break-words leading-[28px]">No Movie with that name in your collection.</li>
+                                    }
+
+                                    @for (data of displaySuggestions; track $index) {
+                                        <li (click)="selectMovieToPlay($index);" class="px-3 py-2 hover:bg-gray-100 cursor-pointer break-words leading-[28px]">
+                                            <div class="flex gap-[12px] items-center">
+                                                <div>
+                                                    <img class="w-[40px] h-auto object-center object-cover" [src]="data.movieData.coverPhoto.imageURL" alt="movieCoverImage">
+                                                </div>
+                                                <div>
+                                                    <h2 class="text-[12px] font-bold">{{ data.movieData.name }}</h2>
+                                                    <p class="text-[9px] text-[#6B7280] leading-[0px]">{{ data.movieData.category.join('/') }}</p>
+                                                    <h2 class="text-[12px] font-bold">Duration</h2>
+                                                    <p class="text-[9px] text-[#6B7280] leading-[0px]">{{ data.movieData.duration.hours }}hrs {{ data.movieData.duration.minutes }}min</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        }
+                    </div>
+                </div>
+                @if(selectedTheaterOwnerMovie) {
+                    <div class="font-bold text-[18px] mb-[40px]">
+                        <div class="mb-[18px]">
+                            <label class="leading-[28px]" for="releaseData">Duration Of the Movie</label>
+                        </div>
+                        <div class="relative">
+                            <div>
+                                <p class="text-[14px] font-normal leading-[28px]">{{ selectedTheaterOwnerMovie.movieData.duration.hours }}hrs {{ selectedTheaterOwnerMovie.movieData.duration.minutes }}min</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="w-full">
+                @if(avaliableTimeSchedule) {
+                    <div class="font-bold text-[18px] mb-[40px]">
+                        <div class="mb-[18px]">
+                            <label class="leading-[28px]" [class.error]="form.get('timeSlot')?.errors  && form.get('timeSlot')!.touched" for="releaseData">Available Time Schedules</label>
+                            <p class="font-normal text-[#5A637A] text-[12px] mt-[10px]">*There will be 15 minutes break after each show for cleaning the cinema hall</p>
+                        </div>
+                        <div class="relative">
+                            <div class="flex gap-[18px] flex-wrap">
+                                @for (time of avaliableTimeSchedule; track $index) {
+                                    <div (click)="selectSlot($index);" class="rounded-[40px] cursor-pointer select-none" [class.timeSelected]="((selectedTimeSlotIdx !== undefined) && (selectedTimeSlotIdx === $index))" [class.timeNotSelected]="((selectedTimeSlotIdx === undefined) || (selectedTimeSlotIdx !== $index))" >
+                                        <p class="m-0 font-semibold text-[16px] leading-[24px] py-[6px] px-[18px]">{{ time.start | formatTime }} To {{ time.end | formatTime }}</p>
+                                    </div>
+                                }
+                            </div>
+                            @if (form.get('timeSlot')!.errors  && form.get('timeSlot')!.touched) {
+                                <p class="text-[13px] text-[#FF6B6B] font-normal absolute mt-[12px]">{{ form.get('timeSlot')?.errors?.['message'] }}</p>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="w-3/4 text-center text-white font-semibold text-[16px] bg-[#000] p-[10px]">
+                @if(isFormSubmited){
+                    <div class="flex justify-center items-center">
+                        <div class="animate-spin inline-block size-[30px] border-[3px] border-current border-t-transparent text-white rounded-full dark:text-white" role="status" aria-label="loading">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                }@else{
+                    Add Schedule
+                }
+            </button>
+        </div>
+    </form>
+</div>

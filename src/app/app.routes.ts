@@ -48,6 +48,8 @@ import { EditMovieComponentComponent } from './shared/components/home/admin/edit
 import { AddMovieComponent } from './shared/components/home/admin/add-movie/add-movie.component';
 import { MyMovieRequestsComponent } from './shared/components/home/theaterOwner/my-movie-requests/my-movie-requests.component';
 import { ApproveRejectMovieRequestComponent } from './shared/components/home/distributer/approve-reject-movie-request/approve-reject-movie-request.component';
+import { AddScheduleComponent } from './shared/components/home/theaterOwner/add-schedule/add-schedule.component';
+import { ManageScheduleComponent } from './shared/components/home/theaterOwner/manage-schedule/manage-schedule.component';
 
 export const routes: Routes = [
     {
@@ -261,6 +263,16 @@ export const routes: Routes = [
                         path: 'addscreen',
                         canActivate: [theaterOwnerAuthGuard],
                         component: AddscreensComponent
+                    },
+                    {
+                        path: 'manageschedule/:screenId',
+                        canActivate: [theaterOwnerAuthGuard],
+                        component: ManageScheduleComponent
+                    },
+                    {
+                        path: 'manageschedule/:screenId/addschedule',
+                        canActivate: [theaterOwnerAuthGuard],
+                        component: AddScheduleComponent
                     }
                 ]
             },

@@ -3,9 +3,10 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { IAddTheaterErrorResponse, IAddTheaterSucessfullResponse, IGetDistributerListAPISucessfullResponse, IGetAllTheatersSucessfullResponse, IAddScreenSucessfullResponse, IAddScreenErrorResponse, IGetAllScreensSucessfullResponse, IGetTheaterSucessfullResponse, IRequestMovieSucessfullResponse, IRequestMovieErrorResponse } from '../../shared/models/ITheaterOwnerAPIResponse.interface';
-import { IGetAllMovieRequestsSucessfullResponse, IGetMovieListOfDistributerDataAPISucessfullResponse } from '../../shared/models/theaterOwnerAPIResponse.interface';
+import { IAddMovieSchedule, IGetAllMovieRequestsSucessfullResponse, IGetAllMoviesFromCollectionSucessfullResponse, IGetMovieListOfDistributerDataAPISucessfullResponse, IGetScheduleOn } from '../../shared/models/theaterOwnerAPIResponse.interface';
 import ITheaterCredentials, { IScreenCredentials } from '../../shared/models/ITheaterCredentials.interface';
 import IMovieRequestCredentials from '../../shared/models/requestMovie.entity';
+import { IScheduleCredentials } from '../../shared/models/schedule.entity';
 
 @Injectable({
   providedIn: 'root'
@@ -150,6 +151,44 @@ export class TheaterOwnerService {
       catchError(err => {
         return throwError(err);
       })
+    );
+
+    return APIResponse$;
+  }
+
+  getallmoviesfromcollection(): Observable<IGetAllMoviesFromCollectionSucessfullResponse> {
+    const url: string = `${this.api}/getallmoviesfromcollection`;
+
+    const APIResponse$: Observable<IGetAllMoviesFromCollectionSucessfullResponse> = this.httpClient.get<IGetAllMoviesFromCollectionSucessfullResponse>(url)
+    .pipe(
+      map(res => res as IGetAllMoviesFromCollectionSucessfullResponse),
+      catchError(err => {
+        return throwError(err);
+      })
+    );
+
+    return APIResponse$;
+  }
+
+  addMovieSchedule(data: IScheduleCredentials): Observable<IAddMovieSchedule> {
+    const url: string = `${this.api}/addMovieSchedule`;
+
+    const APIResponse$: Observable<IAddMovieSchedule> = this.httpClient.post<IAddMovieSchedule>(url, data)
+    .pipe(
+      map(res => res as IAddMovieSchedule),
+      catchError((err: any) => throwError(err))
+    );
+
+    return APIResponse$;
+  }
+
+  getAllScheduleOnDate(date: Date, screenId: string): Observable<IGetScheduleOn> {
+    const url: string = `${this.api}/getAllSchedulesOn?date=${date}&screenId=${screenId}`;
+
+    const APIResponse$: Observable<IGetScheduleOn> = this.httpClient.get<IGetScheduleOn>(url)
+    .pipe(
+      map(res => res as IGetScheduleOn),
+      catchError((err: any) => throwError(err))
     );
 
     return APIResponse$;

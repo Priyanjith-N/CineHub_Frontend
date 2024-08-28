@@ -20,4 +20,9 @@ export interface IAddressDetails {
     lat: number;
     lng: number;
     address: string;
-  }
+}
+
+export interface IAvaliableTimeSchedules {
+    start: string;
+    end: string;
+}
