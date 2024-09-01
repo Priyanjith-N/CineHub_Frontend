@@ -1,0 +1,5 @@
+@import url(../../../../../../../node_modules/keen-slider/keen-slider.min.css);
+.keen-slider__slide {
+    display: flex;
+    justify-content: center;
+}

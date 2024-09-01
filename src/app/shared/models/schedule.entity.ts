@@ -1,3 +1,4 @@
+import { IMovie } from "./IMovieCredentials.interface";
 import { ISeatLayout } from "./screen.entity";
 
 export default interface IMovieSchedule {
@@ -21,4 +22,14 @@ export interface IScheduleCredentials {
     startTime: string;
     endTime: string;
     movieId: string;
+}
+
+export interface INowPlayingMovies {
+    movieData: IMovie;
+}
+
+export interface IHomeMovieData {
+    nowPlayingMovies: INowPlayingMovies[];
+    recommendedMovies: IMovie[];
+    upcommingMovies: IMovie[];
 }

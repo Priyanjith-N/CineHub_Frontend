@@ -1,7 +1,24 @@
-<app-card-slider cardTitle="Movies" ></app-card-slider>
+@if(isDataRetriving) {
+    <app-skeleton-card-slider></app-skeleton-card-slider>
 
-<app-carousel></app-carousel>
+    <app-skeleton-carousel></app-skeleton-carousel>
+}
 
-<app-card-slider cardTitle="Coming Soon" ></app-card-slider>
 
-<app-card-slider cardTitle="Recommended Movies" ></app-card-slider>
+
+
+@if(!isDataRetriving && nowPlayingMovies.length) {
+    <app-card-slider [movies]="nowPlayingMovies" cardTitle="Movies" ></app-card-slider>
+}
+
+@if(!isDataRetriving) {
+    <app-carousel></app-carousel>
+}
+
+@if(!isDataRetriving && upcommingMovies.length) {
+    <app-card-slider [movies]="upcommingMovies" cardTitle="Coming Soon" ></app-card-slider>
+}
+
+@if(!isDataRetriving && recommendedMovies.length) {
+    <app-card-slider [movies]="recommendedMovies" cardTitle="Recommended Movies" ></app-card-slider>
+}
