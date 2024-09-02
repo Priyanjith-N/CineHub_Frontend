@@ -51,6 +51,8 @@ import { ApproveRejectMovieRequestComponent } from './shared/components/home/dis
 import { AddScheduleComponent } from './shared/components/home/theaterOwner/add-schedule/add-schedule.component';
 import { ManageScheduleComponent } from './shared/components/home/theaterOwner/manage-schedule/manage-schedule.component';
 import { MyMovieCollectionComponent } from './shared/components/home/theaterOwner/my-movie-collection/my-movie-collection.component';
+import { LandingPageComponent } from './shared/components/home/user/landing-page/landing-page.component';
+import { MovieDetailsComponent } from './shared/components/home/user/movie-details/movie-details.component';
 
 export const routes: Routes = [
     {
@@ -144,7 +146,19 @@ export const routes: Routes = [
     {
         path: '',
         canActivate: [], // for sample useage temp userAuthGuard
-        component: HomePageComponent
+        component: HomePageComponent,
+        children: [
+            {
+                path: '',
+                canActivate: [],
+                component: LandingPageComponent
+            },
+            {
+                path: 'movie/:movieId',
+                canActivate: [],
+                component: MovieDetailsComponent
+            }
+        ]
     },
     {
         path: 'admin',

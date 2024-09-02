@@ -1,0 +1,19 @@
+@import url(../../../../../../../node_modules/keen-slider/keen-slider.min.css);
+.keen-slider__slide {
+    /* @apply max-w-[120px] min-w-[120px] !important; */
+    max-width: 120px !important;
+    min-width: 120px !important;
+}
+
+.visiable {
+    opacity: 1;
+}
+
+@keyframes opacity {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
