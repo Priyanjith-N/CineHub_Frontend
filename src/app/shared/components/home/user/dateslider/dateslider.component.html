@@ -1,0 +1,42 @@
+<div class="flex gap-[10px] items-center pb-[22px] mb-[24px] border-b border-solid border-[#C4C4C4]">
+    <div>
+        <div (click)="moveSlide(false)" class="cursor-pointer">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 8.5L11.5 16L19 23.5" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg> 
+        </div>               
+    </div>
+    <div class="flex keen-slider" id="slider"  #sliderRef >
+        <div class="keen-slider__slide cursor-pointer flex flex-col justify-center items-center gap-1 w-[75px] h-[72px] bg-white border flex-none order-none grow-0 p-[18px] rounded-lg border-solid border-[#5A637A] text-center">
+            <p class="text-[12px] font-medium text-[#5A637A]" >15 Jun</p>
+            <p class="text-[#333333] text-[16px] font-black">SAT</p>
+        </div>
+        <div class="keen-slider__slide cursor-pointer flex flex-col justify-center items-center gap-1 w-[75px] h-[72px] bg-white border flex-none order-none grow-0 p-[18px] rounded-lg border-solid border-[#5A637A] text-center">
+            <p class="text-[12px] font-medium text-[#5A637A]" >16 Jun</p>
+            <p class="text-[#333333] text-[16px] font-black">SUN</p>
+        </div>
+        <div class="keen-slider__slide cursor-pointer flex flex-col justify-center items-center gap-1 w-[75px] h-[72px] bg-white border flex-none order-none grow-0 p-[18px] rounded-lg border-solid border-[#5A637A] text-center">
+            <p class="text-[12px] font-medium text-[#5A637A]" >17 Jun</p>
+            <p class="text-[#333333] text-[16px] font-black">MON</p>
+        </div>
+        <div class="keen-slider__slide cursor-pointer flex flex-col justify-center items-center gap-1 w-[75px] h-[72px] bg-white border flex-none order-none grow-0 p-[18px] rounded-lg border-solid border-[#5A637A] text-center">
+            <p class="text-[12px] font-medium text-[#5A637A]" >18 Jun</p>
+            <p class="text-[#333333] text-[16px] font-black">TUE</p>
+        </div>
+        <div class="keen-slider__slide cursor-pointer flex flex-col justify-center items-center gap-1 w-[75px] h-[72px] bg-white border flex-none order-none grow-0 p-[18px] rounded-lg border-solid border-[#5A637A] text-center">
+            <p class="text-[12px] font-medium text-[#5A637A]" >19 Jun</p>
+            <p class="text-[#333333] text-[16px] font-black">WED</p>
+        </div>
+        <div class="keen-slider__slide cursor-pointer flex flex-col justify-center items-center gap-1 w-[75px] h-[72px] bg-white border flex-none order-none grow-0 p-[18px] rounded-lg border-solid border-[#5A637A] text-center">
+            <p class="text-[12px] font-medium text-[#5A637A]" >19 Jun</p>
+            <p class="text-[#333333] text-[16px] font-black">WED</p>
+        </div>
+    </div>
+    <div>
+        <div (click)="moveSlide()" class="cursor-pointer">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13 23.5L20.5 16L13 8.5" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>                
+        </div>
+    </div>
+</div>

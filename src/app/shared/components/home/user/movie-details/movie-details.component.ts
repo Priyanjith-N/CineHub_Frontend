@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, inject, OnDestroy, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 import KeenSlider, { KeenSliderInstance } from "keen-slider"
 import { UserService } from '../../../../../core/services/user.service';
@@ -14,7 +14,8 @@ import { WorkerDetailsSliderComponent } from '../worker-details-slider/worker-de
   standalone: true,
   imports: [
     DateFormatterPipe,
-    WorkerDetailsSliderComponent
+    WorkerDetailsSliderComponent,
+    RouterLink
   ],
   templateUrl: './movie-details.component.html',
   styleUrl: './movie-details.component.css'

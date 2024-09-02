@@ -1,0 +1,11 @@
+.booked {
+    @apply bg-[#DADFE8] text-[#9DA8BE] select-none;
+}
+
+.selected {
+    @apply bg-[#1A2C50] text-white cursor-pointer select-none;
+}
+
+.avaliable {
+    @apply bg-white text-black border border-solid border-[#9DA8BE] cursor-pointer select-none;
+}

@@ -77,7 +77,7 @@
                         {{ movieData.releaseDate! | dateFormatter }}
                     </div>
                     <div class="mt-[32px]">
-                        <button type="button" class="border text-white bg-[rgb(248,68,100)] shadow-[rgba(0,0,0,0.16)_0px_1px_8px] w-[216px] relative cursor-pointer p-0 rounded-lg border-solid border-[rgb(248,68,100)] tracking-[0.2px] text-lg font-medium leading-6 whitespace-nowrap overflow-hidden text-ellipsis px-2 py-3">
+                        <button [routerLink]="['/bookmovie', movieData._id]" type="button" class="border text-white bg-[rgb(248,68,100)] shadow-[rgba(0,0,0,0.16)_0px_1px_8px] w-[216px] relative cursor-pointer p-0 rounded-lg border-solid border-[rgb(248,68,100)] tracking-[0.2px] text-lg font-medium leading-6 whitespace-nowrap overflow-hidden text-ellipsis px-2 py-3">
                             <span class="font-medium text-base text-white">Book tickets</span>
                         </button>
                     </div>
