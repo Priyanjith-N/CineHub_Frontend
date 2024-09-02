@@ -1,514 +1,360 @@
-<section class="bg-[rgb(26,26,26)]">
-    <div class="mx-[48px] h-[480px] py-[32px] bg-[rgb(26,26,26)]" style="background-image: linear-gradient(90deg, rgb(26, 26, 26) 24.97%, rgb(26, 26, 26) 38.3%, rgba(26, 26, 26, 0.04) 97.47%, rgb(26, 26, 26) 100%), url(assets/images/footage.avif); background-repeat: no-repeat;background-position: right center;">
-        <div class="flex items-center mx-[100px] relative">
-            <div>
-                <div class="relative">
-                    <div class="rounded-[16px_16px_0px_0px] object-cover cursor-pointer">
-                        <img class="w-auto h-[392px] max-w-full rounded-[16px_16px_0px_0px] object-cover" src="assets/images/footage-et00404702-1721030388.avif" alt="">
+@if(movieData) {
+    <section class="bg-[rgb(26,26,26)]">
+        <div class="mx-[48px] h-[480px] py-[32px] bg-[rgb(26,26,26)]" style="background-image: linear-gradient(90deg, rgb(26, 26, 26) 24.97%, rgb(26, 26, 26) 38.3%, rgba(26, 26, 26, 0.04) 97.47%, rgb(26, 26, 26) 100%), url({{movieData.bannerPhoto.imageURL}}); background-repeat: no-repeat;background-position: right center;">
+            <div class="flex items-center mx-[100px] relative">
+                <div>
+                    <div class="relative">
+                        <div class="rounded-[16px_16px_0px_0px] object-cover cursor-pointer">
+                            <img class="w-auto h-[392px] max-w-full rounded-[16px_16px_0px_0px] object-cover" [src]="movieData.coverPhoto.imageURL" alt="">
+                        </div>
+                        <div class="rounded-[24px] select-none py-[4px] px-[8px] shadow-[rgba(0,0,0,0.16)_0px_1px_8px] bg-[rgba(34,34,34,0.8)] flex items-center z-50 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                            <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <rect y="0.114258" width="13" height="13" fill="url(#pattern0_78_284)"/>
+                                <defs>
+                                <pattern id="pattern0_78_284" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                <use xlink:href="#image0_78_284" transform="scale(0.0111111)"/>
+                                </pattern>
+                                <image id="image0_78_284" width="90" height="90" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAACLUlEQVR4nO3dQWoUQRTG8Q6SiBDBTdClrpONHkBP4TZLryC5QUQxyTJX8AozF0j26fUIowvDLIRseoLzF6EHBFESU1Xv1avvd4Kqj4Lpr+bNdNeJiIiIiIhEBGwB74CvwCVwBOxYrysc4JA/fQcOgAfW6wtjPMl/MwfeAPes11k9bqYHXluvtYWg1ybAc+s1V4nbWwGfgGfWa48e9NoAnACPrPdQBe5uAbwF7lvvJXrQazNgH9iw3pNLpHcGvLTeVwtB//6Esme9PzfIawmcAo+71lHG1Vj1H3atoqx5s5UeG31zlR5b02YqPfZWTVR6/BhCV3r8WYSs9Pg1C1Xp8e88RKWnHpOqKz11uR4r/ZOuNtTpqrpKT93m1VR6YujdV3pimQIvOo+IZ+Wy0hPX4KrSE9/CRaWnHZ9NKz3tOQdeKeiolZ62LYHjX8P4CrqMDwq6jEsFXYaCLuS9TnT+D8OPwKaCzkePd5mpsGSmCp6ZLpUy0zVpZrr4b3o6lRh6fTmbl8YNMtMATWYaCStAQ46ZxfglLn7NNIjeQmVODT8GV5NFqVmni9fKnJpxyFO3lTk1o4B795U5tcIBz6uZ0E+tcGXe7lqVOeCl/hglf9ATYNf2GDmSIeCzEJU5tYQBz0JV5tQSBLwIWZlTu0PAQ+jKnNp/BPxjrMxPrddelVuGPGmmMqd2w4AvmqvMqQFf/hFwu5U5Nb1MoezrQQ7Hk/1NrwcRERERERHp6vMTtSzZqzczTxgAAAAASUVORK5CYII="/>
+                                </defs>
+                            </svg>                        
+                            <span class="text-xs font-medium leading-4 tracking-[0.2px] text-white pl-1.5">Trailer</span>
+                        </div>
                     </div>
-                    <div class="rounded-[24px] select-none py-[4px] px-[8px] shadow-[rgba(0,0,0,0.16)_0px_1px_8px] bg-[rgba(34,34,34,0.8)] flex items-center z-50 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                        <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <rect y="0.114258" width="13" height="13" fill="url(#pattern0_78_284)"/>
-                            <defs>
-                            <pattern id="pattern0_78_284" patternContentUnits="objectBoundingBox" width="1" height="1">
-                            <use xlink:href="#image0_78_284" transform="scale(0.0111111)"/>
-                            </pattern>
-                            <image id="image0_78_284" width="90" height="90" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAACLUlEQVR4nO3dQWoUQRTG8Q6SiBDBTdClrpONHkBP4TZLryC5QUQxyTJX8AozF0j26fUIowvDLIRseoLzF6EHBFESU1Xv1avvd4Kqj4Lpr+bNdNeJiIiIiIhEBGwB74CvwCVwBOxYrysc4JA/fQcOgAfW6wtjPMl/MwfeAPes11k9bqYHXluvtYWg1ybAc+s1V4nbWwGfgGfWa48e9NoAnACPrPdQBe5uAbwF7lvvJXrQazNgH9iw3pNLpHcGvLTeVwtB//6Esme9PzfIawmcAo+71lHG1Vj1H3atoqx5s5UeG31zlR5b02YqPfZWTVR6/BhCV3r8WYSs9Pg1C1Xp8e88RKWnHpOqKz11uR4r/ZOuNtTpqrpKT93m1VR6YujdV3pimQIvOo+IZ+Wy0hPX4KrSE9/CRaWnHZ9NKz3tOQdeKeiolZ62LYHjX8P4CrqMDwq6jEsFXYaCLuS9TnT+D8OPwKaCzkePd5mpsGSmCp6ZLpUy0zVpZrr4b3o6lRh6fTmbl8YNMtMATWYaCStAQ46ZxfglLn7NNIjeQmVODT8GV5NFqVmni9fKnJpxyFO3lTk1o4B795U5tcIBz6uZ0E+tcGXe7lqVOeCl/hglf9ATYNf2GDmSIeCzEJU5tYQBz0JV5tQSBLwIWZlTu0PAQ+jKnNp/BPxjrMxPrddelVuGPGmmMqd2w4AvmqvMqQFf/hFwu5U5Nb1MoezrQQ7Hk/1NrwcRERERERHp6vMTtSzZqzczTxgAAAAASUVORK5CYII="/>
-                            </defs>
-                        </svg>                        
-                        <span class="text-xs font-medium leading-4 tracking-[0.2px] text-white pl-1.5">Trailer</span>
+                    <div class="bg-black justify-center items-center flex w-full p-2 rounded-[0px_0px_16px_16px]">
+                        <span class="text-[12px] font-medium leading-4 tracking-[0.2px] text-white no-underline whitespace-nowrap overflow-hidden text-ellipsis">In cinemas</span>
                     </div>
                 </div>
-                <div class="bg-black justify-center items-center flex w-full p-2 rounded-[0px_0px_16px_16px]">
-                    <span class="text-[12px] font-medium leading-4 tracking-[0.2px] text-white no-underline whitespace-nowrap overflow-hidden text-ellipsis">In cinemas</span>
-                </div>
-            </div>
-            <div class="pl-[32px]">
-                <h2 class="text-white text-4xl font-bold leading-[42px] whitespace-nowrap overflow-hidden text-ellipsis">Footage</h2>
-                <section class="block">
-                    <div class="w-[446px] mt-[16px] py-[12px] px-[24px] justify-between items-center flex max-w-[446px] cursor-pointer bg-[rgb(51,51,51)] mb-0 mx-0 rounded-lg">
-                        <div class="flex items-center">
+                <div class="pl-[32px]">
+                    <h2 class="text-white text-4xl font-bold leading-[42px] whitespace-nowrap overflow-hidden text-ellipsis">{{ movieData.name }}</h2>
+                    <section class="block">
+                        <div class="w-[446px] mt-[16px] py-[12px] px-[24px] justify-between items-center flex max-w-[446px] cursor-pointer bg-[rgb(51,51,51)] mb-0 mx-0 rounded-lg">
+                            <div class="flex items-center">
+                                <div>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <rect width="24" height="24" fill="url(#pattern0_78_282)"/>
+                                        <defs>
+                                        <pattern id="pattern0_78_282" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                        <use xlink:href="#image0_78_282" transform="scale(0.0111111)"/>
+                                        </pattern>
+                                        <image id="image0_78_282" width="90" height="90" xlink:href="data:image/png;base64,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"/>
+                                        </defs>
+                                    </svg>                                                               
+                                </div>
+                                <div>
+                                    <h5 class="tracking-[0.2px] text-white text-lg font-medium leading-6 mx-2 my-0">7.1/10</h5>
+                                </div>
+                                <div>
+                                    <h6 class="text-white text-base font-normal leading-6 tracking-[0.2px] mr-1">(518 Votes)</h6>
+                                </div>
+                                <div>
+                                    <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 13L7.66667 7L1 0.999999" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>                                
+                                </div>
+                            </div>
                             <div>
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                    <rect width="24" height="24" fill="url(#pattern0_78_282)"/>
+                                <button type="button" class="cursor-pointer bg-white justify-center items-center flex text-[rgb(26,26,26)] ml-1 px-3 py-2 rounded-lg border-[none]">Rate now</button>
+                            </div>
+                        </div>
+                    </section>
+                    <div class="pt-[16px]">
+                        <div class="flex">
+                            <div class="m-[8px_8px_0px_0px] py-[2px] px-[8px] bg-[rgba(299,299,299,1)] rounded-[2px]">
+                                <p class="cursor-pointer hover:underline duration-300 ease-in-out">{{ movieData.type }}</p>
+                            </div>
+                            @for (language of movieData.language; track $index) {
+                                <div class="m-[8px_8px_0px_0px] py-[2px] px-[8px] bg-[rgba(299,299,299,1)] rounded-[2px]">
+                                    <p class="cursor-pointer hover:underline duration-300 ease-in-out">{{ language }}</p>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="pt-[16px] flex items-center text-white text-base font-normal leading-6 tracking-[0.2px]">
+                        {{ movieData.duration.hours }}h {{ movieData.duration.minutes }}m
+                        <span class="text-base font-normal leading-6 tracking-[0.2px] px-2 py-0">  •  </span>
+                        <p class="text-base font-normal leading-6 tracking-[0.2px] text-white mr-0">{{ movieData.category.join(', ') }}</p>
+                        <span class="text-base font-normal leading-6 tracking-[0.2px] px-2 py-0">  •  </span>
+                        {{ movieData.releaseDate! | dateFormatter }}
+                    </div>
+                    <div class="mt-[32px]">
+                        <button type="button" class="border text-white bg-[rgb(248,68,100)] shadow-[rgba(0,0,0,0.16)_0px_1px_8px] w-[216px] relative cursor-pointer p-0 rounded-lg border-solid border-[rgb(248,68,100)] tracking-[0.2px] text-lg font-medium leading-6 whitespace-nowrap overflow-hidden text-ellipsis px-2 py-3">
+                            <span class="font-medium text-base text-white">Book tickets</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="absolute top-0 right-0">
+                    <section class="flex h-12 w-[122px] bg-[rgba(34,34,34,0.8)] opacity-80 cursor-pointer rounded px-4 py-0">
+                        <div class="justify-between items-center flex w-full">
+                            <div>
+                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <rect width="32" height="32" fill="url(#pattern0_82_283)"/>
                                     <defs>
-                                    <pattern id="pattern0_78_282" patternContentUnits="objectBoundingBox" width="1" height="1">
-                                    <use xlink:href="#image0_78_282" transform="scale(0.0111111)"/>
+                                    <pattern id="pattern0_82_283" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                    <use xlink:href="#image0_82_283" transform="scale(0.0111111)"/>
                                     </pattern>
-                                    <image id="image0_78_282" width="90" height="90" xlink:href="data:image/png;base64,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"/>
+                                    <image id="image0_82_283" width="90" height="90" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAADN0lEQVR4nO2c225SQRSG5x2sMdpWMfFlTLQaX8DGC0+19Vl6V4t64aWXnh+kpGifoUbACwXaz0wYIiGIMHtO7LW+hBsCw15/FmvPnvlnGaMoiqIoiqIoiqKUCXAV2AW+AG3gp3u13XvPgM3c17myAOvAC2DI/zkD3gKN3Ne9UgB3gR7L0wW2cl//SgA8dxnqi/3uXu44ViGTzyqIPCm2ZvYsgA3PcjGvjFyZ+WOSAV4TnmbuuEqcwg0jCG3H3MgdXzEAe8RjJ3d8xQB8jij0x9zxFQNwElHodu74ioGws41pernjKwagE1HoTu74igE4iij0ce74igC4BnyNKLTsmyGjufM+8Iu4PDESARpu+fM38RmIe2AhXQZPcmCEZfBhogyexM5kLpu6g5/AfeA80DLpbVNn8Be46b677WprFZF3jQCB+x4CX58a6w5w6lkubpk6QkCBp8ZdW2JzduA+W7+aTCSBZ/zOReAR8N49QXbc2sixfRgBnhYxhfuHL8Ju87SAD8BjG0xpAq/aHtyrBf96Q/fXW5szngoc0Bdxam9EKnAaX8QAuK8ZnMYXca41eH5NjrlTIesml9gXMU/gN8ANI4mIvohp5GVwQl+E3AxO7Iv4JjaDE/sijnLHVwyRZxvd3PFJEfpH7viKIfJ2fSt3fFJuhid6COev0PYIWEz6Or0bCb2Z+IGlYaQCvEwg9Bi5Ge4OQNqdk5T0RWa4PfKVeZm0YYSte1Rd+N+uuPDfkJTZXc+trK2psXwFPxQhuD3M6LJrUV/EAXBhzngq+AI7LzvAJ+eF6DlvhPVIvAMeJrIbyMjw0JBIcOCSNZM7s0zLlUR5/TqIJLhzKC1a+obuOWLd1B0CCg7cA76zPHL6dTASvOkrOPCg4nKCrH4d+AseyoguI7MrCh4Cmf06yHNYSG6/DtJmuPbrIF2Ga7+OiQyPaZeQfUR5Erc0EAvt1zEm8oaF9utI5EvRfh2JfCnar2OMNq+qhy9FZr+OxL4Uef06MvlS5PTryOhLkdGvwwfgZqASUv9+HQX4Uurdr6MQX0p9+3XEwm3O7i/YjebMmS61Jgf2pZTXr0NRFEVRFEVRFMVE4g/R2nVw+7ZeWwAAAABJRU5ErkJggg=="/>
                                     </defs>
-                                </svg>                                                               
-                            </div>
-                            <div>
-                                <h5 class="tracking-[0.2px] text-white text-lg font-medium leading-6 mx-2 my-0">7.1/10</h5>
-                            </div>
-                            <div>
-                                <h6 class="text-white text-base font-normal leading-6 tracking-[0.2px] mr-1">(518 Votes)</h6>
-                            </div>
-                            <div>
-                                <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M1 13L7.66667 7L1 0.999999" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>                                
                             </div>
+                            <div class="text-base font-medium leading-5 tracking-[0.2px] text-white">Share</div>
                         </div>
-                        <div>
-                            <button type="button" class="cursor-pointer bg-white justify-center items-center flex text-[rgb(26,26,26)] ml-1 px-3 py-2 rounded-lg border-[none]">Rate now</button>
-                        </div>
-                    </div>
-                </section>
-                <div class="pt-[16px]">
-                    <div class="flex">
-                        <div class="m-[8px_8px_0px_0px] py-[2px] px-[8px] bg-[rgba(299,299,299,1)] rounded-[2px]">
-                            <p class="cursor-pointer hover:underline duration-300 ease-in-out">2D</p>
-                        </div>
-                        <div class="m-[8px_8px_0px_0px] py-[2px] px-[8px] bg-[rgba(299,299,299,1)] rounded-[2px]">
-                            <p class="cursor-pointer hover:underline duration-300 ease-in-out">Malayalam</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="pt-[16px] flex items-center text-white text-base font-normal leading-6 tracking-[0.2px]">
-                    2h 6m
-                    <span class="text-base font-normal leading-6 tracking-[0.2px] px-2 py-0">  •  </span>
-                    <p class="text-base font-normal leading-6 tracking-[0.2px] text-white mr-0">Mystery, Thriller</p>
-                    <span class="text-base font-normal leading-6 tracking-[0.2px] px-2 py-0">  •  </span>
-                    23 Aug, 2024
-                </div>
-                <div class="mt-[32px]">
-                    <button type="button" class="border text-white bg-[rgb(248,68,100)] shadow-[rgba(0,0,0,0.16)_0px_1px_8px] w-[216px] relative cursor-pointer p-0 rounded-lg border-solid border-[rgb(248,68,100)] tracking-[0.2px] text-lg font-medium leading-6 whitespace-nowrap overflow-hidden text-ellipsis px-2 py-3">
-                        <span class="font-medium text-base text-white">Book tickets</span>
-                    </button>
-                </div>
-            </div>
-            <div class="absolute top-0 right-0">
-                <section class="flex h-12 w-[122px] bg-[rgba(34,34,34,0.8)] opacity-80 cursor-pointer rounded px-4 py-0">
-                    <div class="justify-between items-center flex w-full">
-                        <div>
-                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                <rect width="32" height="32" fill="url(#pattern0_82_283)"/>
-                                <defs>
-                                <pattern id="pattern0_82_283" patternContentUnits="objectBoundingBox" width="1" height="1">
-                                <use xlink:href="#image0_82_283" transform="scale(0.0111111)"/>
-                                </pattern>
-                                <image id="image0_82_283" width="90" height="90" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAADN0lEQVR4nO2c225SQRSG5x2sMdpWMfFlTLQaX8DGC0+19Vl6V4t64aWXnh+kpGifoUbACwXaz0wYIiGIMHtO7LW+hBsCw15/FmvPnvlnGaMoiqIoiqIoiqKUCXAV2AW+AG3gp3u13XvPgM3c17myAOvAC2DI/zkD3gKN3Ne9UgB3gR7L0wW2cl//SgA8dxnqi/3uXu44ViGTzyqIPCm2ZvYsgA3PcjGvjFyZ+WOSAV4TnmbuuEqcwg0jCG3H3MgdXzEAe8RjJ3d8xQB8jij0x9zxFQNwElHodu74ioGws41pernjKwagE1HoTu74igE4iij0ce74igC4BnyNKLTsmyGjufM+8Iu4PDESARpu+fM38RmIe2AhXQZPcmCEZfBhogyexM5kLpu6g5/AfeA80DLpbVNn8Be46b677WprFZF3jQCB+x4CX58a6w5w6lkubpk6QkCBp8ZdW2JzduA+W7+aTCSBZ/zOReAR8N49QXbc2sixfRgBnhYxhfuHL8Ju87SAD8BjG0xpAq/aHtyrBf96Q/fXW5szngoc0Bdxam9EKnAaX8QAuK8ZnMYXca41eH5NjrlTIesml9gXMU/gN8ANI4mIvohp5GVwQl+E3AxO7Iv4JjaDE/sijnLHVwyRZxvd3PFJEfpH7viKIfJ2fSt3fFJuhid6COev0PYIWEz6Or0bCb2Z+IGlYaQCvEwg9Bi5Ge4OQNqdk5T0RWa4PfKVeZm0YYSte1Rd+N+uuPDfkJTZXc+trK2psXwFPxQhuD3M6LJrUV/EAXBhzngq+AI7LzvAJ+eF6DlvhPVIvAMeJrIbyMjw0JBIcOCSNZM7s0zLlUR5/TqIJLhzKC1a+obuOWLd1B0CCg7cA76zPHL6dTASvOkrOPCg4nKCrH4d+AseyoguI7MrCh4Cmf06yHNYSG6/DtJmuPbrIF2Ga7+OiQyPaZeQfUR5Erc0EAvt1zEm8oaF9utI5EvRfh2JfCnar2OMNq+qhy9FZr+OxL4Uef06MvlS5PTryOhLkdGvwwfgZqASUv9+HQX4Uurdr6MQX0p9+3XEwm3O7i/YjebMmS61Jgf2pZTXr0NRFEVRFEVRFMVE4g/R2nVw+7ZeWwAAAABJRU5ErkJggg=="/>
-                                </defs>
-                            </svg>                                
-                        </div>
-                        <div class="text-base font-medium leading-5 tracking-[0.2px] text-white">Share</div>
-                    </div>
-                </section>
-            </div>
-        </div>
-    </div>
-</section>
-<section>
-    <div class="mx-[148px]">
-        <div class="py-[32px]">
-            <span class="flex flex-col w-full h-full">
-                <h4 class="text-2xl font-bold leading-[30px] text-black" >About the  movie</h4>
-                <div class="text-base font-normal leading-6 tracking-[0.2px] text-[rgb(51,51,51)] pt-4">
-                    <span>Footage is a Malayalam movie starring Manju Warrier, Vishak Nair and Gayathri Ashok in prominent roles. It is directed by Saiju Sreedharan.</span>
-                </div>
-            </span>
-        </div>
-        <div class="py-[32px] border-t-neutral-200 border-t border-solid">
-            <div>
-                <p class="tracking-[0.2px] text-black text-2xl font-bold leading-[30px]">Cast</p>
-            </div>
-            <div class="flex gap-[8px] pt-[16px] relative">
-                <div class="opacity-0 bg-[linear-gradient(to_left,rgba(255,255,255,0)_0%,rgb(255,255,255)_50%)] h-full absolute left-0 top-0 z-50 animate-[0.3s_ease_0s_1_normal_none_running_opacity]" [class.visiable]="this.castSlider && this.castSlider.track.details.progress !== 0">
-                    <div class="flex h-[120px] items-center">
-                        <div class="cursor-pointer" (click)="moveSlide(false, 'cast')">
-                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="20" cy="20" r="20" fill="#222222" fill-opacity="0.62"/>
-                                <path d="M22.1428 14.6428L16.7857 20L22.1428 25.3571" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>                                            
-                        </div>
-                    </div>
-                </div>
-                <div class="flex items-start text-center keen-slider" id="slider" #sliderRef_1>
-                    <div class="max-w-[120px] min-w-[120px] keen-slider__slide">
-                        <div class="max-h-[120px] min-h-[120px] max-w-[120px] min-w-[120px] bg-[none] rounded-[60px]">
-                            <img class="opacity-100 transition-[0.5s] w-full min-h-[inherit] max-h-[inherit] object-cover rounded-[60px]" src="../../../../../../assets/images/manju-warrier-1045703-1721833876.avif" alt="">
-                        </div>
-                        <h2 class="overflow-hidden break-words text-black text-base font-normal leading-6 tracking-[0.2px] pt-2">Manju Warrier</h2>
-                        <h2 class="overflow-hidden break-words text-[rgb(102,102,102)] text-ellipsis line-clamp-2 text-sm font-normal leading-5 max-h-[2.50rem] tracking-[0.2px]">Director, Producer, Writer, Screenplay, Dialogue Writer, Editor</h2>
-                    </div>
-                    <div class="max-w-[120px] min-w-[120px] keen-slider__slide">
-                        <div class="max-h-[120px] min-h-[120px] max-w-[120px] min-w-[120px] bg-[none] rounded-[60px]">
-                            <img class="opacity-100 transition-[0.5s] w-full min-h-[inherit] max-h-[inherit] object-cover rounded-[60px]" src="../../../../../../assets/images/manju-warrier-1045703-1721833876.avif" alt="">
-                        </div>
-                        <h2 class="overflow-hidden break-words text-black text-base font-normal leading-6 tracking-[0.2px] pt-2">Manju Warrier</h2>
-                        <h2 class="overflow-hidden break-words text-[rgb(102,102,102)] text-ellipsis line-clamp-2 text-sm font-normal leading-5 max-h-[2.50rem] tracking-[0.2px]">Actor</h2>
-                    </div>
-                    <div class="max-w-[120px] min-w-[120px] keen-slider__slide">
-                        <div class="max-h-[120px] min-h-[120px] max-w-[120px] min-w-[120px] bg-[none] rounded-[60px]">
-                            <img class="opacity-100 transition-[0.5s] w-full min-h-[inherit] max-h-[inherit] object-cover rounded-[60px]" src="../../../../../../assets/images/manju-warrier-1045703-1721833876.avif" alt="">
-                        </div>
-                        <h2 class="overflow-hidden break-words text-black text-base font-normal leading-6 tracking-[0.2px] pt-2">Manju Warrier</h2>
-                        <h2 class="overflow-hidden break-words text-[rgb(102,102,102)] text-ellipsis line-clamp-2 text-sm font-normal leading-5 max-h-[2.50rem] tracking-[0.2px]">Actor</h2>
-                    </div>
-                    <div class="max-w-[120px] min-w-[120px] keen-slider__slide">
-                        <div class="max-h-[120px] min-h-[120px] max-w-[120px] min-w-[120px] bg-[none] rounded-[60px]">
-                            <img class="opacity-100 transition-[0.5s] w-full min-h-[inherit] max-h-[inherit] object-cover rounded-[60px]" src="../../../../../../assets/images/manju-warrier-1045703-1721833876.avif" alt="">
-                        </div>
-                        <h2 class="overflow-hidden break-words text-black text-base font-normal leading-6 tracking-[0.2px] pt-2">Manju Warrier</h2>
-                        <h2 class="overflow-hidden break-words text-[rgb(102,102,102)] text-ellipsis line-clamp-2 text-sm font-normal leading-5 max-h-[2.50rem] tracking-[0.2px]">Actor</h2>
-                    </div>
-                    <div class="max-w-[120px] min-w-[120px] keen-slider__slide">
-                        <div class="max-h-[120px] min-h-[120px] max-w-[120px] min-w-[120px] bg-[none] rounded-[60px]">
-                            <img class="opacity-100 transition-[0.5s] w-full min-h-[inherit] max-h-[inherit] object-cover rounded-[60px]" src="../../../../../../assets/images/manju-warrier-1045703-1721833876.avif" alt="">
-                        </div>
-                        <h2 class="overflow-hidden break-words text-black text-base font-normal leading-6 tracking-[0.2px] pt-2">Manju Warrier</h2>
-                        <h2 class="overflow-hidden break-words text-[rgb(102,102,102)] text-ellipsis line-clamp-2 text-sm font-normal leading-5 max-h-[2.50rem] tracking-[0.2px]">Actor</h2>
-                    </div>
-                    <div class="max-w-[120px] min-w-[120px] keen-slider__slide">
-                        <div class="max-h-[120px] min-h-[120px] max-w-[120px] min-w-[120px] bg-[none] rounded-[60px]">
-                            <img class="opacity-100 transition-[0.5s] w-full min-h-[inherit] max-h-[inherit] object-cover rounded-[60px]" src="../../../../../../assets/images/manju-warrier-1045703-1721833876.avif" alt="">
-                        </div>
-                        <h2 class="overflow-hidden break-words text-black text-base font-normal leading-6 tracking-[0.2px] pt-2">Manju Warrier</h2>
-                        <h2 class="overflow-hidden break-words text-[rgb(102,102,102)] text-ellipsis line-clamp-2 text-sm font-normal leading-5 max-h-[2.50rem] tracking-[0.2px]">Actor</h2>
-                    </div>
-                    <div class="max-w-[120px] min-w-[120px] keen-slider__slide">
-                        <div class="max-h-[120px] min-h-[120px] max-w-[120px] min-w-[120px] bg-[none] rounded-[60px]">
-                            <img class="opacity-100 transition-[0.5s] w-full min-h-[inherit] max-h-[inherit] object-cover rounded-[60px]" src="../../../../../../assets/images/manju-warrier-1045703-1721833876.avif" alt="">
-                        </div>
-                        <h2 class="overflow-hidden break-words text-black text-base font-normal leading-6 tracking-[0.2px] pt-2">Manju Warrier</h2>
-                        <h2 class="overflow-hidden break-words text-[rgb(102,102,102)] text-ellipsis line-clamp-2 text-sm font-normal leading-5 max-h-[2.50rem] tracking-[0.2px]">Actor</h2>
-                    </div>
-                    <div class="max-w-[120px] min-w-[120px] keen-slider__slide">
-                        <div class="max-h-[120px] min-h-[120px] max-w-[120px] min-w-[120px] bg-[none] rounded-[60px]">
-                            <img class="opacity-100 transition-[0.5s] w-full min-h-[inherit] max-h-[inherit] object-cover rounded-[60px]" src="../../../../../../assets/images/manju-warrier-1045703-1721833876.avif" alt="">
-                        </div>
-                        <h2 class="overflow-hidden break-words text-black text-base font-normal leading-6 tracking-[0.2px] pt-2">Manju Warrier</h2>
-                        <h2 class="overflow-hidden break-words text-[rgb(102,102,102)] text-ellipsis line-clamp-2 text-sm font-normal leading-5 max-h-[2.50rem] tracking-[0.2px]">Actor</h2>
-                    </div>
-                </div>
-                <div class="bg-[linear-gradient(to_right,rgba(255,255,255,0)_0%,rgb(255,255,255)_50%)] h-full absolute right-0 top-0 z-50">
-                    <div class="flex h-[120px] items-center">
-                        <div class="cursor-pointer" (click)="moveSlide(true, 'cast')">
-                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="20" cy="20" r="20" transform="rotate(-180 20 20)" fill="#222222" fill-opacity="0.62"/>
-                                <path d="M17.8572 25.3572L23.2143 20L17.8572 14.6429" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>                                              
-                        </div>
-                    </div>
+                    </section>
                 </div>
             </div>
         </div>
-        <div class="py-[32px] border-t-neutral-200 border-t border-solid">
-            <div>
-                <p class="tracking-[0.2px] text-black text-2xl font-bold leading-[30px]">Crew</p>
+    </section>
+    <section>
+        <div class="mx-[148px]">
+            <div class="py-[32px]">
+                <span class="flex flex-col w-full h-full">
+                    <h4 class="text-2xl font-bold leading-[30px] text-black" >About the  movie</h4>
+                    <div class="text-base font-normal leading-6 tracking-[0.2px] text-[rgb(51,51,51)] pt-4">
+                        <span>{{ movieData.about }}</span>
+                    </div>
+                </span>
             </div>
-            <div class="flex gap-[8px] pt-[16px] relative">
-                <div class="opacity-0 bg-[linear-gradient(to_left,rgba(255,255,255,0)_0%,rgb(255,255,255)_50%)] h-full absolute left-0 top-0 z-50 animate-[0.3s_ease_0s_1_normal_none_running_opacity]" [class.visiable]="this.crewSlider && this.crewSlider.track.details.progress !== 0">
-                    <div class="flex h-[120px] items-center">
-                        <div class="cursor-pointer" (click)="moveSlide(false, 'crew')">
-                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="20" cy="20" r="20" fill="#222222" fill-opacity="0.62"/>
-                                <path d="M22.1428 14.6428L16.7857 20L22.1428 25.3571" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>                                            
-                        </div>
-                    </div>
-                </div>
-                <div class="flex items-start text-center keen-slider" id="slider" #sliderRef_2>
-                    <div class="max-w-[120px] min-w-[120px] keen-slider__slide">
-                        <div class="max-h-[120px] min-h-[120px] max-w-[120px] min-w-[120px] bg-[none] rounded-[60px]">
-                            <img class="opacity-100 transition-[0.5s] w-full min-h-[inherit] max-h-[inherit] object-cover rounded-[60px]" src="../../../../../../assets/images/manju-warrier-1045703-1721833876.avif" alt="">
-                        </div>
-                        <h2 class="overflow-hidden break-words text-black text-base font-normal leading-6 tracking-[0.2px] pt-2">Manju Warrier</h2>
-                        <h2 class="overflow-hidden break-words text-[rgb(102,102,102)] text-ellipsis line-clamp-2 text-sm font-normal leading-5 max-h-[2.50rem] tracking-[0.2px]">Director, Producer, Writer, Screenplay, Dialogue Writer, Editor</h2>
-                    </div>
-                    <div class="max-w-[120px] min-w-[120px] keen-slider__slide">
-                        <div class="max-h-[120px] min-h-[120px] max-w-[120px] min-w-[120px] bg-[none] rounded-[60px]">
-                            <img class="opacity-100 transition-[0.5s] w-full min-h-[inherit] max-h-[inherit] object-cover rounded-[60px]" src="../../../../../../assets/images/manju-warrier-1045703-1721833876.avif" alt="">
-                        </div>
-                        <h2 class="overflow-hidden break-words text-black text-base font-normal leading-6 tracking-[0.2px] pt-2">Manju Warrier</h2>
-                        <h2 class="overflow-hidden break-words text-[rgb(102,102,102)] text-ellipsis line-clamp-2 text-sm font-normal leading-5 max-h-[2.50rem] tracking-[0.2px]">Actor</h2>
-                    </div>
-                    <div class="max-w-[120px] min-w-[120px] keen-slider__slide">
-                        <div class="max-h-[120px] min-h-[120px] max-w-[120px] min-w-[120px] bg-[none] rounded-[60px]">
-                            <img class="opacity-100 transition-[0.5s] w-full min-h-[inherit] max-h-[inherit] object-cover rounded-[60px]" src="../../../../../../assets/images/manju-warrier-1045703-1721833876.avif" alt="">
-                        </div>
-                        <h2 class="overflow-hidden break-words text-black text-base font-normal leading-6 tracking-[0.2px] pt-2">Manju Warrier</h2>
-                        <h2 class="overflow-hidden break-words text-[rgb(102,102,102)] text-ellipsis line-clamp-2 text-sm font-normal leading-5 max-h-[2.50rem] tracking-[0.2px]">Actor</h2>
-                    </div>
-                    <div class="max-w-[120px] min-w-[120px] keen-slider__slide">
-                        <div class="max-h-[120px] min-h-[120px] max-w-[120px] min-w-[120px] bg-[none] rounded-[60px]">
-                            <img class="opacity-100 transition-[0.5s] w-full min-h-[inherit] max-h-[inherit] object-cover rounded-[60px]" src="../../../../../../assets/images/manju-warrier-1045703-1721833876.avif" alt="">
-                        </div>
-                        <h2 class="overflow-hidden break-words text-black text-base font-normal leading-6 tracking-[0.2px] pt-2">Manju Warrier</h2>
-                        <h2 class="overflow-hidden break-words text-[rgb(102,102,102)] text-ellipsis line-clamp-2 text-sm font-normal leading-5 max-h-[2.50rem] tracking-[0.2px]">Actor</h2>
-                    </div>
-                    <div class="max-w-[120px] min-w-[120px] keen-slider__slide">
-                        <div class="max-h-[120px] min-h-[120px] max-w-[120px] min-w-[120px] bg-[none] rounded-[60px]">
-                            <img class="opacity-100 transition-[0.5s] w-full min-h-[inherit] max-h-[inherit] object-cover rounded-[60px]" src="../../../../../../assets/images/manju-warrier-1045703-1721833876.avif" alt="">
-                        </div>
-                        <h2 class="overflow-hidden break-words text-black text-base font-normal leading-6 tracking-[0.2px] pt-2">Manju Warrier</h2>
-                        <h2 class="overflow-hidden break-words text-[rgb(102,102,102)] text-ellipsis line-clamp-2 text-sm font-normal leading-5 max-h-[2.50rem] tracking-[0.2px]">Actor</h2>
-                    </div>
-                    <div class="max-w-[120px] min-w-[120px] keen-slider__slide">
-                        <div class="max-h-[120px] min-h-[120px] max-w-[120px] min-w-[120px] bg-[none] rounded-[60px]">
-                            <img class="opacity-100 transition-[0.5s] w-full min-h-[inherit] max-h-[inherit] object-cover rounded-[60px]" src="../../../../../../assets/images/manju-warrier-1045703-1721833876.avif" alt="">
-                        </div>
-                        <h2 class="overflow-hidden break-words text-black text-base font-normal leading-6 tracking-[0.2px] pt-2">Manju Warrier</h2>
-                        <h2 class="overflow-hidden break-words text-[rgb(102,102,102)] text-ellipsis line-clamp-2 text-sm font-normal leading-5 max-h-[2.50rem] tracking-[0.2px]">Actor</h2>
-                    </div>
-                    <div class="max-w-[120px] min-w-[120px] keen-slider__slide">
-                        <div class="max-h-[120px] min-h-[120px] max-w-[120px] min-w-[120px] bg-[none] rounded-[60px]">
-                            <img class="opacity-100 transition-[0.5s] w-full min-h-[inherit] max-h-[inherit] object-cover rounded-[60px]" src="../../../../../../assets/images/manju-warrier-1045703-1721833876.avif" alt="">
-                        </div>
-                        <h2 class="overflow-hidden break-words text-black text-base font-normal leading-6 tracking-[0.2px] pt-2">Manju Warrier</h2>
-                        <h2 class="overflow-hidden break-words text-[rgb(102,102,102)] text-ellipsis line-clamp-2 text-sm font-normal leading-5 max-h-[2.50rem] tracking-[0.2px]">Actor</h2>
-                    </div>
-                    <div class="max-w-[120px] min-w-[120px] keen-slider__slide">
-                        <div class="max-h-[120px] min-h-[120px] max-w-[120px] min-w-[120px] bg-[none] rounded-[60px]">
-                            <img class="opacity-100 transition-[0.5s] w-full min-h-[inherit] max-h-[inherit] object-cover rounded-[60px]" src="../../../../../../assets/images/manju-warrier-1045703-1721833876.avif" alt="">
-                        </div>
-                        <h2 class="overflow-hidden break-words text-black text-base font-normal leading-6 tracking-[0.2px] pt-2">Manju Warrier</h2>
-                        <h2 class="overflow-hidden break-words text-[rgb(102,102,102)] text-ellipsis line-clamp-2 text-sm font-normal leading-5 max-h-[2.50rem] tracking-[0.2px]">Actor</h2>
-                    </div>
-                </div>
-                <div class="bg-[linear-gradient(to_right,rgba(255,255,255,0)_0%,rgb(255,255,255)_50%)] h-full absolute right-0 top-0 z-50">
-                    <div class="flex h-[120px] items-center">
-                        <div class="cursor-pointer" (click)="moveSlide(true, 'crew')">
-                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="20" cy="20" r="20" transform="rotate(-180 20 20)" fill="#222222" fill-opacity="0.62"/>
-                                <path d="M17.8572 25.3572L23.2143 20L17.8572 14.6429" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>                                              
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="py-[32px] border-t-neutral-200 border-t border-solid">
-            <div class="flex justify-between items-center">
+            <div class="py-[32px] border-t-neutral-200 border-t border-solid">
                 <div>
-                    <p class="tracking-[0.2px] text-black text-2xl font-bold leading-[30px]">Top reviews</p>
+                    <p class="tracking-[0.2px] text-black text-2xl font-bold leading-[30px]">Cast</p>
                 </div>
-                <div class="flex items-center gap-[12px] cursor-pointer">
-                    <span class="text-[rgb(220,53,75)] text-[18px] leading-[24px] font-[500]">196 reviews</span>
-                    <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1 13L7 7L1 0.999999" stroke="#DC354B" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>                        
-                </div>
+                <app-worker-details-slider [workerDetails]="movieData.cast" ></app-worker-details-slider>
             </div>
-            <h4 class="text-[rgb(102,102,102)] text-base font-normal leading-6 tracking-[0.2px] pl-0 pr-4 pt-6 pb-0">Summary of 196 reviews.</h4>
-            <div class="relative">
-                <div class="flex transition-[0.5s] scroll-smooth pt-6 pb-0 px-0 gap-[32px]">
-                    <div class="p-[24px] border rounded border-solid border-[rgb(204,204,204)] w-[446px]">
-                        <div class="flex item-start justify-between">
-                            <div class="flex items-center">
-                                <div>
-                                    <img class="w-[40px] h-[40px] object-cover" src="assets/images/noimguser.avif" alt="">
-                                </div>
-                                <div class="block pt-1 pb-0 px-3">
-                                    <h5 class="text-base font-normal leading-6 tracking-[0.2px]">User</h5>
-                                </div>
-                            </div>
-                            <div class="flex items-center">
-                                <div>
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                        <rect width="24" height="24" fill="url(#pattern0_96_387)"/>
-                                        <defs>
-                                        <pattern id="pattern0_96_387" patternContentUnits="objectBoundingBox" width="1" height="1">
-                                        <use xlink:href="#image0_96_387" transform="scale(0.0111111)"/>
-                                        </pattern>
-                                        <image id="image0_96_387" width="90" height="90" xlink:href="data:image/png;base64,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"/>
-                                        </defs>
-                                    </svg>                                    
-                                </div>
-                                <div class="text-base font-normal leading-6 tracking-[0.2px] pl-1">
-                                    10/10
-                                </div>
-                            </div>
-                        </div>
-                        <div class="overflow-hidden text-ellipsis block whitespace-normal pt-6">
-                            <p class="text-[rgb(102,102,102)] text-base font-normal leading-6 tracking-[0.2px] pt-1">
-                                അർജുൻ എത്ര വയസായി കാണും ഞാൻ ചെറുപ്പത്തിൽ ആരാധിച്ചിരുന്ന ആൾ ആണ് ഇപ്പോഴും അതെ ആക്ഷൻ  അതെ എന്നർജി പുള്ളിയെ കാണാൻ വേണ്ടി ഇനിയും ഞാൻ പടം കാണും
-                            </p>
-                        </div>
-                        <div class="pt-[16px] flex justify-between items-center">
-                            <div class="flex">
-                                <button class="bg-transparent items-center flex cursor-pointer pl-0.5 pr-0 py-0 border-[none]">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                        <rect width="24" height="24" fill="url(#pattern0_96_370)"/>
-                                        <defs>
-                                        <pattern id="pattern0_96_370" patternContentUnits="objectBoundingBox" width="1" height="1">
-                                        <use xlink:href="#image0_96_370" transform="scale(0.0111111)"/>
-                                        </pattern>
-                                        <image id="image0_96_370" width="90" height="90" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAAC20lEQVR4nO2cu68NURSHP4TEq0GDQhASf4CITqdSecfRaDRXRKJQilajIBG9QiRXiEJEcjXc3INQqRTiTXHjGY9gyZa5CZdz7pw5M2vPnvl9ya8+63xZ2bP3nr0HhBBCCCHawhLA/sgX4CVwHTgCLI1dYFPYNE309EwCndhFNoHODKKncjB2oalzPKfor8CG2MWmzPmcokMuxC42ZboDiA5dvTh2wakyOYDokG2xC06RZQNKDjkZu+gU2VxA9GjsolNkfwHRD2IXnSKnCoh+HLvo1FgOfCwgOizPxQCcLSB5akkucrIe+FZQ9CdZzs/FgpJDvkt0PjYCP4cQ/Uai83FjCMkhYxI9M1uHlBxyWqL7Mxu4V4LovRLdn30lSA5ZIdG9mQc8KkHyQ0nuz6GSuvmMRPdmEfCqJNHai+7DiZIkh2MIC9XRvZfan0sSfU2S/8+CkqZzluWwRP/LfOBqiZINWCfRf7MKuFWyZIuQsHn1AriSLZLCgqs2Q8VR4G0NJFkFCcPgmljTtvDDO4BzBY4NWIJ5Daz2Emwtz12vYST2H7UaZI9E4yL6skTjIvq5ROMiOmwHaIymetEuh3i8HzxWw1ySaFxEb5doKpd8W/NoKpf8xHMZbi3OFi/JbRf9FFgr0bjIHgfmqKNxka1ZBz6iNY/GR7RWhviIDhdLNeugetEu92i8usZqnPDCVqKpXvRuiaZyyXe014HL2Ky34FQruet9rsNamGNey+62i+7GOBJmLc0uiaY5+xvqaH6fLJVoGrK/oY5GHW0ao5uVnRo6qFzyhBYsuJwcdXvz3daH4USseyttET2a3c2JehPLWpBaEFuCSXR8Qdakju5FuKv9owaSbMi8IwHCS8v3NZBlQ56tS+bTEeM1EGYFM0JCzAIOZEenLKHcz77/lBxzs29EjyUwfgfJK2nIZ4w72Vd2bwLPsgdPTLkfsjspI6l2shBCCCGEEEIwLL8A1ajcSTJ0HX8AAAAASUVORK5CYII="/>
-                                        </defs>
-                                    </svg>
-                                    <span class="text-xs font-medium leading-4 tracking-[0.2px] uppercase text-[rgb(102,102,102)] pl-0.5 pr-0 pt-0.5 pb-0">62</span>                                   
-                                </button>
-                                <button class="ml-[24px] bg-transparent items-center flex cursor-pointer pl-0.5 pr-0 py-0 border-[none]">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                        <rect width="24" height="24" fill="url(#pattern0_96_363)"/>
-                                        <defs>
-                                        <pattern id="pattern0_96_363" patternContentUnits="objectBoundingBox" width="1" height="1">
-                                        <use xlink:href="#image0_96_363" transform="scale(0.0111111)"/>
-                                        </pattern>
-                                        <image id="image0_96_363" width="90" height="90" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAACvElEQVR4nO2cua9OQRiHH1usDdEgEtvFPyCiU2o0RKy3o3Mj0emoNQqCP0AUEks0CgkiQa61Uink2oUrscQSjExyKsn9vrPMeWfmnN+TvPV35sk785155z0DQgghhBBCCCGEEEIIIYxYBowCZ4FbwBvgM+AixlfgHjAGzM45E2YVcm8CfyJLHRaPi2TIiunAfmAiAYGuouxsMntdMR1dpnGQDNgNfElAlmsQd0mcQxmsw65E+ERJAteDSILYEpxExxfklNFkFVeBPcAMLR2YCH8EjGiNxkT221iyXQ/jATBTojGRvUuiMRF9RaIxEe3LulqjaV/0T4nGJKNfSzQmoi9JNCaid0g0rUseL06N9GdIu6KPaMOC6e5wjbbgmNU9VqvWgVlmm5RPraaq63vdI/YgXSIHAxKNzVot0XSk7hF72roE4rlE0526R+xscgnEdommdcl3rOoerscxAayykNx30ZutJPdd9AvVOjDtn1atAxvZeuvARrTeo7ERrZ0hNqJ/6K0DE9EvJRqt0a5DsVMZTeuS71v3eMwHVgDbgNPAhwQyzbUc74oxR2UucBj41OFMXklCLAduJyDGNYzfwCvgcrEmm7eElWFOcVIccuAjsQeVKvOK6eYChf/WXEyBz8LvgURfk+XBHAu47fVvOmIKFhQNJyFkb5XlwYwFEn1KoodfYvUsgOinEj2cvYGyeqlkD2Ya8DCAaH+9gxjClgCiT8pyOa43FH1DosuxAfjbQPR7iS7PhYbFHlGStcCvmqK/yXI1ztQUPSnR1VhSXCuc/L0ZXeBEqs0rXWO0hugnsR86RzbVEH0x9kPnyOIaoo/HfuhcmawoWjXpmoxX/JDSHySIGpyrIPq8DNfnaIUzw/USXZ99JST7ItQBSW7GxiGSP6rYH4ZF/4n1fSD+Mj/fx+GbZhYG+p2o/AMhlNxchRY6iwAAAABJRU5ErkJggg=="/>
-                                        </defs>
-                                    </svg>                                    
-                                </button>
-                            </div>
-                            <div>
-                                <span class="text-base font-normal leading-6 tracking-[0.2px] text-[rgb(204,204,204)] pr-4">3 Days ago</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-[24px] border rounded border-solid border-[rgb(204,204,204)] w-[446px]">
-                        <div class="flex item-start justify-between">
-                            <div class="flex items-center">
-                                <div>
-                                    <img class="w-[40px] h-[40px] object-cover" src="assets/images/noimguser.avif" alt="">
-                                </div>
-                                <div class="block pt-1 pb-0 px-3">
-                                    <h5 class="text-base font-normal leading-6 tracking-[0.2px]">User</h5>
-                                </div>
-                            </div>
-                            <div class="flex items-center">
-                                <div>
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                        <rect width="24" height="24" fill="url(#pattern0_96_387)"/>
-                                        <defs>
-                                        <pattern id="pattern0_96_387" patternContentUnits="objectBoundingBox" width="1" height="1">
-                                        <use xlink:href="#image0_96_387" transform="scale(0.0111111)"/>
-                                        </pattern>
-                                        <image id="image0_96_387" width="90" height="90" xlink:href="data:image/png;base64,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"/>
-                                        </defs>
-                                    </svg>                                    
-                                </div>
-                                <div class="text-base font-normal leading-6 tracking-[0.2px] pl-1">
-                                    10/10
-                                </div>
-                            </div>
-                        </div>
-                        <div class="overflow-hidden text-ellipsis block whitespace-normal pt-6">
-                            <p class="text-[rgb(102,102,102)] text-base font-normal leading-6 tracking-[0.2px] pt-1">
-                                അർജുൻ എത്ര വയസായി കാണും ഞാൻ ചെറുപ്പത്തിൽ ആരാധിച്ചിരുന്ന ആൾ ആണ് ഇപ്പോഴും അതെ ആക്ഷൻ  അതെ എന്നർജി പുള്ളിയെ കാണാൻ വേണ്ടി ഇനിയും ഞാൻ പടം കാണും
-                            </p>
-                        </div>
-                        <div class="pt-[16px] flex justify-between items-center">
-                            <div class="flex">
-                                <button class="bg-transparent items-center flex cursor-pointer pl-0.5 pr-0 py-0 border-[none]">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                        <rect width="24" height="24" fill="url(#pattern0_96_370)"/>
-                                        <defs>
-                                        <pattern id="pattern0_96_370" patternContentUnits="objectBoundingBox" width="1" height="1">
-                                        <use xlink:href="#image0_96_370" transform="scale(0.0111111)"/>
-                                        </pattern>
-                                        <image id="image0_96_370" width="90" height="90" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAAC20lEQVR4nO2cu68NURSHP4TEq0GDQhASf4CITqdSecfRaDRXRKJQilajIBG9QiRXiEJEcjXc3INQqRTiTXHjGY9gyZa5CZdz7pw5M2vPnvl9ya8+63xZ2bP3nr0HhBBCCCHawhLA/sgX4CVwHTgCLI1dYFPYNE309EwCndhFNoHODKKncjB2oalzPKfor8CG2MWmzPmcokMuxC42ZboDiA5dvTh2wakyOYDokG2xC06RZQNKDjkZu+gU2VxA9GjsolNkfwHRD2IXnSKnCoh+HLvo1FgOfCwgOizPxQCcLSB5akkucrIe+FZQ9CdZzs/FgpJDvkt0PjYCP4cQ/Uai83FjCMkhYxI9M1uHlBxyWqL7Mxu4V4LovRLdn30lSA5ZIdG9mQc8KkHyQ0nuz6GSuvmMRPdmEfCqJNHai+7DiZIkh2MIC9XRvZfan0sSfU2S/8+CkqZzluWwRP/LfOBqiZINWCfRf7MKuFWyZIuQsHn1AriSLZLCgqs2Q8VR4G0NJFkFCcPgmljTtvDDO4BzBY4NWIJ5Daz2Emwtz12vYST2H7UaZI9E4yL6skTjIvq5ROMiOmwHaIymetEuh3i8HzxWw1ySaFxEb5doKpd8W/NoKpf8xHMZbi3OFi/JbRf9FFgr0bjIHgfmqKNxka1ZBz6iNY/GR7RWhviIDhdLNeugetEu92i8usZqnPDCVqKpXvRuiaZyyXe014HL2Ky34FQruet9rsNamGNey+62i+7GOBJmLc0uiaY5+xvqaH6fLJVoGrK/oY5GHW0ao5uVnRo6qFzyhBYsuJwcdXvz3daH4USseyttET2a3c2JehPLWpBaEFuCSXR8Qdakju5FuKv9owaSbMi8IwHCS8v3NZBlQ56tS+bTEeM1EGYFM0JCzAIOZEenLKHcz77/lBxzs29EjyUwfgfJK2nIZ4w72Vd2bwLPsgdPTLkfsjspI6l2shBCCCGEEEIwLL8A1ajcSTJ0HX8AAAAASUVORK5CYII="/>
-                                        </defs>
-                                    </svg>
-                                    <span class="text-xs font-medium leading-4 tracking-[0.2px] uppercase text-[rgb(102,102,102)] pl-0.5 pr-0 pt-0.5 pb-0">62</span>                                   
-                                </button>
-                                <button class="ml-[24px] bg-transparent items-center flex cursor-pointer pl-0.5 pr-0 py-0 border-[none]">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                        <rect width="24" height="24" fill="url(#pattern0_96_363)"/>
-                                        <defs>
-                                        <pattern id="pattern0_96_363" patternContentUnits="objectBoundingBox" width="1" height="1">
-                                        <use xlink:href="#image0_96_363" transform="scale(0.0111111)"/>
-                                        </pattern>
-                                        <image id="image0_96_363" width="90" height="90" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAACvElEQVR4nO2cua9OQRiHH1usDdEgEtvFPyCiU2o0RKy3o3Mj0emoNQqCP0AUEks0CgkiQa61Uink2oUrscQSjExyKsn9vrPMeWfmnN+TvPV35sk785155z0DQgghhBBCCCGEEEIIIYxYBowCZ4FbwBvgM+AixlfgHjAGzM45E2YVcm8CfyJLHRaPi2TIiunAfmAiAYGuouxsMntdMR1dpnGQDNgNfElAlmsQd0mcQxmsw65E+ERJAteDSILYEpxExxfklNFkFVeBPcAMLR2YCH8EjGiNxkT221iyXQ/jATBTojGRvUuiMRF9RaIxEe3LulqjaV/0T4nGJKNfSzQmoi9JNCaid0g0rUseL06N9GdIu6KPaMOC6e5wjbbgmNU9VqvWgVlmm5RPraaq63vdI/YgXSIHAxKNzVot0XSk7hF72roE4rlE0526R+xscgnEdommdcl3rOoerscxAayykNx30ZutJPdd9AvVOjDtn1atAxvZeuvARrTeo7ERrZ0hNqJ/6K0DE9EvJRqt0a5DsVMZTeuS71v3eMwHVgDbgNPAhwQyzbUc74oxR2UucBj41OFMXklCLAduJyDGNYzfwCvgcrEmm7eElWFOcVIccuAjsQeVKvOK6eYChf/WXEyBz8LvgURfk+XBHAu47fVvOmIKFhQNJyFkb5XlwYwFEn1KoodfYvUsgOinEj2cvYGyeqlkD2Ya8DCAaH+9gxjClgCiT8pyOa43FH1DosuxAfjbQPR7iS7PhYbFHlGStcCvmqK/yXI1ztQUPSnR1VhSXCuc/L0ZXeBEqs0rXWO0hugnsR86RzbVEH0x9kPnyOIaoo/HfuhcmawoWjXpmoxX/JDSHySIGpyrIPq8DNfnaIUzw/USXZ99JST7ItQBSW7GxiGSP6rYH4ZF/4n1fSD+Mj/fx+GbZhYG+p2o/AMhlNxchRY6iwAAAABJRU5ErkJggg=="/>
-                                        </defs>
-                                    </svg>                                    
-                                </button>
-                            </div>
-                            <div>
-                                <span class="text-base font-normal leading-6 tracking-[0.2px] text-[rgb(204,204,204)] pr-4">3 Days ago</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-[24px] border rounded border-solid border-[rgb(204,204,204)] w-[446px]">
-                        <div class="flex item-start justify-between">
-                            <div class="flex items-center">
-                                <div>
-                                    <img class="w-[40px] h-[40px] object-cover" src="assets/images/noimguser.avif" alt="">
-                                </div>
-                                <div class="block pt-1 pb-0 px-3">
-                                    <h5 class="text-base font-normal leading-6 tracking-[0.2px]">User</h5>
-                                </div>
-                            </div>
-                            <div class="flex items-center">
-                                <div>
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                        <rect width="24" height="24" fill="url(#pattern0_96_387)"/>
-                                        <defs>
-                                        <pattern id="pattern0_96_387" patternContentUnits="objectBoundingBox" width="1" height="1">
-                                        <use xlink:href="#image0_96_387" transform="scale(0.0111111)"/>
-                                        </pattern>
-                                        <image id="image0_96_387" width="90" height="90" xlink:href="data:image/png;base64,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"/>
-                                        </defs>
-                                    </svg>                                    
-                                </div>
-                                <div class="text-base font-normal leading-6 tracking-[0.2px] pl-1">
-                                    10/10
-                                </div>
-                            </div>
-                        </div>
-                        <div class="overflow-hidden text-ellipsis block whitespace-normal pt-6">
-                            <p class="text-[rgb(102,102,102)] text-base font-normal leading-6 tracking-[0.2px] pt-1">
-                                അർജുൻ എത്ര വയസായി കാണും ഞാൻ ചെറുപ്പത്തിൽ ആരാധിച്ചിരുന്ന ആൾ ആണ് ഇപ്പോഴും അതെ ആക്ഷൻ  അതെ എന്നർജി പുള്ളിയെ കാണാൻ വേണ്ടി ഇനിയും ഞാൻ പടം കാണും
-                            </p>
-                        </div>
-                        <div class="pt-[16px] flex justify-between items-center">
-                            <div class="flex">
-                                <button class="bg-transparent items-center flex cursor-pointer pl-0.5 pr-0 py-0 border-[none]">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                        <rect width="24" height="24" fill="url(#pattern0_96_370)"/>
-                                        <defs>
-                                        <pattern id="pattern0_96_370" patternContentUnits="objectBoundingBox" width="1" height="1">
-                                        <use xlink:href="#image0_96_370" transform="scale(0.0111111)"/>
-                                        </pattern>
-                                        <image id="image0_96_370" width="90" height="90" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAAC20lEQVR4nO2cu68NURSHP4TEq0GDQhASf4CITqdSecfRaDRXRKJQilajIBG9QiRXiEJEcjXc3INQqRTiTXHjGY9gyZa5CZdz7pw5M2vPnvl9ya8+63xZ2bP3nr0HhBBCCCHawhLA/sgX4CVwHTgCLI1dYFPYNE309EwCndhFNoHODKKncjB2oalzPKfor8CG2MWmzPmcokMuxC42ZboDiA5dvTh2wakyOYDokG2xC06RZQNKDjkZu+gU2VxA9GjsolNkfwHRD2IXnSKnCoh+HLvo1FgOfCwgOizPxQCcLSB5akkucrIe+FZQ9CdZzs/FgpJDvkt0PjYCP4cQ/Uai83FjCMkhYxI9M1uHlBxyWqL7Mxu4V4LovRLdn30lSA5ZIdG9mQc8KkHyQ0nuz6GSuvmMRPdmEfCqJNHai+7DiZIkh2MIC9XRvZfan0sSfU2S/8+CkqZzluWwRP/LfOBqiZINWCfRf7MKuFWyZIuQsHn1AriSLZLCgqs2Q8VR4G0NJFkFCcPgmljTtvDDO4BzBY4NWIJ5Daz2Emwtz12vYST2H7UaZI9E4yL6skTjIvq5ROMiOmwHaIymetEuh3i8HzxWw1ySaFxEb5doKpd8W/NoKpf8xHMZbi3OFi/JbRf9FFgr0bjIHgfmqKNxka1ZBz6iNY/GR7RWhviIDhdLNeugetEu92i8usZqnPDCVqKpXvRuiaZyyXe014HL2Ky34FQruet9rsNamGNey+62i+7GOBJmLc0uiaY5+xvqaH6fLJVoGrK/oY5GHW0ao5uVnRo6qFzyhBYsuJwcdXvz3daH4USseyttET2a3c2JehPLWpBaEFuCSXR8Qdakju5FuKv9owaSbMi8IwHCS8v3NZBlQ56tS+bTEeM1EGYFM0JCzAIOZEenLKHcz77/lBxzs29EjyUwfgfJK2nIZ4w72Vd2bwLPsgdPTLkfsjspI6l2shBCCCGEEEIwLL8A1ajcSTJ0HX8AAAAASUVORK5CYII="/>
-                                        </defs>
-                                    </svg>
-                                    <span class="text-xs font-medium leading-4 tracking-[0.2px] uppercase text-[rgb(102,102,102)] pl-0.5 pr-0 pt-0.5 pb-0">62</span>                                   
-                                </button>
-                                <button class="ml-[24px] bg-transparent items-center flex cursor-pointer pl-0.5 pr-0 py-0 border-[none]">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                        <rect width="24" height="24" fill="url(#pattern0_96_363)"/>
-                                        <defs>
-                                        <pattern id="pattern0_96_363" patternContentUnits="objectBoundingBox" width="1" height="1">
-                                        <use xlink:href="#image0_96_363" transform="scale(0.0111111)"/>
-                                        </pattern>
-                                        <image id="image0_96_363" width="90" height="90" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAACvElEQVR4nO2cua9OQRiHH1usDdEgEtvFPyCiU2o0RKy3o3Mj0emoNQqCP0AUEks0CgkiQa61Uink2oUrscQSjExyKsn9vrPMeWfmnN+TvPV35sk785155z0DQgghhBBCCCGEEEIIIYxYBowCZ4FbwBvgM+AixlfgHjAGzM45E2YVcm8CfyJLHRaPi2TIiunAfmAiAYGuouxsMntdMR1dpnGQDNgNfElAlmsQd0mcQxmsw65E+ERJAteDSILYEpxExxfklNFkFVeBPcAMLR2YCH8EjGiNxkT221iyXQ/jATBTojGRvUuiMRF9RaIxEe3LulqjaV/0T4nGJKNfSzQmoi9JNCaid0g0rUseL06N9GdIu6KPaMOC6e5wjbbgmNU9VqvWgVlmm5RPraaq63vdI/YgXSIHAxKNzVot0XSk7hF72roE4rlE0526R+xscgnEdommdcl3rOoerscxAayykNx30ZutJPdd9AvVOjDtn1atAxvZeuvARrTeo7ERrZ0hNqJ/6K0DE9EvJRqt0a5DsVMZTeuS71v3eMwHVgDbgNPAhwQyzbUc74oxR2UucBj41OFMXklCLAduJyDGNYzfwCvgcrEmm7eElWFOcVIccuAjsQeVKvOK6eYChf/WXEyBz8LvgURfk+XBHAu47fVvOmIKFhQNJyFkb5XlwYwFEn1KoodfYvUsgOinEj2cvYGyeqlkD2Ya8DCAaH+9gxjClgCiT8pyOa43FH1DosuxAfjbQPR7iS7PhYbFHlGStcCvmqK/yXI1ztQUPSnR1VhSXCuc/L0ZXeBEqs0rXWO0hugnsR86RzbVEH0x9kPnyOIaoo/HfuhcmawoWjXpmoxX/JDSHySIGpyrIPq8DNfnaIUzw/USXZ99JST7ItQBSW7GxiGSP6rYH4ZF/4n1fSD+Mj/fx+GbZhYG+p2o/AMhlNxchRY6iwAAAABJRU5ErkJggg=="/>
-                                        </defs>
-                                    </svg>                                    
-                                </button>
-                            </div>
-                            <div>
-                                <span class="text-base font-normal leading-6 tracking-[0.2px] text-[rgb(204,204,204)] pr-4">3 Days ago</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-[linear-gradient(to_right,rgba(255,255,255,0)_0%,rgb(255,255,255)_50%)] h-full absolute right-0 top-0 z-50">
-                    <div class="flex h-full items-center">
-                        <div class="cursor-pointer">
-                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="20" cy="20" r="20" transform="rotate(-180 20 20)" fill="#222222" fill-opacity="0.62"/>
-                                <path d="M17.8572 25.3572L23.2143 20L17.8572 14.6429" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>                                              
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- <div class="py-[32px] border-t-neutral-200 border-t border-solid">
-            <div class="flex justify-between items-center">
+            <div class="py-[32px] border-t-neutral-200 border-t border-solid">
                 <div>
-                    <p class="tracking-[0.2px] text-black text-2xl font-bold leading-[30px]">You might also like</p>
+                    <p class="tracking-[0.2px] text-black text-2xl font-bold leading-[30px]">Crew</p>
                 </div>
-                <div class="flex items-center gap-[12px] cursor-pointer">
-                    <span class="text-lg font-medium leading-6 tracking-[0.2px] text-[rgb(220,53,75)]">View All</span>
-                    <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1 13L7 7L1 0.999999" stroke="#DC354B" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>                        
+                <app-worker-details-slider [workerDetails]="movieData.crew" ></app-worker-details-slider>
+            </div>
+            <div class="py-[32px] border-t-neutral-200 border-t border-solid">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <p class="tracking-[0.2px] text-black text-2xl font-bold leading-[30px]">Top reviews</p>
+                    </div>
+                    <div class="flex items-center gap-[12px] cursor-pointer">
+                        <span class="text-[rgb(220,53,75)] text-[18px] leading-[24px] font-[500]">196 reviews</span>
+                        <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 13L7 7L1 0.999999" stroke="#DC354B" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>                        
+                    </div>
+                </div>
+                <h4 class="text-[rgb(102,102,102)] text-base font-normal leading-6 tracking-[0.2px] pl-0 pr-4 pt-6 pb-0">Summary of 196 reviews.</h4>
+                <div class="relative">
+                    <div class="flex transition-[0.5s] scroll-smooth pt-6 pb-0 px-0 gap-[32px]">
+                        <div class="p-[24px] border rounded border-solid border-[rgb(204,204,204)] w-[446px]">
+                            <div class="flex item-start justify-between">
+                                <div class="flex items-center">
+                                    <div>
+                                        <img class="w-[40px] h-[40px] object-cover" src="assets/images/noimguser.avif" alt="">
+                                    </div>
+                                    <div class="block pt-1 pb-0 px-3">
+                                        <h5 class="text-base font-normal leading-6 tracking-[0.2px]">User</h5>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div>
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <rect width="24" height="24" fill="url(#pattern0_96_387)"/>
+                                            <defs>
+                                            <pattern id="pattern0_96_387" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                            <use xlink:href="#image0_96_387" transform="scale(0.0111111)"/>
+                                            </pattern>
+                                            <image id="image0_96_387" width="90" height="90" xlink:href="data:image/png;base64,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"/>
+                                            </defs>
+                                        </svg>                                    
+                                    </div>
+                                    <div class="text-base font-normal leading-6 tracking-[0.2px] pl-1">
+                                        10/10
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="overflow-hidden text-ellipsis block whitespace-normal pt-6">
+                                <p class="text-[rgb(102,102,102)] text-base font-normal leading-6 tracking-[0.2px] pt-1">
+                                    അർജുൻ എത്ര വയസായി കാണും ഞാൻ ചെറുപ്പത്തിൽ ആരാധിച്ചിരുന്ന ആൾ ആണ് ഇപ്പോഴും അതെ ആക്ഷൻ  അതെ എന്നർജി പുള്ളിയെ കാണാൻ വേണ്ടി ഇനിയും ഞാൻ പടം കാണും
+                                </p>
+                            </div>
+                            <div class="pt-[16px] flex justify-between items-center">
+                                <div class="flex">
+                                    <button class="bg-transparent items-center flex cursor-pointer pl-0.5 pr-0 py-0 border-[none]">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <rect width="24" height="24" fill="url(#pattern0_96_370)"/>
+                                            <defs>
+                                            <pattern id="pattern0_96_370" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                            <use xlink:href="#image0_96_370" transform="scale(0.0111111)"/>
+                                            </pattern>
+                                            <image id="image0_96_370" width="90" height="90" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAAC20lEQVR4nO2cu68NURSHP4TEq0GDQhASf4CITqdSecfRaDRXRKJQilajIBG9QiRXiEJEcjXc3INQqRTiTXHjGY9gyZa5CZdz7pw5M2vPnvl9ya8+63xZ2bP3nr0HhBBCCCHawhLA/sgX4CVwHTgCLI1dYFPYNE309EwCndhFNoHODKKncjB2oalzPKfor8CG2MWmzPmcokMuxC42ZboDiA5dvTh2wakyOYDokG2xC06RZQNKDjkZu+gU2VxA9GjsolNkfwHRD2IXnSKnCoh+HLvo1FgOfCwgOizPxQCcLSB5akkucrIe+FZQ9CdZzs/FgpJDvkt0PjYCP4cQ/Uai83FjCMkhYxI9M1uHlBxyWqL7Mxu4V4LovRLdn30lSA5ZIdG9mQc8KkHyQ0nuz6GSuvmMRPdmEfCqJNHai+7DiZIkh2MIC9XRvZfan0sSfU2S/8+CkqZzluWwRP/LfOBqiZINWCfRf7MKuFWyZIuQsHn1AriSLZLCgqs2Q8VR4G0NJFkFCcPgmljTtvDDO4BzBY4NWIJ5Daz2Emwtz12vYST2H7UaZI9E4yL6skTjIvq5ROMiOmwHaIymetEuh3i8HzxWw1ySaFxEb5doKpd8W/NoKpf8xHMZbi3OFi/JbRf9FFgr0bjIHgfmqKNxka1ZBz6iNY/GR7RWhviIDhdLNeugetEu92i8usZqnPDCVqKpXvRuiaZyyXe014HL2Ky34FQruet9rsNamGNey+62i+7GOBJmLc0uiaY5+xvqaH6fLJVoGrK/oY5GHW0ao5uVnRo6qFzyhBYsuJwcdXvz3daH4USseyttET2a3c2JehPLWpBaEFuCSXR8Qdakju5FuKv9owaSbMi8IwHCS8v3NZBlQ56tS+bTEeM1EGYFM0JCzAIOZEenLKHcz77/lBxzs29EjyUwfgfJK2nIZ4w72Vd2bwLPsgdPTLkfsjspI6l2shBCCCGEEEIwLL8A1ajcSTJ0HX8AAAAASUVORK5CYII="/>
+                                            </defs>
+                                        </svg>
+                                        <span class="text-xs font-medium leading-4 tracking-[0.2px] uppercase text-[rgb(102,102,102)] pl-0.5 pr-0 pt-0.5 pb-0">62</span>                                   
+                                    </button>
+                                    <button class="ml-[24px] bg-transparent items-center flex cursor-pointer pl-0.5 pr-0 py-0 border-[none]">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <rect width="24" height="24" fill="url(#pattern0_96_363)"/>
+                                            <defs>
+                                            <pattern id="pattern0_96_363" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                            <use xlink:href="#image0_96_363" transform="scale(0.0111111)"/>
+                                            </pattern>
+                                            <image id="image0_96_363" width="90" height="90" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAACvElEQVR4nO2cua9OQRiHH1usDdEgEtvFPyCiU2o0RKy3o3Mj0emoNQqCP0AUEks0CgkiQa61Uink2oUrscQSjExyKsn9vrPMeWfmnN+TvPV35sk785155z0DQgghhBBCCCGEEEIIIYxYBowCZ4FbwBvgM+AixlfgHjAGzM45E2YVcm8CfyJLHRaPi2TIiunAfmAiAYGuouxsMntdMR1dpnGQDNgNfElAlmsQd0mcQxmsw65E+ERJAteDSILYEpxExxfklNFkFVeBPcAMLR2YCH8EjGiNxkT221iyXQ/jATBTojGRvUuiMRF9RaIxEe3LulqjaV/0T4nGJKNfSzQmoi9JNCaid0g0rUseL06N9GdIu6KPaMOC6e5wjbbgmNU9VqvWgVlmm5RPraaq63vdI/YgXSIHAxKNzVot0XSk7hF72roE4rlE0526R+xscgnEdommdcl3rOoerscxAayykNx30ZutJPdd9AvVOjDtn1atAxvZeuvARrTeo7ERrZ0hNqJ/6K0DE9EvJRqt0a5DsVMZTeuS71v3eMwHVgDbgNPAhwQyzbUc74oxR2UucBj41OFMXklCLAduJyDGNYzfwCvgcrEmm7eElWFOcVIccuAjsQeVKvOK6eYChf/WXEyBz8LvgURfk+XBHAu47fVvOmIKFhQNJyFkb5XlwYwFEn1KoodfYvUsgOinEj2cvYGyeqlkD2Ya8DCAaH+9gxjClgCiT8pyOa43FH1DosuxAfjbQPR7iS7PhYbFHlGStcCvmqK/yXI1ztQUPSnR1VhSXCuc/L0ZXeBEqs0rXWO0hugnsR86RzbVEH0x9kPnyOIaoo/HfuhcmawoWjXpmoxX/JDSHySIGpyrIPq8DNfnaIUzw/USXZ99JST7ItQBSW7GxiGSP6rYH4ZF/4n1fSD+Mj/fx+GbZhYG+p2o/AMhlNxchRY6iwAAAABJRU5ErkJggg=="/>
+                                            </defs>
+                                        </svg>                                    
+                                    </button>
+                                </div>
+                                <div>
+                                    <span class="text-base font-normal leading-6 tracking-[0.2px] text-[rgb(204,204,204)] pr-4">3 Days ago</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-[24px] border rounded border-solid border-[rgb(204,204,204)] w-[446px]">
+                            <div class="flex item-start justify-between">
+                                <div class="flex items-center">
+                                    <div>
+                                        <img class="w-[40px] h-[40px] object-cover" src="assets/images/noimguser.avif" alt="">
+                                    </div>
+                                    <div class="block pt-1 pb-0 px-3">
+                                        <h5 class="text-base font-normal leading-6 tracking-[0.2px]">User</h5>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div>
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <rect width="24" height="24" fill="url(#pattern0_96_387)"/>
+                                            <defs>
+                                            <pattern id="pattern0_96_387" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                            <use xlink:href="#image0_96_387" transform="scale(0.0111111)"/>
+                                            </pattern>
+                                            <image id="image0_96_387" width="90" height="90" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFv0lEQVR4nO2daYgcRRTHy2M9UbxxPeKJHzwQb/wgaDQeCELwAMkXg7qKGLM7/apn86mz897sRiTo4qf9JvkYEAmKR7zPeBJPREWJgRhNZqdqdtcEszEtr9fsNTNOT0/vVlXbP3gfh37vT/WrrlevaoTIycnJycnJcYcwCA7XfnmZBrwlvHfjYab9ySRhz0iXAvpQSwojA3qfhTftV+bQEldMizxtuMK0X5lDSXxpvtAK6EXTfmUKtTo4QQH9VSe0xH26LzjJtH+ZQfm4sj5tTI/qB0z7lxmUpFeaCi3xZdP+ZQLdP3Rio7QxO33U+gdPNu2n8yjAh5uJPCM2PWTaT+fRkl5vKTTgZtN+Os1YIThFAU22HtG4f9wLTjPtr7NoSY+2EnlmpYiPmPbXWTTgW7GFlvSmaX+dZAKC0zklxBVaAf090Uvdpv12Du3T422M5oP2mGm/nUMDvte20IDvmPbbKSZ6qZtTQbtC828qfXSmaf+doSpLqxOkjchqHj1h2n9nULML/O2OaokfmPbfCSp+cJaSeKADoQ9Ui+uWmI7DehRgIanIM2KX+kzHYT1K0scdCw24xXQcVlMtrlvSSdqYnT5Ucehc0/FYiwL0OxV5RmySpuOxFi3p8xSF/tR0PFai+4fOTyNtzLH+wQtNx2Ud2qc1qYrMBtgvsg63bPF+33yb6KVuHr11BvRl6kJL3NroWbyh0Mi3RRdJ+3StkvSaBvx5tilJf2jA6nxL/ZWX9lhUqm0UM+DvdfoAvqq9gWtiiVxZFRyvJI2aDlA7agqwsls+eVxLoauyfINpZ7XjVoPB61sKPbamfKoC2mvaWe2s4R6eA2Klj6os3aUBx8w7TW4Z0DhrJ9qhVhi8KJq1TTsv3TAl8btRv3SJSEK4avhIJXHYdBDaclNAG3YEwTGiUxTQ8uizxoKgtE0WpVe8X6RJ1cNzuPxoPDhpiQF+sWBL/OiwDuC6LC9QdDyRRzitioWGZ9b/6aKmpr3yfWIxGS3g2bwRakHw4WKYAvyM6yTCBJxKlMS1SXowtCMW7dZIHA6D4AhhGj5gGRVZsjeKKzWP7hS2tQkkauOSdpoC/MTafUeuQbueStTBVNEz0iVsR3m4VEn8zcFRvKvm0R3CJfioQ7R5YIGAOp69vVsGZwgXCUV4iJZUbKeh3ESq4EVYJm5LUB7eqIF22CdytDV3q8gS45xKgH60aCT/kMmTXGHPSJdlFUDlxJdFkkWNNi/u3FHt4VKRNRTgs6aFbZA+hkWWCKe+PrabFrbOAH9l30RW0JKuNi5q01FNV4qsoIDQWqGBBkRW0BK/MS1oc8OvRBbQgBeYF7OFmSrop4mSZc+4kC3TBxaE6zhSo35XuMxUBc/egtL0iJa4n3sOhasoDx80LaKOK7aPK4WraKBNqQsCuGVBGnmANgkX4V40DfRnmq+35rpxz0hX1MgzVefel57YuGen99SxwjUU0N0pjrht3CA//xk1b+A6BfhTem8LLReuwR2WKQmwke8mbfYcPsbALVoppY/nhEtEu+GAlc6CRt3OtcXKL93TaZsa/96pO6m5zttZwPhRktUat6nxJmtnzy7fJFwhafO6AprkvpBONkq57Mk32PzXfaYt0sczwhW0pF8SjOLvtVe6Ki0fqsXSZRro6wRib3OiRs313QQjecNCfFpt71t/NL9d7fZzq0LpCmE7XN+NLzDuavsUUwK0T7cpSTvbeLvWCtvh+m5MkTcvZmfQv3WXuv8JaGy4VdgMd1/GSBN7eVUXBsGhhvYue+KsWJWH5wlb4UujWszo31aLpctN+znmlS9udYZSAfUK1+7iV1OT0fpFOWATkzAIjtISn242UVr93wENFwvcc+eXlwlL4d67hi3GgG8IW+FjCHNuMAd63oU/Ohjji1KAXpiVNiY14O3CZnihwPlNyfLNwjF0dBaHeke98qWmfcnJycnJycnJyRE28w8SQhwEtHng/QAAAABJRU5ErkJggg=="/>
+                                            </defs>
+                                        </svg>                                    
+                                    </div>
+                                    <div class="text-base font-normal leading-6 tracking-[0.2px] pl-1">
+                                        10/10
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="overflow-hidden text-ellipsis block whitespace-normal pt-6">
+                                <p class="text-[rgb(102,102,102)] text-base font-normal leading-6 tracking-[0.2px] pt-1">
+                                    അർജുൻ എത്ര വയസായി കാണും ഞാൻ ചെറുപ്പത്തിൽ ആരാധിച്ചിരുന്ന ആൾ ആണ് ഇപ്പോഴും അതെ ആക്ഷൻ  അതെ എന്നർജി പുള്ളിയെ കാണാൻ വേണ്ടി ഇനിയും ഞാൻ പടം കാണും
+                                </p>
+                            </div>
+                            <div class="pt-[16px] flex justify-between items-center">
+                                <div class="flex">
+                                    <button class="bg-transparent items-center flex cursor-pointer pl-0.5 pr-0 py-0 border-[none]">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <rect width="24" height="24" fill="url(#pattern0_96_370)"/>
+                                            <defs>
+                                            <pattern id="pattern0_96_370" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                            <use xlink:href="#image0_96_370" transform="scale(0.0111111)"/>
+                                            </pattern>
+                                            <image id="image0_96_370" width="90" height="90" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAAC20lEQVR4nO2cu68NURSHP4TEq0GDQhASf4CITqdSecfRaDRXRKJQilajIBG9QiRXiEJEcjXc3INQqRTiTXHjGY9gyZa5CZdz7pw5M2vPnvl9ya8+63xZ2bP3nr0HhBBCCCHawhLA/sgX4CVwHTgCLI1dYFPYNE309EwCndhFNoHODKKncjB2oalzPKfor8CG2MWmzPmcokMuxC42ZboDiA5dvTh2wakyOYDokG2xC06RZQNKDjkZu+gU2VxA9GjsolNkfwHRD2IXnSKnCoh+HLvo1FgOfCwgOizPxQCcLSB5akkucrIe+FZQ9CdZzs/FgpJDvkt0PjYCP4cQ/Uai83FjCMkhYxI9M1uHlBxyWqL7Mxu4V4LovRLdn30lSA5ZIdG9mQc8KkHyQ0nuz6GSuvmMRPdmEfCqJNHai+7DiZIkh2MIC9XRvZfan0sSfU2S/8+CkqZzluWwRP/LfOBqiZINWCfRf7MKuFWyZIuQsHn1AriSLZLCgqs2Q8VR4G0NJFkFCcPgmljTtvDDO4BzBY4NWIJ5Daz2Emwtz12vYST2H7UaZI9E4yL6skTjIvq5ROMiOmwHaIymetEuh3i8HzxWw1ySaFxEb5doKpd8W/NoKpf8xHMZbi3OFi/JbRf9FFgr0bjIHgfmqKNxka1ZBz6iNY/GR7RWhviIDhdLNeugetEu92i8usZqnPDCVqKpXvRuiaZyyXe014HL2Ky34FQruet9rsNamGNey+62i+7GOBJmLc0uiaY5+xvqaH6fLJVoGrK/oY5GHW0ao5uVnRo6qFzyhBYsuJwcdXvz3daH4USseyttET2a3c2JehPLWpBaEFuCSXR8Qdakju5FuKv9owaSbMi8IwHCS8v3NZBlQ56tS+bTEeM1EGYFM0JCzAIOZEenLKHcz77/lBxzs29EjyUwfgfJK2nIZ4w72Vd2bwLPsgdPTLkfsjspI6l2shBCCCGEEEIwLL8A1ajcSTJ0HX8AAAAASUVORK5CYII="/>
+                                            </defs>
+                                        </svg>
+                                        <span class="text-xs font-medium leading-4 tracking-[0.2px] uppercase text-[rgb(102,102,102)] pl-0.5 pr-0 pt-0.5 pb-0">62</span>                                   
+                                    </button>
+                                    <button class="ml-[24px] bg-transparent items-center flex cursor-pointer pl-0.5 pr-0 py-0 border-[none]">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <rect width="24" height="24" fill="url(#pattern0_96_363)"/>
+                                            <defs>
+                                            <pattern id="pattern0_96_363" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                            <use xlink:href="#image0_96_363" transform="scale(0.0111111)"/>
+                                            </pattern>
+                                            <image id="image0_96_363" width="90" height="90" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAACvElEQVR4nO2cua9OQRiHH1usDdEgEtvFPyCiU2o0RKy3o3Mj0emoNQqCP0AUEks0CgkiQa61Uink2oUrscQSjExyKsn9vrPMeWfmnN+TvPV35sk785155z0DQgghhBBCCCGEEEIIIYxYBowCZ4FbwBvgM+AixlfgHjAGzM45E2YVcm8CfyJLHRaPi2TIiunAfmAiAYGuouxsMntdMR1dpnGQDNgNfElAlmsQd0mcQxmsw65E+ERJAteDSILYEpxExxfklNFkFVeBPcAMLR2YCH8EjGiNxkT221iyXQ/jATBTojGRvUuiMRF9RaIxEe3LulqjaV/0T4nGJKNfSzQmoi9JNCaid0g0rUseL06N9GdIu6KPaMOC6e5wjbbgmNU9VqvWgVlmm5RPraaq63vdI/YgXSIHAxKNzVot0XSk7hF72roE4rlE0526R+xscgnEdommdcl3rOoerscxAayykNx30ZutJPdd9AvVOjDtn1atAxvZeuvARrTeo7ERrZ0hNqJ/6K0DE9EvJRqt0a5DsVMZTeuS71v3eMwHVgDbgNPAhwQyzbUc74oxR2UucBj41OFMXklCLAduJyDGNYzfwCvgcrEmm7eElWFOcVIccuAjsQeVKvOK6eYChf/WXEyBz8LvgURfk+XBHAu47fVvOmIKFhQNJyFkb5XlwYwFEn1KoodfYvUsgOinEj2cvYGyeqlkD2Ya8DCAaH+9gxjClgCiT8pyOa43FH1DosuxAfjbQPR7iS7PhYbFHlGStcCvmqK/yXI1ztQUPSnR1VhSXCuc/L0ZXeBEqs0rXWO0hugnsR86RzbVEH0x9kPnyOIaoo/HfuhcmawoWjXpmoxX/JDSHySIGpyrIPq8DNfnaIUzw/USXZ99JST7ItQBSW7GxiGSP6rYH4ZF/4n1fSD+Mj/fx+GbZhYG+p2o/AMhlNxchRY6iwAAAABJRU5ErkJggg=="/>
+                                            </defs>
+                                        </svg>                                    
+                                    </button>
+                                </div>
+                                <div>
+                                    <span class="text-base font-normal leading-6 tracking-[0.2px] text-[rgb(204,204,204)] pr-4">3 Days ago</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-[24px] border rounded border-solid border-[rgb(204,204,204)] w-[446px]">
+                            <div class="flex item-start justify-between">
+                                <div class="flex items-center">
+                                    <div>
+                                        <img class="w-[40px] h-[40px] object-cover" src="assets/images/noimguser.avif" alt="">
+                                    </div>
+                                    <div class="block pt-1 pb-0 px-3">
+                                        <h5 class="text-base font-normal leading-6 tracking-[0.2px]">User</h5>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div>
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <rect width="24" height="24" fill="url(#pattern0_96_387)"/>
+                                            <defs>
+                                            <pattern id="pattern0_96_387" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                            <use xlink:href="#image0_96_387" transform="scale(0.0111111)"/>
+                                            </pattern>
+                                            <image id="image0_96_387" width="90" height="90" xlink:href="data:image/png;base64,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"/>
+                                            </defs>
+                                        </svg>                                    
+                                    </div>
+                                    <div class="text-base font-normal leading-6 tracking-[0.2px] pl-1">
+                                        10/10
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="overflow-hidden text-ellipsis block whitespace-normal pt-6">
+                                <p class="text-[rgb(102,102,102)] text-base font-normal leading-6 tracking-[0.2px] pt-1">
+                                    അർജുൻ എത്ര വയസായി കാണും ഞാൻ ചെറുപ്പത്തിൽ ആരാധിച്ചിരുന്ന ആൾ ആണ് ഇപ്പോഴും അതെ ആക്ഷൻ  അതെ എന്നർജി പുള്ളിയെ കാണാൻ വേണ്ടി ഇനിയും ഞാൻ പടം കാണും
+                                </p>
+                            </div>
+                            <div class="pt-[16px] flex justify-between items-center">
+                                <div class="flex">
+                                    <button class="bg-transparent items-center flex cursor-pointer pl-0.5 pr-0 py-0 border-[none]">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <rect width="24" height="24" fill="url(#pattern0_96_370)"/>
+                                            <defs>
+                                            <pattern id="pattern0_96_370" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                            <use xlink:href="#image0_96_370" transform="scale(0.0111111)"/>
+                                            </pattern>
+                                            <image id="image0_96_370" width="90" height="90" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAAC20lEQVR4nO2cu68NURSHP4TEq0GDQhASf4CITqdSecfRaDRXRKJQilajIBG9QiRXiEJEcjXc3INQqRTiTXHjGY9gyZa5CZdz7pw5M2vPnvl9ya8+63xZ2bP3nr0HhBBCCCHawhLA/sgX4CVwHTgCLI1dYFPYNE309EwCndhFNoHODKKncjB2oalzPKfor8CG2MWmzPmcokMuxC42ZboDiA5dvTh2wakyOYDokG2xC06RZQNKDjkZu+gU2VxA9GjsolNkfwHRD2IXnSKnCoh+HLvo1FgOfCwgOizPxQCcLSB5akkucrIe+FZQ9CdZzs/FgpJDvkt0PjYCP4cQ/Uai83FjCMkhYxI9M1uHlBxyWqL7Mxu4V4LovRLdn30lSA5ZIdG9mQc8KkHyQ0nuz6GSuvmMRPdmEfCqJNHai+7DiZIkh2MIC9XRvZfan0sSfU2S/8+CkqZzluWwRP/LfOBqiZINWCfRf7MKuFWyZIuQsHn1AriSLZLCgqs2Q8VR4G0NJFkFCcPgmljTtvDDO4BzBY4NWIJ5Daz2Emwtz12vYST2H7UaZI9E4yL6skTjIvq5ROMiOmwHaIymetEuh3i8HzxWw1ySaFxEb5doKpd8W/NoKpf8xHMZbi3OFi/JbRf9FFgr0bjIHgfmqKNxka1ZBz6iNY/GR7RWhviIDhdLNeugetEu92i8usZqnPDCVqKpXvRuiaZyyXe014HL2Ky34FQruet9rsNamGNey+62i+7GOBJmLc0uiaY5+xvqaH6fLJVoGrK/oY5GHW0ao5uVnRo6qFzyhBYsuJwcdXvz3daH4USseyttET2a3c2JehPLWpBaEFuCSXR8Qdakju5FuKv9owaSbMi8IwHCS8v3NZBlQ56tS+bTEeM1EGYFM0JCzAIOZEenLKHcz77/lBxzs29EjyUwfgfJK2nIZ4w72Vd2bwLPsgdPTLkfsjspI6l2shBCCCGEEEIwLL8A1ajcSTJ0HX8AAAAASUVORK5CYII="/>
+                                            </defs>
+                                        </svg>
+                                        <span class="text-xs font-medium leading-4 tracking-[0.2px] uppercase text-[rgb(102,102,102)] pl-0.5 pr-0 pt-0.5 pb-0">62</span>                                   
+                                    </button>
+                                    <button class="ml-[24px] bg-transparent items-center flex cursor-pointer pl-0.5 pr-0 py-0 border-[none]">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <rect width="24" height="24" fill="url(#pattern0_96_363)"/>
+                                            <defs>
+                                            <pattern id="pattern0_96_363" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                            <use xlink:href="#image0_96_363" transform="scale(0.0111111)"/>
+                                            </pattern>
+                                            <image id="image0_96_363" width="90" height="90" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAACvElEQVR4nO2cua9OQRiHH1usDdEgEtvFPyCiU2o0RKy3o3Mj0emoNQqCP0AUEks0CgkiQa61Uink2oUrscQSjExyKsn9vrPMeWfmnN+TvPV35sk785155z0DQgghhBBCCCGEEEIIIYxYBowCZ4FbwBvgM+AixlfgHjAGzM45E2YVcm8CfyJLHRaPi2TIiunAfmAiAYGuouxsMntdMR1dpnGQDNgNfElAlmsQd0mcQxmsw65E+ERJAteDSILYEpxExxfklNFkFVeBPcAMLR2YCH8EjGiNxkT221iyXQ/jATBTojGRvUuiMRF9RaIxEe3LulqjaV/0T4nGJKNfSzQmoi9JNCaid0g0rUseL06N9GdIu6KPaMOC6e5wjbbgmNU9VqvWgVlmm5RPraaq63vdI/YgXSIHAxKNzVot0XSk7hF72roE4rlE0526R+xscgnEdommdcl3rOoerscxAayykNx30ZutJPdd9AvVOjDtn1atAxvZeuvARrTeo7ERrZ0hNqJ/6K0DE9EvJRqt0a5DsVMZTeuS71v3eMwHVgDbgNPAhwQyzbUc74oxR2UucBj41OFMXklCLAduJyDGNYzfwCvgcrEmm7eElWFOcVIccuAjsQeVKvOK6eYChf/WXEyBz8LvgURfk+XBHAu47fVvOmIKFhQNJyFkb5XlwYwFEn1KoodfYvUsgOinEj2cvYGyeqlkD2Ya8DCAaH+9gxjClgCiT8pyOa43FH1DosuxAfjbQPR7iS7PhYbFHlGStcCvmqK/yXI1ztQUPSnR1VhSXCuc/L0ZXeBEqs0rXWO0hugnsR86RzbVEH0x9kPnyOIaoo/HfuhcmawoWjXpmoxX/JDSHySIGpyrIPq8DNfnaIUzw/USXZ99JST7ItQBSW7GxiGSP6rYH4ZF/4n1fSD+Mj/fx+GbZhYG+p2o/AMhlNxchRY6iwAAAABJRU5ErkJggg=="/>
+                                            </defs>
+                                        </svg>                                    
+                                    </button>
+                                </div>
+                                <div>
+                                    <span class="text-base font-normal leading-6 tracking-[0.2px] text-[rgb(204,204,204)] pr-4">3 Days ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-[linear-gradient(to_right,rgba(255,255,255,0)_0%,rgb(255,255,255)_50%)] h-full absolute right-0 top-0 z-50">
+                        <div class="flex h-full items-center">
+                            <div class="cursor-pointer">
+                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="20" cy="20" r="20" transform="rotate(-180 20 20)" fill="#222222" fill-opacity="0.62"/>
+                                    <path d="M17.8572 25.3572L23.2143 20L17.8572 14.6429" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>                                              
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div> -->
-    </div>
-</section>
+            <!-- <div class="py-[32px] border-t-neutral-200 border-t border-solid">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <p class="tracking-[0.2px] text-black text-2xl font-bold leading-[30px]">You might also like</p>
+                    </div>
+                    <div class="flex items-center gap-[12px] cursor-pointer">
+                        <span class="text-lg font-medium leading-6 tracking-[0.2px] text-[rgb(220,53,75)]">View All</span>
+                        <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 13L7 7L1 0.999999" stroke="#DC354B" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>                        
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </section>
+}

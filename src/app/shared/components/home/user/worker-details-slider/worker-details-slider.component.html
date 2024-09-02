@@ -1,0 +1,37 @@
+<div class="flex gap-[8px] pt-[16px] relative">
+    @if(workerDetails.length > 8 ) {
+        <div class="opacity-0 bg-[linear-gradient(to_left,rgba(255,255,255,0)_0%,rgb(255,255,255)_50%)] h-full absolute left-0 top-0 z-50 animate-[0.3s_ease_0s_1_normal_none_running_opacity]" [class.visiable]="this.workerSlider && this.workerSlider.track.details.progress !== 0">
+            <div class="flex h-[120px] items-center">
+                <div class="cursor-pointer" (click)="moveSlide(false)">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="20" fill="#222222" fill-opacity="0.62"/>
+                        <path d="M22.1428 14.6428L16.7857 20L22.1428 25.3571" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>                                            
+                </div>
+            </div>
+        </div>
+    }
+    <div class="flex items-start text-center keen-slider" id="slider" #sliderRef>
+        @for (details of workerDetails; track $index) {
+            <div class="max-w-[120px] min-w-[120px] keen-slider__slide">
+                <div class="max-h-[120px] min-h-[120px] max-w-[120px] min-w-[120px] bg-[none] rounded-[60px]">
+                    <img class="opacity-100 transition-[0.5s] w-full min-h-[inherit] max-h-[inherit] object-cover rounded-[60px]" [src]="details.image.imageURL" alt="">
+                </div>
+                <h2 class="overflow-hidden break-words text-black text-base font-normal leading-6 tracking-[0.2px] pt-2">{{ details.name }}</h2>
+                <h2 class="overflow-hidden break-words text-[rgb(102,102,102)] text-ellipsis line-clamp-2 text-sm font-normal leading-5 max-h-[2.50rem] tracking-[0.2px]">{{ details.role }}</h2>
+            </div>
+        }
+    </div>
+    @if(workerDetails.length > 8 ) {
+        <div class="bg-[linear-gradient(to_right,rgba(255,255,255,0)_0%,rgb(255,255,255)_50%)] h-full absolute right-0 top-0 z-50">
+            <div class="flex h-[120px] items-center">
+                <div class="cursor-pointer" (click)="moveSlide(true)">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="20" transform="rotate(-180 20 20)" fill="#222222" fill-opacity="0.62"/>
+                        <path d="M17.8572 25.3572L23.2143 20L17.8572 14.6429" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>                                              
+                </div>
+            </div>
+        </div>
+    }
+</div>
