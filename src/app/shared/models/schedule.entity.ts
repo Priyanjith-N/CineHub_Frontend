@@ -39,12 +39,26 @@ export interface ISchedulesForMovie {
     scheduleId: string;
     startTime: string;
     endTime: string;
+    availableSeats: number;
 }
 
 export interface IMovieSchedulesWithTheaterDetails {
     scheduledDate: Date;
     theaterData: ITheater;
     schedules: ISchedulesForMovie[];
+}
+
+export interface IMovieSchedulesWithTheaterDetailsWithLocationDecoded {
+    scheduledDate: Date;
+    theaterData: ITheaterLocationDecoded;
+    schedules: ISchedulesForMovie[];
+}
+
+export interface ITheaterLocationDecoded extends Omit<ITheater, 'location'> {
+    location: {
+        city: string;
+        address: string;
+    }
 }
 
 export interface ISelectedShowDetails {

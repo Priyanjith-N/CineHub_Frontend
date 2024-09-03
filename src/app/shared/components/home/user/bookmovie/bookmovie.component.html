@@ -44,7 +44,7 @@
                         </div>
                     </div>
                     <div class="mb-[24px]">
-                        <p class="text-[16px] font-normal leading-[24px] text-[#5A637A]">Kozhikode</p>
+                        <p class="text-[16px] font-normal leading-[24px] text-[#5A637A]">{{ show.theaterData.location.city }}</p>
                     </div>
                     <div>
                         <div class="flex items-center gap-[12px] mb-[16px]">
@@ -55,12 +55,12 @@
                                 </svg>                                
                             </div>
                             <div>
-                                <p class="font-medium text-[14px] leading-[25px] text-[#5A637A] w-full break-words">{{ show.theaterData.location }}</p>
+                                <p class="font-medium text-[14px] leading-[25px] text-[#5A637A] w-full break-words">{{ show.theaterData.location.address }}</p>
                             </div>
                         </div>
                         <div class="flex gap-[18px] flex-wrap">
                             @for (schedule of show.schedules; track $index) {
-                                <div (click)="selectSchedule(schedule.scheduleId, show.theaterData._id);" class="w-[102px] h-[40px] duration-300 ease-in-out border border-transparent border-solid py-[12px] px-[20px] font-bold text-[13px] rounded-[4px]" [class.avaliable]="selectedScheduleId !== schedule.scheduleId" [class.selected]="selectedScheduleId === schedule.scheduleId">
+                                <div (click)="selectSchedule(schedule.scheduleId, show.theaterData._id);" class="w-[102px] h-[40px] duration-300 ease-in-out border border-transparent border-solid py-[12px] px-[20px] font-bold text-[13px] rounded-[4px]" [class.avaliable]="selectedScheduleId !== schedule.scheduleId && schedule.availableSeats !== 0" [class.selected]="selectedScheduleId === schedule.scheduleId" [class.booked]="schedule.availableSeats === 0">
                                     <p class="text-center">{{ schedule.startTime | formatTime }}</p>
                                 </div>
                             }

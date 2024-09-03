@@ -5,9 +5,12 @@ import { UserService } from '../../../../../core/services/user.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { IGetAllShowsForAMovieSucessfullResponse, IGetMovieDetailsSucessfullResponse } from '../../../../models/userAPIResponse.interface';
-import { IMovieSchedulesWithTheaterDetails, ISelectedShowDetails } from '../../../../models/schedule.entity';
+import { IMovieSchedulesWithTheaterDetails, IMovieSchedulesWithTheaterDetailsWithLocationDecoded, ISelectedShowDetails, ITheaterLocationDecoded } from '../../../../models/schedule.entity';
 import { FormatTimePipe } from '../../../../pipes/format-time.pipe';
 import { DateFormatterPipe } from '../../../../pipes/date-formatter.pipe';
+import { AddressSearchService } from '../../../../../core/services/address-search.service';
+
+import { GeoJsonProperties } from 'geojson';
 
 @Component({
   selector: 'app-bookmovie',
@@ -24,10 +27,11 @@ import { DateFormatterPipe } from '../../../../pipes/date-formatter.pipe';
 export class BookmovieComponent {
   private userService: UserService = inject(UserService);
   private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
+  private addressSearchService: AddressSearchService = inject(AddressSearchService);
 
   private movieId: string;
   movieData: IMovie | undefined;
-  allShows: IMovieSchedulesWithTheaterDetails[] = [];
+  allShows: IMovieSchedulesWithTheaterDetailsWithLocationDecoded[] = [];
   selectedShowDetails: ISelectedShowDetails | null = null;
   selectedScheduleId: string | null = null;
 
@@ -49,12 +53,55 @@ export class BookmovieComponent {
 
     APIResponse2$.subscribe(
       (res => {
-        this.allShows = res.data;
+        this.setLocation(res.data);
       }),
       ((err: any) => {
         console.error(err);
       })
     );
+  }
+
+  private async setLocation(shows: IMovieSchedulesWithTheaterDetails[]) {
+    this.allShows = [];
+    for(const show of shows) {
+        const address: Promise<{ city: string, address: string }> = new Promise((resolve, reject) => {
+          this.addressSearchService.reverseGeoCoding(show.theaterData.location.lat, show.theaterData.location.lng).subscribe(
+            (res => {
+              if(res?.results) {
+                const properites: GeoJsonProperties = res.results[0] as GeoJsonProperties;
+      
+                if(properites) {
+                  resolve({
+                    city: properites['city'],
+                    address: properites['formatted']
+                  })
+                }
+              }
+            }),
+            ((err: any) => {
+              console.log(err);
+              reject(err);
+            })
+          );
+        });
+
+        const theaterData: ITheaterLocationDecoded = {
+          _id: show.theaterData._id,
+          images: show.theaterData.images,
+          isListed: show.theaterData.isListed,
+          licence: show.theaterData.licence,
+          location: await address,
+          name: show.theaterData.name,
+          numberOfScreen: show.theaterData.numberOfScreen,
+          ownerId: show.theaterData.ownerId,
+        }
+
+        this.allShows.push({
+          scheduledDate: show.scheduledDate,
+          schedules: show.schedules,
+          theaterData
+        });
+    }
   }
 
   selectSchedule(scheduleId: string, theaterId: string) {
