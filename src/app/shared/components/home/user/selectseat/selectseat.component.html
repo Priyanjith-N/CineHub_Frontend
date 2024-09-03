@@ -12,8 +12,8 @@
             </div>
         </div>
         <div>
-            <div class="border border-solid border-[#000000] rounded-[7px] py-[4.5px] px-[6px] flex items-center gap-[6px]">
-                <p class="text-[13px] font-semibold">2 Tickets</p>
+            <div (click)="openOrCloseChangeTicketModal()" class="cursor-pointer border border-solid border-[#000000] rounded-[7px] py-[4.5px] px-[6px] flex items-center gap-[6px]">
+                <p class="text-[13px] font-semibold">{{ noOfTickets }} Tickets</p>
                 <div>
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <rect width="15" height="15" fill="url(#pattern0_112_309)"/>
@@ -102,3 +102,35 @@
         </button>
     </div>
 </div>
+
+@if(changeTicketModal) {
+    <div class="fixed z-[400] bg-[rgba(0,0,0,0.7)] inset-0">
+        <div class="max-w-[515px] bg-white text-[#888c90] z-[400] rounded-[5px] fixed top-1/2 -translate-y-1/2 shadow-[0_0_6px_2px_rgba(0,0,0,0.2)] m-auto inset-x-0">
+            <div class="py-[25px] px-[35px] text-black text-base normal-case tracking-[0] text-center font-bold">How Many Seats?</div>
+            <div class="p-[15px] text-center">
+                <div>
+                    <span class="inline-block w-[120px] h-[120px] duration-300 ease-in-out">
+                        <img class="w-[120px] h-[120px]" [src]="seatNumberWiseImage[showTicketImageIdx].imgURL" alt="">
+                    </span>
+                </div>
+                <div class="my-[20px]">
+                    <ul class="w-full bg-white inline-block px-[15px] py-0 text-center">
+                        @for (item of getTickectsCount(); track $index) {
+                            <li (click)="chageNoOfTickets(item)" class="cursor-pointer inline-block transition-[0.5s] w-[30px] h-[30px] leading-[30px] text-sm text-[#333] mx-[5px] my-0 rounded-[50%] text-center hover:text-white hover:bg-[#f84464] duration-500 ease-in-out" [class.selectedNumberOfSeats]="noOfTickets === item">{{ item }}</li>
+                        }
+                    </ul>
+                </div>
+                <div class="pt-[25px] border-t-2 border-t-[rgba(245,245,245,0.7)] border-solid text-center">
+                    <div class="inline-block mx-[15px] my-[5px]">
+                        <span class="text-xs text-[#666] block text-center">AUDI 1</span>
+                        <span class="font-bold text-xs text-[#333] block text-center">Rs. 180</span>
+                        <span class="text-xs text-[#2ec492] block text-center">Available</span>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between w-full h-14 px-4 py-2">
+                    <div (click)="openOrCloseChangeTicketModal()" class="flex justify-center items-center h-full shadow-[0_1px_8px_rgba(0,0,0,0.16)] cursor-pointer min-h-[40px] max-w-[400px] rounded-lg w-full px-4 py-2.5 m-auto bg-[#f84464] text-white"> Select Seats </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

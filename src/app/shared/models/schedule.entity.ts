@@ -10,6 +10,7 @@ export default interface IMovieSchedule {
     endTime: string;
     movieId: string;
     seats: (IScheduleSeatLayout | null)[][];
+    availableSeats: number;
 }
 
 export interface IScheduleSeatLayout extends ISeatLayout {

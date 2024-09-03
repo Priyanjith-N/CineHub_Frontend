@@ -25,10 +25,47 @@ export class SelectseatComponent {
 
   private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   theaterScreenLayout: IMovieSchedulesForBooking | undefined;
+  seatNumberWiseImage: { startSeat: number, endSeat: number, imgURL: string }[];
+  noOfTickets: number = 1;
+  showTicketImageIdx: number = 0;
+  changeTicketModal: boolean = true;
   
   private scheduleId: string;
 
   constructor() {
+    this.seatNumberWiseImage = [
+      {
+        startSeat: 1,
+        endSeat: 1,
+        imgURL: "assets/images/cyle.jpg"
+      },
+      {
+        startSeat: 2,
+        endSeat: 2,
+        imgURL: "assets/images/scooter.jpg"
+      },
+      {
+        startSeat: 3,
+        endSeat: 3,
+        imgURL: "assets/images/realistic-rikshaw.avif"
+      },
+      {
+        startSeat: 4,
+        endSeat: 4,
+        imgURL: "assets/images/4 car.avif"
+      },
+      {
+        startSeat: 5,
+        endSeat: 7,
+        imgURL: "assets/images/car.jpg"
+      },
+      {
+        startSeat: 8,
+        endSeat: 10,
+        imgURL: "assets/images/van.jpg"
+      },
+    ]
+
     this.scheduleId = this.activatedRoute.snapshot.params['scheduleId'];
 
     const APIResponse$: Observable<IGetTheaterScreenLayoutSucessfullResponse> = this.userService.getTheaterScreenLayout(this.scheduleId);
@@ -41,6 +78,29 @@ export class SelectseatComponent {
           console.error(err);
       })
     );
+  }
+
+  openOrCloseChangeTicketModal() {
+    this.changeTicketModal = !this.changeTicketModal;
+  }
+
+  chageNoOfTickets(noOfTickets: number) {
+    this.noOfTickets = noOfTickets;
+
+    this.showTicketImageIdx = this.seatNumberWiseImage.findIndex((obj) => obj.startSeat <= this.noOfTickets && obj.endSeat >= this.noOfTickets);
+  }
+
+  getTickectsCount(): number[] {
+    if(!this.theaterScreenLayout) return [];
+
+    const limit = this.theaterScreenLayout.availableSeats >= 10 ? 10 : this.theaterScreenLayout.availableSeats;
+
+    const arr = [];
+    for(let i = 1 ; i <= limit ; i++) {
+      arr.push(i);
+    }
+
+    return arr;
   }
 
   getSeatPrice(category: string): number {

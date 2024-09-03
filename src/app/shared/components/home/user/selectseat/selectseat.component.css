@@ -13,3 +13,7 @@
 .seatCategory:first-child {
     @apply mb-[32px] mt-[0];
 }
+
+.selectedNumberOfSeats {
+    @apply text-white bg-[#f84464];
+}
