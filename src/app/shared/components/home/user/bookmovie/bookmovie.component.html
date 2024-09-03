@@ -7,7 +7,7 @@
         @if(allShows.length) {
             <app-dateslider (changeDateEvent)="changeDate($event);" [data]="allShows" ></app-dateslider>
         }
-        <div class="flex items-center cursor-pointer mb-[32px]">
+        <div (click)="showOrCloseChooseLocationModal(true);" class="flex items-center cursor-pointer mb-[32px]">
             <div>
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M15.8571 16.4286C15.1507 16.4286 14.4602 16.2192 13.8729 15.8267C13.2856 15.4343 12.8278 14.8765 12.5575 14.2239C12.2872 13.5713 12.2165 12.8532 12.3543 12.1604C12.4921 11.4677 12.8322 10.8313 13.3317 10.3318C13.8312 9.83234 14.4675 9.4922 15.1603 9.35439C15.8531 9.21659 16.5712 9.28731 17.2238 9.55763C17.8764 9.82794 18.4342 10.2857 18.8266 10.873C19.219 11.4603 19.4285 12.1508 19.4285 12.8572C19.4274 13.8041 19.0507 14.7118 18.3812 15.3813C17.7117 16.0509 16.8039 16.4275 15.8571 16.4286ZM15.8571 10.7143C15.4333 10.7143 15.019 10.84 14.6666 11.0755C14.3142 11.3109 14.0395 11.6456 13.8773 12.0372C13.7151 12.4287 13.6727 12.8596 13.7554 13.2752C13.8381 13.6909 14.0422 14.0727 14.3418 14.3724C14.6415 14.6721 15.0234 14.8762 15.439 14.9589C15.8547 15.0416 16.2856 14.9991 16.6771 14.8369C17.0687 14.6748 17.4033 14.4001 17.6388 14.0477C17.8743 13.6953 17.9999 13.281 17.9999 12.8572C17.9994 12.2891 17.7734 11.7443 17.3717 11.3426C16.9699 10.9409 16.4252 10.7149 15.8571 10.7143Z" fill="#333333" stroke="black" stroke-width="0.25"/>
@@ -15,7 +15,7 @@
                 </svg>                    
             </div>
             <div class="ml-[8px]">
-                <p class="text-[20px]">Kozhikode</p>
+                <p class="text-[20px]">{{ currentLocation?.city }}</p>
             </div>
             <div>
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -125,3 +125,7 @@
         }
     </div>
 </div>
+
+@if(openChooseLocationModal) {
+    <app-choose-location-modal (closeModal)="showOrCloseChooseLocationModal(false);"></app-choose-location-modal>
+}

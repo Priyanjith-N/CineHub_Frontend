@@ -11,6 +11,8 @@ import { DateFormatterPipe } from '../../../../pipes/date-formatter.pipe';
 import { AddressSearchService } from '../../../../../core/services/address-search.service';
 
 import { GeoJsonProperties } from 'geojson';
+import { LocationService } from '../../../../../core/services/location.service';
+import { ChooseLocationModalComponent } from '../../../modal/choose-location-modal/choose-location-modal.component';
 
 @Component({
   selector: 'app-bookmovie',
@@ -19,7 +21,8 @@ import { GeoJsonProperties } from 'geojson';
     DatesliderComponent,
     FormatTimePipe,
     DateFormatterPipe,
-    RouterLink
+    RouterLink,
+    ChooseLocationModalComponent
   ],
   templateUrl: './bookmovie.component.html',
   styleUrl: './bookmovie.component.css'
@@ -28,6 +31,7 @@ export class BookmovieComponent {
   private userService: UserService = inject(UserService);
   private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private addressSearchService: AddressSearchService = inject(AddressSearchService);
+  private locationService: LocationService = inject(LocationService);
 
   private movieId: string;
   movieData: IMovie | undefined;
@@ -35,6 +39,8 @@ export class BookmovieComponent {
   displayData: IMovieSchedulesWithTheaterDetailsWithLocationDecoded[] = [];
   selectedShowDetails: ISelectedShowDetails | null = null;
   selectedScheduleId: string | null = null;
+  currentLocation: { latitude: number; longitude: number; city: string; } | null = null; 
+  openChooseLocationModal: boolean = false;
 
   constructor() {
     this.movieId = this.activatedRoute.snapshot.params['movieId'];
@@ -50,6 +56,20 @@ export class BookmovieComponent {
       })
     );
 
+    this.getAllShowsForAMovieSucessfullResponse();
+
+    this.locationService.location$.subscribe(
+      (value => {
+        this.currentLocation = value;
+        this.getAllShowsForAMovieSucessfullResponse();
+      }),
+      ((err: any) => {
+        console.error(err);
+      })
+    );
+  }
+
+  private getAllShowsForAMovieSucessfullResponse() {
     const APIResponse2$: Observable<IGetAllShowsForAMovieSucessfullResponse> = this.userService.getAllShowsForAMovie(this.movieId);
 
     APIResponse2$.subscribe(
@@ -108,7 +128,14 @@ export class BookmovieComponent {
 
     this.allShows.sort((a, b) => new Date(a.scheduledDate).getTime() - new Date(b.scheduledDate).getTime());
 
-    if(this.allShows.length) this.changeDate(this.allShows[0].scheduledDate);
+    if(this.allShows.length) {
+      this.locationBasedListing(this.currentLocation!.city);
+      this.changeDate(this.allShows[0].scheduledDate);
+    }
+  }
+
+  showOrCloseChooseLocationModal(status: boolean) {
+    this.openChooseLocationModal = status;
   }
 
   selectSchedule(scheduleId: string, theaterId: string) {
@@ -130,8 +157,6 @@ export class BookmovieComponent {
     
     date.setHours(0);
     date.setMinutes(0);
-
-    console.log(date);
     
     this.displayData = this.allShows.filter((show) => {
       const showDate = new Date(show.scheduledDate).setHours(0, 0, 0, 0);
@@ -139,5 +164,9 @@ export class BookmovieComponent {
     
       return showDate === targetDate;
     });    
+  }
+
+  locationBasedListing(city: string) {
+    this.allShows = this.allShows.filter((show) => show.theaterData.location.city === city);
   }
 }

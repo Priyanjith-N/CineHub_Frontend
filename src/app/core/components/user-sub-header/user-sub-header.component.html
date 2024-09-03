@@ -16,13 +16,21 @@
         </ul>
     </div>
     <div>
-        <form>
-            <select id="default" class="bg-white border border-transparent text-black text-[14px] font-roboto font-normal p-2.5 outline-none" >
-              <option selected hidden >Choose a Location</option>
-              <option value="US">Kozhikode</option>
-              <option value="CA">Kannur</option>
-              <option value="FR">Wayanad</option>
-            </select>
-          </form>
+        <div (click)="showOrCloseChooseLocationModal(true);" class="bg-white border border-transparent flex items-center cursor-pointer gap-[13px] text-black text-[14px] font-roboto font-normal p-2.5 outline-none">
+            @if(choosenLocation){
+                <p>{{ choosenLocation.city }}</p>
+            }@else {
+                <p>Choose a Location</p>
+            }
+            <div>
+                <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1L5 5L9 1" stroke="#333333" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>                    
+            </div>
+        </div>
     </div>
 </div>
+
+@if(openChooseLocationModal) {
+    <app-choose-location-modal (closeModal)="showOrCloseChooseLocationModal(false);"></app-choose-location-modal>
+}

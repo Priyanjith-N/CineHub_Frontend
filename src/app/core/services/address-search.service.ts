@@ -8,7 +8,10 @@ import { Observable } from 'rxjs';
 })
 export class AddressSearchService {
   private httpClient: HttpClient = inject(HttpClient);
+
   private getPlacesAPI: string = `https://api.geoapify.com/v1/geocode/autocomplete?apiKey=${environment.GEOAPIFY_API_KEY}`;
+
+  private getCitysAPI: string = `https://api.geoapify.com/v1/geocode/autocomplete?type=city&format=json&apiKey=${environment.GEOAPIFY_API_KEY}`;
 
   private getPlaceDetailsAPI: string = `https://api.geoapify.com/v1/geocode/reverse?format=json&apiKey=${environment.GEOAPIFY_API_KEY}`;
 
@@ -23,5 +26,11 @@ export class AddressSearchService {
   reverseGeoCoding(lat: number, lng: number) {
     const url: string = `${this.getPlaceDetailsAPI}&lat=${lat}&lon=${lng}`;
     return this.httpClient.get<any>(url);
+  }
+
+  getCity(text: string): Observable<GeoJSON.FeatureCollection> {
+    const url: string = `${this.getCitysAPI}&text=${text}`;
+
+    return this.httpClient.get<GeoJSON.FeatureCollection>(url);
   }
 }
