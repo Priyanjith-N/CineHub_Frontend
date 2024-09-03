@@ -92,34 +92,37 @@ export class AddScheduleComponent {
     while(hour <= 24) {
       console.log('in here', hour);
       
-      if(minutes > 0 && minutes < 15 ) {
+      if(minutes > 0 && minutes < 15) {
         minutes = 15;
-      }else if(minutes > 15 && minutes < 30) {
+      } else if(minutes > 15 && minutes < 30) {
         minutes = 30;
-      }else if(minutes > 30 && minutes < 45) {
-        minutes = 45
-      }else if(minutes > 45 && minutes < 60) {
+      } else if(minutes > 30 && minutes < 45) {
+        minutes = 45;
+      } else if(minutes > 45 && minutes < 60) {
         hour++;
         minutes = 0;
       }
 
-      const start: string = `${(hour<10)?('0'+ hour) :hour}: ${(minutes<10)?('0'+ minutes) :minutes}`;
+      const start: string = `${(hour<10)?('0'+ hour) :hour}:${(minutes<10)?('0'+ minutes) :minutes}`;
 
       const startTime: Date = new Date();
       startTime.setHours(hour);
       startTime.setMinutes(minutes);
 
+       // Calculate new hour and minutes with movie duration
       hour += duration.hour;
       minutes += duration.min;
       
+      // Handle overflow of minutes
       if(minutes >= 60) {
         const spareTime = minutes % 60;
         hour++;
-        minutes=spareTime;
+        minutes = spareTime;
       }
-      if(hour > 24) break;
 
-      const end: string = `${(hour<10)?('0'+ hour) :hour}: ${(minutes<10)?('0'+ minutes) :minutes}`;
+      if(hour >= 24) break;  // Added explicit break condition here
+
+      const end: string = `${(hour<10)?('0'+ hour) :hour}:${(minutes<10)?('0'+ minutes) :minutes}`;
 
       const endTime: Date = new Date();
       endTime.setHours(hour);
@@ -131,17 +134,13 @@ export class AddScheduleComponent {
         const takenStartTime: Date = new Date();
         takenStartTime.setHours(Number(schedule.startTime.split(':')[0]));
         takenStartTime.setMinutes(Number(schedule.startTime.split(':')[1]));
-
+    
         const takenEndTime: Date = new Date();
         takenEndTime.setHours(Number(schedule.endTime.split(':')[0]));
         takenEndTime.setMinutes(Number(schedule.endTime.split(':')[1]));
-
-        if(takenStartTime >= startTime && takenEndTime >= startTime) {
-          isSlotTaken = true;
-          hour = takenEndTime.getHours();
-          minutes = takenEndTime.getMinutes();
-          break;
-        }else if(takenStartTime >= endTime && takenEndTime >= endTime){
+    
+        if((takenStartTime <= startTime && takenEndTime > startTime) ||
+           (takenStartTime < endTime && takenEndTime >= endTime)) {
           isSlotTaken = true;
           hour = takenEndTime.getHours();
           minutes = takenEndTime.getMinutes();
@@ -156,13 +155,18 @@ export class AddScheduleComponent {
         });
       }
 
-      minutes += 15; // cleaning time
+      // Add cleaning time
+      minutes += 15; 
 
+      // Handle overflow of minutes
       if(minutes >= 60) {
         const spareTime = minutes % 60;
         hour++;
         minutes = spareTime;
       }
+
+      if(hour >= 24) break;
+      
     }
 
     console.log(this.avaliableTimeSchedule);
