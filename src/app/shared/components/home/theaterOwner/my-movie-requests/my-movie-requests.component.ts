@@ -9,6 +9,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import IToastOption from '../../../../models/IToastOption.interface';
 import { ToastMessageService } from '../../../../../core/services/toast-message.service';
 import { IReRequestMovieSucessfullResponse } from '../../../../models/ITheaterOwnerAPIResponse.interface';
+import { PaginationComponent } from '../../../pagination/pagination.component';
 
 @Component({
   selector: 'app-my-movie-requests',
@@ -16,7 +17,8 @@ import { IReRequestMovieSucessfullResponse } from '../../../../models/ITheaterOw
   imports: [
     CommonModule,
     DateFormatterPipe,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PaginationComponent
   ],
   templateUrl: './my-movie-requests.component.html',
   styleUrl: './my-movie-requests.component.css'
@@ -89,7 +91,7 @@ export class MyMovieRequestsComponent {
     reRequestMovieAPIResponse$.subscribe(
       (res => {
         this.isFormSubmited = false;
-        
+
         this.getAllMovieRequests();
 
         this.closeModal();
@@ -117,6 +119,10 @@ export class MyMovieRequestsComponent {
     const searchText: string = inputElement.value.toLowerCase();
 
     this.displayData = this.data.filter((req) => req.movieData.name.toLowerCase().startsWith(searchText) || req.distributerData.name.toLowerCase().startsWith(searchText));
+  }
+
+  getData(pageNumber: number = 1) {
+    console.log(pageNumber);
   }
 
   private showToast(toastOption: IToastOption): void {

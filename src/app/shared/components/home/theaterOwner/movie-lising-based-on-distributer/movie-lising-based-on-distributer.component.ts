@@ -12,6 +12,7 @@ import IMovieRequestCredentials from '../../../../models/requestMovie.entity';
 import { IRequestMovieErrorResponse, IRequestMovieSucessfullResponse } from '../../../../models/ITheaterOwnerAPIResponse.interface';
 import IToastOption from '../../../../models/IToastOption.interface';
 import { ToastMessageService } from '../../../../../core/services/toast-message.service';
+import { PaginationComponent } from '../../../pagination/pagination.component';
 
 @Component({
   selector: 'app-movie-lising-based-on-distributer',
@@ -19,7 +20,8 @@ import { ToastMessageService } from '../../../../../core/services/toast-message.
   imports: [
     CommonModule,
     DateFormatterPipe,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PaginationComponent
   ],
   templateUrl: './movie-lising-based-on-distributer.component.html',
   styleUrl: './movie-lising-based-on-distributer.component.css'
@@ -139,6 +141,10 @@ export class MovieLisingBasedOnDistributerComponent {
       })
     );
     
+  }
+
+  getData(pageNumber: number = 1) {
+    console.log(pageNumber);
   }
 
   private showToast(toastOption: IToastOption): void {

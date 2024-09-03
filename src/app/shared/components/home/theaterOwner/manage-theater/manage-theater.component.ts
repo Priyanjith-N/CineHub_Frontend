@@ -5,13 +5,15 @@ import { TheaterOwnerService } from '../../../../../core/services/theater-owner.
 import ITheater from '../../../../models/theater.entity';
 import { Observable } from 'rxjs';
 import { IGetAllTheatersSucessfullResponse } from '../../../../models/ITheaterOwnerAPIResponse.interface';
+import { PaginationComponent } from '../../../pagination/pagination.component';
 
 @Component({
   selector: 'app-manage-theater',
   standalone: true,
   imports: [
     CommonModule,
-    RouterLink
+    RouterLink,
+    PaginationComponent
   ],
   templateUrl: './manage-theater.component.html',
   styleUrl: './manage-theater.component.css'
@@ -46,5 +48,9 @@ export class ManageTheaterComponent {
     const inputElement: HTMLInputElement = event.target as HTMLInputElement;
     const searchText = inputElement.value.toLowerCase();
     this.displayData = this.data.filter((theater) => theater.name.toLowerCase().startsWith(searchText));
+  }
+
+  getData(pageNumber: number = 1) {
+    console.log(pageNumber);
   }
 }
