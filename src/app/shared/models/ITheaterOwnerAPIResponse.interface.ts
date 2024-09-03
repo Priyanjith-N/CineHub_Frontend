@@ -43,6 +43,10 @@ export interface IRequestMovieSucessfullResponse {
     message: string;
 }
 
+export interface IReRequestMovieSucessfullResponse {
+    message: string;
+}
+
 export interface IRequestMovieErrorResponse {
     requiredCredentialsError?: boolean;
     error?: string;

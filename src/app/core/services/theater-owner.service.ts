@@ -2,10 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { IAddTheaterErrorResponse, IAddTheaterSucessfullResponse, IGetDistributerListAPISucessfullResponse, IGetAllTheatersSucessfullResponse, IAddScreenSucessfullResponse, IAddScreenErrorResponse, IGetAllScreensSucessfullResponse, IGetTheaterSucessfullResponse, IRequestMovieSucessfullResponse, IRequestMovieErrorResponse } from '../../shared/models/ITheaterOwnerAPIResponse.interface';
+import { IAddTheaterErrorResponse, IAddTheaterSucessfullResponse, IGetDistributerListAPISucessfullResponse, IGetAllTheatersSucessfullResponse, IAddScreenSucessfullResponse, IAddScreenErrorResponse, IGetAllScreensSucessfullResponse, IGetTheaterSucessfullResponse, IRequestMovieSucessfullResponse, IRequestMovieErrorResponse, IReRequestMovieSucessfullResponse } from '../../shared/models/ITheaterOwnerAPIResponse.interface';
 import { IAddMovieSchedule, IGetAllMovieRequestsSucessfullResponse, IGetAllMoviesFromCollectionSucessfullResponse, IGetMovieListOfDistributerDataAPISucessfullResponse, IGetScheduleOn } from '../../shared/models/theaterOwnerAPIResponse.interface';
 import ITheaterCredentials, { IScreenCredentials } from '../../shared/models/ITheaterCredentials.interface';
-import IMovieRequestCredentials from '../../shared/models/requestMovie.entity';
+import IMovieRequestCredentials, { IMovieReRequestCredentials } from '../../shared/models/requestMovie.entity';
 import { IScheduleCredentials } from '../../shared/models/schedule.entity';
 
 @Injectable({
@@ -140,6 +140,18 @@ export class TheaterOwnerService {
     );
 
     return requestMovieAPIResponse$;
+  }
+
+  reRequestForMovie(data: IMovieReRequestCredentials, movieRequestId: string): Observable<IReRequestMovieSucessfullResponse> {
+    const url: string = `${this.api}/rerequestformovie/${movieRequestId}`;
+
+    const reRequestMovieAPIResponse$: Observable<IReRequestMovieSucessfullResponse> = this.httpClient.patch<IReRequestMovieSucessfullResponse>(url, data)
+    .pipe(
+      map(res => res as IReRequestMovieSucessfullResponse),
+      catchError((err: any) => throwError(err))
+    );
+
+    return reRequestMovieAPIResponse$;
   }
 
   getAllMovieRequests(): Observable<IGetAllMovieRequestsSucessfullResponse> {

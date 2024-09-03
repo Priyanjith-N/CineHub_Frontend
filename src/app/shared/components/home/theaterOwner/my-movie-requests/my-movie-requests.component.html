@@ -88,10 +88,88 @@
                         {{ data.date | dateFormatter }}
                     </td>
                     <td class="font-normal text-[14px] font-roboto text-left px-[24px] py-[11px]">
-                        {{ data.requestStatus }}
+                        @if(data.requestStatus === "Rejected") {
+                            <button (click)="reRequest(data);" class="py-1 px-3 rounded-[5.07px] text-black border-solid border-[1px] border-black hover:text-white hover:bg-black transition-all duration-[300ms]">
+                                <div class="flex justify-center">
+                                    <div>
+                                        <p class="font-bold leading-[24px] w-[max-content]" >Re-Request</p>
+                                    </div>
+                                </div>
+                            </button>
+                        }@else {
+                            {{ data.requestStatus }}
+                        }
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
+
+@if(reRequestData) {
+    <div class="w-[80.65%] h-screen bg-[rgba(21,19,23,0.49)] fixed top-0 right-0 z-40 flex justify-center items-center">
+        <div class="bg-white p-[24px] font-roboto w-1/2 rounded-[5.07px] relative">
+            @if(isFormSubmited) {
+                <div class="absolute w-full h-full bg-black top-0 left-0 bg-opacity-[65%] z-50">
+                    <div class="relative w-full h-full">
+                        <div role="status" class="absolute -translate-x-1/2 -translate-y-1/2 top-2/4 left-1/2">
+                            <svg aria-hidden="true" class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-white" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/><path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/></svg>
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div class="text-white text-opacity-[85%] absolute -translate-x-1/2 -translate-y-1/2 top-[58%] left-1/2 text-center">
+                            <p>Please wait ...</p>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="flex justify-between items-center mb-[24px]">
+                <div>
+                    <p class="font-medium text-[24px]">Re-Requesting for {{ reRequestData.movieData.name }} Movie</p>
+                </div>
+                <div (click)="closeModal();" class="cursor-pointer">
+                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.89949 6.31372L0.656854 2.07108C0.26633 1.68056 0.26633 1.04739 0.656854 0.656867C1.04738 0.266342 1.68054 0.266342 2.07107 0.656866L6.31371 4.89951L10.5563 0.656867C10.9469 0.266342 11.58 0.266342 11.9706 0.656867C12.3611 1.04739 12.3611 1.68056 11.9706 2.07108L7.72792 6.31372L11.9706 10.5564C12.3611 10.9469 12.3611 11.5801 11.9706 11.9706C11.58 12.3611 10.9469 12.3611 10.5563 11.9706L6.31371 7.72793L2.07107 11.9706C1.68054 12.3611 1.04738 12.3611 0.656853 11.9706C0.266329 11.58 0.26633 10.9469 0.656854 10.5564L4.89949 6.31372Z" fill="#333333"/>
+                    </svg>                        
+                </div>
+            </div>
+            <div>
+                <form [formGroup]="reRequestMovieForm" (submit)="reRequestForMovieSubmit();" >
+                    <div class="font-normal text-[18px] mb-[24px] w-3/4">
+                        <div class="mb-[18px]">
+                            <label class="leading-[28px]" for="name1">Profit Sharing Per Ticket (%) (Negotiate)</label>
+                        </div>
+                        <div class="relative">
+                            <input formControlName="profitSharingPerTicket" id="name1" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-3/4 outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="number" placeholder="12">
+                            @if(reRequestMovieForm.get('profitSharingPerTicket')!.hasError('required')  && reRequestMovieForm.get('profitSharingPerTicket')!.touched){
+                                <p class="text-[13px] text-[#FF6B6B] absolute mt-[7px]">This Field is required.</p>
+                            }@else if (reRequestMovieForm.get('profitSharingPerTicket')!.errors  && reRequestMovieForm.get('profitSharingPerTicket')!.touched) {
+                                <p class="text-[13px] text-[#FF6B6B] absolute mt-[7px]">{{ reRequestMovieForm.get('profitSharingPerTicket')?.errors?.['message'] }}</p>
+                            }
+                        </div>
+                    </div>
+                    <div class="font-normal text-[18px] mb-[24px] w-3/4">
+                        <div class="mb-[18px]">
+                            <label class="leading-[28px]" for="timePeriod">Time Period ( Number of days )</label>
+                        </div>
+                        <div class="relative">
+                            <input formControlName="timePeriod" id="timePeriod" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-3/4 outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="number" placeholder="10">
+                            @if(reRequestMovieForm.get('timePeriod')!.hasError('required')  && reRequestMovieForm.get('timePeriod')!.touched){
+                                <p class="text-[13px] text-[#FF6B6B] absolute mt-[7px]">This Field is required.</p>
+                            }@else if (reRequestMovieForm.get('timePeriod')!.errors  && reRequestMovieForm.get('timePeriod')!.touched) {
+                                <p class="text-[13px] text-[#FF6B6B] absolute mt-[7px]">{{ reRequestMovieForm.get('timePeriod')?.errors?.['message'] }}</p>
+                            }
+                        </div>
+                    </div>
+                    <div class="flex justify-end items-center gap-[20px]">
+                        <div>
+                            <button (click)="closeModal();" type="button" class="py-[6px] px-[16px] font-medium text-16px rounded-[5.07px] text-red-600 border-[1px] border-solid border-red-600 hover:bg-red-600 hover:text-white">Cancel</button>
+                        </div>
+                        <div>
+                            <button type="submit" class="py-[6px] px-[16px] bg-black font-medium text-16px rounded-[5.07px] text-white">Re-Request</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}
