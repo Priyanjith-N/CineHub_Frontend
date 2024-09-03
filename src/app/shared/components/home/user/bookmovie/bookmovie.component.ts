@@ -32,6 +32,7 @@ export class BookmovieComponent {
   private movieId: string;
   movieData: IMovie | undefined;
   allShows: IMovieSchedulesWithTheaterDetailsWithLocationDecoded[] = [];
+  displayData: IMovieSchedulesWithTheaterDetailsWithLocationDecoded[] = [];
   selectedShowDetails: ISelectedShowDetails | null = null;
   selectedScheduleId: string | null = null;
 
@@ -62,46 +63,52 @@ export class BookmovieComponent {
   }
 
   private async setLocation(shows: IMovieSchedulesWithTheaterDetails[]) {
-    this.allShows = [];
+    const allShows: IMovieSchedulesWithTheaterDetailsWithLocationDecoded[] = [];
     for(const show of shows) {
-        const address: Promise<{ city: string, address: string }> = new Promise((resolve, reject) => {
-          this.addressSearchService.reverseGeoCoding(show.theaterData.location.lat, show.theaterData.location.lng).subscribe(
-            (res => {
-              if(res?.results) {
-                const properites: GeoJsonProperties = res.results[0] as GeoJsonProperties;
-      
-                if(properites) {
-                  resolve({
-                    city: properites['city'],
-                    address: properites['formatted']
-                  })
-                }
+      const address: Promise<{ city: string, address: string }> = new Promise((resolve, reject) => {
+        this.addressSearchService.reverseGeoCoding(show.theaterData.location.lat, show.theaterData.location.lng).subscribe(
+          (res => {
+            if(res?.results) {
+              const properites: GeoJsonProperties = res.results[0] as GeoJsonProperties;
+    
+              if(properites) {
+                resolve({
+                  city: properites['city'],
+                  address: properites['formatted']
+                })
               }
-            }),
-            ((err: any) => {
-              console.log(err);
-              reject(err);
-            })
-          );
-        });
+            }
+          }),
+          ((err: any) => {
+            console.log(err);
+            reject(err);
+          })
+        );
+      });
 
-        const theaterData: ITheaterLocationDecoded = {
-          _id: show.theaterData._id,
-          images: show.theaterData.images,
-          isListed: show.theaterData.isListed,
-          licence: show.theaterData.licence,
-          location: await address,
-          name: show.theaterData.name,
-          numberOfScreen: show.theaterData.numberOfScreen,
-          ownerId: show.theaterData.ownerId,
-        }
+      const theaterData: ITheaterLocationDecoded = {
+        _id: show.theaterData._id,
+        images: show.theaterData.images,
+        isListed: show.theaterData.isListed,
+        licence: show.theaterData.licence,
+        location: await address,
+        name: show.theaterData.name,
+        numberOfScreen: show.theaterData.numberOfScreen,
+        ownerId: show.theaterData.ownerId,
+      }
 
-        this.allShows.push({
-          scheduledDate: show.scheduledDate,
-          schedules: show.schedules,
-          theaterData
-        });
+      allShows.push({
+        scheduledDate: show.scheduledDate,
+        schedules: show.schedules,
+        theaterData
+      });
     }
+
+    this.allShows = allShows;
+
+    this.allShows.sort((a, b) => new Date(a.scheduledDate).getTime() - new Date(b.scheduledDate).getTime());
+
+    if(this.allShows.length) this.changeDate(this.allShows[0].scheduledDate);
   }
 
   selectSchedule(scheduleId: string, theaterId: string) {
@@ -110,7 +117,6 @@ export class BookmovieComponent {
     const shows = this.allShows.find((schedule) => schedule.theaterData._id.toString() === theaterId.toString())!;
 
     const schedule = shows.schedules.find((schedule) => schedule.scheduleId.toString() === scheduleId.toString())!;
-
     this.selectedShowDetails = {
       scheduledDate: shows.scheduledDate,
       scheduleId: schedule.scheduleId,
@@ -119,4 +125,19 @@ export class BookmovieComponent {
     }
   }
 
+  changeDate(changedDate: Date) {
+    const date: Date = new Date(changedDate);
+    
+    date.setHours(0);
+    date.setMinutes(0);
+
+    console.log(date);
+    
+    this.displayData = this.allShows.filter((show) => {
+      const showDate = new Date(show.scheduledDate).setHours(0, 0, 0, 0);
+      const targetDate = new Date(date).setHours(0, 0, 0, 0);
+    
+      return showDate === targetDate;
+    });    
+  }
 }

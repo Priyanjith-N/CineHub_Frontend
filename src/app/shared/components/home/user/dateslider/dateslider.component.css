@@ -3,3 +3,19 @@
     max-width: 75px !important;
     min-width: 72px !important;
 }
+
+.notSelected {
+    @apply border-[#5A637A] bg-white;
+}
+
+.selected {
+    @apply border-transparent bg-[#1A2C50];
+}
+
+.selected p:first{
+    color: #5A637A !important;
+}
+
+.selected p:last-child{
+    color: white;
+}
