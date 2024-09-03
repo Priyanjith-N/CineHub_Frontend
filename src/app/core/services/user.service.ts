@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { IGetAllShowsForAMovieSucessfullResponse, IGetDataForHomePageSucessfullResponse, IGetMovieDetailsSucessfullResponse } from '../../shared/models/userAPIResponse.interface';
+import { IGetAllShowsForAMovieSucessfullResponse, IGetDataForHomePageSucessfullResponse, IGetMovieDetailsSucessfullResponse, IGetTheaterScreenLayoutSucessfullResponse } from '../../shared/models/userAPIResponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +42,18 @@ export class UserService {
     const url: string = `${this.api}/getAllShowsForAMovie/${movieId}`;
 
     const APIResponse$: Observable<IGetAllShowsForAMovieSucessfullResponse> = this.httpClient.get<IGetAllShowsForAMovieSucessfullResponse>(url)
+    .pipe(
+      map(res => res),
+      catchError((err: any) => throwError(err))
+    );
+
+    return APIResponse$;
+  }
+
+  getTheaterScreenLayout(scheduleId: string): Observable<IGetTheaterScreenLayoutSucessfullResponse> {
+    const url: string = `${this.api}/getTheaterScreenLayout/${scheduleId}`;
+
+    const APIResponse$: Observable<IGetTheaterScreenLayoutSucessfullResponse> = this.httpClient.get<IGetTheaterScreenLayoutSucessfullResponse>(url)
     .pipe(
       map(res => res),
       catchError((err: any) => throwError(err))

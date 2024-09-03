@@ -1,5 +1,5 @@
 import { IMovie } from "./IMovieCredentials.interface";
-import { IHomeMovieData, IMovieSchedulesWithTheaterDetails } from "./schedule.entity";
+import { IHomeMovieData, IMovieSchedulesForBooking, IMovieSchedulesWithTheaterDetails } from "./schedule.entity";
 
 export interface IGetDataForHomePageSucessfullResponse {
     message: string;
@@ -14,4 +14,9 @@ export interface IGetMovieDetailsSucessfullResponse{
 export interface IGetAllShowsForAMovieSucessfullResponse{
     message: string;
     data: IMovieSchedulesWithTheaterDetails[];
+}
+
+export interface IGetTheaterScreenLayoutSucessfullResponse{
+    message: string;
+    data: IMovieSchedulesForBooking;
 }

@@ -1,0 +1,15 @@
+.booked {
+    @apply bg-[#DADFE8] text-[#9DA8BE] border-transparent select-none;
+}
+
+.selectedSeat {
+    @apply bg-[#1A2C50] text-white border-transparent select-none;
+}
+
+.avaliableSeat {
+    @apply bg-white text-[#333333] border-[#9DA8BE] select-none cursor-pointer hover:bg-[#1A2C50] hover:text-white hover:border-transparent;
+}
+
+.seatCategory:first-child {
+    @apply mb-[32px] mt-[0];
+}

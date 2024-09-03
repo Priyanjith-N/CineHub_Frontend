@@ -54,6 +54,7 @@ import { MyMovieCollectionComponent } from './shared/components/home/theaterOwne
 import { LandingPageComponent } from './shared/components/home/user/landing-page/landing-page.component';
 import { MovieDetailsComponent } from './shared/components/home/user/movie-details/movie-details.component';
 import { BookmovieComponent } from './shared/components/home/user/bookmovie/bookmovie.component';
+import { SelectseatComponent } from './shared/components/home/user/selectseat/selectseat.component';
 
 export const routes: Routes = [
     {
@@ -163,6 +164,11 @@ export const routes: Routes = [
                 path: 'bookmovie/:movieId',
                 canActivate: [],
                 component: BookmovieComponent
+            },
+            {
+                path: 'bookseat/:scheduleId',
+                canActivate: [],
+                component: SelectseatComponent
             }
         ]
     },

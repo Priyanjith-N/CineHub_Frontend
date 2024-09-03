@@ -1,0 +1,104 @@
+<div>
+    <div class="py-[16px] mb-[27px] px-[30px] border-y flex w-full justify-between items-center border-solid border-y-[rgba(0,0,0,0.1)]">
+        <div class="flex items-start gap-[14px]">
+            <div class="translate-y-[50%]">
+                <svg width="10" height="17" viewBox="0 0 10 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8.5 1L1 8.5L8.5 16" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>                
+            </div>
+            <div class="flex flex-col gap-[4px]">
+                <p class="font-normal text-[16px] text-[#333333]">{{ theaterScreenLayout?.movieData?.name }}</p>
+                <p class="font-medium text-[13px] text-[#333333]">{{ theaterScreenLayout?.theaterData?.name }} | {{ theaterScreenLayout?.date! | dateFormatter }} | {{ theaterScreenLayout?.startTime! | formatTime }}</p>
+            </div>
+        </div>
+        <div>
+            <div class="border border-solid border-[#000000] rounded-[7px] py-[4.5px] px-[6px] flex items-center gap-[6px]">
+                <p class="text-[13px] font-semibold">2 Tickets</p>
+                <div>
+                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <rect width="15" height="15" fill="url(#pattern0_112_309)"/>
+                        <defs>
+                        <pattern id="pattern0_112_309" patternContentUnits="objectBoundingBox" width="1" height="1">
+                        <use xlink:href="#image0_112_309" transform="scale(0.0111111)"/>
+                        </pattern>
+                        <image id="image0_112_309" width="90" height="90" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAACF0lEQVR4nO3cv0rdYBiA8cdBb8YqgpPYoegmXoD34GaRLkK/rVJQcBBHFbVLZzdXR72DQmnr0D9Lx/4BJRChSJRzTpI3PfmeH2Q8mjy8nnw5JxEkSZIkSf+1OeAEuAF+A1+AI+BZ1zvWJy+Bv8BtxfYHWO96B/sgPRL44bbV9Y7mEPnW2HGRjR0Y2diBkY0dGNnYgZHvN5d+QaGLdfb0w1+Wu9RS7MOuDyyX2J+6PqhcYv/q+oByif2564PJJfYxGYZLI7ymTuTiU79ZMpL+OfjI2BtkJFUE2B7yZ7waIfJrMpKeCNFmbCPTfmwj0/5kG5n2YxuZ9mMbmeFWCqMs/YZ9zVhLNS8s6kx2NlKDkY0d/Bmykx0U2diBkbOPnQIjZxs7dRC52FwnY2Qnedwk3y6M3AvJSTZyLyQn2ci9kJxkI/dCcpKN3AtOcgAjBzByACMHMHIAIwcwcoBJYB5YBjbLB2civn5KZG7ByHETXjy26yQH+OEtATE+eN9FjCtPfDEuvIMoxntv04qx4zo5xpIXI/XNDHhV9gJ4C5wB58AlcF2uSJ5a/mV/xXfvTUNBpoGfRq42AXxscPp2neRqzxv+U1/z7aLaQcOPJSzndqf9oB8WfW/4JDbVwn6OvVUfuInxzqebYnzzUbIYNwP+R8O98qstjWj7kbjFCXIfWCzX2appqoxdTPZX4BRYKVcjkiRJkiTG2B2vTLDs0kESkAAAAABJRU5ErkJggg=="/>
+                        </defs>
+                    </svg>                                              
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex flex-col items-center">
+        <div>
+            <section>
+                <div>
+                    <div class="mb-[49px]">
+                        @for (row of theaterScreenLayout?.seats; track $index; let idx = $index) {
+                            @for (seatCategory of theaterScreenLayout?.screenData?.seatCategory; track $index) {
+                                @if((idx + 1) === seatCategory.rowNumbers[0]) {
+                                    <div class="pb-[8px] w-full border-b border-solid border-[rgba(189,197,212,0.4)] my-[33px] seatCategory">
+                                        <p class="text-[12px] leading-[12px]">Rs. {{ getSeatPrice(seatCategory.category) }} {{ seatCategory.category }}</p>
+                                    </div>
+                                }
+                            }
+                            <div class="flex gap-[12.09px] mb-[12.09px] items-center">
+                                @for(seats of row; track $index) {
+                                    @if(seats) {
+                                        <div class="w-[40.3px] h-[34.83px] rounded-[6px] p-[11.42px] flex items-center justify-center border border-solid duration-300 ease-in-out" [class.booked]="seats.isBooked" [class.avaliableSeat]="!seats.isBooked">
+                                            <p class="font-bold text-[12px] leading-[12px]">{{ seats.name }}</p>
+                                        </div>
+                                    }@else {
+                                        <div class="w-[40.3px] h-[34.83px] p-[11.42px] flex">
+                                            <p class="font-bold text-[12px] leading-[12px]"></p>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="mt-[143px] mb-[50.5px]">
+            <div class="mb-[5px]">
+                <svg width="336" height="39" viewBox="0 0 336 39" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <rect x="3" y="6.5" width="315" height="23" fill="url(#pattern0_117_1071)"/>
+                    <path d="M18 24L25.5 34H0V3H56L18 24Z" fill="white"/>
+                    <path d="M315 23.5L306 38.5H335.5V0H270L315 23.5Z" fill="white"/>
+                    <defs>
+                    <pattern id="pattern0_117_1071" patternContentUnits="objectBoundingBox" width="1" height="1">
+                    <use xlink:href="#image0_117_1071" transform="matrix(0.0031746 0 0 0.0434783 0 -2.28261)"/>
+                    </pattern>
+                    <image id="image0_117_1071" width="318" height="82" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAT4AAABSCAYAAADNebilAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAASeSURBVHhe7dxLb9pYGIfxY3OHXJSk6qaL2cz3/0SzmUUXo5ncuRqw5/3bRgKaNCQxYPI+PykiDRJFkfr0PcfHREmSZAEAHInLRwBwg/ABcIfwAXCH8AFwh/ABcIfwAXCH8AFwh/ABcIfwAXCH8AFwh/ABcIfwAXCH8AFwh/ABcIfwAXCH8AFwh/ABcIfwAXCH8AFwh/ABcIfwAXCH8AFwh/ABcIfwAXCH8AFwh/ABcIfwAXCH8AFwh/ABcIfwAXCH8AFwh/ABcIfwAXCH8AFwh/ABcIfwAXCH8AFwh/ABcIfwAXCH8AFwh/ABcIfwAXCH8AFwh/ABcIfwAXCH8AFwh/ABcIfwAXCH8AFwh/ABcIfwAXDnZMOXZeU3AGqrrv9OoyRJTi4ht8MQniYhzBblDzZE5SOAw/o1Je1mCJe9EG7Oyh/UxEmF725UfHWamf0yM/ulMvYBdZYsovA4iWxIicL1IORfdXAS4XsYF8FrxkXwOi2CB5yS2bwI4HxpAbTp76pfPnEktQ7foy1nFbw4suB1s9Btb77VSRKHJQ0EakmbToNOWvyhNC0DuEyjfPmrZfAx1DJ82r9T8OSyl4beVvCm8ziMZnH+vweA+optlXbWTkN/K4CTRAEsrq1qArzo5t8eTK3CN5yGcGvBS+13pOD1O5tvTePyMGmE+YLgAaekYQHU9Ne3CK4bK4Dj2FZ1RQDPDxTAWoRvNCuu1C7K4A1eCN7IgqeNUgCn67UAjmbFBNi0IVABPOuUT+zJUcM3TmxJa8HTsRQF76y7+VYUuqEtaZMF56yBr0QXKhXA3lYAh9MigDoGoz3Afrt8omJHCd9kXkx4U3u87KbhvPdr8EZJbJMewQO+smbDAmjx2w7gcxnAbqsIYM8eq3TQ8GmyU/C0tNWxlAub8tZp707B08ULAH68FsAni5+uAg9s6asAdmwSrMJBwpcsLXjPqngRPC1r12+wWCyLJS3BA3xrKYC2BO621gJohXqcWgDHUX7x4+Y8hHajfO6D9hq+hQXvP5vwdB5vFbxoK3ia8HQeDwBWXgqg7vvV8lcToM7/fbMJsPnBAO4lfEt7rwre/UhvMM2jp/M8K0tNeAQPwBtaTZ0DXG7crZWm2v8r9gCvBlkewMY7U1Jp+FJ7JS1p7/KR1ILXzULDyr2i09o6eDzeIXjroQTwdSlkb2k303wPcD2AGqAep1F4tmXwdT/Ll8A6D7iLSsKnF9BFizub8PTmNOFpsxIA9k1bZpoAtW12bRPgzcDC9kYAPx2+8SyEv++Kv6VlU1rM6hXAEeiOr3k5Pf5xnYX+bw5Bfyp8utPir38iW4fvPmICwD5py22+DOHP77byfGUQ+/TEdzuM8jswvl+wtAVwfP8+RaHb1lXf15v06YXpjb246jqx+AHAMalDOjf8u+hJJTtyit/9mLUugON6sA6pR2+pJHw6TKhzNLozAwCOQf3RxdVdPty0snN82uf7eR+FH1fs9QE4vFV/dvlEl8rCJz8fovzDRN91hZcVMoCXvKNMupKrz/DbdfCqNHwAcAoq2eMDgFNC+AC4Q/gAuEP4ALhD+AA4E8L/rZm6HvVY3gwAAAAASUVORK5CYII="/>
+                    </defs>
+                </svg>
+            </div> 
+            <div>
+                <p class="text-center text-[12px] leading-[12px]">All eyes this way please!</p>
+            </div>             
+        </div>
+        <div class="flex items-center gap-[50px] justify-center mb-[52px]">
+            <div class="flex items-center gap-[12px]">
+                <div class="w-[22px] h-[20px] bg-white border border-solid border-[#9DA8BE] rounded-[6px]"></div>
+                <p class="font-normal text-[15px] text-[rgba(0,0,0,0.55)]">Available</p>
+            </div>
+
+            <div class="flex items-center gap-[12px]">
+                <div class="w-[22px] h-[20px] bg-[#1A2C50] border border-solid border-transparent rounded-[6px]"></div>
+                <p class="font-normal text-[15px] text-[rgba(0,0,0,0.55)]">Selected</p>
+            </div>
+
+            <div class="flex items-center gap-[12px]">
+                <div class="w-[22px] h-[20px] bg-[#DADFE8] border border-solid border-transparent rounded-[6px]"></div>
+                <p class="font-normal text-[15px] text-[rgba(0,0,0,0.55)]">Sold</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex w-full justify-center items-center py-[16px] bg-white shadow-[0px_19px_100px_rgba(0,0,0,0.25)]">
+        <button type="button" class="py-[13px] px-[97px] outline-none border-transparent rounded-[10px] bg-[#DC354B]">
+            <p class="font-semibold text-[16px] text-white">Pay Rs.900</p>
+        </button>
+    </div>
+</div>
