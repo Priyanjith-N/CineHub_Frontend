@@ -30,6 +30,7 @@ export class SelectseatComponent {
   showTicketImageIdx: number = 0;
   changeTicketModal: boolean = true;
   selectedSeats: { rowIdx: number, colIdx: number }[] = [];
+  totalAmount: number = 0;
   
   private scheduleId: string;
 
@@ -82,6 +83,8 @@ export class SelectseatComponent {
   }
 
   selectSeat(rowIdx: number, colIdx: number) {
+    if(!this.theaterScreenLayout) return;
+
     let isSelected: boolean = false;
     for(const seatCordinates of this.selectedSeats) {
       if(seatCordinates.rowIdx === rowIdx && seatCordinates.colIdx === colIdx) {
@@ -89,16 +92,47 @@ export class SelectseatComponent {
         break;
       }
     }
-    
+
     if(isSelected) {
-      this.selectedSeats = this.selectedSeats.filter((seatCordinates) => !(seatCordinates.rowIdx === rowIdx && seatCordinates.colIdx === colIdx));
+      this.selectedSeats = this.selectedSeats.filter((seatCordinates) => {
+        if(seatCordinates.rowIdx === rowIdx && seatCordinates.colIdx === colIdx) {
+          this.totalAmount -= this.theaterScreenLayout!.seats[rowIdx][colIdx]!.price;
+          return false;
+        }
+
+        return true;
+      });
     }else if((this.selectedSeats.length + 1) <= this.noOfTickets){
       this.selectedSeats.push({
         rowIdx,
         colIdx
-      })
+      });
+
+      this.totalAmount += this.theaterScreenLayout.seats[rowIdx][colIdx]!.price;
     }
     
+  }
+
+  getPriceForSeatCategory(category: string): number {
+    if(!this.theaterScreenLayout) return 0;
+    for(const row of this.theaterScreenLayout.seats) {
+      for(const seat of row) {
+        if(seat && seat.category === category) return seat.price;
+      }
+    }
+    return 0;
+  }
+
+  checkForAvaliableSeatsForCategory(category: string): boolean {
+    if(!this.theaterScreenLayout) return false;
+
+    for(const row of this.theaterScreenLayout.seats) {
+      for(const seat of row) {
+        if(seat && !seat.isBooked) return true;
+      }
+    }
+
+    return false;
   }
 
   isSelected(rowIdx: number, colIdx: number): boolean {
