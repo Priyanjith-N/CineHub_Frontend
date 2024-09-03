@@ -29,6 +29,7 @@ export class SelectseatComponent {
   noOfTickets: number = 1;
   showTicketImageIdx: number = 0;
   changeTicketModal: boolean = true;
+  selectedSeats: { rowIdx: number, colIdx: number }[] = [];
   
   private scheduleId: string;
 
@@ -78,6 +79,36 @@ export class SelectseatComponent {
           console.error(err);
       })
     );
+  }
+
+  selectSeat(rowIdx: number, colIdx: number) {
+    let isSelected: boolean = false;
+    for(const seatCordinates of this.selectedSeats) {
+      if(seatCordinates.rowIdx === rowIdx && seatCordinates.colIdx === colIdx) {
+        isSelected = true;
+        break;
+      }
+    }
+    
+    if(isSelected) {
+      this.selectedSeats = this.selectedSeats.filter((seatCordinates) => !(seatCordinates.rowIdx === rowIdx && seatCordinates.colIdx === colIdx));
+    }else if((this.selectedSeats.length + 1) <= this.noOfTickets){
+      this.selectedSeats.push({
+        rowIdx,
+        colIdx
+      })
+    }
+    
+  }
+
+  isSelected(rowIdx: number, colIdx: number): boolean {
+    for(const seatCordinates of this.selectedSeats) {
+      if(seatCordinates.rowIdx === rowIdx && seatCordinates.colIdx === colIdx) {
+        return true
+      };
+    }
+
+    return false;
   }
 
   openOrCloseChangeTicketModal() {

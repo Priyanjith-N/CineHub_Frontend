@@ -34,18 +34,18 @@
             <section>
                 <div>
                     <div class="mb-[49px]">
-                        @for (row of theaterScreenLayout?.seats; track $index; let idx = $index) {
+                        @for (row of theaterScreenLayout?.seats; track $index; let rowIdx = $index) {
                             @for (seatCategory of theaterScreenLayout?.screenData?.seatCategory; track $index) {
-                                @if((idx + 1) === seatCategory.rowNumbers[0]) {
+                                @if((rowIdx + 1) === seatCategory.rowNumbers[0]) {
                                     <div class="pb-[8px] w-full border-b border-solid border-[rgba(189,197,212,0.4)] my-[33px] seatCategory">
                                         <p class="text-[12px] leading-[12px]">Rs. {{ getSeatPrice(seatCategory.category) }} {{ seatCategory.category }}</p>
                                     </div>
                                 }
                             }
                             <div class="flex gap-[12.09px] mb-[12.09px] items-center">
-                                @for(seats of row; track $index) {
+                                @for(seats of row; track $index; let colIdx = $index) {
                                     @if(seats) {
-                                        <div class="w-[40.3px] h-[34.83px] rounded-[6px] p-[11.42px] flex items-center justify-center border border-solid duration-300 ease-in-out" [class.booked]="seats.isBooked" [class.avaliableSeat]="!seats.isBooked">
+                                        <div (click)="selectSeat(rowIdx, colIdx);" class="w-[40.3px] h-[34.83px] rounded-[6px] p-[11.42px] flex items-center justify-center border border-solid duration-300 ease-in-out cursor-pointer" [class.booked]="seats.isBooked" [class.avaliableSeat]="!seats.isBooked && !isSelected(rowIdx, colIdx)" [class.selectedSeat]="isSelected(rowIdx, colIdx)">
                                             <p class="font-bold text-[12px] leading-[12px]">{{ seats.name }}</p>
                                         </div>
                                     }@else {
@@ -110,7 +110,7 @@
             <div class="p-[15px] text-center">
                 <div>
                     <span class="inline-block w-[120px] h-[120px] duration-300 ease-in-out">
-                        <img class="w-[120px] h-[120px]" [src]="seatNumberWiseImage[showTicketImageIdx].imgURL" alt="">
+                        <img class="w-[120px] h-[120px] object-contain" [src]="seatNumberWiseImage[showTicketImageIdx].imgURL" alt="">
                     </span>
                 </div>
                 <div class="my-[20px]">
