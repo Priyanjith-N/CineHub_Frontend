@@ -1,5 +1,6 @@
 import { IMovie } from "./IMovieCredentials.interface";
 import { ISeatLayout } from "./screen.entity";
+import ITheater from "./theater.entity";
 
 export default interface IMovieSchedule {
     _id: string;
@@ -32,4 +33,23 @@ export interface IHomeMovieData {
     nowPlayingMovies: INowPlayingMovies[];
     recommendedMovies: IMovie[];
     upcommingMovies: IMovie[];
+}
+
+export interface ISchedulesForMovie {
+    scheduleId: string;
+    startTime: string;
+    endTime: string;
+}
+
+export interface IMovieSchedulesWithTheaterDetails {
+    scheduledDate: Date;
+    theaterData: ITheater;
+    schedules: ISchedulesForMovie[];
+}
+
+export interface ISelectedShowDetails {
+    scheduleId: string;
+    theaterName: string;
+    scheduledDate: Date;
+    time: string;
 }

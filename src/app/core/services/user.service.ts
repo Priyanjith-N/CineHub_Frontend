@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { IGetDataForHomePageSucessfullResponse, IGetMovieDetailsSucessfullResponse } from '../../shared/models/userAPIResponse.interface';
+import { IGetAllShowsForAMovieSucessfullResponse, IGetDataForHomePageSucessfullResponse, IGetMovieDetailsSucessfullResponse } from '../../shared/models/userAPIResponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +30,18 @@ export class UserService {
     const url: string = `${this.api}/getmoviedetails/${movieId}`;
 
     const APIResponse$: Observable<IGetMovieDetailsSucessfullResponse> = this.httpClient.get<IGetMovieDetailsSucessfullResponse>(url)
+    .pipe(
+      map(res => res),
+      catchError((err: any) => throwError(err))
+    );
+
+    return APIResponse$;
+  }
+
+  getAllShowsForAMovie(movieId: string): Observable<IGetAllShowsForAMovieSucessfullResponse> {
+    const url: string = `${this.api}/getAllShowsForAMovie/${movieId}`;
+
+    const APIResponse$: Observable<IGetAllShowsForAMovieSucessfullResponse> = this.httpClient.get<IGetAllShowsForAMovieSucessfullResponse>(url)
     .pipe(
       map(res => res),
       catchError((err: any) => throwError(err))

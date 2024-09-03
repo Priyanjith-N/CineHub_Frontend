@@ -90,6 +90,8 @@ export class AddScheduleComponent {
     }
 
     while(hour <= 24) {
+      console.log('in here', hour);
+      
       if(minutes > 0 && minutes < 15 ) {
         minutes = 15;
       }else if(minutes > 15 && minutes < 30) {
@@ -108,14 +110,14 @@ export class AddScheduleComponent {
       startTime.setMinutes(minutes);
 
       hour += duration.hour;
-      if(hour > 24) break;
       minutes += duration.min;
-
+      
       if(minutes >= 60) {
         const spareTime = minutes % 60;
         hour++;
         minutes=spareTime;
       }
+      if(hour > 24) break;
 
       const end: string = `${(hour<10)?('0'+ hour) :hour}: ${(minutes<10)?('0'+ minutes) :minutes}`;
 
@@ -156,12 +158,14 @@ export class AddScheduleComponent {
 
       minutes += 15; // cleaning time
 
-      if(minutes > 60) {
+      if(minutes >= 60) {
         const spareTime = minutes % 60;
         hour++;
-        minutes+=spareTime;
+        minutes = spareTime;
       }
     }
+
+    console.log(this.avaliableTimeSchedule);
   }
 
   selectSlot(idx: number) {
@@ -272,5 +276,9 @@ export class AddScheduleComponent {
     if(this.form.value.date && this.selectedTheaterOwnerMovie && (date > new Date(this.selectedTheaterOwnerMovie.movieValidity))) this.form.get('movieToPlay')?.setErrors({ message: `${this.selectedTheaterOwnerMovie.movieData.name} movie can used till ${ new Date(this.selectedTheaterOwnerMovie.movieValidity).toDateString() }` });
 
     if(this.selectedTimeSlotIdx === undefined) this.form.get('timeSlot')?.setErrors({ message: 'This Field is required.' });
+
+    if(date && this.selectedTheaterOwnerMovie && new Date(this.selectedTheaterOwnerMovie.movieData.releaseDate!) > date) {
+      this.form.get('movieToPlay')?.setErrors({ message: `${this.selectedTheaterOwnerMovie.movieData.name} movie cannot be used before release date ${ new Date(this.selectedTheaterOwnerMovie.movieData.releaseDate!).toDateString() }` });
+    }
   }
 }
