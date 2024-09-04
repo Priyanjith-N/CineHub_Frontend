@@ -1,0 +1,28 @@
+<div class="flex gap-[10px] items-center pb-[22px] mb-[24px] border-b border-solid border-[#C4C4C4] justify-center">
+    @if(data.length > 6) {
+        <div>
+            <div (click)="moveSlide(false)" class="cursor-pointer">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 8.5L11.5 16L19 23.5" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg> 
+            </div>               
+        </div>
+    }
+    <div class="flex keen-slider" id="slider"  #sliderRef >
+        @for (show of data; track $index) {
+            <div (click)="changeDate($index)" class="keen-slider__slide cursor-pointer flex flex-col justify-center items-center gap-1 w-[75px] h-[72px] flex-none order-none grow-0 p-[18px] rounded-lg text-center border border-solid" [class.notSelected]="$index !== selectedDate" [class.selected]="$index === selectedDate">
+                <p class="text-[#5A637A] text-[12px] font-medium" >{{ (show.scheduledDate | dateFormatter).split(' ').slice(1, 3).reverse().join(' ') }}</p>
+                <p class="text-[#333333] text-[16px] font-black uppercase">{{ (show.scheduledDate | dateFormatter).split(' ').slice(0, 1) }}</p>
+            </div>
+        }
+    </div>
+    @if(data.length > 6) {
+        <div>
+            <div (click)="moveSlide()" class="cursor-pointer">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13 23.5L20.5 16L13 8.5" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>                
+            </div>
+        </div>
+    }
+</div>

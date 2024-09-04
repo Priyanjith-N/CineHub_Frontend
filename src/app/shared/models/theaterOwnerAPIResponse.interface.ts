@@ -1,7 +1,7 @@
 import { IDistributerList } from "./distributer.entity";
 import { IMovie } from "./IMovieCredentials.interface";
 import { IMovieRequestDetails } from "./requestMovie.entity";
-import IMovieSchedule from "./schedule.entity";
+import IMovieSchedule, { IMovieScheduleWithDetails } from "./schedule.entity";
 import { ITheaterOwnerMovieDetails } from "./theaterOwnerCollection.entity";
 
 export interface IGetMovieListOfDistributerDataAPISucessfullResponse {
@@ -29,4 +29,9 @@ export interface IAddMovieSchedule {
 export interface IGetScheduleOn {
     message: string;
     data: IMovieSchedule[]
+}
+
+export interface IGetallmoviescheduleSucessfullResponse {
+    message: string;
+    data: IMovieScheduleWithDetails[];
 }
