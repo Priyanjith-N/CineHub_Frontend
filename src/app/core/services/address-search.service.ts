@@ -9,11 +9,11 @@ import { Observable } from 'rxjs';
 export class AddressSearchService {
   private httpClient: HttpClient = inject(HttpClient);
 
-  private getPlacesAPI: string = `https://api.geoapify.com/v1/geocode/autocomplete?apiKey=${environment.GEOAPIFY_API_KEY}`;
+  private getPlacesAPI: string = `${environment.GEOAPIFY_AUTOCOMPLETE_API}?apiKey=${environment.GEOAPIFY_API_KEY}`;
 
-  private getCitysAPI: string = `https://api.geoapify.com/v1/geocode/autocomplete?type=city&format=json&apiKey=${environment.GEOAPIFY_API_KEY}`;
+  private getCitysAPI: string = `${environment.GEOAPIFY_AUTOCOMPLETE_API}?type=city&format=json&apiKey=${environment.GEOAPIFY_API_KEY}`;
 
-  private getPlaceDetailsAPI: string = `https://api.geoapify.com/v1/geocode/reverse?format=json&apiKey=${environment.GEOAPIFY_API_KEY}`;
+  private getPlaceDetailsAPI: string = `${environment.GEOAPIFY_REVERSE_GEOCODING_API}?format=json&apiKey=${environment.GEOAPIFY_API_KEY}`;
 
   constructor() { }
 

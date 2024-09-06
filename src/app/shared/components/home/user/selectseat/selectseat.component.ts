@@ -151,6 +151,7 @@ export class SelectseatComponent {
 
   chageNoOfTickets(noOfTickets: number) {
     this.noOfTickets = noOfTickets;
+    this.selectedSeats = [];
 
     this.showTicketImageIdx = this.seatNumberWiseImage.findIndex((obj) => obj.startSeat <= this.noOfTickets && obj.endSeat >= this.noOfTickets);
   }
