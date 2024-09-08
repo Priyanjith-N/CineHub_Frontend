@@ -1,4 +1,4 @@
-@if(movieData) {
+@if(isDataLoaded) {
     <section class="bg-[rgb(26,26,26)]">
         <div class="mx-[48px] h-[480px] py-[32px] bg-[rgb(26,26,26)]" style="background-image: linear-gradient(90deg, rgb(26, 26, 26) 24.97%, rgb(26, 26, 26) 38.3%, rgba(26, 26, 26, 0.04) 97.47%, rgb(26, 26, 26) 100%), url({{movieData.bannerPhoto.imageURL}}); background-repeat: no-repeat;background-position: right center;">
             <div class="flex items-center mx-[100px] relative">
@@ -357,4 +357,6 @@
             </div> -->
         </div>
     </section>
+}@else {
+    <app-skeleton-movie-deatil-page></app-skeleton-movie-deatil-page>
 }

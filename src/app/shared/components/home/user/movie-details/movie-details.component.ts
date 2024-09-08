@@ -8,6 +8,7 @@ import { IGetMovieDetailsSucessfullResponse } from '../../../../models/userAPIRe
 import { IMovie } from '../../../../models/IMovieCredentials.interface';
 import { DateFormatterPipe } from '../../../../pipes/date-formatter.pipe';
 import { WorkerDetailsSliderComponent } from '../worker-details-slider/worker-details-slider.component';
+import { SkeletonMovieDeatilPageComponent } from '../../../skeleton/user/skeleton-movie-deatil-page/skeleton-movie-deatil-page.component';
 
 @Component({
   selector: 'app-movie-details',
@@ -15,7 +16,8 @@ import { WorkerDetailsSliderComponent } from '../worker-details-slider/worker-de
   imports: [
     DateFormatterPipe,
     WorkerDetailsSliderComponent,
-    RouterLink
+    RouterLink,
+    SkeletonMovieDeatilPageComponent
   ],
   templateUrl: './movie-details.component.html',
   styleUrl: './movie-details.component.css'
@@ -24,7 +26,8 @@ export class MovieDetailsComponent {
   private userService: UserService = inject(UserService);
   private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private movieId: string;
-  movieData: IMovie | undefined;
+  movieData!: IMovie;
+  isDataLoaded: boolean = false;
 
   constructor() {
     this.movieId = this.activatedRoute.snapshot.params['movieId'];
@@ -33,6 +36,7 @@ export class MovieDetailsComponent {
 
     APIResponse$.subscribe(
       (res => {
+        this.isDataLoaded = true;
         this.movieData = res.data;
       }),
       ((err: any) => {
