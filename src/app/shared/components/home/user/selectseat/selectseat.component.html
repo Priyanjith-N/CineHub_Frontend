@@ -98,7 +98,7 @@
 
     @if(selectedSeats.length) {
         <div class="flex w-full justify-center items-center py-[16px] bg-white shadow-[0px_19px_100px_rgba(0,0,0,0.25)]">
-            <button type="button" class="py-[13px] px-[97px] outline-none border-transparent rounded-[10px] bg-[#DC354B]">
+            <button (click)="selectAndPay();" type="button" class="py-[13px] px-[97px] outline-none border-transparent rounded-[10px] bg-[#DC354B]">
                 <p class="font-semibold text-[16px] text-white">Pay Rs.{{ totalAmount }}</p>
             </button>
         </div>

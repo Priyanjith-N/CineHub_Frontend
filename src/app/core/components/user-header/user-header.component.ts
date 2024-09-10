@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { IUserProfile } from '../../../shared/models/user.entity';
+import { UserprofileService } from '../../services/userprofile.service';
 
 @Component({
   selector: 'app-user-header',
@@ -12,5 +14,13 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './user-header.component.css'
 })
 export class UserHeaderComponent {
-  isUserAuth = false;
+  private userProfileService: UserprofileService = inject(UserprofileService);
+
+  userProfile: IUserProfile | null = null;
+
+  constructor() {
+    this.userProfileService.userProfile$.subscribe((userProfileData) => {
+      this.userProfile = userProfileData;
+    });
+  }
 }

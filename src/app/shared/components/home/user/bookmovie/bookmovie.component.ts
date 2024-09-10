@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { DatesliderComponent } from '../dateslider/dateslider.component';
 import { IMovie } from '../../../../models/IMovieCredentials.interface';
 import { UserService } from '../../../../../core/services/user.service';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { IGetAllShowsForAMovieSucessfullResponse, IGetMovieDetailsSucessfullResponse } from '../../../../models/userAPIResponse.interface';
 import { IMovieSchedulesWithTheaterDetails, IMovieSchedulesWithTheaterDetailsWithLocationDecoded, ISelectedShowDetails, ITheaterLocationDecoded } from '../../../../models/schedule.entity';
@@ -13,6 +13,7 @@ import { AddressSearchService } from '../../../../../core/services/address-searc
 import { GeoJsonProperties } from 'geojson';
 import { LocationService } from '../../../../../core/services/location.service';
 import { ChooseLocationModalComponent } from '../../../modal/choose-location-modal/choose-location-modal.component';
+import { DateFormaterToLocalStringPipe } from '../../../../pipes/date-formater-to-local-string.pipe';
 
 @Component({
   selector: 'app-bookmovie',
@@ -20,9 +21,9 @@ import { ChooseLocationModalComponent } from '../../../modal/choose-location-mod
   imports: [
     DatesliderComponent,
     FormatTimePipe,
-    DateFormatterPipe,
     RouterLink,
-    ChooseLocationModalComponent
+    ChooseLocationModalComponent,
+    DateFormaterToLocalStringPipe
   ],
   templateUrl: './bookmovie.component.html',
   styleUrl: './bookmovie.component.css'

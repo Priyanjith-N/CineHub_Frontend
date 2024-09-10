@@ -55,6 +55,8 @@ import { LandingPageComponent } from './shared/components/home/user/landing-page
 import { MovieDetailsComponent } from './shared/components/home/user/movie-details/movie-details.component';
 import { BookmovieComponent } from './shared/components/home/user/bookmovie/bookmovie.component';
 import { SelectseatComponent } from './shared/components/home/user/selectseat/selectseat.component';
+import { ConfirmPaymentComponent } from './shared/components/home/user/confirm-payment/confirm-payment.component';
+import { userAuthGuard } from './core/guards/user-auth.guard';
 
 export const routes: Routes = [
     {
@@ -169,6 +171,11 @@ export const routes: Routes = [
                 path: 'bookseat/:scheduleId',
                 canActivate: [],
                 component: SelectseatComponent
+            },
+            {
+                path: 'bookseat/:scheduleId/confirmpayment',
+                canActivate: [userAuthGuard],
+                component: ConfirmPaymentComponent
             }
         ]
     },

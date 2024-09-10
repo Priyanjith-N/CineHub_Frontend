@@ -43,9 +43,9 @@
                 </svg>      
             </div>
             
-            @if(isUserAuth){
+            @if(userProfile){
                 <div class="w-[40px] h-[40px] rounded-[50%] bg-[linear-gradient(to_bottom,#f2c446,#c6943f)] relative cursor-pointer font-roboto font-medium text-[18px]">
-                    <span class="h-fit w-fit text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">A</span>
+                    <span class="h-fit w-fit text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 uppercase">{{ userProfile.name[0] }}</span>
                 </div>
             }@else{
                 <div class="font-roboto font-medium text-[18px] text-[#F2C46F]">

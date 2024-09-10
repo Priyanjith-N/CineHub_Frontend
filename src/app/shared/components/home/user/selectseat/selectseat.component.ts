@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IGetTheaterScreenLayoutSucessfullResponse } from '../../../../models/userAPIResponse.interface';
 import { Observable } from 'rxjs';
 import { UserService } from '../../../../../core/services/user.service';
@@ -7,7 +7,10 @@ import { IMovieSchedulesForBooking } from '../../../../models/schedule.entity';
 import { DateFormatterPipe } from '../../../../pipes/date-formatter.pipe';
 import { FormatTimePipe } from '../../../../pipes/format-time.pipe';
 import { CommonModule } from '@angular/common';
-import { ISeatCategory } from '../../../../models/screen.entity';
+import { ISeatCategory, ISeatCategoryPattern, ISeatLayout } from '../../../../models/screen.entity';
+import { ToastMessageService } from '../../../../../core/services/toast-message.service';
+import IToastOption from '../../../../models/IToastOption.interface';
+import { BookseatdetailsService } from '../../../../../core/services/bookseatdetails.service';
 
 @Component({
   selector: 'app-selectseat',
@@ -22,8 +25,11 @@ import { ISeatCategory } from '../../../../models/screen.entity';
 })
 export class SelectseatComponent {
   private userService: UserService = inject(UserService);
-
+  private bookseatdetailsService: BookseatdetailsService = inject(BookseatdetailsService);
+  private toastMessageService: ToastMessageService = inject(ToastMessageService);
+  private router: Router = inject(Router);
   private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
+
   theaterScreenLayout: IMovieSchedulesForBooking | undefined;
   seatNumberWiseImage: { startSeat: number, endSeat: number, imgURL: string }[];
   noOfTickets: number = 1;
@@ -183,5 +189,60 @@ export class SelectseatComponent {
       }
     }
     return 0;
+  }
+
+  selectAndPay() {
+    if(this.selectedSeats.length !== this.noOfTickets) {
+      const toastOption: IToastOption = {
+        severity: 'warn',
+        summary: 'Seat Selection Incomplete',
+        detail: `Please select ${this.noOfTickets} seats in total.`
+      }
+
+      this.showToast(toastOption);
+
+      return;
+    }
+
+    const isCategoryTaken: Set<String> = new Set<string>();
+    const selectedSeatCategorys: ISeatCategoryPattern[] = [];
+    this.selectedSeats.forEach((seatIdx) => {
+      const seat = this.theaterScreenLayout!.seats[seatIdx.rowIdx][seatIdx.colIdx]!;
+      if(!isCategoryTaken.has(seat.category)) {
+        isCategoryTaken.add(seat.category);
+        
+        selectedSeatCategorys.push({
+          category: seat.category,
+          price: seat.price
+        });
+      }
+    });
+
+    const selectedSeats: ISeatLayout[] = this.selectedSeats.map((seatIdx) => {
+      const seat = this.theaterScreenLayout!.seats[seatIdx.rowIdx][seatIdx.colIdx]!;
+
+      return {
+        name: seat.name,
+        category: seat.category,
+        price: seat.price
+      }
+    })
+
+
+    this.bookseatdetailsService.setValue({
+      time: this.theaterScreenLayout!.startTime,
+      selectedSeatsIdx: this.selectedSeats,
+      scheduleId: this.scheduleId,
+      date: this.theaterScreenLayout!.date,
+      movieName: this.theaterScreenLayout!.movieData.name,
+      category: selectedSeatCategorys,
+      selectedSeats: selectedSeats
+    });
+
+    this.router.navigate(['bookseat', this.scheduleId, 'confirmpayment'])
+  }
+
+  private showToast(toastOption: IToastOption): void {
+    this.toastMessageService.showToast(toastOption); // emit value to subject for geting value accross the appliction for toast message.
   }
 }
