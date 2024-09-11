@@ -1,0 +1,11 @@
+.Succeed, .Active {
+    @apply bg-[#118EEA];
+}
+
+.Fail {
+    @apply bg-[#FF6B6B];
+}
+
+.canceled {
+    @apply bg-[#E23030];
+}
