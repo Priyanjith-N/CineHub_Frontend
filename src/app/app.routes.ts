@@ -58,6 +58,9 @@ import { SelectseatComponent } from './shared/components/home/user/selectseat/se
 import { ConfirmPaymentComponent } from './shared/components/home/user/confirm-payment/confirm-payment.component';
 import { userAuthGuard } from './core/guards/user-auth.guard';
 import { PaymentsucessfullComponent } from './shared/components/home/user/paymentsucessfull/paymentsucessfull.component';
+import { MyTicketsComponent } from './shared/components/home/user/my-tickets/my-tickets.component';
+import { MyactiveTicketsComponent } from './shared/components/home/user/myactive-tickets/myactive-tickets.component';
+import { MytransactionlistComponent } from './shared/components/home/user/mytransactionlist/mytransactionlist.component';
 
 export const routes: Routes = [
     {
@@ -182,6 +185,22 @@ export const routes: Routes = [
                 path: 'paymentsuccess',
                 canActivate: [userAuthGuard],
                 component: PaymentsucessfullComponent
+            },
+            {
+                path: 'mytickets',
+                component: MyTicketsComponent,
+                children: [
+                    {
+                        path: 'activetickets',
+                        canActivate: [userAuthGuard],
+                        component: MyactiveTicketsComponent
+                    },
+                    {
+                        path: 'transactionlist',
+                        canActivate: [userAuthGuard],
+                        component: MytransactionlistComponent
+                    }
+                ]
             }
         ]
     },

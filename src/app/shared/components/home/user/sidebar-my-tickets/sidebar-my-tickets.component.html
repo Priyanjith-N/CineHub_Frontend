@@ -1,0 +1,29 @@
+<div class="p-[36px] bg-[#F5F5F5] min-h-screen h-full">
+    <div routerLink="activetickets" class="flex items-center gap-[16px] mb-[10px] cursor-pointer duration-300 ease-in-out" routerLinkActive="activeRoute" [routerLinkActiveOptions]="{ exact: true }">
+        <div>
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M26 14V10C26 9.46957 25.7893 8.96086 25.4142 8.58579C25.0391 8.21071 24.5304 8 24 8H8C7.46957 8 6.96086 8.21071 6.58579 8.58579C6.21071 8.96086 6 9.46957 6 10V14C6.53043 14 7.03914 14.2107 7.41421 14.5858C7.78929 14.9609 8 15.4696 8 16C8 16.5304 7.78929 17.0391 7.41421 17.4142C7.03914 17.7893 6.53043 18 6 18V22C6 23.1 6.9 24 8 24H24C25.1 24 26 23.1 26 22V18C24.9 18 24 17.1 24 16C24 14.9 24.9 14 26 14ZM24 12.54C22.81 13.23 22 14.53 22 16C22 17.47 22.81 18.77 24 19.46V22H8V19.46C9.19 18.77 10 17.47 10 16C10 14.5 9.2 13.23 8 12.54V10H24V12.54ZM15 19H17V21H15V19ZM15 15H17V17H15V15ZM15 11H17V13H15V11Z"/>
+            </svg>                              
+        </div>
+        <div>
+            <p class="font-medium text-[16px] text-[#333333]">ACTIVE TICKETS</p>
+        </div>
+    </div>
+    <div class="min-w-[241px] h-[1px] bg-[#DADFE8]"></div>
+    <div routerLink="transactionlist" class="flex items-center gap-[16px] my-[10px] cursor-pointer duration-300 ease-in-out" routerLinkActive="activeRoute" [routerLinkActiveOptions]="{ exact: true }">
+        <div>
+            <svg class="transationSvg" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect class="transationSvg" x="8.75" y="7.75" width="14.5" height="17.5" rx="1.25" stroke="#333333" stroke-width="1.5"/>
+                <path class="transationSvg" d="M12 13H20" stroke-width="1.5" stroke-linecap="round"/>
+                <path class="transationSvg" d="M12 17H18" stroke-width="1.5" stroke-linecap="round"/>
+                <path class="transationSvg" d="M12 21H16" stroke-width="1.5" stroke-linecap="round"/>
+                <path class="transationSvg" d="M12 6L12 9" stroke-width="1.5" stroke-linecap="round"/>
+                <path class="transationSvg" d="M20 6L20 9" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>                            
+        </div>
+        <div>
+            <p class="font-medium text-[16px] text-[#333333]">TRANSACTION LIST</p>
+        </div>
+    </div>
+    <div class="min-w-[241px] h-[1px] bg-[#DADFE8]"></div>
+</div>

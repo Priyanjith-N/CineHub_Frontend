@@ -1,0 +1,20 @@
+.activeRoute p{
+    @apply text-[#118EEA];
+}
+
+svg {
+    fill: #333333;
+}
+
+.activeRoute svg {
+    fill: #118EEA;
+}
+
+.activeRoute .transationSvg {
+    stroke: #118EEA;
+}
+
+.transationSvg {
+    fill: none;
+    stroke: #333333;
+}
