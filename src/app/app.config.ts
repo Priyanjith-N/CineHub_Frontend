@@ -15,10 +15,12 @@ import {
   GoogleLoginProvider
 } from '@abacritt/angularx-social-login';
 import { environment } from '../environments/environment.development';
+import { provideNgxStripe } from 'ngx-stripe';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes, withViewTransitions(), withInMemoryScrolling({ scrollPositionRestoration: 'top' })),
+    provideNgxStripe(),
     provideHttpClient(withInterceptors([authInterceptor, errorHandleingInterceptor])),
     provideAnimations(),
     {

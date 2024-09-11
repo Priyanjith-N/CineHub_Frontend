@@ -1,0 +1,68 @@
+<div class="h-screen flex justify-center items-center -translate-y-[15%] p-[18px]">
+    @if (bookingProcessing) {
+        <div class="bg-white p-10 rounded-xl shadow-lg text-center max-w-md">
+            <svg class="animate-spin h-16 w-16 text-blue-500 mx-auto mb-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M12 6l-4 10h8z" />
+              <path d="M12 6v-3m-1 3h2m-1 7v3m0-10h0" />
+            </svg>
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Payment Processing</h2>
+            <p class="text-gray-600 mb-4">Please wait while we book your seat.</p>
+            <p class="text-red-600 font-semibold">Do not go back or refresh the page.</p>
+        </div>
+    }@else {
+        <div class="flex flex-col items-center">
+            <div>
+                <p class="font-bold text-[40px] text-[#333333]">Payment Successfull</p>
+            </div>
+            <div class="flex justify-center mb-[32px]">
+                <svg width="283" height="209" viewBox="0 0 283 209" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="20.9492" y="54.4813" width="136.116" height="16.4856" transform="rotate(9.46961 20.9492 54.4813)" fill="#F2C46F" stroke="black" stroke-width="2.5"/>
+                    <rect x="19.4354" y="36.5113" width="136.116" height="16.4856" transform="rotate(-5.53039 19.4354 36.5113)" fill="#F2C46F" stroke="black" stroke-width="2.5"/>
+                    <rect x="23.5913" y="73.1478" width="124.762" height="72.2485" transform="rotate(9.46961 23.5913 73.1478)" fill="#1A2C50" stroke="black" stroke-width="2.5"/>
+                    <rect x="34.6338" y="84.5823" width="99.2148" height="26.3586" transform="rotate(9.46961 34.6338 84.5823)" fill="#F2C46F" stroke="black" stroke-width="2.5"/>
+                    <rect x="30.1196" y="111.648" width="49.067" height="26.3586" transform="rotate(9.46961 30.1196 111.648)" fill="#F2C46F" stroke="black" stroke-width="2.5"/>
+                    <rect x="79.584" y="119.898" width="49.067" height="26.3586" transform="rotate(9.46961 79.584 119.898)" fill="#F2C46F" stroke="black" stroke-width="2.5"/>
+                    <circle cx="25.0932" cy="63.7375" r="2.3251" transform="rotate(9.46961 25.0932 63.7375)" fill="#1A2C50" stroke="black" stroke-width="1.5"/>
+                    <circle cx="25.8332" cy="44.3798" r="2.3251" transform="rotate(-5.53039 25.8332 44.3798)" fill="#1A2C50" stroke="black" stroke-width="1.5"/>
+                    <path d="M150.038 75.2253L137.747 91.4011" stroke="black" stroke-width="2.5"/>
+                    <path d="M150.58 23.0097L142.926 41.8282" stroke="black" stroke-width="2.5"/>
+                    <path d="M138.839 73.3573L126.548 89.5331" stroke="black" stroke-width="2.5"/>
+                    <path d="M139.281 24.1229L131.627 42.9413" stroke="black" stroke-width="2.5"/>
+                    <path d="M127.639 71.4892L115.348 87.665" stroke="black" stroke-width="2.5"/>
+                    <path d="M127.982 25.2359L120.328 44.0544" stroke="black" stroke-width="2.5"/>
+                    <path d="M116.44 69.6212L104.149 85.797" stroke="black" stroke-width="2.5"/>
+                    <path d="M116.681 26.3488L109.027 45.1673" stroke="black" stroke-width="2.5"/>
+                    <path d="M105.24 67.7531L92.9495 83.9289" stroke="black" stroke-width="2.5"/>
+                    <path d="M105.382 27.462L97.7282 46.2805" stroke="black" stroke-width="2.5"/>
+                    <path d="M94.0409 65.8851L81.7503 82.0609" stroke="black" stroke-width="2.5"/>
+                    <path d="M94.0828 28.5751L86.4289 47.3936" stroke="black" stroke-width="2.5"/>
+                    <path d="M82.8412 64.0171L70.5506 80.1929" stroke="black" stroke-width="2.5"/>
+                    <path d="M82.7835 29.6882L75.1295 48.5066" stroke="black" stroke-width="2.5"/>
+                    <path d="M71.642 62.149L59.3513 78.3248" stroke="black" stroke-width="2.5"/>
+                    <path d="M71.4836 30.8012L63.8297 49.6197" stroke="black" stroke-width="2.5"/>
+                    <path d="M60.4423 60.281L48.1516 76.4568" stroke="black" stroke-width="2.5"/>
+                    <path d="M60.1838 31.9142L52.5299 50.7327" stroke="black" stroke-width="2.5"/>
+                    <path d="M49.2426 58.4129L36.9519 74.5887" stroke="black" stroke-width="2.5"/>
+                    <path d="M48.8845 33.0272L41.2306 51.8457" stroke="black" stroke-width="2.5"/>
+                    <circle cx="154.37" cy="152.37" r="52.8703" fill="#F2C46F" stroke="black" stroke-width="3"/>
+                    <circle cx="154.37" cy="152.37" r="46.3458" fill="#1A2C50" stroke="black" stroke-width="3"/>
+                    <circle cx="154.37" cy="128.447" r="9.37405" fill="#F2C46F" stroke="black" stroke-width="3"/>
+                    <circle cx="154.37" cy="152.37" r="2.89975" fill="#F2C46F"/>
+                    <circle cx="178.293" cy="152.37" r="9.37405" transform="rotate(90 178.293 152.37)" fill="#F2C46F" stroke="black" stroke-width="3"/>
+                    <circle cx="154.37" cy="176.293" r="9.37405" fill="#F2C46F" stroke="black" stroke-width="3"/>
+                    <circle cx="130.447" cy="152.37" r="9.37405" transform="rotate(90 130.447 152.37)" fill="#F2C46F" stroke="black" stroke-width="3"/>
+                    <path d="M149.296 205.522C173.46 207.576 197.649 212.264 221.427 189.936C251.15 162.026 255.142 135.734 281.234 140.64" stroke="black" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>                
+            </div>
+            <div class="w-[680px] mb-[52px]">
+                <p class="text-center font-normal text-[20px] text-[#5A637A]">Transaction details have been sent to your email, you can also check other ticket details in my ticket either on the website or on your smartphone.</p>
+            </div>
+            <div>
+                <button class="py-[16px] px-[12px] rounded-[8px] w-[216px] border-solid border-[#5A637A] border-[1.5px] text-[#9DA8BE] hover:bg-black hover:text-white hover:border-transparent duration-300 ease-in-out">
+                    <p class="font-medium text-[24px] leading-[32px]">Show Ticket</p>
+                </button>
+            </div>
+        </div>
+    }
+</div>

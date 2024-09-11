@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { IGetAllShowsForAMovieSucessfullResponse, IGetDataForHomePageSucessfullResponse, IGetMovieDetailsSucessfullResponse, IGetTheaterScreenLayoutSucessfullResponse } from '../../shared/models/userAPIResponse.interface';
+import { IBookSeatSucessfullResponse, ICreateCheckOutSessionStripeSucessfullResponse, IGetAllShowsForAMovieSucessfullResponse, IGetDataForHomePageSucessfullResponse, IGetMovieDetailsSucessfullResponse, IGetTheaterScreenLayoutSucessfullResponse } from '../../shared/models/userAPIResponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -57,6 +57,35 @@ export class UserService {
     .pipe(
       map(res => res),
       catchError((err: any) => throwError(err))
+    );
+
+    return APIResponse$;
+  }
+
+  createCheckOutSessionStripe(scheduleId: string, selectedSeats: { rowIdx: number; colIdx: number; }[]): Observable<ICreateCheckOutSessionStripeSucessfullResponse> {
+    const url: string = `${this.api}/create-checkout-session`;
+
+    const APIResponse$: Observable<ICreateCheckOutSessionStripeSucessfullResponse> = this.httpClient.post<ICreateCheckOutSessionStripeSucessfullResponse>(url, {
+      scheduleId,
+      selectedSeats
+    })
+    .pipe(
+      map(res => res as ICreateCheckOutSessionStripeSucessfullResponse),
+      catchError(err => throwError(err))
+    );
+
+    return APIResponse$;
+  }
+
+  bookSeat(checkoutSessionId: string): Observable<IBookSeatSucessfullResponse> {
+    const url: string = `${this.api}/bookseat`;
+
+    const APIResponse$: Observable<IBookSeatSucessfullResponse> = this.httpClient.post<IBookSeatSucessfullResponse>(url, {
+      checkoutSessionId
+    })
+    .pipe(
+      map(res => res as IBookSeatSucessfullResponse),
+      catchError(err => throwError(err))
     );
 
     return APIResponse$;

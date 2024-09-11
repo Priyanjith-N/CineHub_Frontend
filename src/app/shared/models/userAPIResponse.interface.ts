@@ -20,3 +20,12 @@ export interface IGetTheaterScreenLayoutSucessfullResponse{
     message: string;
     data: IMovieSchedulesForBooking;
 }
+
+export interface ICreateCheckOutSessionStripeSucessfullResponse {
+    message: string;
+    sessionId: string;
+}
+
+export interface IBookSeatSucessfullResponse {
+    message: string;
+}

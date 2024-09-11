@@ -126,8 +126,18 @@
                     <p>* On cancellation of Ticket after purchases will only refund the 70% of the given amount</p>
                 </div>
                 <div>
-                    <button class="bg-[#1A2C50] rounded-[8px] w-full">
-                        <p class="text-[#FFBE00] leading-[32px] font-medium text-[24px] py-[16px] px-[12px]">BUY TICKETS</p>
+                    <button (click)="payNow();" class="bg-[#1A2C50] rounded-[8px] w-full">
+                        @if(isFormSubmited){
+                            <div class="py-[16px] px-[12px]">
+                                <div class="flex justify-center items-center">
+                                    <div class="animate-spin inline-block size-[32px] border-[3px] border-current border-t-transparent text-white rounded-full dark:text-white" role="status" aria-label="loading">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        }@else{
+                            <p class="text-[#FFBE00] leading-[32px] font-medium text-[24px] py-[16px] px-[12px]">BUY TICKETS</p>
+                        }
                     </button>
                 </div>
             </div>
