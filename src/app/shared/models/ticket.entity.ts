@@ -4,6 +4,7 @@ import IScreen, { ISeatLayout } from "./screen.entity";
 import ITheater from "./theater.entity";
 
 export default interface ITickets {
+    _id: string;
     userId: string;
     scheduleId: string;
     paymentIntentId: string;
@@ -13,7 +14,7 @@ export default interface ITickets {
     theaterId: string;
     screenId: string;
     class: string[];
-    paymentStatus: "Successfull" | "Failed" | "Pending",
+    paymentStatus: "Successfull" | "Failed" | "Pending" | "Refunded",
     ticketStatus: "Active" | "canceled" | "Succeed" | "Fail",
     purchaseDetails: IPurchaseDetails[],
     totalPaidAmount:number;

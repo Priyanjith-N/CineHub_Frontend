@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { IBookSeatSucessfullResponse, ICreateCheckOutSessionStripeSucessfullResponse, IGetAllActiveTicketsSucessfullResponse, IGetAllShowsForAMovieSucessfullResponse, IGetDataForHomePageSucessfullResponse, IGetMovieDetailsSucessfullResponse, IGetTheaterScreenLayoutSucessfullResponse } from '../../shared/models/userAPIResponse.interface';
+import { IBookSeatSucessfullResponse, ICancelTicketSucessfullResponse, ICreateCheckOutSessionStripeSucessfullResponse, IGetAllActiveTicketsSucessfullResponse, IGetAllShowsForAMovieSucessfullResponse, IGetDataForHomePageSucessfullResponse, IGetMovieDetailsSucessfullResponse, IGetTheaterScreenLayoutSucessfullResponse } from '../../shared/models/userAPIResponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -97,6 +97,18 @@ export class UserService {
     const APIResponse$: Observable<IGetAllActiveTicketsSucessfullResponse> = this.httpClient.get<IGetAllActiveTicketsSucessfullResponse>(url)
     .pipe(
       map(res => res as IGetAllActiveTicketsSucessfullResponse),
+      catchError((err: any) => throwError(err))
+    );
+
+    return APIResponse$;
+  }
+
+  cancelTicket(ticketId: string): Observable<ICancelTicketSucessfullResponse> {
+    const url: string = `${this.api}/cancelticket/${ticketId}`;
+
+    const APIResponse$: Observable<ICancelTicketSucessfullResponse> = this.httpClient.patch<ICancelTicketSucessfullResponse>(url, {})
+    .pipe(
+      map(res => res as ICancelTicketSucessfullResponse),
       catchError((err: any) => throwError(err))
     );
 
