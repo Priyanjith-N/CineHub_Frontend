@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { IBookSeatSucessfullResponse, ICreateCheckOutSessionStripeSucessfullResponse, IGetAllShowsForAMovieSucessfullResponse, IGetDataForHomePageSucessfullResponse, IGetMovieDetailsSucessfullResponse, IGetTheaterScreenLayoutSucessfullResponse } from '../../shared/models/userAPIResponse.interface';
+import { IBookSeatSucessfullResponse, ICreateCheckOutSessionStripeSucessfullResponse, IGetAllActiveTicketsSucessfullResponse, IGetAllShowsForAMovieSucessfullResponse, IGetDataForHomePageSucessfullResponse, IGetMovieDetailsSucessfullResponse, IGetTheaterScreenLayoutSucessfullResponse } from '../../shared/models/userAPIResponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -86,6 +86,18 @@ export class UserService {
     .pipe(
       map(res => res as IBookSeatSucessfullResponse),
       catchError(err => throwError(err))
+    );
+
+    return APIResponse$;
+  }
+
+  getAllActiveTickets(): Observable<IGetAllActiveTicketsSucessfullResponse> {
+    const url: string = `${this.api}/activetickets`;
+
+    const APIResponse$: Observable<IGetAllActiveTicketsSucessfullResponse> = this.httpClient.get<IGetAllActiveTicketsSucessfullResponse>(url)
+    .pipe(
+      map(res => res as IGetAllActiveTicketsSucessfullResponse),
+      catchError((err: any) => throwError(err))
     );
 
     return APIResponse$;
