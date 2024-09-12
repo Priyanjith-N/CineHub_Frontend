@@ -9,19 +9,19 @@
                         </svg>
                     </div>
                     <input (keyup)="searchPlace($event);" class="w-full h-[45px] text-xs indent-[15px] border-[none] outline-none" type="text" placeholder="Search for your city">
-                    <div class="absolute w-full mt-[12px] bg-white border border-gray-200 rounded-md shadow-lg z-[999999] top-full">
-                        @if(placeResults.length) {
+                    @if(placeResults.length) {
+                        <div class="absolute w-full mt-[12px] bg-white border border-gray-200 rounded-md shadow-lg z-[999999] top-full">
                             <ul class="py-1">
                                 @for (item of placeResults; track $index) {
                                     <li (click)="selectLocation($index);" class="px-3 py-2 hover:bg-gray-100 cursor-pointer break-words leading-[28px]">{{ item.address }}</li>
                                 }
                             </ul>
-                        }
-                    </div>
+                        </div>
+                    }
                 </div>
             </div>
-            <div class="text-[rgb(220,53,88)] text-sm font-medium tracking-[0.2px] flex flex-col cursor-pointer pt-0 pb-3 px-4 border-b-[rgb(221,221,221)]">
-                <div class="flex items-center">
+            <div class="text-[rgb(220,53,88)] text-sm font-medium tracking-[0.2px] flex flex-col cursor-pointer px-[16px] pb-[12px]">
+                <div (click)="getMyLocaiton();" class="flex items-center cursor-pointer w-fit">
                     <div class="mr-[12px]">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9.25 19V16.9583C7.56944 16.7639 6.16319 16.0972 5.03125 14.9583C3.89931 13.8194 3.23611 12.4167 3.04167 10.75H1V9.25H3.04167C3.23611 7.58333 3.89931 6.18056 5.03125 5.04167C6.16319 3.90278 7.56944 3.23611 9.25 3.04167V1H10.75V3.04167C12.4306 3.23611 13.8368 3.90278 14.9688 5.04167C16.1007 6.18056 16.7639 7.58333 16.9583 9.25H19V10.75H16.9583C16.7639 12.4167 16.1007 13.8194 14.9688 14.9583C13.8368 16.0972 12.4306 16.7639 10.75 16.9583V19H9.25ZM10 15.5C11.5278 15.5 12.8264 14.9653 13.8958 13.8958C14.9653 12.8264 15.5 11.5278 15.5 10C15.5 8.47222 14.9653 7.17361 13.8958 6.10417C12.8264 5.03472 11.5278 4.5 10 4.5C8.47222 4.5 7.17361 5.03472 6.10417 6.10417C5.03472 7.17361 4.5 8.47222 4.5 10C4.5 11.5278 5.03472 12.8264 6.10417 13.8958C7.17361 14.9653 8.47222 15.5 10 15.5ZM10 13C9.16667 13 8.45833 12.7083 7.875 12.125C7.29167 11.5417 7 10.8333 7 10C7 9.16667 7.29167 8.45833 7.875 7.875C8.45833 7.29167 9.16667 7 10 7C10.8333 7 11.5417 7.29167 12.125 7.875C12.7083 8.45833 13 9.16667 13 10C13 10.8333 12.7083 11.5417 12.125 12.125C11.5417 12.7083 10.8333 13 10 13ZM10 11.6458C10.4526 11.6458 10.8401 11.4847 11.1623 11.1623C11.4847 10.8401 11.6458 10.4526 11.6458 10C11.6458 9.54736 11.4847 9.15993 11.1623 8.83771C10.8401 8.51535 10.4526 8.35417 10 8.35417C9.54736 8.35417 9.15993 8.51535 8.83771 8.83771C8.51535 9.15993 8.35417 9.54736 8.35417 10C8.35417 10.4526 8.51535 10.8401 8.83771 11.1623C9.15993 11.4847 9.54736 11.6458 10 11.6458Z" fill="#DC3558"/>

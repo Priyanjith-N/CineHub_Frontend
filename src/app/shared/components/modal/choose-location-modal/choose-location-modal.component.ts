@@ -46,6 +46,31 @@ export class ChooseLocationModalComponent  implements OnInit, OnDestroy {
     this.searchInput.complete();
   }
 
+  getMyLocaiton() {
+    navigator.geolocation.getCurrentPosition((position => {
+      this.addressSearchService.reverseGeoCoding(position.coords.latitude, position.coords.longitude).subscribe(
+        (res => {
+          this.closeModal.emit();
+          
+          if(res?.results) {
+            const properites = res.results[0];
+  
+            if(properites) {
+              this.locationService.setValue({
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude,
+                city: properites['city']
+              })
+            }
+          }
+        }),
+        ((err: any) => {
+          console.log(err);
+        })
+      );
+    }))
+  }
+
   searchPlace(event: Event) {
     const inputElement: HTMLInputElement = event.target as HTMLInputElement;
 
