@@ -1,5 +1,5 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, EventEmitter, inject, OnDestroy, OnInit, Output } from '@angular/core';
+import { debounceTime, distinctUntilChanged, Observable, Subject, switchMap } from 'rxjs';
 import { IAddressDetails } from '../../../models/theater.entity';
 import { AddressSearchService } from '../../../../core/services/address-search.service';
 import { LocationService } from '../../../../core/services/location.service';
@@ -11,13 +11,40 @@ import { LocationService } from '../../../../core/services/location.service';
   templateUrl: './choose-location-modal.component.html',
   styleUrl: './choose-location-modal.component.css'
 })
-export class ChooseLocationModalComponent {
+export class ChooseLocationModalComponent  implements OnInit, OnDestroy {
   private locationService: LocationService = inject(LocationService);
   private addressSearchService: AddressSearchService = inject(AddressSearchService);
-
+  private searchInput = new Subject<string>();
+  
   @Output() closeModal: EventEmitter<void> = new EventEmitter<void>;
-
+  
   placeResults: IAddressDetails[] = []
+  
+  ngOnInit(): void {
+    this.searchInput.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap((text) => this.addressSearchService.getPlaces(text)) // all previous request canncel for that i use switch Map
+    ).subscribe(res => {
+      res.features.forEach((value) => {
+        if(this.placeResults.length >= 5) return;
+        const properites = value.properties;
+        if(!properites) return;
+
+        const results: IAddressDetails = {
+          address: properites['city'],
+          lng: properites['lon'],
+          lat: properites['lat'],
+        }
+
+        this.placeResults.push(results);
+      });
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.searchInput.complete();
+  }
 
   searchPlace(event: Event) {
     const inputElement: HTMLInputElement = event.target as HTMLInputElement;
@@ -26,30 +53,9 @@ export class ChooseLocationModalComponent {
 
     if(!text) return;
 
-    const APIResponse$: Observable<GeoJSON.FeatureCollection> = this.addressSearchService.getPlaces(text);
-
     this.placeResults = [];
 
-    APIResponse$.subscribe(
-      (res => {
-        res.features.forEach((value) => {
-          if(this.placeResults.length >= 5) return;
-          const properites = value.properties;
-          if(!properites) return;
-  
-          const results: IAddressDetails = {
-            address: properites['city'],
-            lng: properites['lon'],
-            lat: properites['lat'],
-          }
-  
-          this.placeResults.push(results);
-        });
-      }),
-      ((err: any) => {
-        console.error(err);
-      })
-    );
+    this.searchInput.next(text);
   }
 
   selectLocation(idx: number) {
