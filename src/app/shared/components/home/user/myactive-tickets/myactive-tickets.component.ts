@@ -33,6 +33,7 @@ export class MyactiveTicketsComponent {
   private toastMessageService: ToastMessageService = inject(ToastMessageService);
 
   myActiveTickets: ITicketDetails[] = [];
+  isCancelRequestDone: boolean = false;
 
   constructor() {
     this.getData();
@@ -52,10 +53,15 @@ export class MyactiveTicketsComponent {
   }
 
   cancelTicket(ticketId: string) {
+    if(this.isCancelRequestDone) return;
+
+    this.isCancelRequestDone = true;
+
     const APIResponse$: Observable<ICancelTicketSucessfullResponse> = this.userService.cancelTicket(ticketId);
 
     APIResponse$.subscribe(
       (res => {
+        this.isCancelRequestDone = false;
         const toastOption: IToastOption = {
           severity: 'success',
           summary: 'Ticket Canceled',
@@ -66,6 +72,7 @@ export class MyactiveTicketsComponent {
         this.getData();
       }),
       ((err: any) => {
+        this.isCancelRequestDone = false;
         console.error(err);
       })
     );
