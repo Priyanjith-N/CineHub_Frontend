@@ -4,7 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { IDistributeMovieErrorResponse, IDistributeMovieSuccessfullResponse, IEditProfitSharingErrorResponse, IEditProfitSharingSuccessfullResponse, IGetAllAvaliableMovieDataSuccessfullResponse, IMyDistributedMoviesErrorResponse, IMyDistributedMoviesSuccessfullResponse } from '../../shared/models/IMovieAPIResponse.interface';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { IDistributeMovieData } from '../../shared/models/IMovieCredentials.interface';
-import { IApproveMovieRequestSucessfullResponse, IGetAllMovieRequestsSucessfullResponse, IRejectMovieRequestSucessfullResponse } from '../../shared/models/distributerAPIResponse.interface';
+import { IAddStreamingErrorResponse, IAddStreamingSucessfullResponse, IApproveMovieRequestSucessfullResponse, IGetAllMovieRequestsSucessfullResponse, IGetAllStreamingMovieDetailsSucessfullResponse, IRejectMovieRequestSucessfullResponse } from '../../shared/models/distributerAPIResponse.interface';
+import { IMovieStreamingCredentials } from '../../shared/models/movieStreaming.entity';
 
 @Injectable({
   providedIn: 'root'
@@ -125,6 +126,35 @@ export class DistributerService {
     })
     .pipe(
       map(res => res),
+      catchError((err: any) => throwError(err))
+    );
+
+    return APIResponse$;
+  }
+
+  addStreaming(data: IMovieStreamingCredentials): Observable<IAddStreamingSucessfullResponse> {
+    const url: string = `${this.api}/addstreaming`;
+
+    const APIResponse$: Observable<IAddStreamingSucessfullResponse> = this.httpClient.post<IAddStreamingSucessfullResponse>(url, data)
+    .pipe(
+      map(res => res),
+      catchError((err: any) => {
+        if(err.error) {
+          return throwError(err.error as IAddStreamingErrorResponse);
+        }
+        return throwError(err);
+      })
+    );
+
+    return APIResponse$;
+  }
+
+getAllStreamingMovieDetails(): Observable<IGetAllStreamingMovieDetailsSucessfullResponse> {
+    const url: string = `${this.api}/getallstreamingmoviedetails`;
+
+    const APIResponse$: Observable<IGetAllStreamingMovieDetailsSucessfullResponse> = this.httpClient.get<IGetAllStreamingMovieDetailsSucessfullResponse>(url)
+    .pipe(
+      map(res => res as IGetAllStreamingMovieDetailsSucessfullResponse),
       catchError((err: any) => throwError(err))
     );
 

@@ -1,0 +1,17 @@
+.evenColor {
+    @apply bg-[rgba(238,238,238,0.25)];
+}
+
+.oddColor {
+    @apply bg-white;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.error {
+  @apply border-[#FF6B6B] text-[#FF6B6B];
+}
