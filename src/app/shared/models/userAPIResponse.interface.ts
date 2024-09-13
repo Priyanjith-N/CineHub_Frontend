@@ -29,6 +29,7 @@ export interface ICreateCheckOutSessionStripeSucessfullResponse {
 
 export interface IBookSeatSucessfullResponse {
     message: string;
+    ticketId: string;
 }
 
 export interface IGetAllActiveTicketsSucessfullResponse {

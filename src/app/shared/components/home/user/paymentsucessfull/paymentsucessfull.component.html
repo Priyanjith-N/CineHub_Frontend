@@ -59,7 +59,7 @@
                 <p class="text-center font-normal text-[20px] text-[#5A637A]">Transaction details have been sent to your email, you can also check other ticket details in my ticket either on the website or on your smartphone.</p>
             </div>
             <div>
-                <button class="py-[16px] px-[12px] rounded-[8px] w-[216px] border-solid border-[#5A637A] border-[1.5px] text-[#9DA8BE] hover:bg-black hover:text-white hover:border-transparent duration-300 ease-in-out">
+                <button [routerLink]="['/ticket', ticketId]" class="py-[16px] px-[12px] rounded-[8px] w-[216px] border-solid border-[#5A637A] border-[1.5px] text-[#9DA8BE] hover:bg-black hover:text-white hover:border-transparent duration-300 ease-in-out">
                     <p class="font-medium text-[24px] leading-[32px]">Show Ticket</p>
                 </button>
             </div>
