@@ -16,11 +16,6 @@ export const canAcessUserAuthRoutesGuard: CanActivateFn = async (route: Activate
   }
 
   try {
-    const token: string | null = localStorage.getItem('token');
-    
-
-    if(!token) throw new Error('NO TOKEN AVAILABLE');
-
     const res = await userAuthService.handelVerifyAuthTokenRequest(); // if it respond other than 200 status code promise will reject it comes in catch.
 
     userprofileService.setValue(res!.data);
@@ -30,7 +25,6 @@ export const canAcessUserAuthRoutesGuard: CanActivateFn = async (route: Activate
     return false;
   } catch (err) {
     userprofileService.setValue(null);
-    localStorage.removeItem('token');
     return true;
   }
 };

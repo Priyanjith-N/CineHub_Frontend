@@ -14,18 +14,12 @@ export const canAcessDistributerAuthRoutesGuard: CanActivateFn = async (route: A
   }
 
   try {
-    const token: string | null = localStorage.getItem('token');
-    
-
-    if(!token) throw new Error('NO TOKEN AVAILABLE');
-
     await distributerAuthService.handelVerifyAuthTokenRequest(); // if it respond other than 200 status code promise will reject it comes in catch.
 
     router.navigate(['/distributer']);
 
     return false;
   } catch (err) {
-    localStorage.removeItem('token');
     return true;
   }
 };

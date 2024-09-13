@@ -1,14 +1,17 @@
 import { HttpInterceptorFn } from '@angular/common/http';
-import { catchError, throwError } from 'rxjs';
+import { catchError, map, switchMap, throwError } from 'rxjs';
 import IAllPossiableErrorResponse from '../../shared/models/errorHandleingInterceptorAllErrors.interface';
 import IToastOption from '../../shared/models/IToastOption.interface';
 import { ToastMessageService } from '../services/toast-message.service';
 import { inject } from '@angular/core';
+import { RefreshTokenService } from '../services/refresh-token.service';
 
 export const errorHandleingInterceptor: HttpInterceptorFn = (req, next) => {
-  if(req.url.substring(req.url.lastIndexOf('/')) === '/verifyToken') {
-    return next(req);
-  }
+  const refreshTokenService: RefreshTokenService = inject(RefreshTokenService);
+
+  // if(req.url.substring(req.url.lastIndexOf('/')) === '/verifyToken') {
+  //   return next(req);
+  // }
 
   const toastMessageService: ToastMessageService = inject(ToastMessageService);
   
@@ -19,6 +22,24 @@ export const errorHandleingInterceptor: HttpInterceptorFn = (req, next) => {
       }
 
       const errObj: IAllPossiableErrorResponse = err.error as IAllPossiableErrorResponse;
+
+      if(errObj.errorField === "Token") {
+        localStorage.removeItem('token');
+
+        return refreshTokenService.refreshToken().pipe(
+          switchMap(() => {
+            const newAcessToken = localStorage.getItem('token') ?? '';
+            
+            const authReq = req.clone({
+              withCredentials: true,
+              headers: req.headers.set('Authorization', `Bearer ${newAcessToken}`)
+            });
+
+            return next(authReq);
+          }),
+          catchError((err) => throwError(err))
+        );
+      }
 
       let toastOption: IToastOption | null = null;
 
@@ -34,7 +55,7 @@ export const errorHandleingInterceptor: HttpInterceptorFn = (req, next) => {
           summary: errObj.message,
           detail: 'contact with admins.'
         }
-      }else if(errObj.errorField === "Token") {
+      }else if(errObj.errorField === "RefreshToken" && errObj.message !== "NOT AUTHENTICATED") {
         toastOption = {
           severity: 'warn',
           summary: "Token Error",

@@ -9,11 +9,6 @@ export const userAuthGuard: CanActivateFn = async (route, state) => {
   const userprofileService: UserprofileService = inject(UserprofileService);
   
   try {
-    const token: string | null = localStorage.getItem('token');
-    
-
-    if(!token) throw new Error('NO TOKEN AVAILABLE');
-
     const res = await userAuthService.handelVerifyAuthTokenRequest(); // if it respond other than 200 status code promise will reject it comes in catch.
 
     userprofileService.setValue(res!.data);
@@ -22,7 +17,7 @@ export const userAuthGuard: CanActivateFn = async (route, state) => {
   } catch (err) {
     userprofileService.setValue(null);
     // if you need put toast message here before navigating.
-    localStorage.removeItem('token');
+    
     router.navigate(['/auth/login']);
     return false;
   }

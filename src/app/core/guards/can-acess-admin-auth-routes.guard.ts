@@ -14,18 +14,12 @@ export const canAcessAdminAuthRoutesGuard: CanActivateFn = async (route: Activat
   }
 
   try {
-    const token: string | null = localStorage.getItem('token');
-    
-
-    if(!token) throw new Error('NO TOKEN AVAILABLE');
-
     await adminAuthService.handelVerifyAuthTokenRequest(); // if it respond other than 200 status code promise will reject it comes in catch.
 
     router.navigate(['/admin']);
 
     return false;
   } catch (err) {
-    localStorage.removeItem('token');
     return true;
   }
 };
