@@ -45,10 +45,15 @@ export class TheaterOwerLoginFormComponent implements OnInit {
   }
 
   private googleAuthLogin(idToken: string) {
+    if(this.isFormSubmited) return;
+
+    this.isFormSubmited = true;
+
     const loginAPIResponse$: Observable<ILoginSuccessfullResponse> = this.theaterOwnerAuthService.handelGoogleLogin(idToken);
 
     loginAPIResponse$.subscribe(
       ((res) => {
+        this.isFormSubmited = false;
         const toastOption: IToastOption = {
           severity: 'success',
           summary: 'Success',
@@ -62,6 +67,7 @@ export class TheaterOwerLoginFormComponent implements OnInit {
         this.router.navigate(['/theaterOwner']); // navigate to home Page after successfull login.
       }),
       ((err: any) => {
+        this.isFormSubmited = false;
         this.authService.signOut();
 
         if(err?.notDocumentVerified) {

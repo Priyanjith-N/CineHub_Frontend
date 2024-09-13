@@ -9,6 +9,7 @@ import { LocationService } from '../../../../core/services/location.service';
 import { AddressSearchService } from '../../../../core/services/address-search.service';
 
 import { GeoJsonProperties } from 'geojson'
+import { UserprofileService } from '../../../../core/services/userprofile.service';
 
 @Component({
   selector: 'app-home-page',
@@ -26,6 +27,7 @@ export class HomePageComponent {
 
   private locationService: LocationService = inject(LocationService);
   private addressSearchService: AddressSearchService = inject(AddressSearchService);
+  private userprofileService: UserprofileService = inject(UserprofileService);
 
   constructor(private router: Router, private userAuthService: UserAuthService) {
     if(this.locationService.isLocationNull() && navigator.geolocation) {
@@ -59,6 +61,9 @@ export class HomePageComponent {
       (res: ILogoutSuccessfullResponse) => {
         // toast message if needed
         localStorage.removeItem('token') // remove token
+        
+        this.userprofileService.setValue(null);
+
         this.router.navigate(['/auth/login']);
       },
       (err: any) => {
