@@ -10,6 +10,7 @@ import { LocationAddressPipePipe } from '../../../../pipes/location-address-pipe
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { ToastMessageService } from '../../../../../core/services/toast-message.service';
 import IToastOption from '../../../../models/IToastOption.interface';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-myactive-tickets',
@@ -19,7 +20,8 @@ import IToastOption from '../../../../models/IToastOption.interface';
     DateFormaterToLocalStringPipe,
     LocationAddressPipePipe,
     AsyncPipe,
-    CommonModule
+    CommonModule,
+    RouterLink
   ],
   templateUrl: './myactive-tickets.component.html',
   styleUrl: './myactive-tickets.component.css'
@@ -48,7 +50,11 @@ export class MyactiveTicketsComponent {
     );
   }
 
-  cancelTicket(ticketId: string) {
+  cancelTicket(event: Event, ticketId: string) {
+    event.stopPropagation();
+    console.log('cancel');
+    
+    return;
     if(this.isCancelRequestDone) return;
 
     this.isCancelRequestDone = true;

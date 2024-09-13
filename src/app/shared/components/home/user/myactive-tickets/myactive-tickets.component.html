@@ -5,7 +5,7 @@
     </div>
     <div class="flex flex-col gap-[24px] w-full">
         @for (ticket of myActiveTickets; track $index) {
-            <div class="w-full cursor-pointer hover:bg-slate-100 duration-300 ease-in-out rounded-[4px]">
+            <div [routerLink]="[ '/ticket', ticket._id]" class="w-full cursor-pointer hover:bg-slate-100 duration-300 ease-in-out rounded-[4px] ticketCard">
                 <div class="flex justify-between items-center w-full">
                     <div class="flex items-center gap-[48px]">
                         <div class="w-[135px] h-[202px]">
@@ -36,7 +36,7 @@
                         </div>
                     </div>
                     <div class="pr-[20px]">
-                        <button (click)="cancelTicket(ticket._id);" class="bg-[#E23030] rounded-[4px] px-[24px] py-[10px]">
+                        <button (click)="cancelTicket($event, ticket._id);" class="bg-[#E23030] rounded-[4px] px-[24px] py-[10px] cancel-btn">
                             <p class="text-[13px] font-medium text-white">Cancel</p>
                         </button>
                     </div>

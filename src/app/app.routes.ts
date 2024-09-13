@@ -61,6 +61,7 @@ import { PaymentsucessfullComponent } from './shared/components/home/user/paymen
 import { MyTicketsComponent } from './shared/components/home/user/my-tickets/my-tickets.component';
 import { MyactiveTicketsComponent } from './shared/components/home/user/myactive-tickets/myactive-tickets.component';
 import { MytransactionlistComponent } from './shared/components/home/user/mytransactionlist/mytransactionlist.component';
+import { TicketDetailsComponent } from './shared/components/home/user/ticket-details/ticket-details.component';
 
 export const routes: Routes = [
     {
@@ -201,6 +202,10 @@ export const routes: Routes = [
                         component: MytransactionlistComponent
                     }
                 ]
+            },
+            {
+                path: 'ticket/:ticketId',
+                component: TicketDetailsComponent
             }
         ]
     },
