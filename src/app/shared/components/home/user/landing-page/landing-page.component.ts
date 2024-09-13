@@ -30,6 +30,7 @@ export class LandingPageComponent {
   nowPlayingMovies: IMovie[] = [];
   recommendedMovies: IMovie[] = [];
   upcommingMovies: IMovie[] = [];
+  streamingMovies: IMovie[] = [];
 
 
   constructor() {
@@ -40,13 +41,10 @@ export class LandingPageComponent {
         this.isDataRetriving = false;
         this.data = res.data;
 
-        this.nowPlayingMovies = [];
-        for(const obj of this.data.nowPlayingMovies) {
-          this.nowPlayingMovies.push(obj.movieData);
-        }
-
+        this.nowPlayingMovies = this.data.nowPlayingMovies;
         this.recommendedMovies = this.data.recommendedMovies;
         this.upcommingMovies = this.data.upcommingMovies;
+        this.streamingMovies = this.data.streamingMovies;
       }),
       ((err: any) => {
         console.error(err);

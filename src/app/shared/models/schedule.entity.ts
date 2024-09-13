@@ -31,9 +31,10 @@ export interface INowPlayingMovies {
 }
 
 export interface IHomeMovieData {
-    nowPlayingMovies: INowPlayingMovies[];
+    nowPlayingMovies: IMovie[];
     recommendedMovies: IMovie[];
     upcommingMovies: IMovie[];
+    streamingMovies: IMovie[];
 }
 
 export interface ISchedulesForMovie {

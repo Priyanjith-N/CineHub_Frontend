@@ -19,6 +19,10 @@
     <app-card-slider [movies]="upcommingMovies" cardTitle="Coming Soon" ></app-card-slider>
 }
 
+@if(!isDataRetriving && streamingMovies.length) {
+    <app-card-slider [movies]="streamingMovies" cardTitle="Now Streaming" ></app-card-slider>
+}
+
 @if(!isDataRetriving && recommendedMovies.length) {
     <app-card-slider [movies]="recommendedMovies" cardTitle="Recommended Movies" ></app-card-slider>
 }
