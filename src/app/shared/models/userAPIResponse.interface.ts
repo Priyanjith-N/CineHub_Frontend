@@ -44,3 +44,8 @@ export interface IGetAllTransactionListSucessfullResponse {
     message: string;
     data: ITicketDetails[];
 }
+
+export interface IGetTicketDetailsSucessfullResponse {
+    message: string;
+    data: ITicketDetails;
+}
