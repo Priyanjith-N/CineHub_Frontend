@@ -205,6 +205,7 @@ export const routes: Routes = [
             },
             {
                 path: 'ticket/:ticketId',
+                canActivate: [userAuthGuard],
                 component: TicketDetailsComponent
             }
         ]
