@@ -4,16 +4,16 @@
         <p class="font-normal text-[13px] leading-[24px] text-[#5A637A]">List of tickets and transactions you have made</p>
     </div>
     <div class="flex flex-col gap-[24px] w-full">
-        @for (item of [1, 2, 3]; track $index) {
+        @for (transaction of transactionList; track $index) {
             <div class="w-full cursor-pointer hover:bg-slate-100 duration-300 ease-in-out rounded-[4px]">
                 <div class="flex justify-between items-center w-full">
                     <div class="flex items-center gap-[48px]">
                         <div class="w-[135px] h-[202px]">
-                            <img src="../../../../../../assets/images/spider.jpg" class="w-full h-full object-fill object-center rounded-[8px]" alt="">
+                            <img [src]="transaction.movieData.coverPhoto.imageURL" class="w-full h-full object-fill object-center rounded-[8px]" alt="">
                         </div>
                         <div>
-                            <p class="font-medium leading-[32px] text-[18px] text-[#333333]">Spiderman: No Way Home</p>
-                            <p class="font-medium text-[13px] text-[#414A63] mb-[12px]">Sunday, 16 June 2024, 02:40 PM</p>
+                            <p class="font-medium leading-[32px] text-[18px] text-[#333333]">{{ transaction.movieData.name }}</p>
+                            <p class="font-medium text-[13px] text-[#414A63] mb-[12px]">{{ transaction.date | dateFormaterToLocalString }}, {{ transaction.time | formatTime }}</p>
                             <div class="flex items-center gap-[5px]">
                                 <div>
                                     <svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -22,14 +22,34 @@
                                     </svg>                                
                                 </div>
                                 <div>
-                                    <p class="text-[13px] leading-[24px] text-[#9DA8BE]">Palaxi Cinemas HiLITE MALL: Kozhikode</p>
+                                    <p *ngIf="transaction.theaterData.location | locationAddressPipe | async as address; else loading" class="text-[13px] leading-[24px] text-[#9DA8BE]">{{ address }}</p>
+                                    <ng-template #loading>
+                                        <div class='flex space-x-2 justify-center items-center bg-transparent dark:invert'>
+                                            <span class='sr-only'>Loading...</span>
+                                             <div class='h-[13px] w-[13px] bg-[#9DA8BE] rounded-full animate-bounce [animation-delay:-0.3s]'></div>
+                                           <div class='h-[13px] w-[13px] bg-[#9DA8BE] rounded-full animate-bounce [animation-delay:-0.15s]'></div>
+                                           <div class='h-[13px] w-[13px] bg-[#9DA8BE] rounded-full animate-bounce'></div>
+                                       </div>
+                                    </ng-template>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div>
-                        <div class=" rounded-[4px] px-[24px] py-[10px] Succeed">
-                            <p class="text-[13px] font-medium text-[#DADFE8]">Succeed</p>
+                        <div class=" rounded-[4px] px-[24px] py-[10px] Succeed" [ngClass]="{
+                            'succeed': ((transaction.ticketStatus === 'Succeed') || (transaction.ticketStatus === 'Active')),
+                            'fail': transaction.ticketStatus === 'Fail',
+                            'canceled': transaction.ticketStatus === 'Canceled'
+                          }">
+                            <p class="text-[13px] font-medium text-[#DADFE8]">
+                                @if((transaction.ticketStatus === 'Succeed') || (transaction.ticketStatus === 'Active')) {
+                                    Succeed
+                                }@else if (transaction.ticketStatus === 'Fail') {
+                                    Fail
+                                }@else if (transaction.ticketStatus === 'Canceled') {
+                                    Canceled
+                                }
+                            </p>
                         </div>
                     </div>
                 </div>

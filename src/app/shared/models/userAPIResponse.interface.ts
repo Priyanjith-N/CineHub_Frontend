@@ -39,3 +39,8 @@ export interface IGetAllActiveTicketsSucessfullResponse {
 export interface ICancelTicketSucessfullResponse {
     message: string;
 }
+
+export interface IGetAllTransactionListSucessfullResponse {
+    message: string;
+    data: ITicketDetails[];
+}

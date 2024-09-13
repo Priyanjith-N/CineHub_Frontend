@@ -1,8 +1,8 @@
-.Succeed, .Active {
+.succeed {
     @apply bg-[#118EEA];
 }
 
-.Fail {
+.fail {
     @apply bg-[#FF6B6B];
 }
 

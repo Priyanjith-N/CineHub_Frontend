@@ -15,7 +15,7 @@ export default interface ITickets {
     screenId: string;
     class: string[];
     paymentStatus: "Successfull" | "Failed" | "Pending" | "Refunded",
-    ticketStatus: "Active" | "canceled" | "Succeed" | "Fail",
+    ticketStatus: "Active" | "Canceled" | "Succeed" | "Fail",
     purchaseDetails: IPurchaseDetails[],
     totalPaidAmount:number;
     selectedSeatsIdx: ISelectedSeatsIdx[];
@@ -37,8 +37,4 @@ export interface ITicketDetails extends ITickets {
     movieData: IMovie;
     theaterData: ITheater;
     screenData: IScreen;
-}
-
-export interface ITicketDetailsWithLocationDecoded extends Omit<ITicketDetails, 'theaterData'> {
-    theaterData: ITheaterLocationDecoded;
 }

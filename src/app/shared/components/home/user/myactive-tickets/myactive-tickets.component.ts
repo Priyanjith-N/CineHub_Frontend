@@ -1,14 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { UserService } from '../../../../../core/services/user.service';
-import { ITicketDetails, ITicketDetailsWithLocationDecoded } from '../../../../models/ticket.entity';
+import { ITicketDetails } from '../../../../models/ticket.entity';
 import { Observable } from 'rxjs';
 import { ICancelTicketSucessfullResponse, IGetAllActiveTicketsSucessfullResponse } from '../../../../models/userAPIResponse.interface';
 import { FormatTimePipe } from '../../../../pipes/format-time.pipe';
 import { DateFormaterToLocalStringPipe } from '../../../../pipes/date-formater-to-local-string.pipe';
-import { AddressSearchService } from '../../../../../core/services/address-search.service';
 
-import { GeoJsonProperties } from 'geojson';
-import { ILocation } from '../../../../models/theater.entity';
 import { LocationAddressPipePipe } from '../../../../pipes/location-address-pipe.pipe';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { ToastMessageService } from '../../../../../core/services/toast-message.service';
@@ -29,7 +26,6 @@ import IToastOption from '../../../../models/IToastOption.interface';
 })
 export class MyactiveTicketsComponent {
   private userService: UserService = inject(UserService);
-  private addressSearchService: AddressSearchService = inject(AddressSearchService);
   private toastMessageService: ToastMessageService = inject(ToastMessageService);
 
   myActiveTickets: ITicketDetails[] = [];
