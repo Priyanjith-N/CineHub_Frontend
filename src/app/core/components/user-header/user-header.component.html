@@ -44,11 +44,19 @@
             </div>
             
             @if(userProfile){
-                <div class="w-[40px] h-[40px] rounded-[50%] bg-[linear-gradient(to_bottom,#f2c446,#c6943f)] relative cursor-pointer font-roboto font-medium text-[18px]">
-                    <span class="h-fit w-fit text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 uppercase">{{ userProfile.name[0] }}</span>
+                <div class="relative" (mouseenter)="showDropdown = true"
+                (mouseleave)="onMouseLeave()" >
+                    <div class="w-[40px] h-[40px] rounded-[50%] bg-[linear-gradient(to_bottom,#f2c446,#c6943f)] relative cursor-pointer font-roboto font-medium text-[18px]">
+                        <span class="h-fit w-fit text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 uppercase">{{ userProfile.name[0] }}</span>
+                    </div>
+                    <div (mouseenter)="showDropdown = true" class="absolute left-0 top-full bg-white p-[10px]" [ngClass]="{'hidden': !showDropdown}">
+                        <button (click)="logout();" class="rounded py-[6px] no-underline cursor-pointer transition-opacity duration-[0.25s] relative w-full text-base font-medium leading-[1.4] bg-transparent border text-[rgb(248,68,100)] m-0 px-3 border-solid border-[rgb(248,68,100)]">
+                            <p>Logout</p>
+                        </button>
+                    </div>
                 </div>
             }@else{
-                <div class="font-roboto font-medium text-[18px] text-[#F2C46F]">
+                <div class="font-roboto font-medium text-[18px] text-[#F2C46F] relative">
                     <a routerLink="/auth/login" >
                         <button class="bg-[#1A2C50] hover:bg-[#282764] text-center p-[0.35rem] pl-[1.35rem] pr-[1.35rem] rounded-[5.07px]" >Login</button>
                     </a>

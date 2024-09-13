@@ -27,7 +27,6 @@ export class HomePageComponent {
 
   private locationService: LocationService = inject(LocationService);
   private addressSearchService: AddressSearchService = inject(AddressSearchService);
-  private userprofileService: UserprofileService = inject(UserprofileService);
 
   constructor(private router: Router, private userAuthService: UserAuthService) {
     if(this.locationService.isLocationNull() && navigator.geolocation) {
@@ -53,26 +52,4 @@ export class HomePageComponent {
       }))
     }
    }
-
-  async logout() {
-    const logoutAPIResponse$ = this.userAuthService.handelLogoutRequest();
-    
-    logoutAPIResponse$.subscribe(
-      (res: ILogoutSuccessfullResponse) => {
-        // toast message if needed
-        localStorage.removeItem('token') // remove token
-        
-        this.userprofileService.setValue(null);
-
-        this.router.navigate(['/auth/login']);
-      },
-      (err: any) => {
-        if(err.error) {
-          // toast message if needed
-        }else{
-          // toast message if needed
-        }
-      }
-    );
-  }
 }
