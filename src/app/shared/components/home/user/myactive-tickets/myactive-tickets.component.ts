@@ -52,9 +52,7 @@ export class MyactiveTicketsComponent {
 
   cancelTicket(event: Event, ticketId: string) {
     event.stopPropagation();
-    console.log('cancel');
     
-    return;
     if(this.isCancelRequestDone) return;
 
     this.isCancelRequestDone = true;
