@@ -8,8 +8,8 @@ import { IMovie } from '../../../../models/IMovieCredentials.interface';
 import { DistributerService } from '../../../../../core/services/distributer.service';
 import { IMyDistributedMoviesSuccessfullResponse } from '../../../../models/IMovieAPIResponse.interface';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IMovieStreamingCredentials, IMovieStreamingDetails } from '../../../../models/movieStreaming.entity';
-import { IAddStreamingErrorResponse, IAddStreamingSucessfullResponse, IGetAllStreamingMovieDetailsSucessfullResponse } from '../../../../models/distributerAPIResponse.interface';
+import { IMovieStreamingCredentials, IMovieStreamingCredentialsForEdit, IMovieStreamingDetails } from '../../../../models/movieStreaming.entity';
+import { IAddStreamingErrorResponse, IAddStreamingSucessfullResponse, IEditStreamingErrorResponse, IEditStreamingSucessfullResponse, IGetAllStreamingMovieDetailsSucessfullResponse } from '../../../../models/distributerAPIResponse.interface';
 import IToastOption from '../../../../models/IToastOption.interface';
 import { ToastMessageService } from '../../../../../core/services/toast-message.service';
 
@@ -32,11 +32,15 @@ export class MangeStreamingComponent {
 
   private data: IMovie[] = [];
   private streamingMovieData: IMovieStreamingDetails[] = [];
+  private selectedStreaming: IMovieStreamingDetails | null = null; 
   displayData: IMovieStreamingDetails[] = [];
   selectedMovieToStream: IMovie | null = null;
   displaySuggestions: IMovie[] | null = null;
   isFormSubmited: boolean = false;
   openModal: boolean = false;
+
+  modalHeading = "Streaming Movie";
+  submitBtnText: "Add" | "Edit" = "Add"
 
   form: FormGroup;
 
@@ -84,10 +88,33 @@ export class MangeStreamingComponent {
   openOrCloseModal(open: boolean = true) {
     this.selectedMovieToStream = null;
     this.displaySuggestions = null;
+    this.selectedStreaming = null;
 
     this.form.reset();
 
     this.openModal = open;
+
+    this.modalHeading = "Streaming Movie";
+    this.submitBtnText = "Add"
+  }
+
+  openEditModal(movieStreamingIdx: number) {
+    this.selectedStreaming = this.displayData[movieStreamingIdx];
+    this.selectedMovieToStream = this.selectedStreaming.movieData;
+
+    if(!this.selectedMovieToStream) return;
+
+    this.modalHeading = `Edit Streaming Details for ${this.selectedMovieToStream.name} Movie`;
+    this.submitBtnText = "Edit"
+
+    this.form = new FormGroup({
+      movieToStream: new FormControl(''),
+      rentAmount: new FormControl(this.displayData[movieStreamingIdx].rentAmount, [Validators.required]),
+      rentalPeriod: new FormControl(this.displayData[movieStreamingIdx].rentalPeriod, [Validators.required]),
+      buyAmount: new FormControl(this.displayData[movieStreamingIdx].buyAmount, [Validators.required])
+    });
+
+    this.openModal = true;
   }
 
   showMovieSuggestionsToPlay() {
@@ -122,9 +149,74 @@ export class MangeStreamingComponent {
     this.validateForm();
 
     if(this.form.invalid || this.isFormSubmited) return this.form.markAllAsTouched();
-
+    
     this.isFormSubmited = true;
 
+    if(this.submitBtnText === "Add") {
+      this.addStreaming();
+    }else if(this.submitBtnText === "Edit") {
+      this.editStreaming();
+    }
+  }
+
+  deleteStreaming(streamingId: string) {
+    const APIResponse$: Observable<{ message: string; }> = this.distributerService.deleteStreaming(streamingId);
+
+    APIResponse$.subscribe(
+      (res => {
+        const toastOption: IToastOption = {
+          severity: 'success',
+          summary: 'Success',
+          detail: res.message
+        }
+
+        this.showToast(toastOption); // emit the toast option to show toast.
+
+        this.getAllStreamingMovieData();
+      }),
+      ((err: any) => console.error(err))
+    );
+  }
+
+  private editStreaming() {
+    const data: IMovieStreamingCredentialsForEdit = {
+      streamingId: this.selectedStreaming!._id,
+      buyAmount: this.form.value.buyAmount,
+      rentalPeriod: this.form.value.rentalPeriod,
+      rentAmount: this.form.value.rentAmount,
+      movieId: this.selectedMovieToStream!._id
+    }
+
+    const APIResponse$: Observable<IEditStreamingSucessfullResponse> = this.distributerService.editStreaming(data);
+    
+    APIResponse$.subscribe(
+      (res => {
+        this.isFormSubmited = false;
+        this.openOrCloseModal(false);
+
+        const toastOption: IToastOption = {
+          severity: 'success',
+          summary: 'Success',
+          detail: res.message
+        }
+
+        this.showToast(toastOption); // emit the toast option to show toast.
+
+        this.getAllStreamingMovieData();
+      }),
+      ((err: any) => {
+        this.isFormSubmited = false;
+
+        if(!err.errorField) return console.error(err);
+        
+        const errObj: IEditStreamingErrorResponse = err;
+
+        this.form.get(errObj.errorField)?.setErrors({ message: errObj.message });
+      })
+    );
+  }
+
+  private addStreaming() {
     const data: IMovieStreamingCredentials = {
       buyAmount: this.form.value.buyAmount,
       rentalPeriod: this.form.value.rentalPeriod,
@@ -146,6 +238,8 @@ export class MangeStreamingComponent {
         }
 
         this.showToast(toastOption); // emit the toast option to show toast.
+        
+        this.getAllStreamingMovieData();
       }),
       ((err: any) => {
         this.isFormSubmited = false;
@@ -160,7 +254,7 @@ export class MangeStreamingComponent {
   }
 
   private validateForm() {
-    if(!this.selectedMovieToStream) this.form.get('movieToStream')?.setErrors({ message: "This Field is required." });
+    if(this.submitBtnText === "Add" && !this.selectedMovieToStream) this.form.get('movieToStream')?.setErrors({ message: "This Field is required." });
 
     if(this.form.get('rentalPeriod')?.value === 0) this.form.get('rentalPeriod')?.setErrors({ message: "Minimum period is least 1 day." });
     

@@ -92,7 +92,7 @@
                     <td class="font-normal text-[14px] font-roboto px-[24px] py-[11px] text-center">
                         <div class="flex items-center gap-[12px]">
                             <div class="w-1/2">
-                                <button class="py-1 px-3 rounded-[5.07px] w-full text-black border-solid border-[1px] border-black hover:text-white hover:bg-black transition-all duration-[300ms]">
+                                <button (click)="openEditModal($index);" class="py-1 px-3 rounded-[5.07px] w-full text-black border-solid border-[1px] border-black hover:text-white hover:bg-black transition-all duration-[300ms]">
                                     <div class="flex justify-center">
                                         <div>
                                             <p class="font-bold leading-[24px]" >Edit</p>
@@ -101,7 +101,7 @@
                                 </button>
                             </div>
                             <div class="w-1/2">
-                                <button class="py-1 px-3 rounded-[5.07px] w-full text-red-600 border-solid border-[1px] border-red-600 hover:text-white hover:bg-red-600 transition-all duration-[300ms]">
+                                <button (click)="deleteStreaming(data._id);" class="py-1 px-3 rounded-[5.07px] w-full text-red-600 border-solid border-[1px] border-red-600 hover:text-white hover:bg-red-600 transition-all duration-[300ms]">
                                     <div class="flex justify-center">
                                         <div>
                                             <p class="leading-[24px] font-bold" >Delete</p>
@@ -138,7 +138,7 @@
             }
             <div class="flex justify-between items-center mb-[24px]">
                 <div>
-                    <p class="font-medium text-[24px]">Streaming Movie</p>
+                    <p class="font-medium text-[24px]">{{ modalHeading }}</p>
                 </div>
                 <div (click)="openOrCloseModal(false);" class="cursor-pointer">
                     <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -148,44 +148,47 @@
             </div>
             <div>
                 <form [formGroup]="form" (submit)="steamMovieSubmit();">
-                    <div class="font-normal text-[18px] mb-[24px] w-3/4">
-                        <div class="mb-[18px]">
-                            <label class="leading-[28px] text-[#333333]" for="name1" [class.error]="form.get('movieToStream')?.errors  && form.get('movieToStream')!.touched" placeholder="Select date">Movie Name</label>
-                        </div>
-                        <div class="relative">
-                            <input #movieSearch (keyup)="showFiltedMovie($event);" (click)="showMovieSuggestionsToPlay();" formControlName="movieToStream" id="name1" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-3/4 outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="text" placeholder="Movie name" autocomplete="off" [class.error]="form.get('movieToStream')?.errors  && form.get('movieToStream')!.touched">
-                            @if(form.get('movieToStream')!.hasError('required')  && form.get('movieToStream')!.touched){
-                                <p class="text-[13px] text-[#FF6B6B] absolute mt-[7px]">This Field is required.</p>
-                            }@else if (form.get('movieToStream')!.errors  && form.get('movieToStream')!.touched) {
-                                <p class="text-[13px] text-[#FF6B6B] absolute mt-[7px]">{{ form.get('movieToStream')?.errors?.['message'] }}</p>
-                            }
-                            @if(displaySuggestions) {
-                                <div class="absolute w-full mt-[12px] bg-white border border-gray-200 rounded-md shadow-lg z-[999999]">
-                                    <ul class="py-1 max-h-[170px] overflow-y-scroll scroll-m-0 scroll-p-0 suggestionsDiv">
-                                        @if(!displaySuggestions.length) {
-                                            <li class="px-3 py-2 hover:bg-gray-100 text-[14px] cursor-pointer break-words leading-[28px]">No Movie with that name in your collection.</li>
-                                        }
-    
-                                        @for (data of displaySuggestions; track $index) {
-                                            <li (click)="selectMovieToPlay($index);" class="px-3 py-2 hover:bg-gray-100 cursor-pointer break-words leading-[28px]">
-                                                <div class="flex gap-[12px] items-center">
-                                                    <div>
-                                                        <img class="w-[40px] h-auto object-center object-cover" [src]="data.coverPhoto.imageURL" alt="movieCoverImage">
+                    @if(submitBtnText === "Add") {
+                        <div class="font-normal text-[18px] mb-[24px] w-3/4">
+                            <div class="mb-[18px]">
+                                <label class="leading-[28px] text-[#333333]" for="name1" [class.error]="form.get('movieToStream')?.errors  && form.get('movieToStream')!.touched" placeholder="Select date">Movie Name</label>
+                            </div>
+                            <div class="relative">
+                                <input #movieSearch (keyup)="showFiltedMovie($event);" (click)="showMovieSuggestionsToPlay();" formControlName="movieToStream" id="name1" class="border-[#9DA8BE] border-solid border-b-[1px] text-[18px] w-3/4 outline-none placeholder:text-[#9DA8BE] placeholder:text-[18px] pb-[5px]" type="text" placeholder="Movie name" autocomplete="off" [class.error]="form.get('movieToStream')?.errors  && form.get('movieToStream')!.touched">
+                                @if(form.get('movieToStream')!.hasError('required')  && form.get('movieToStream')!.touched){
+                                    <p class="text-[13px] text-[#FF6B6B] absolute mt-[7px]">This Field is required.</p>
+                                }@else if (form.get('movieToStream')!.errors  && form.get('movieToStream')!.touched) {
+                                    <p class="text-[13px] text-[#FF6B6B] absolute mt-[7px]">{{ form.get('movieToStream')?.errors?.['message'] }}</p>
+                                }
+                                @if(displaySuggestions) {
+                                    <div class="absolute w-full mt-[12px] bg-white border border-gray-200 rounded-md shadow-lg z-[999999]">
+                                        <ul class="py-1 max-h-[170px] overflow-y-scroll scroll-m-0 scroll-p-0 suggestionsDiv">
+                                            @if(!displaySuggestions.length) {
+                                                <li class="px-3 py-2 hover:bg-gray-100 text-[14px] cursor-pointer break-words leading-[28px]">No Movie with that name in your collection.</li>
+                                            }
+        
+                                            @for (data of displaySuggestions; track $index) {
+                                                <li (click)="selectMovieToPlay($index);" class="px-3 py-2 hover:bg-gray-100 cursor-pointer break-words leading-[28px]">
+                                                    <div class="flex gap-[12px] items-center">
+                                                        <div>
+                                                            <img class="w-[40px] h-auto object-center object-cover" [src]="data.coverPhoto.imageURL" alt="movieCoverImage">
+                                                        </div>
+                                                        <div>
+                                                            <h2 class="text-[12px] font-bold">{{ data.name }}</h2>
+                                                            <p class="text-[9px] text-[#6B7280] leading-[0px]">{{ data.category.join('/') }}</p>
+                                                            <h2 class="text-[12px] font-bold">Duration</h2>
+                                                            <p class="text-[9px] text-[#6B7280] leading-[0px]">{{ data.duration.hours }}hrs {{ data.duration.minutes }}min</p>
+                                                        </div>
                                                     </div>
-                                                    <div>
-                                                        <h2 class="text-[12px] font-bold">{{ data.name }}</h2>
-                                                        <p class="text-[9px] text-[#6B7280] leading-[0px]">{{ data.category.join('/') }}</p>
-                                                        <h2 class="text-[12px] font-bold">Duration</h2>
-                                                        <p class="text-[9px] text-[#6B7280] leading-[0px]">{{ data.duration.hours }}hrs {{ data.duration.minutes }}min</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        }
-                                    </ul>
-                                </div>
-                            }
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                }
+                            </div>
                         </div>
-                    </div>
+                    }
+
                     <div class="font-normal text-[18px] mb-[24px] w-3/4">
                         <div class="flex items-baseline gap-[12px]">
                             <div>
@@ -234,7 +237,7 @@
                             <button (click)="openOrCloseModal(false);" type="button" class="py-[6px] px-[16px] font-medium text-16px rounded-[5.07px] text-red-600 border-[1px] border-solid border-red-600 hover:bg-red-600 hover:text-white">Close</button>
                         </div>
                         <div>
-                            <button type="submit" class="py-[6px] px-[16px] bg-black font-medium text-16px rounded-[5.07px] text-white">Add</button>
+                            <button type="submit" class="py-[6px] px-[16px] bg-black font-medium text-16px rounded-[5.07px] text-white">{{ submitBtnText }}</button>
                         </div>
                     </div>
                 </form>

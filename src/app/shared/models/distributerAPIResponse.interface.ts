@@ -18,7 +18,16 @@ export interface IAddStreamingSucessfullResponse {
     message: string;
 }
 
+export interface IEditStreamingSucessfullResponse {
+    message: string;
+}
+
 export interface IAddStreamingErrorResponse {
+    message: string;
+    errorField: string;
+}
+
+export interface IEditStreamingErrorResponse {
     message: string;
     errorField: string;
 }

@@ -15,6 +15,10 @@ export interface IMovieStreamingCredentials {
     buyAmount: number;
 }
 
+export interface IMovieStreamingCredentialsForEdit extends IMovieStreamingCredentials {
+    streamingId: string;
+}
+
 export interface IMovieStreamingDetails extends IMovieStreaming {
     movieData: IMovie;
 }

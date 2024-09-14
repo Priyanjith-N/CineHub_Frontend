@@ -4,8 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { IDistributeMovieErrorResponse, IDistributeMovieSuccessfullResponse, IEditProfitSharingErrorResponse, IEditProfitSharingSuccessfullResponse, IGetAllAvaliableMovieDataSuccessfullResponse, IMyDistributedMoviesErrorResponse, IMyDistributedMoviesSuccessfullResponse } from '../../shared/models/IMovieAPIResponse.interface';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { IDistributeMovieData } from '../../shared/models/IMovieCredentials.interface';
-import { IAddStreamingErrorResponse, IAddStreamingSucessfullResponse, IApproveMovieRequestSucessfullResponse, IGetAllMovieRequestsSucessfullResponse, IGetAllStreamingMovieDetailsSucessfullResponse, IRejectMovieRequestSucessfullResponse } from '../../shared/models/distributerAPIResponse.interface';
-import { IMovieStreamingCredentials } from '../../shared/models/movieStreaming.entity';
+import { IAddStreamingErrorResponse, IAddStreamingSucessfullResponse, IApproveMovieRequestSucessfullResponse, IEditStreamingErrorResponse, IEditStreamingSucessfullResponse, IGetAllMovieRequestsSucessfullResponse, IGetAllStreamingMovieDetailsSucessfullResponse, IRejectMovieRequestSucessfullResponse } from '../../shared/models/distributerAPIResponse.interface';
+import { IMovieStreamingCredentials, IMovieStreamingCredentialsForEdit } from '../../shared/models/movieStreaming.entity';
 
 @Injectable({
   providedIn: 'root'
@@ -149,12 +149,46 @@ export class DistributerService {
     return APIResponse$;
   }
 
-getAllStreamingMovieDetails(): Observable<IGetAllStreamingMovieDetailsSucessfullResponse> {
+  editStreaming(data: IMovieStreamingCredentialsForEdit): Observable<IEditStreamingSucessfullResponse> {
+    const url: string = `${this.api}/editstreaming/${data.streamingId}`;
+
+    const APIResponse$: Observable<IEditStreamingSucessfullResponse> = this.httpClient.put<IEditStreamingSucessfullResponse>(url, {
+      movieId: data.movieId,
+      buyAmount: data.buyAmount,
+      rentAmount: data.rentAmount,
+      rentalPeriod: data.rentalPeriod,
+    })
+    .pipe(
+      map(res => res),
+      catchError((err: any) => {
+        if(err.error) {
+          return throwError(err.error as IEditStreamingErrorResponse);
+        }
+        return throwError(err);
+      })
+    );
+
+    return APIResponse$;
+  }
+
+  getAllStreamingMovieDetails(): Observable<IGetAllStreamingMovieDetailsSucessfullResponse> {
     const url: string = `${this.api}/getallstreamingmoviedetails`;
 
     const APIResponse$: Observable<IGetAllStreamingMovieDetailsSucessfullResponse> = this.httpClient.get<IGetAllStreamingMovieDetailsSucessfullResponse>(url)
     .pipe(
       map(res => res as IGetAllStreamingMovieDetailsSucessfullResponse),
+      catchError((err: any) => throwError(err))
+    );
+
+    return APIResponse$;
+  }
+  
+  deleteStreaming(streamingId: string): Observable<{ message: string; }> {
+    const url: string = `${this.api}/deletestreaming/${streamingId}`;
+
+    const APIResponse$: Observable<{ message: string; }> = this.httpClient.delete<{ message: string; }>(url)
+    .pipe(
+      map(res => res as { message: string; }),
       catchError((err: any) => throwError(err))
     );
 
