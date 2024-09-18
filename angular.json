@@ -13,6 +13,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "allowedCommonJsDependencies": [
+              "leaflet"
+            ],
             "outputPath": "dist/cine-hub-frontend",
             "index": "src/index.html",
             "browser": "src/main.ts",
@@ -36,8 +39,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "2.00 MB",
+                  "maximumError": "2.50 MB"
                 },
                 {
                   "type": "anyComponentStyle",

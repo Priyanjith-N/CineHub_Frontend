@@ -8,8 +8,7 @@ import IToastOption from '../../../../models/IToastOption.interface';
 import { Router } from '@angular/router';
 import { ToastMessageService } from '../../../../../core/services/toast-message.service';
 import { IAddressDetails, ILocation } from '../../../../models/theater.entity';
-import * as L from 'leaflet';
-import { Browser, Map, map, tileLayer, Marker, marker, Icon, LatLng, LeafletMouseEvent } from 'leaflet';
+import { Browser, Map, map, tileLayer, Marker, marker, Icon, LatLng, LeafletMouseEvent, control } from 'leaflet';
 import { GeoJSON, GeoJsonProperties } from 'geojson';
 import { environment } from '../../../../../../environments/environment.development';
 import { AddressSearchService } from '../../../../../core/services/address-search.service';
@@ -124,7 +123,7 @@ export class AddTheaterComponent {
     
     this.placeResults = [];
 
-    const latLng = new L.LatLng(selectedPlace.lat, selectedPlace.lng);
+    const latLng = new LatLng(selectedPlace.lat, selectedPlace.lng);
 
     this.lefletMap.removeLayer(this.marker);
 
@@ -206,7 +205,7 @@ export class AddTheaterComponent {
         id: 'osm-bright',
       } as any).addTo(this.lefletMap);
 
-      this.lefletMap.addControl(L.control.layers());
+      this.lefletMap.addControl(control.layers());
 
       const currentLatLng = new LatLng(this.location.lat, this.location.lng);
 
