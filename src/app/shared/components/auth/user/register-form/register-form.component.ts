@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { IUserRegisterCredentials } from '../../../../models/IRegisterCredentials.interface';
@@ -8,6 +8,7 @@ import { UserAuthService } from '../../../../../core/services/user-auth.service'
 
 import { ToastMessageService } from '../../../../../core/services/toast-message.service';
 import IToastOption from '../../../../models/IToastOption.interface';
+import { DocumentVerificationPendingMessagePageService } from '../../../../../core/services/document-verification-pending-message-page.service';
 
 @Component({
   selector: 'app-register-form',
@@ -20,12 +21,16 @@ import IToastOption from '../../../../models/IToastOption.interface';
   styleUrl: './register-form.component.css'
 })
 export class RegisterFormComponent {
+  private userAuthService: UserAuthService = inject(UserAuthService);
+  private toastMessageService: ToastMessageService = inject(ToastMessageService);
+  private router: Router = inject(Router);
+
   isFormSubmited: boolean = false;
   toggleShowHidePassword: boolean = false;
   toggleShowHideConfirmPassword: boolean = false;
   registerFrom: FormGroup;
 
-  constructor(private userAuthService: UserAuthService, private toastMessageService: ToastMessageService, private router: Router) {
+  constructor() {
     this.registerFrom = new FormGroup({
       name: new FormControl('', [Validators.required]),
       phoneNumber: new FormControl('', [Validators.required, Validators.pattern(/^\d{10}$/)]),
