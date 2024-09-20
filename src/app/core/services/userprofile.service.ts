@@ -9,6 +9,7 @@ export class UserprofileService {
   private userProfileSubject = new BehaviorSubject<IUserProfile | null>(null);
 
   // Observable that components can subscribe to
+  // here is the user profile
   userProfile$ = this.userProfileSubject.asObservable();
 
  setValue(value: IUserProfile | null) {
