@@ -63,6 +63,7 @@ import { MyactiveTicketsComponent } from './shared/components/home/user/myactive
 import { MytransactionlistComponent } from './shared/components/home/user/mytransactionlist/mytransactionlist.component';
 import { TicketDetailsComponent } from './shared/components/home/user/ticket-details/ticket-details.component';
 import { MangeStreamingComponent } from './shared/components/home/distributer/mange-streaming/mange-streaming.component';
+import { DashboardComponent } from './shared/components/home/admin/dashboard/dashboard.component';
 
 export const routes: Routes = [
     {
@@ -216,6 +217,11 @@ export const routes: Routes = [
         canActivate: [adminAuthGuard],
         component: AdminHomePageComponent,
         children: [
+            {
+                path: '',
+                canActivate: [adminAuthGuard],
+                component: DashboardComponent
+            },
             {
                 path: 'verifyRequest',
                 canActivate: [adminAuthGuard],
