@@ -14,7 +14,7 @@
             </svg>
 
             <div class="text-white ">
-              <p [countUp]="277" class="font-semibold text-3xl">0</p>
+              <p [countUp]="data?.totalTheatersCount || 0" class="font-semibold text-3xl">0</p>
               <p>Theater count</p>
             </div>
 
@@ -34,7 +34,7 @@
             </svg>
 
             <div class="text-white ">
-              <p [countUp]="177" class="font-semibold text-3xl">0</p>
+              <p [countUp]="data?.totalDistributersCount || 0" class="font-semibold text-3xl">0</p>
               <p>Distributor count</p>
             </div>
           </div>
@@ -53,7 +53,7 @@
             </svg>
 
             <div class="text-white">
-              <p [countUp]="345" class="font-semibold text-3xl">0</p>
+              <p [countUp]="data?.totalMoviesCount  || 0" class="font-semibold text-3xl">0</p>
               <p>Films count</p>
             </div>
           </div>
@@ -73,28 +73,35 @@
                 </thead>
 
                 <tbody class="bg-white">
-                    <tr>
-                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0 h-auto w-10">
-                                    <img class="h-auto w-10 object-cover object-center" src="https://res.cloudinary.com/dv0d4adfa/image/upload/v1723792642/CineHub/bgryvqnjvkijtpzcijof.avif" alt="" />
-                                </div>
+                    @if(!data || (data && !data.top10Movies.length)) {
+                        <tr>
+                            <td colspan="3" class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">No Data avaliable.</td>
+                        </tr>
+                    }
+                    @for (item of data?.top10Movies; track $index) {
+                        <tr>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-auto w-10">
+                                        <img class="h-auto w-10 object-cover object-center" [src]="item.movieData.coverPhoto.imageURL" alt="" />
+                                    </div>
 
-                                <div class="ml-4">
-                                    <div class="text-sm leading-5 font-medium text-gray-900">Deadpool & Wolverine</div>
-                                    <div class="text-sm leading-5 text-gray-500">Action/Adventure/Comedy</div>
+                                    <div class="ml-4">
+                                        <div class="text-sm leading-5 font-medium text-gray-900">{{ item.movieData.name }}</div>
+                                        <div class="text-sm leading-5 text-gray-500">{{ item.movieData.category.join('/') }}</div>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        
-                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                            <div class="text-sm leading-5 text-gray-900">24</div>
-                        </td>
+                            </td>
+                            
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                <div [countUp]="item.totalTicketSold" class="text-sm leading-5 text-gray-900">0</div>
+                            </td>
 
-                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                            ₹ 800
-                        </td>
-                    </tr>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                ₹ <span [countUp]="item.amount">0</span>
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
@@ -114,24 +121,31 @@
                 </thead>
 
                 <tbody class="bg-white">
-                    <tr>
-                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                            <div class="flex items-center">
-                                <div class="ml-4">
-                                    <div class="text-sm leading-5 font-medium text-gray-900">Priyanjith N</div>
-                                    <div class="text-sm leading-5 text-gray-500">{{'priyanjithn@gmail.com'}}</div>
+                    @if(!data || (data && !data.top10Distributers.length)) {
+                        <tr>
+                            <td colspan="3" class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">No Data avaliable.</td>
+                        </tr>
+                    }
+                    @for (item of data?.top10Distributers; track $index) {
+                        <tr>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                <div class="flex items-center">
+                                    <div class="ml-4">
+                                        <div class="text-sm leading-5 font-medium text-gray-900">{{ item.distributerData.name }}</div>
+                                        <div class="text-sm leading-5 text-gray-500">{{ item.distributerData.email }}</div>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        
-                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                            <div class="text-sm leading-5 text-gray-900">20</div>
-                        </td>
-
-                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                            ₹ 800
-                        </td>
-                    </tr>
+                            </td>
+                            
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                <div [countUp]="item.distributerData.distributedMoviesList.length" class="text-sm leading-5 text-gray-900">0</div>
+                            </td>
+    
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                ₹ <span [countUp]="item.amount" >0</span>
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
@@ -151,28 +165,44 @@
                 </thead>
 
                 <tbody class="bg-white">
-                    <tr>
-                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0 h-auto w-12">
-                                    <img class="h-auto w-12 rounded-md" src="https://res.cloudinary.com/dv0d4adfa/image/upload/v1723716593/CineHub/krxtcyg6xojscrqhozip.png" alt="" />
-                                </div>
+                    @if(!data || (data && !data.top10Distributers.length)) {
+                        <tr>
+                            <td colspan="3" class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">No Data avaliable.</td>
+                        </tr>
+                    }
 
-                                <div class="ml-4">
-                                    <div class="text-sm leading-5 font-medium text-gray-900">Palaxi Cinemas HiLITE MALL</div>
-                                    <div class="text-sm leading-5 text-gray-500">Hilite Mall, Hilite Road, Hilite City, Kozhikode - 673014, KL India</div>
+                    @for (item of data?.top10Theaters; track $index) {
+                        <tr>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-auto w-12">
+                                        <img class="h-auto w-12 rounded-md" [src]="item.theaterData.images[0].imageURL" alt="" />
+                                    </div>
+    
+                                    <div class="ml-4">
+                                        <div class="text-sm leading-5 font-medium text-gray-900">{{ item.theaterData.name }}</div>
+                                        <div *ngIf="item.theaterData.location | locationAddressPipe | async as address; else loading" class="text-sm leading-5 text-gray-500 break-words">{{ address }}</div>
+                                        <ng-template #loading>
+                                            <div class='mt-[10px] flex space-x-2 justify-start items-center bg-transparent'>
+                                                <span class='sr-only'>Loading...</span>
+                                            <div class='h-[8px] w-[8px] bg-gray-500 rounded-full animate-bounce [animation-delay:-0.3s]'></div>
+                                            <div class='h-[8px] w-[8px] bg-gray-500 rounded-full animate-bounce [animation-delay:-0.15s]'></div>
+                                            <div class='h-[8px] w-[8px] bg-gray-500 rounded-full animate-bounce'></div>
+                                        </div>
+                                        </ng-template>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        
-                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                            <div class="text-sm leading-5 text-gray-900">2</div>
-                        </td>
-
-                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                            ₹ 800
-                        </td>
-                    </tr>
+                            </td>
+                            
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                <div [countUp]="item.theaterData.numberOfScreen" class="text-sm leading-5 text-gray-900">0</div>
+                            </td>
+    
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                ₹ <span [countUp]="item.amount" >0</span>
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>

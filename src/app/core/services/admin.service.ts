@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { IBlockOrUnblockAPIErrorResponse, IBlockOrUnblockAPISucessfullResponse, IDistributerData, INotVerifiedDistributers, INotVerifiedTheaterOwners, IRetriveDataSucessfullAPIResponse, ISingleDataRetrivalAPIResponse, ITheaterOwnerData, IUserData } from '../../shared/models/adminAPIResponse.interface';
+import { IBlockOrUnblockAPIErrorResponse, IBlockOrUnblockAPISucessfullResponse, IDistributerData, IGetDashboardDataSuccessfullResponse, INotVerifiedDistributers, INotVerifiedTheaterOwners, IRetriveDataSucessfullAPIResponse, ISingleDataRetrivalAPIResponse, ITheaterOwnerData, IUserData } from '../../shared/models/adminAPIResponse.interface';
 import { environment } from '../../../environments/environment.development';
 import IMovieData from '../../shared/models/IMovieCredentials.interface';
 import { IAddEditMovieErrorResponse, IGetMoviesSuccessfullResponse, IGetMovieSuccessfullResponse, IListOrUnlistAPIErrorResponse, IListOrUnlistAPISucessfullResponse } from '../../shared/models/IMovieAPIResponse.interface';
@@ -270,5 +270,17 @@ export class AdminService {
     );
 
     return listOrUnlistMovieAPIResponse$;
+  }
+
+  getDashboardData(): Observable<IGetDashboardDataSuccessfullResponse> {
+    const url: string = `${this.api}/getdashboarddata`;
+
+    const APIResponse$: Observable<IGetDashboardDataSuccessfullResponse> = this.httpClient.get<IGetDashboardDataSuccessfullResponse>(url)
+    .pipe(
+      map((response) => response as IGetDashboardDataSuccessfullResponse),
+      catchError((err: any) => throwError(err))
+    );
+
+    return APIResponse$;
   }
 }

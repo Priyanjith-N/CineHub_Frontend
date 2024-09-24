@@ -1,3 +1,4 @@
+import { IDashboardDatas } from "./admin.entity";
 import IImage from "./common.entity";
 
 export interface IRetriveDataSucessfullAPIResponse<T> {
@@ -91,4 +92,9 @@ export interface INotVerifiedDistributers {
 export interface ISingleDataRetrivalAPIResponse<T> {
     message: string;
     data: T;
+}
+
+export interface IGetDashboardDataSuccessfullResponse {
+    message: string;
+    data: IDashboardDatas;
 }
