@@ -64,6 +64,7 @@ import { MytransactionlistComponent } from './shared/components/home/user/mytran
 import { TicketDetailsComponent } from './shared/components/home/user/ticket-details/ticket-details.component';
 import { MangeStreamingComponent } from './shared/components/home/distributer/mange-streaming/mange-streaming.component';
 import { DashboardComponent } from './shared/components/home/admin/dashboard/dashboard.component';
+import { TheaterOwnerDashboardComponent } from './shared/components/home/theaterOwner/theater-owner-dashboard/theater-owner-dashboard.component';
 
 export const routes: Routes = [
     {
@@ -301,6 +302,11 @@ export const routes: Routes = [
         canActivate: [theaterOwnerAuthGuard],
         component: TheaterOwnerHomePageComponent,
         children: [
+            {
+                path: '',
+                canActivate: [theaterOwnerAuthGuard],
+                component: TheaterOwnerDashboardComponent
+            },
             {
                 path: 'managetheater',
                 canActivate: [theaterOwnerAuthGuard],

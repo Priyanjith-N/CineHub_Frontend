@@ -12,3 +12,9 @@ export default interface ITheaterOwner {
     documentVerificationStatus: string;
     isBlocked: boolean;
 }
+
+export interface ITheaterOwnerDashboardData {
+    totalActiveMovieCount: number;
+    totalOverallBooking: number;
+    totalPendingRequest: number;
+}
