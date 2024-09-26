@@ -104,7 +104,7 @@ export class TheaterOwnerDashboardComponent implements AfterViewInit {
           labels.push(name);
           revenue.push(data.revenue);
         }
-        
+
         this.initChart(labels, revenue);
       }),
       ((err: any) => console.error(err) )
@@ -115,8 +115,6 @@ export class TheaterOwnerDashboardComponent implements AfterViewInit {
     console.log(this.chart);
     
     if(this.chart) {
-      console.log('sfdd');
-      
       this.chart.clear();
       this.chart.destroy();
     }
