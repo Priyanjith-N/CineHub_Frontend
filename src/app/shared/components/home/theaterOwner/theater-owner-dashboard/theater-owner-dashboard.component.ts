@@ -66,18 +66,18 @@ export class TheaterOwnerDashboardComponent implements AfterViewInit {
   changFilter(event: Event) {
     const selectElement: HTMLSelectElement = event.target as HTMLSelectElement;
     this.filter = selectElement.value as ("Daily" | "Monthly" | "Yearly");
-
+    
     if(!this.cardCountData) return;
-
+    
     this.getDataForGraph(this.cardCountData.allTheatersWithScreens[this.selectedTheaterIdx].theaterData._id, this.cardCountData.allTheatersWithScreens[this.selectedTheaterIdx].screens[this.selectedScreenIdx]._id, this.filter);
   }
 
   selectScreen(event: Event) {
     const selectElement: HTMLSelectElement = event.target as HTMLSelectElement;
     this.selectedScreenIdx = Number(selectElement.value);
-
+    
     if(!this.cardCountData) return;
-
+    
     this.getDataForGraph(this.cardCountData.allTheatersWithScreens[this.selectedTheaterIdx].theaterData._id, this.cardCountData.allTheatersWithScreens[this.selectedTheaterIdx].screens[this.selectedScreenIdx]._id, this.filter);
   }
 
@@ -86,6 +86,8 @@ export class TheaterOwnerDashboardComponent implements AfterViewInit {
     
     APIResponse$.subscribe(
       (res => {
+        console.log(res);
+        
         const labels: string[] = [];
         const revenue: number[] = [];
 
@@ -101,16 +103,21 @@ export class TheaterOwnerDashboardComponent implements AfterViewInit {
 
           labels.push(name);
           revenue.push(data.revenue);
-
-          this.initChart(labels, revenue);
         }
+        
+        this.initChart(labels, revenue);
       }),
       ((err: any) => console.error(err) )
     );
   }
 
   private initChart(labels: string[], data: number[]) {
+    console.log(this.chart);
+    
     if(this.chart) {
+      console.log('sfdd');
+      
+      this.chart.clear();
       this.chart.destroy();
     }
 
