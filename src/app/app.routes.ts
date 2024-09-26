@@ -193,6 +193,7 @@ export const routes: Routes = [
             },
             {
                 path: 'mytickets',
+                canActivate: [userAuthGuard],
                 component: MyTicketsComponent,
                 children: [
                     {
