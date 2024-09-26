@@ -39,8 +39,7 @@ export class TheaterOwnerDashboardComponent implements AfterViewInit {
   }
 
   getData() {
-    const APIResponse$: Observable<IGetTheaterOwnerDashboardDataSuccessfullResponse> =
-      this.theaterOwnerService.getDashboardData();
+    const APIResponse$: Observable<IGetTheaterOwnerDashboardDataSuccessfullResponse> = this.theaterOwnerService.getDashboardData();
 
     APIResponse$.subscribe(
       (res) => {
@@ -76,6 +75,10 @@ export class TheaterOwnerDashboardComponent implements AfterViewInit {
   selectScreen(event: Event) {
     const selectElement: HTMLSelectElement = event.target as HTMLSelectElement;
     this.selectedScreenIdx = Number(selectElement.value);
+
+    if(!this.cardCountData) return;
+
+    this.getDataForGraph(this.cardCountData.allTheatersWithScreens[this.selectedTheaterIdx].theaterData._id, this.cardCountData.allTheatersWithScreens[this.selectedTheaterIdx].screens[this.selectedScreenIdx]._id, this.filter);
   }
 
   private getDataForGraph(theaterId: string, screenId: string, filter: "Daily" | "Monthly" | "Yearly") {
@@ -95,8 +98,6 @@ export class TheaterOwnerDashboardComponent implements AfterViewInit {
           }else if(filter === "Yearly") {
             name = `${data.year}`;
           }
-
-          console.log(name);
 
           labels.push(name);
           revenue.push(data.revenue);
