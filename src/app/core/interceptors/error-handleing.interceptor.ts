@@ -6,6 +6,7 @@ import { ToastMessageService } from '../services/toast-message.service';
 import { inject } from '@angular/core';
 import { RefreshTokenService } from '../services/refresh-token.service';
 import { ErrorMessage } from '../enums/errorMessage.enum';
+import { errorField } from '../constants/error.constants';
 
 export const errorHandleingInterceptor: HttpInterceptorFn = (req, next) => {
   const refreshTokenService: RefreshTokenService = inject(RefreshTokenService);

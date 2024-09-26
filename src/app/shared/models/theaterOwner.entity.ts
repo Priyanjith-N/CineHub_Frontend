@@ -1,4 +1,5 @@
 import IImage from "./common.entity";
+import ITheater from "./theater.entity";
 
 export default interface ITheaterOwner {
     _id: string;
@@ -13,8 +14,24 @@ export default interface ITheaterOwner {
     isBlocked: boolean;
 }
 
+export interface IAllTheaterWithScreen {
+    theaterData: ITheater;
+    screens: {
+        _id: string;
+        name: string;
+    }[]
+}
+
 export interface ITheaterOwnerDashboardData {
     totalActiveMovieCount: number;
     totalOverallBooking: number;
     totalPendingRequest: number;
+    allTheatersWithScreens: IAllTheaterWithScreen[]
+}
+
+export interface IGraphData {
+    revenue: number;
+    day?: number;
+    month?: string;
+    year: number;
 }

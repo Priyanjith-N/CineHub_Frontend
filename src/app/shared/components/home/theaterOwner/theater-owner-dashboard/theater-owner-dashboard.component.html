@@ -59,4 +59,46 @@
             </div>
           </div>
         </div>
+
+        <div class="w-full">
+          <div class="my-[20px]">
+            <div class="flex justify-between">
+              <div class="flex gap-[32px]">
+                <div>
+                  <label for="underline_select" class="sr-only">Theaters</label>
+                  <select (change)="selectTheater($event)" id="underline_select" class="block p-2.5 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer" >
+                    @for (item of cardCountData?.allTheatersWithScreens; track $index) {
+                      <option [value]="$index"  [selected]="$index === selectedTheaterIdx" class="p-2.5" >
+                          {{ item.theaterData.name }}
+                      </option>
+                    }
+                  </select>
+                </div>
+                <div>
+                  <label for="underline_select1" class="sr-only">Screens</label>
+                  <select (change)="selectScreen($event)" id="underline_select1" class="block p-2.5 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                    @if(cardCountData) {
+                      @for (item of cardCountData.allTheatersWithScreens[selectedTheaterIdx].screens; track $index) {
+                        <option [value]="$index" [selected]="$index === selectedScreenIdx" class="p-2.5" >{{ item.name }}</option>
+                      }
+                    }
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label for="underline_select2" class="sr-only">Filter</label>
+                <select (change)="changFilter($event);" id="underline_select2" class="block p-2.5 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                  <option value="Daily" selected class="p-2.5" >Daily</option>
+                  <option value="Monthly" class="p-2.5" >Monthly</option>
+                  <option value="Yearly" class="p-2.5" >Yearly</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="w-full flex justify-center">
+            <div class="min-w-[75%] h-auto">
+              <canvas #myChart ></canvas>
+            </div>
+          </div>
+        </div>
 </div>

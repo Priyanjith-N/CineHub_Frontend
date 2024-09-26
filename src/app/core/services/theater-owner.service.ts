@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { IAddTheaterErrorResponse, IAddTheaterSucessfullResponse, IGetDistributerListAPISucessfullResponse, IGetAllTheatersSucessfullResponse, IAddScreenSucessfullResponse, IAddScreenErrorResponse, IGetAllScreensSucessfullResponse, IGetTheaterSucessfullResponse, IRequestMovieSucessfullResponse, IRequestMovieErrorResponse, IReRequestMovieSucessfullResponse } from '../../shared/models/ITheaterOwnerAPIResponse.interface';
-import { IAddMovieSchedule, IGetAllMovieRequestsSucessfullResponse, IGetallmoviescheduleSucessfullResponse, IGetAllMoviesFromCollectionSucessfullResponse, IGetMovieListOfDistributerDataAPISucessfullResponse, IGetScheduleOn, IGetTheaterOwnerDashboardDataSuccessfullResponse } from '../../shared/models/theaterOwnerAPIResponse.interface';
+import { IAddMovieSchedule, IGetAllMovieRequestsSucessfullResponse, IGetallmoviescheduleSucessfullResponse, IGetAllMoviesFromCollectionSucessfullResponse, IGetMovieListOfDistributerDataAPISucessfullResponse, IGetScheduleOn, IGetTheaterOwnerDashboardDataSuccessfullResponse, IGetTheaterOwnerGraphDataSuccessfullResponse } from '../../shared/models/theaterOwnerAPIResponse.interface';
 import ITheaterCredentials, { IScreenCredentials } from '../../shared/models/ITheaterCredentials.interface';
 import IMovieRequestCredentials, { IMovieReRequestCredentials } from '../../shared/models/requestMovie.entity';
 import { IScheduleCredentials } from '../../shared/models/schedule.entity';
@@ -224,6 +224,18 @@ export class TheaterOwnerService {
     const APIResponse$: Observable<IGetTheaterOwnerDashboardDataSuccessfullResponse> = this.httpClient.get<IGetTheaterOwnerDashboardDataSuccessfullResponse>(url)
     .pipe(
       map((response) => response as IGetTheaterOwnerDashboardDataSuccessfullResponse),
+      catchError((err: any) => throwError(err))
+    );
+
+    return APIResponse$;
+  }
+
+  getGraphData(filter: string, theaterId: string, screenId: string): Observable<IGetTheaterOwnerGraphDataSuccessfullResponse> {
+    const url: string = `${this.api}/getgraphdata/${theaterId}/${screenId}?filter=${filter}`;
+
+    const APIResponse$: Observable<IGetTheaterOwnerGraphDataSuccessfullResponse> = this.httpClient.get<IGetTheaterOwnerGraphDataSuccessfullResponse>(url)
+    .pipe(
+      map((response) => response as IGetTheaterOwnerGraphDataSuccessfullResponse),
       catchError((err: any) => throwError(err))
     );
 
