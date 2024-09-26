@@ -58,153 +58,154 @@
             </div>
           </div>
         </div>
-</div>
-
-<div class="flex flex-col mt-[40px]">
-    <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-        <div class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
-            <table class="min-w-full">
-                <thead>
-                    <tr>
-                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Top 10 Films</th>
-                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Total Ticket Sold</th>
-                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Total Amount</th>
-                    </tr>
-                </thead>
-
-                <tbody class="bg-white">
-                    @if(!data || (data && !data.top10Movies.length)) {
-                        <tr>
-                            <td colspan="3" class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">No Data avaliable.</td>
-                        </tr>
-                    }
-                    @for (item of data?.top10Movies; track $index) {
-                        <tr>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                <div class="flex items-center">
-                                    <div class="flex-shrink-0 h-auto w-10">
-                                        <img class="h-auto w-10 object-cover object-center" [src]="item.movieData.coverPhoto.imageURL" alt="" />
-                                    </div>
-
-                                    <div class="ml-4">
-                                        <div class="text-sm leading-5 font-medium text-gray-900">{{ item.movieData.name }}</div>
-                                        <div class="text-sm leading-5 text-gray-500">{{ item.movieData.category.join('/') }}</div>
-                                    </div>
-                                </div>
-                            </td>
-                            
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                <div [countUp]="item.totalTicketSold" class="text-sm leading-5 text-gray-900">0</div>
-                            </td>
-
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                ₹ <span [countUp]="item.amount">0</span>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
     </div>
-</div>
-
-<div class="flex flex-col mt-[40px]">
-    <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-        <div class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
-            <table class="min-w-full">
-                <thead>
-                    <tr>
-                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Top 10 Distributors</th>
-                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Total Movies Distributed</th>
-                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Total Amount</th>
-                    </tr>
-                </thead>
-
-                <tbody class="bg-white">
-                    @if(!data || (data && !data.top10Distributers.length)) {
-                        <tr>
-                            <td colspan="3" class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">No Data avaliable.</td>
-                        </tr>
-                    }
-                    @for (item of data?.top10Distributers; track $index) {
-                        <tr>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                <div class="flex items-center">
-                                    <div class="ml-4">
-                                        <div class="text-sm leading-5 font-medium text-gray-900">{{ item.distributerData.name }}</div>
-                                        <div class="text-sm leading-5 text-gray-500">{{ item.distributerData.email }}</div>
-                                    </div>
-                                </div>
-                            </td>
-                            
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                <div [countUp]="item.distributerData.distributedMoviesList.length" class="text-sm leading-5 text-gray-900">0</div>
-                            </td>
     
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                ₹ <span [countUp]="item.amount" >0</span>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-
-<div class="flex flex-col mt-[40px]">
-    <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-        <div class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
-            <table class="min-w-full">
-                <thead>
-                    <tr>
-                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Top 10 Theaters</th>
-                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Total Screens</th>
-                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Total Amount</th>
-                    </tr>
-                </thead>
-
-                <tbody class="bg-white">
-                    @if(!data || (data && !data.top10Distributers.length)) {
+    <div class="flex flex-col mt-[40px]">
+        <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+            <div class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
+                <table class="min-w-full">
+                    <thead>
                         <tr>
-                            <td colspan="3" class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">No Data avaliable.</td>
+                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Top 10 Films</th>
+                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Total Ticket Sold</th>
+                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Total Amount</th>
                         </tr>
-                    }
-
-                    @for (item of data?.top10Theaters; track $index) {
-                        <tr>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                <div class="flex items-center">
-                                    <div class="flex-shrink-0 h-auto w-12">
-                                        <img class="h-auto w-12 rounded-md" [src]="item.theaterData.images[0].imageURL" alt="" />
-                                    </div>
+                    </thead>
     
-                                    <div class="ml-4">
-                                        <div class="text-sm leading-5 font-medium text-gray-900">{{ item.theaterData.name }}</div>
-                                        <div *ngIf="item.theaterData.location | locationAddressPipe | async as address; else loading" class="text-sm leading-5 text-gray-500 break-words">{{ address }}</div>
-                                        <ng-template #loading>
-                                            <div class='mt-[10px] flex space-x-2 justify-start items-center bg-transparent'>
-                                                <span class='sr-only'>Loading...</span>
-                                            <div class='h-[8px] w-[8px] bg-gray-500 rounded-full animate-bounce [animation-delay:-0.3s]'></div>
-                                            <div class='h-[8px] w-[8px] bg-gray-500 rounded-full animate-bounce [animation-delay:-0.15s]'></div>
-                                            <div class='h-[8px] w-[8px] bg-gray-500 rounded-full animate-bounce'></div>
+                    <tbody class="bg-white">
+                        @if(!data || (data && !data.top10Movies.length)) {
+                            <tr>
+                                <td colspan="3" class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">No Data avaliable.</td>
+                            </tr>
+                        }
+                        @for (item of data?.top10Movies; track $index) {
+                            <tr>
+                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-auto w-10">
+                                            <img class="h-auto w-10 object-cover object-center" [src]="item.movieData.coverPhoto.imageURL" alt="" />
                                         </div>
-                                        </ng-template>
-                                    </div>
-                                </div>
-                            </td>
-                            
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                <div [countUp]="item.theaterData.numberOfScreen" class="text-sm leading-5 text-gray-900">0</div>
-                            </td>
     
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                ₹ <span [countUp]="item.amount" >0</span>
-                            </td>
+                                        <div class="ml-4">
+                                            <div class="text-sm leading-5 font-medium text-gray-900">{{ item.movieData.name }}</div>
+                                            <div class="text-sm leading-5 text-gray-500">{{ item.movieData.category.join('/') }}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                
+                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                    <div [countUp]="item.totalTicketSold" class="text-sm leading-5 text-gray-900">0</div>
+                                </td>
+    
+                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                    ₹ <span [countUp]="item.amount">0</span>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <div class="flex flex-col mt-[40px]">
+        <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+            <div class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
+                <table class="min-w-full">
+                    <thead>
+                        <tr>
+                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Top 10 Distributors</th>
+                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Total Movies Distributed</th>
+                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Total Amount</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
+                    </thead>
+    
+                    <tbody class="bg-white">
+                        @if(!data || (data && !data.top10Distributers.length)) {
+                            <tr>
+                                <td colspan="3" class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">No Data avaliable.</td>
+                            </tr>
+                        }
+                        @for (item of data?.top10Distributers; track $index) {
+                            <tr>
+                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                    <div class="flex items-center">
+                                        <div class="ml-4">
+                                            <div class="text-sm leading-5 font-medium text-gray-900">{{ item.distributerData.name }}</div>
+                                            <div class="text-sm leading-5 text-gray-500">{{ item.distributerData.email }}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                
+                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                    <div [countUp]="item.distributerData.distributedMoviesList.length" class="text-sm leading-5 text-gray-900">0</div>
+                                </td>
+        
+                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                    ₹ <span [countUp]="item.amount" >0</span>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <div class="flex flex-col mt-[40px]">
+        <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+            <div class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
+                <table class="min-w-full">
+                    <thead>
+                        <tr>
+                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Top 10 Theaters</th>
+                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Total Screens</th>
+                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Total Amount</th>
+                        </tr>
+                    </thead>
+    
+                    <tbody class="bg-white">
+                        @if(!data || (data && !data.top10Distributers.length)) {
+                            <tr>
+                                <td colspan="3" class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">No Data avaliable.</td>
+                            </tr>
+                        }
+    
+                        @for (item of data?.top10Theaters; track $index) {
+                            <tr>
+                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-auto w-12">
+                                            <img class="h-auto w-12 rounded-md" [src]="item.theaterData.images[0].imageURL" alt="" />
+                                        </div>
+        
+                                        <div class="ml-4">
+                                            <div class="text-sm leading-5 font-medium text-gray-900">{{ item.theaterData.name }}</div>
+                                            <div *ngIf="item.theaterData.location | locationAddressPipe | async as address; else loading" class="text-sm leading-5 text-gray-500 break-words">{{ address }}</div>
+                                            <ng-template #loading>
+                                                <div class='mt-[10px] flex space-x-2 justify-start items-center bg-transparent'>
+                                                    <span class='sr-only'>Loading...</span>
+                                                <div class='h-[8px] w-[8px] bg-gray-500 rounded-full animate-bounce [animation-delay:-0.3s]'></div>
+                                                <div class='h-[8px] w-[8px] bg-gray-500 rounded-full animate-bounce [animation-delay:-0.15s]'></div>
+                                                <div class='h-[8px] w-[8px] bg-gray-500 rounded-full animate-bounce'></div>
+                                            </div>
+                                            </ng-template>
+                                        </div>
+                                    </div>
+                                </td>
+                                
+                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                    <div [countUp]="item.theaterData.numberOfScreen" class="text-sm leading-5 text-gray-900">0</div>
+                                </td>
+        
+                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                    ₹ <span [countUp]="item.amount" >0</span>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

@@ -65,6 +65,7 @@ import { TicketDetailsComponent } from './shared/components/home/user/ticket-det
 import { MangeStreamingComponent } from './shared/components/home/distributer/mange-streaming/mange-streaming.component';
 import { DashboardComponent } from './shared/components/home/admin/dashboard/dashboard.component';
 import { TheaterOwnerDashboardComponent } from './shared/components/home/theaterOwner/theater-owner-dashboard/theater-owner-dashboard.component';
+import { DistributerDashboardComponent } from './shared/components/home/distributer/distributer-dashboard/distributer-dashboard.component';
 
 export const routes: Routes = [
     {
@@ -275,6 +276,11 @@ export const routes: Routes = [
         canActivate: [distributerAuthGuard],
         component: DistributerHomePageComponent,
         children: [
+            {
+                path: '',
+                canActivate: [distributerAuthGuard],
+                component: DistributerDashboardComponent
+            },
             {
                 path: 'distributemovies',
                 canActivate: [distributerAuthGuard],

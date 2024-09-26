@@ -6,6 +6,7 @@ import { catchError, map, Observable, throwError } from 'rxjs';
 import { IDistributeMovieData } from '../../shared/models/IMovieCredentials.interface';
 import { IAddStreamingErrorResponse, IAddStreamingSucessfullResponse, IApproveMovieRequestSucessfullResponse, IEditStreamingErrorResponse, IEditStreamingSucessfullResponse, IGetAllMovieRequestsSucessfullResponse, IGetAllStreamingMovieDetailsSucessfullResponse, IRejectMovieRequestSucessfullResponse } from '../../shared/models/distributerAPIResponse.interface';
 import { IMovieStreamingCredentials, IMovieStreamingCredentialsForEdit } from '../../shared/models/movieStreaming.entity';
+import { IGetDistributerDashboardDataSuccessfullResponse } from '../../shared/models/distributer.entity';
 
 @Injectable({
   providedIn: 'root'
@@ -189,6 +190,18 @@ export class DistributerService {
     const APIResponse$: Observable<{ message: string; }> = this.httpClient.delete<{ message: string; }>(url)
     .pipe(
       map(res => res as { message: string; }),
+      catchError((err: any) => throwError(err))
+    );
+
+    return APIResponse$;
+  }
+
+  getDashboardData(): Observable<IGetDistributerDashboardDataSuccessfullResponse> {
+    const url: string = `${this.api}/getdashboarddata`;
+
+    const APIResponse$: Observable<IGetDistributerDashboardDataSuccessfullResponse> = this.httpClient.get<IGetDistributerDashboardDataSuccessfullResponse>(url)
+    .pipe(
+      map((response) => response as IGetDistributerDashboardDataSuccessfullResponse),
       catchError((err: any) => throwError(err))
     );
 
