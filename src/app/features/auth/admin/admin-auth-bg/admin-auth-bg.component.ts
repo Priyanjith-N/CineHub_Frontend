@@ -27,9 +27,7 @@ export class AdminAuthBGComponent {
       (toastOption: IToastOption) => {
         this.messageService.add(toastOption);
       },
-      (err: any) => {
-        console.error(err, 'From auth bg component toast');
-      }
+      (err: any) => {}
     );
   }
 

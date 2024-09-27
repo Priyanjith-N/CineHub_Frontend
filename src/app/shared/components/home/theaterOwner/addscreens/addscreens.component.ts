@@ -198,8 +198,6 @@ export class AddscreensComponent {
     }
 
     const capacity: number = this.screenForm.value.capacity;
-    console.log(capacity, seatSelected);
-    
 
     if(seatSelected !== rowsSelected){
       const toastOptions: IToastOption = {

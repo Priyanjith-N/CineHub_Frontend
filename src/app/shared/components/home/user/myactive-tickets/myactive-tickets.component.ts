@@ -45,7 +45,6 @@ export class MyactiveTicketsComponent {
         this.myActiveTickets = res.data
       }),
       ((err: any) => {
-        console.error(err);
       })
     );
   }
@@ -73,7 +72,6 @@ export class MyactiveTicketsComponent {
       }),
       ((err: any) => {
         this.isCancelRequestDone = false;
-        console.error(err);
       })
     );
   }

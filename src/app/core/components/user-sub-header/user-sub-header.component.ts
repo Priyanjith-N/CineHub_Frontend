@@ -23,9 +23,7 @@ export class UserSubHeaderComponent {
       (choosenLocation => {
         this.choosenLocation = choosenLocation;
       }),
-      ((err: any) => {
-        console.error(err);
-      })
+      ((err: any) => {})
     );
   }
 

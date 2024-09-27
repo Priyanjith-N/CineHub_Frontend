@@ -39,7 +39,6 @@ export class PaymentsucessfullComponent {
       },
       ((err: any) => {
         this.router.navigate(['/']);
-        console.error(err);
       })
     )
   }

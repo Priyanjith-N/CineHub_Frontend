@@ -78,7 +78,6 @@ export class AddTheaterComponent {
           }
         }),
         ((err: any) => {
-          console.log(err);
           reject();
         })
       );
@@ -113,7 +112,6 @@ export class AddTheaterComponent {
         });
       }),
       ((err: any) => {
-        console.error(err);
       })
     );
   }
@@ -246,7 +244,6 @@ export class AddTheaterComponent {
         }
       });
     } catch (err: any) {
-      console.error(err);
     }
   }
 
@@ -399,7 +396,6 @@ export class AddTheaterComponent {
 
       return base64Images;
     } catch (err: any) {
-      console.error(err, 'err in converting to base64');
       throw err;
     }
   }
@@ -415,7 +411,6 @@ export class AddTheaterComponent {
       const base64String: string = await promise;
       return base64String;
     } catch (err: any) {
-      console.error(err, 'err in converting to base64');
       throw err;
     }
   }

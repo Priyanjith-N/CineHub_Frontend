@@ -152,8 +152,6 @@ export class DistributerOtpEmailVerificationFormComponent {
         this.showToast(toastOption); // emit the toast option to show toast.
       }),
       ((err: any) => {
-        console.log(err);
-        
         this.resendOTPRequest = false;
         this.showResendOTPOption = false;
         this.resetTimer(); // to resetTimer clear localstrorage stored time.
@@ -193,7 +191,6 @@ export class DistributerOtpEmailVerificationFormComponent {
         this.isFormSubmited = false;
         this.showResendOTPOption = false;
         this.resetTimer();
-        console.log(res);
         this.documentVerificationPendingMessagePageService.setValue(true);
         this.router.navigate(['/distributer/auth/accountNotVerified']); // navigate to welcome message page after verification.
       }),

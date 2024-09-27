@@ -24,7 +24,6 @@ export class AdminTableComponent  {
 
       this.searchEvent.emit(searchText);
     } catch (err: any) {
-      console.error(err);
     }
   }
 
@@ -33,6 +32,6 @@ export class AdminTableComponent  {
   }
 
   getData(pageNumber: number = 1) {
-    console.log(pageNumber);
+    
   }
 }

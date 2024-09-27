@@ -29,19 +29,14 @@ export class AdminAccountVerificationDetailPageComponent {
           this.myData = res.data as ITheaterOwnerData;
         }),
         ((err: any) => {
-          console.log(err);
         })
       );
     }else if(this.role === "Distributer"){
       this.adminService.getDistributer(this.id).subscribe(
         ((res: ISingleDataRetrivalAPIResponse<IDistributerData>) => {
           this.myData = res.data as IDistributerData;
-          console.log('licence' in this.myData);
-          
         }),
-        ((err: any) => {
-          console.log(err);
-        })
+        ((err: any) => {})
       );
     }
   }
@@ -77,7 +72,6 @@ export class AdminAccountVerificationDetailPageComponent {
         }),
         ((err: any) => {
           this.isSubmited = false;
-          console.error(err);
         })
       );
     }else if(this.role === "Distributer"){
@@ -90,7 +84,6 @@ export class AdminAccountVerificationDetailPageComponent {
         }),
         ((err: any) => {
           this.isSubmited = false;
-          console.error(err);
         })
       );
     }

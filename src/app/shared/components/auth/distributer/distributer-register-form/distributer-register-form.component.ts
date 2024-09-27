@@ -106,7 +106,6 @@ export class DistributerRegisterFormComponent {
     registerAPIResponse$.subscribe(
       ((res: IRegisterSuccessfullResponse) => {
         this.isFormSubmited = false;
-        console.log(res);
         this.router.navigate(['/distributer/auth/verifyEmail']); // navigate to otp verification page.
       }),
       ((err: any) => {
@@ -159,7 +158,6 @@ export class DistributerRegisterFormComponent {
 
       return base64Images;
     } catch (err: any) {
-      console.error(err, 'err in converting to base64');
       throw err;
     }
   }

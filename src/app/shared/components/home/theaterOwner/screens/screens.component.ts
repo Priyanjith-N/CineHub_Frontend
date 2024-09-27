@@ -40,9 +40,7 @@ export class ScreensComponent {
           });
         }
       }),
-      ((err: any) => {
-        console.log(err);
-      })
+      ((err: any) => {})
     );
   }
 

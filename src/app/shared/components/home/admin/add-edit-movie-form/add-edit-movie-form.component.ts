@@ -82,9 +82,7 @@ export class AddEditMovieFormComponent implements AfterViewInit {
         const movieData: IMovie = res.data;
         this.initEditForm(movieData);
       }),
-      ((err: any) => {
-        console.log(err);
-      })
+      ((err: any) => {})
     );
   }
 
@@ -457,7 +455,6 @@ export class AddEditMovieFormComponent implements AfterViewInit {
 
       return base64Images;
     } catch (err: any) {
-      console.error(err, 'err in converting to base64');
       throw err;
     }
   }
@@ -473,7 +470,6 @@ export class AddEditMovieFormComponent implements AfterViewInit {
       const base64String: string = await promise;
       return base64String;
     } catch (err: any) {
-      console.error(err, 'err in converting to base64');
       throw err;
     }
   }

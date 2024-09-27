@@ -49,7 +49,6 @@ export class ApproveRejectMovieRequestComponent {
         this.displayData = this.data;
       }),
       ((err: any) => {
-        console.error(err);
       })
     );
   }
@@ -99,8 +98,6 @@ export class ApproveRejectMovieRequestComponent {
       ((err: any) => {
         this.isFormSubmited = false;
         this.closeModal();
-
-        console.log(err);
       })
     );
   }
@@ -128,8 +125,6 @@ export class ApproveRejectMovieRequestComponent {
       ((err: any) => {
         this.isFormSubmited = false;
         this.closeModal();
-
-        console.log(err);
       })
     );
   }

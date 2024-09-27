@@ -40,7 +40,6 @@ export class MovieDetailsComponent {
         this.movieData = res.data;
       }),
       ((err: any) => {
-        console.error(err);
       })
     );
   }

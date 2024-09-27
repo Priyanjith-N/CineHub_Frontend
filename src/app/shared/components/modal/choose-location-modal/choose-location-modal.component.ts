@@ -64,9 +64,7 @@ export class ChooseLocationModalComponent  implements OnInit, OnDestroy {
             }
           }
         }),
-        ((err: any) => {
-          console.log(err);
-        })
+        ((err: any) => {})
       );
     }))
   }

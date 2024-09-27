@@ -85,14 +85,10 @@ export class ConfirmPaymentComponent {
       (res => {
         this.isFormSubmited = false;
 
-        this.stripe.redirectToCheckout({ sessionId: res.sessionId }).subscribe((res) => {
-          console.log(res);
-        });
+        this.stripe.redirectToCheckout({ sessionId: res.sessionId }).subscribe();
       }),
       ((err: any) => {
         this.isFormSubmited = false;
-
-        console.error(err);
       })
     );
   }

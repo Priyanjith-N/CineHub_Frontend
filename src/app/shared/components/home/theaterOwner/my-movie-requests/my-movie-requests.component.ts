@@ -45,9 +45,7 @@ export class MyMovieRequestsComponent {
         this.data = res.data;
         this.displayData = this.data;
       }),
-      ((err: any) => {
-        console.log(err);
-      })
+      ((err: any) => {})
     );
   }
 
@@ -107,8 +105,6 @@ export class MyMovieRequestsComponent {
       ((err: any) => {
         this.isFormSubmited = false;
         this.closeModal();
-
-        console.error(err);
       })
     );
   }
@@ -122,7 +118,7 @@ export class MyMovieRequestsComponent {
   }
 
   getData(pageNumber: number = 1) {
-    console.log(pageNumber);
+    
   }
 
   private showToast(toastOption: IToastOption): void {

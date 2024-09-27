@@ -29,9 +29,7 @@ export class AppComponent implements OnDestroy {
       (toastOption: IToastOption) => {
         this.messageService.add(toastOption);
       },
-      (err: any) => {
-        console.error(err, 'toast');
-      }
+      (err: any) => {}
     );
   }
 

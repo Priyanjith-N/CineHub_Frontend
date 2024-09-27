@@ -33,9 +33,7 @@ export class ManageTheaterComponent {
         this.data = res.data;
         this.displayData = this.data.filter((theater) => this.isListed === theater.isListed);
       }),
-      ((err: any) => {
-        console.log(err);
-      })
+      ((err: any) => {})
     );
   }
 
@@ -51,6 +49,6 @@ export class ManageTheaterComponent {
   }
 
   getData(pageNumber: number = 1) {
-    console.log(pageNumber);
+    
   }
 }

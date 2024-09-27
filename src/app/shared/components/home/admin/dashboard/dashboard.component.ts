@@ -40,7 +40,6 @@ export class DashboardComponent implements AfterViewInit {
         this.data = res.data;
       }),
       ((err: any) => {
-        console.error(err);
       })
     );
   }

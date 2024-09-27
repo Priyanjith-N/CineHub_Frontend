@@ -34,9 +34,7 @@ export const appConfig: ApplicationConfig = {
             provider: new GoogleLoginProvider(environment.GOOGLE_PROVIDER_CLIENT_ID)
           }
         ],
-        onError: (err: any) => {
-          console.error(err, 'error from provider');
-        }
+        onError: (err: any) => {}
       } as SocialAuthServiceConfig,
     }
   ]

@@ -25,15 +25,10 @@ export class AdminDistributerManagementComponent {
 
     getDistributerAPIResponse$.subscribe(
       ((res: IRetriveDataSucessfullAPIResponse<IDistributerData>) => {
-        console.log(res.message);
-        
         this.data = res.data;
         this.distributerData = this.data;
       }),
-      ((err: any) => {
-        console.log(err);
-        
-      })
+      ((err: any) => {})
     );
    }
 
@@ -60,7 +55,6 @@ export class AdminDistributerManagementComponent {
 
     blockOrUnblockAPIResponse$.subscribe(
       ((res: IBlockOrUnblockAPISucessfullResponse) => {
-        console.log(res.message);
         this.distributerData = this.distributerData.map((distributer) => {
           if(distributer._id === data._id) {
             distributer.isBlocked = !distributer.isBlocked;
@@ -68,13 +62,7 @@ export class AdminDistributerManagementComponent {
           return distributer;
         })
       }),
-      ((err: any) => {
-        if(err.requiredCredentialsError) {
-          console.error(err);
-        }else{
-          console.error(err);
-        }
-      })
+      ((err: any) => {})
     );
    }
 }

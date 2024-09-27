@@ -144,7 +144,7 @@ export class MovieLisingBasedOnDistributerComponent {
   }
 
   getData(pageNumber: number = 1) {
-    console.log(pageNumber);
+    
   }
 
   private showToast(toastOption: IToastOption): void {

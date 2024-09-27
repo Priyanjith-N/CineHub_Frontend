@@ -47,7 +47,6 @@ export class LandingPageComponent {
         this.streamingMovies = this.data.streamingMovies;
       }),
       ((err: any) => {
-        console.error(err);
       })
     );
   }

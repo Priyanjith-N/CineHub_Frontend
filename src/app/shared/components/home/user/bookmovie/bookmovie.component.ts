@@ -53,7 +53,6 @@ export class BookmovieComponent {
         this.movieData = res.data;
       }),
       ((err: any) => {
-        console.error(err);
       })
     );
 
@@ -65,7 +64,6 @@ export class BookmovieComponent {
         this.getAllShowsForAMovieSucessfullResponse();
       }),
       ((err: any) => {
-        console.error(err);
       })
     );
   }
@@ -78,7 +76,6 @@ export class BookmovieComponent {
         this.setLocation(res.data);
       }),
       ((err: any) => {
-        console.error(err);
       })
     );
   }
@@ -101,7 +98,6 @@ export class BookmovieComponent {
             }
           }),
           ((err: any) => {
-            console.log(err);
             reject(err);
           })
         );

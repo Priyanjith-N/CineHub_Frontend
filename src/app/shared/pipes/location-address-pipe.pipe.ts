@@ -26,7 +26,6 @@ export class LocationAddressPipePipe implements PipeTransform {
         }
       }),
       catchError((err: any) => {
-        console.log(err);
         return 'Address Error'
       })
     );;

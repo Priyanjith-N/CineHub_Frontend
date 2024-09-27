@@ -83,7 +83,6 @@ export class SelectseatComponent {
         this.theaterScreenLayout = res.data;
       }),
       ((err: any) => {
-          console.error(err);
       })
     );
   }

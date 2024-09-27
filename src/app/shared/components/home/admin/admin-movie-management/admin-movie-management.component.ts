@@ -69,16 +69,9 @@ export class AdminMovieManagementComponent {
 
     listOrUnlistMovieAPIResponse$.subscribe(
       ((res: IListOrUnlistAPISucessfullResponse) => {
-        console.log(res.message);
         this.getData(1);
       }),
-      ((err: any) => {
-        if(err.requiredCredentialsError) {
-          console.error(err);
-        }else{
-          console.error(err);
-        }
-      })
+      ((err: any) => {})
     );
    }
 

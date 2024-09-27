@@ -69,7 +69,6 @@ export class MangeStreamingComponent {
         this.displayData = this.streamingMovieData;
       }),
       ((err: any) => {
-        console.error(err);
       })
     );
   }
@@ -174,7 +173,7 @@ export class MangeStreamingComponent {
 
         this.getAllStreamingMovieData();
       }),
-      ((err: any) => console.error(err))
+      ((err: any) => {})
     );
   }
 
@@ -207,7 +206,7 @@ export class MangeStreamingComponent {
       ((err: any) => {
         this.isFormSubmited = false;
 
-        if(!err.errorField) return console.error(err);
+        if(!err.errorField) return ;
         
         const errObj: IEditStreamingErrorResponse = err;
 
@@ -244,7 +243,7 @@ export class MangeStreamingComponent {
       ((err: any) => {
         this.isFormSubmited = false;
 
-        if(!err.errorField) return console.error(err);
+        if(!err.errorField) return ;
         
         const errObj: IAddStreamingErrorResponse = err;
 

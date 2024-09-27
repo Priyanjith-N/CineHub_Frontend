@@ -90,8 +90,6 @@ export class AddScheduleComponent {
     }
 
     while(hour <= 24) {
-      console.log('in here', hour);
-      
       if(minutes > 0 && minutes < 15) {
         minutes = 15;
       } else if(minutes > 15 && minutes < 30) {
@@ -168,8 +166,6 @@ export class AddScheduleComponent {
       if(hour >= 24) break;
       
     }
-
-    console.log(this.avaliableTimeSchedule);
   }
 
   selectSlot(idx: number) {
@@ -197,7 +193,6 @@ export class AddScheduleComponent {
         this.getALLAvaliableTime();
       }),
       ((err: any) => {
-        console.error(err);
       })
     );
   }
@@ -264,7 +259,6 @@ export class AddScheduleComponent {
       }),
       ((err: any) => {
         this.isFormSubmited = false;
-        console.error(err);
       })
     );
     

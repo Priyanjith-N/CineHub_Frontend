@@ -38,7 +38,6 @@ export class MytransactionlistComponent {
         this.transactionList = res.data
       }),
       ((err: any) => {
-        console.error(err);
       })
     );
   }

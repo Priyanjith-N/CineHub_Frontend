@@ -58,7 +58,6 @@ export class AdminLoginFormComponent {
 
     loginAPIResponse$.subscribe(
       (res: ILoginSuccessfullResponse) => {
-        console.log(res);
         this.isFormSubmited = false;
         
         const toastOption: IToastOption = {

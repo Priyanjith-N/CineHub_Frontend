@@ -43,6 +43,6 @@ export class MyMovieCollectionComponent {
   }
 
   getData(pageNumber: number = 1) {
-    console.log(pageNumber);
+    
   }
 }

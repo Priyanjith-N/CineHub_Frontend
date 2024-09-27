@@ -191,7 +191,6 @@ export class TheaterOwnerOtpEmailVerifcationFormComponent {
         this.isFormSubmited = false;
         this.showResendOTPOption = false;
         this.resetTimer();
-        console.log(res);
         this.documentVerificationPendingMessagePageService.setValue(true);
         this.router.navigate(['/theaterOwner/auth/accountNotVerified']); // navigate to wllcome message page after verification.
       }),

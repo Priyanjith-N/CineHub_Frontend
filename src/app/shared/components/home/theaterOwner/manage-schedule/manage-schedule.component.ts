@@ -62,7 +62,6 @@ export class ManageScheduleComponent {
         this.changeDate(this.allMovieSchedules[0].scheduledDate!);
       }),
       ((err: any) => {
-        console.error(err);
       })
     );
   }

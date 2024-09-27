@@ -48,7 +48,6 @@ export class TheaterOwnerDashboardComponent implements AfterViewInit {
         this.getDataForGraph(this.cardCountData.allTheatersWithScreens[0].theaterData._id, this.cardCountData.allTheatersWithScreens[0].screens[0]._id, this.filter);
       },
       (err: any) => {
-        console.error(err);
       }
     );
   }
@@ -86,8 +85,6 @@ export class TheaterOwnerDashboardComponent implements AfterViewInit {
     
     APIResponse$.subscribe(
       (res => {
-        console.log(res);
-        
         const labels: string[] = [];
         const revenue: number[] = [];
 
@@ -107,13 +104,11 @@ export class TheaterOwnerDashboardComponent implements AfterViewInit {
 
         this.initChart(labels, revenue);
       }),
-      ((err: any) => console.error(err) )
+      ((err: any) => {} )
     );
   }
 
   private initChart(labels: string[], data: number[]) {
-    console.log(this.chart);
-    
     if(this.chart) {
       this.chart.clear();
       this.chart.destroy();

@@ -67,8 +67,6 @@ export const errorHandleingInterceptor: HttpInterceptorFn = (req, next) => {
           summary: 'Server Error',
           detail: 'Internal Server Error.'
         }
-
-        console.error(errObj.message, "Error Server");
       }
 
       if(toastOption) {

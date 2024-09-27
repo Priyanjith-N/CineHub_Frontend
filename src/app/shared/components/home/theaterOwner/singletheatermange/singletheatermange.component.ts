@@ -35,9 +35,7 @@ export class SingletheatermangeComponent {
         this.data = res.data;
         this.getAddressLocation();
       }),
-      ((err: any) => {
-        console.log(err);
-      })
+      ((err: any) => {})
     );
   }
 
@@ -52,9 +50,7 @@ export class SingletheatermangeComponent {
             }
           }
         }),
-        ((err: any) => {
-          console.log(err);
-        })
+        ((err: any) => {})
       );
   }
 }

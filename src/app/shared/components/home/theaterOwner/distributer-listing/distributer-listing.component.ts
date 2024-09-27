@@ -32,9 +32,7 @@ export class DistributerListingComponent {
         this.data = res.data;
         this.displayData = this.data;
       }),
-      ((err: any) => {
-        console.log(err);
-      })
+      ((err: any) => {})
     );
   }
 
@@ -46,6 +44,6 @@ export class DistributerListingComponent {
   }
 
   getData(pageNumber: number = 1) {
-    console.log(pageNumber);
+    
   }
 }

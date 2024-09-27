@@ -25,13 +25,10 @@ export class AdminTheaterOwnerManagementComponent {
 
     getTheaterOwnerAPIResponse$.subscribe(
       ((res: IRetriveDataSucessfullAPIResponse<ITheaterOwnerData>) => {
-        console.log(res.message);
         this.data = res.data;
         this.theaterOwnerData = this.data;
       }),
-      ((err: any) => {
-        console.log(err);
-      })
+      ((err: any) => {})
     );
    }
 
@@ -50,8 +47,6 @@ export class AdminTheaterOwnerManagementComponent {
    }
 
    popConfimationModal(data: {_id: string, isBlocked: boolean, name: string}) {
-    console.log(data);
-    
     this.blockTheaterOwnerData = data;
    }
 
@@ -60,7 +55,6 @@ export class AdminTheaterOwnerManagementComponent {
 
     blockOrUnblockAPIResponse$.subscribe(
       ((res: IBlockOrUnblockAPISucessfullResponse) => {
-        console.log(res.message);
         this.theaterOwnerData = this.theaterOwnerData.map((theaterOwner) => {
           if(theaterOwner._id === data._id) {
             theaterOwner.isBlocked = !theaterOwner.isBlocked;
@@ -70,9 +64,7 @@ export class AdminTheaterOwnerManagementComponent {
       }),
       ((err: any) => {
         if(err.requiredCredentialsError) {
-          console.error(err);
         }else{
-          console.error(err);
         }
       })
     );

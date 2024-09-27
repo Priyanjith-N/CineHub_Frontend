@@ -133,7 +133,6 @@ export class TheaterOwnerRegisterFormComponent {
     registerAPIResponse$.subscribe(
       (res: IRegisterSuccessfullResponse) => {
         this.isFormSubmited = false;
-        console.log(res);
         this.router.navigate(['/theaterOwner/auth/verifyEmail']); // navigate to otp verification page.
       },
       (err: any) => {
@@ -170,7 +169,6 @@ export class TheaterOwnerRegisterFormComponent {
 
       return base64Images;
     } catch (err: any) {
-      console.error(err, 'err in converting to base64');
       throw err;
     }
   }

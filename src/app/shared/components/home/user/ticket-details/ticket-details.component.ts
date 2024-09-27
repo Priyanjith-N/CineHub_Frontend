@@ -40,7 +40,6 @@ export class TicketDetailsComponent {
         this.ticketData = res.data;
       }),
       (err => {
-        console.error(err);
       })
     );
   }

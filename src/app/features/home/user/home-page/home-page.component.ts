@@ -45,9 +45,7 @@ export class HomePageComponent {
               }
             }
           }),
-          ((err: any) => {
-            console.log(err);
-          })
+          ((err: any) => {})
         );
       }))
     }

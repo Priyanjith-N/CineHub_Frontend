@@ -30,7 +30,6 @@ export class DistributerDashboardComponent {
         this.data = res.data;
       }),
       ((err: any) => {
-        console.error(err);
       })
     )
   }

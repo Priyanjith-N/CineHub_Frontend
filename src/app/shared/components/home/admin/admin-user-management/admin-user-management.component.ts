@@ -25,13 +25,10 @@ export class AdminUserManagementComponent {
 
     getUserAPIResponse$.subscribe(
       ((res: IRetriveDataSucessfullAPIResponse<IUserData>) => {
-        console.log(res.message);
         this.data = res.data;
         this.userData = this.data;
       }),
-      ((err: any) => {
-        console.log(err);  
-      })
+      ((err: any) => {})
     );
    }
 
@@ -39,8 +36,6 @@ export class AdminUserManagementComponent {
      this.userData = this.data.filter((user) => {
        return user.name.toLowerCase().startsWith(searchText);
     });
-
-    console.log(this.data);
    }
 
    confirm(confirm: boolean) {
@@ -60,7 +55,6 @@ export class AdminUserManagementComponent {
 
     blockOrUnblockAPIResponse$.subscribe(
       ((res: IBlockOrUnblockAPISucessfullResponse) => {
-        console.log(res.message);
         this.userData = this.userData.map((user) => {
           if(user._id === data._id) {
             user.isBlocked = !user.isBlocked;
@@ -70,9 +64,7 @@ export class AdminUserManagementComponent {
       }),
       ((err: any) => {
         if(err.requiredCredentialsError) {
-          console.error(err);
         }else{
-          console.error(err);
         }
       })
     );
