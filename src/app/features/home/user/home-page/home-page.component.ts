@@ -9,7 +9,6 @@ import { LocationService } from '../../../../core/services/location.service';
 import { AddressSearchService } from '../../../../core/services/address-search.service';
 
 import { GeoJsonProperties } from 'geojson'
-import { UserprofileService } from '../../../../core/services/userprofile.service';
 
 @Component({
   selector: 'app-home-page',

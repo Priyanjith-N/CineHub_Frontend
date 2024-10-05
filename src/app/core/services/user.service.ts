@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { IBookSeatSucessfullResponse, ICancelTicketSucessfullResponse, ICreateCheckOutSessionStripeSucessfullResponse, IGetAllActiveTicketsSucessfullResponse, IGetAllShowsForAMovieSucessfullResponse, IGetAllTransactionListSucessfullResponse, IGetDataForHomePageSucessfullResponse, IGetMovieDetailsSucessfullResponse, IGetTheaterScreenLayoutSucessfullResponse, IGetTicketDetailsSucessfullResponse } from '../../shared/models/userAPIResponse.interface';
+import { IBookSeatSucessfullResponse, ICancelTicketSucessfullResponse, ICreateCheckOutSessionStripeSucessfullResponse, IGetAllActiveTicketsSucessfullResponse, IGetAllShowsForAMovieSucessfullResponse, IGetAllTransactionListSucessfullResponse, IGetDataForHomePageSucessfullResponse, IGetMovieDetailsSucessfullResponse, IGetTheaterScreenLayoutSucessfullResponse, IGetTicketDetailsSucessfullResponse, IGetUserProfileSucessfullResponse } from '../../shared/models/userAPIResponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -133,6 +133,18 @@ export class UserService {
     const APIResponse$: Observable<IGetTicketDetailsSucessfullResponse> = this.httpClient.get<IGetTicketDetailsSucessfullResponse>(url)
     .pipe(
       map(res => res as IGetTicketDetailsSucessfullResponse),
+      catchError((err: any) => throwError(err))
+    );
+
+    return APIResponse$;
+  }
+
+  getUserProfileData(): Observable<IGetUserProfileSucessfullResponse> {
+    const url: string = `${this.api}/getUserProfileData`;
+
+    const APIResponse$: Observable<IGetUserProfileSucessfullResponse> = this.httpClient.get<IGetUserProfileSucessfullResponse>(url)
+    .pipe(
+      map(res => res as IGetUserProfileSucessfullResponse),
       catchError((err: any) => throwError(err))
     );
 

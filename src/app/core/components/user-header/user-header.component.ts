@@ -1,10 +1,12 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { IUserProfile } from '../../../shared/models/user.entity';
-import { UserprofileService } from '../../services/userprofile.service';
 import { CommonModule } from '@angular/common';
 import { ILogoutSuccessfullResponse } from '../../../shared/models/ILogoutResponse.interface';
 import { UserAuthService } from '../../services/user-auth.service';
+import { UserService } from '../../services/user.service';
+import { Observable } from 'rxjs';
+import { IGetUserProfileSucessfullResponse } from '../../../shared/models/userAPIResponse.interface';
 
 @Component({
   selector: 'app-user-header',
@@ -17,23 +19,29 @@ import { UserAuthService } from '../../services/user-auth.service';
   templateUrl: './user-header.component.html',
   styleUrl: './user-header.component.css'
 })
-export class UserHeaderComponent {
+export class UserHeaderComponent implements OnInit {
   private userAuthService: UserAuthService = inject(UserAuthService);
-  private userProfileService: UserprofileService = inject(UserprofileService);
+  private userService: UserService = inject(UserService);
   private router: Router = inject(Router);
 
   userProfile: IUserProfile | null = null;
 
-  constructor() {
-    this.userProfileService.userProfile$.subscribe((userProfileData) => {
-      this.userProfile = userProfileData;
-    });
+  constructor() {}
+
+  ngOnInit(): void {
+    const APIResponse$: Observable<IGetUserProfileSucessfullResponse> = this.userService.getUserProfileData();
+
+    APIResponse$.subscribe(
+      (res) => {
+        this.userProfile = res.data;
+      },
+      ((err: any) => {})
+    );
   }
 
   showDropdown = false;
 
   onMouseLeave() {
-    // Delay hiding to allow time for the mouse to move to the button
     setTimeout(() => {
       if (!this.isMouseOverDropdown) {
         this.showDropdown = false;
@@ -41,7 +49,6 @@ export class UserHeaderComponent {
     }, 200);
   }
 
-  // Track if the mouse is over the dropdown area
   isMouseOverDropdown = false;
 
   async logout() {
@@ -49,20 +56,10 @@ export class UserHeaderComponent {
     
     logoutAPIResponse$.subscribe(
       (res: ILogoutSuccessfullResponse) => {
-        // toast message if needed
         localStorage.removeItem('token') // remove token
         
         this.router.navigate(['/auth/login']);
-        
-        this.userProfileService.setValue(null);
       },
-      (err: any) => {
-        if(err.error) {
-          // toast message if needed
-        }else{
-          // toast message if needed
-        }
-      }
-    );
+      (err: any) => {});
   }
 }

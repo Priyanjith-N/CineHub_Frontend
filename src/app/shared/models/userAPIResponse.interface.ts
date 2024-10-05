@@ -1,6 +1,7 @@
 import { IMovie } from "./IMovieCredentials.interface";
 import { IHomeMovieData, IMovieSchedulesForBooking, IMovieSchedulesWithTheaterDetails } from "./schedule.entity";
 import { ITicketDetails } from "./ticket.entity";
+import { IUserProfile } from "./user.entity";
 
 export interface IGetDataForHomePageSucessfullResponse {
     message: string;
@@ -49,4 +50,9 @@ export interface IGetAllTransactionListSucessfullResponse {
 export interface IGetTicketDetailsSucessfullResponse {
     message: string;
     data: ITicketDetails;
+}
+
+export interface IGetUserProfileSucessfullResponse {
+    message: string;
+    data: IUserProfile;
 }
