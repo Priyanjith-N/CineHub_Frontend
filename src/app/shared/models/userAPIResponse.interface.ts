@@ -54,5 +54,5 @@ export interface IGetTicketDetailsSucessfullResponse {
 
 export interface IGetUserProfileSucessfullResponse {
     message: string;
-    data: IUserProfile;
+    data: IUserProfile | null;
 }
